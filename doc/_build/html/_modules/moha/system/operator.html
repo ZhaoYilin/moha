@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>moha.system.operator &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_tensor_network.html">5. Tensor Network State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_property.html">6. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_api.html">1. AI Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>moha.system.operator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for moha.system.operator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="Operator"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.Operator">[docs]</a><span class="k">class</span> <span class="nc">Operator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<span class="k">class</span> <span class="nc">CreationOperator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">AnnihilationOperator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="ZeroElectronOperator"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.ZeroElectronOperator">[docs]</a><span class="k">class</span> <span class="nc">ZeroElectronOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">molecule</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s1">&#39;nuclear_repulsion&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">A</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">B</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">&gt;</span><span class="n">i</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">+=</span> <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">number</span><span class="o">*</span><span class="n">B</span><span class="o">.</span><span class="n">number</span><span class="p">)</span><span class="o">/</span><span class="n">molecule</span><span class="o">.</span><span class="n">bond_length</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown operator or operator not implemented&#39;</span><span class="p">)</span>
+        <span class="n">operator</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">operator</span></div>
+        
+<div class="viewcode-block" id="OneElectronOperator"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.OneElectronOperator">[docs]</a><span class="k">class</span> <span class="nc">OneElectronOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OneElectronOperator</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">Norb</span> <span class="o">=</span> <span class="n">basis_set</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>     
+        <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s1">&#39;overlap&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.overlap</span> <span class="k">import</span> <span class="n">overlap</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">overlap</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;kinetic&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.kinetic</span> <span class="k">import</span> <span class="n">kinetic</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">kinetic</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nuclear_attraction&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.nuclear_attraction</span> <span class="k">import</span> <span class="n">nuclear_attraction</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+                            <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">atom</span><span class="o">.</span><span class="n">number</span><span class="o">*</span><span class="n">nuclear_attraction</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">,</span><span class="n">atom</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;multipole_moment&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.multipole_moment</span> <span class="k">import</span> <span class="n">multipole_moment</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">multipole_moment</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">,</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;differential&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.differential</span> <span class="k">import</span> <span class="n">differential</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">differential</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">,</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;linear_momentum&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.linear_momentum</span> <span class="k">import</span> <span class="n">linear_momentum</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">linear_momentum</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;angular_momentum&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.angular_momentum</span> <span class="k">import</span> <span class="n">angular_momentum</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">angular_momentum</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown operator or operator not implemented&#39;</span><span class="p">)</span>
+
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span>
+        <span class="n">operator</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">basis_set</span><span class="o">.</span><span class="n">size</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">operator</span>
+
+<div class="viewcode-block" id="OneElectronOperator.basis_transformation"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.OneElectronOperator.basis_transformation">[docs]</a>    <span class="k">def</span> <span class="nf">basis_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">C</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        C:coefficent matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                            <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value_prime</span>
+            <span class="k">return</span> <span class="n">value_prime</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))}</span>
+            <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span> 
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                                <span class="n">value_prime</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">l</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value_prime</span>
+            <span class="k">return</span> <span class="n">value_prime</span></div>
+
+    <span class="k">def</span> <span class="nf">spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">j</span><span class="o">%</span><span class="mi">2</span><span class="p">:</span>
+                        <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">value_prime</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">j</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">][</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">j</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">][</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">value_prime</span></div>
+
+
+
+<div class="viewcode-block" id="TwoElectronOperator"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.TwoElectronOperator">[docs]</a><span class="k">class</span> <span class="nc">TwoElectronOperator</span><span class="p">(</span><span class="n">Operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TwoElectronOperator</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s1">&#39;electron_repulsion&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">.integral.electron_repulsion</span> <span class="k">import</span> <span class="n">electron_repulsion</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>     
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">ok</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">ol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="o">.</span><span class="n">basis</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                            <span class="n">ij</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">j</span>
+                            <span class="n">kl</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">l</span>
+                            <span class="k">if</span> <span class="n">ij</span><span class="o">&gt;=</span><span class="n">kl</span><span class="p">:</span>
+                                <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">electron_repulsion</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">,</span><span class="n">ok</span><span class="p">,</span><span class="n">ol</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown operator or operator not implemented&#39;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">operator</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">basis_set</span><span class="o">.</span><span class="n">size</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">operator</span>
+
+<div class="viewcode-block" id="TwoElectronOperator.basis_transformation"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.TwoElectronOperator.basis_transformation">[docs]</a>    <span class="k">def</span> <span class="nf">basis_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">C</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform electron repulsion integral from atomic orbtial to molecular orbtial</span>
+<span class="sd">        C:coefficent matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.auxiliary</span> <span class="k">import</span> <span class="n">eint</span>
+        <span class="n">Norb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">Eri_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                            <span class="n">Eri_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)]</span>
+ 
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+            <span class="n">temp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+            <span class="n">temp3</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+            <span class="n">Eri</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">,:,:,:]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Eri_tensor</span><span class="p">[</span><span class="n">m</span><span class="p">,:,:,:]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                        <span class="n">temp2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,:,:]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">,:,:]</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                            <span class="n">temp3</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,:]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">o</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">temp2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">o</span><span class="p">,:]</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                                <span class="n">Eri</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">temp3</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">Eri</span>
+            <span class="k">return</span> <span class="n">Eri</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;basis type should be spatial&#39;</span><span class="p">)</span></div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coulomb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value_prime</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">):</span>
+                <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">value_prime</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                            <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">j</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">l</span><span class="o">%</span><span class="mi">2</span><span class="p">:</span>
+                                <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">value_prime</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;basis type should be spatial&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">double_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        antisymmetrized two electron integral</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spin</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">value_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span> 
+                            <span class="n">value_prime</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>  <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">-</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">value_prime</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;basis type should be spatial&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hamiltonian"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.Hamiltonian">[docs]</a><span class="k">class</span> <span class="nc">Hamiltonian</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operators</span> <span class="o">=</span> <span class="n">operators</span>
+
+    <span class="k">def</span> <span class="nf">add_operator_by_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">operator_name</span><span class="p">,</span><span class="nb">type</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Operator name exists already&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># warning</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ZeroElectronOperator</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">OneElectronOperator</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">TwoElectronOperator</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+            
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;operators can only be zero one or two electrons operator&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Hamiltonian.add_operator"><a class="viewcode-back" href="../../../developer_api/moha.system.operator.html#moha.system.operator.Hamiltonian.add_operator">[docs]</a>    <span class="k">def</span> <span class="nf">add_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">,</span><span class="n">operator_name</span><span class="p">,</span><span class="nb">type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds an operator to the hamiltonian.</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        operator_name : string</span>
+<span class="sd">        The operator name.</span>
+<span class="sd">        type : int</span>
+<span class="sd">            type of operator </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">:</span>
+    	    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Operator name exists already&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ZeroElectronOperator</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="n">molecule</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">OneElectronOperator</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)]</span> <span class="o">=</span> <span class="n">TwoElectronOperator</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;operators can only be zero one or two electrons operator&#39;</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">,</span><span class="n">terms</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;nuclear_repulsion&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;overlap&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;kinetic&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;nuclear_attraction&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;electron_repulsion&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}):</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">basis_set</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">hamiltonian</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">operator_name</span><span class="p">,</span><span class="nb">type</span> <span class="ow">in</span> <span class="n">terms</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">molecule</span><span class="p">,</span><span class="n">basis_set</span><span class="p">,</span><span class="n">operator_name</span><span class="p">,</span><span class="nb">type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hamiltonian</span>
+
+    <span class="k">def</span> <span class="nf">basis_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">operator_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">operator_name</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Operator name not exists already&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="n">operator_name</span><span class="p">]</span><span class="o">.</span><span class="n">basis_transfer</span><span class="p">(</span><span class="n">C</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

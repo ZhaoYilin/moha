@@ -1,0 +1,46 @@
+moha.modelsystem package
+========================
+
+Submodules
+----------
+
+moha.modelsystem.auxiliary module
+---------------------------------
+
+.. automodule:: moha.modelsystem.auxiliary
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.modelsystem.lattice module
+-------------------------------
+
+.. automodule:: moha.modelsystem.lattice
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.modelsystem.modeloperator module
+-------------------------------------
+
+.. automodule:: moha.modelsystem.modeloperator
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.modelsystem.sites module
+-----------------------------
+
+.. automodule:: moha.modelsystem.sites
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: moha.modelsystem
+    :members:
+    :undoc-members:
+    :show-inheritance:

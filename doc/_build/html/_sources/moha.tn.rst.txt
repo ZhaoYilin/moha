@@ -1,0 +1,46 @@
+moha.tn package
+===============
+
+Submodules
+----------
+
+moha.tn.auxiliary module
+------------------------
+
+.. automodule:: moha.tn.auxiliary
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.tn.optimizer module
+------------------------
+
+.. automodule:: moha.tn.optimizer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.tn.tns module
+------------------
+
+.. automodule:: moha.tn.tns
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.tn.tnso module
+-------------------
+
+.. automodule:: moha.tn.tnso
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: moha.tn
+    :members:
+    :undoc-members:
+    :show-inheritance:

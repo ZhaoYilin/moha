@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>6. Property &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. AI Doucmentation" href="developer_api.html" />
+    <link rel="prev" title="5. Tensor Network State" href="user_tensor_network.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_tensor_network.html">5. Tensor Network State</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Property</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#population-analysis-atomic-charges">6.1. Population Analysis/Atomic Charges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mulliken-population-analyasis">6.1.1. Mulliken Population Analyasis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multipole-moment">6.2. Multipole Moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multipole-polarizability">6.3. Multipole Polarizability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excitation-energy">6.4. Excitation energy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-interaction-singles-cis">6.4.1. Configuration Interaction Singles (CIS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-dependent-hartree-fock-tdhf-the-random-phase-approximation-rpa">6.4.2. Time-Dependent Hartree Fock (TDHF)/The Random Phase Approximation (RPA)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. AI Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>6. Property</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_property.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="property">
+<h1>6. Property<a class="headerlink" href="#property" title="Permalink to this headline">¶</a></h1>
+<p>This section containts information about atomic and molecular properties that can be calculated.</p>
+<div class="section" id="population-analysis-atomic-charges">
+<h2>6.1. Population Analysis/Atomic Charges<a class="headerlink" href="#population-analysis-atomic-charges" title="Permalink to this headline">¶</a></h2>
+<p>Population analysis is the study of charge distribution in molecules, it requires the overlap integrals and the electron density, in addition to information about the number of basis functions centered on each atom. The charge on atom A may be computed as:</p>
+<div class="section" id="mulliken-population-analyasis">
+<h3>6.1.1. Mulliken Population Analyasis<a class="headerlink" href="#mulliken-population-analyasis" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[q_A = Z_A - 2 \sum_{\mu \in A} ({\mathbf D S})_{\mu\mu},\]</div>
+<p>where the summation is limited to only those basis functions centered on atom A.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/mulliken_population_analysis.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">PopulationAnalysis</span><span class="o">.</span><span class="n">mulliken</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">,</span><span class="n">hfwavefunction</span><span class="p">,</span><span class="n">ham</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="multipole-moment">
+<h2>6.2. Multipole Moment<a class="headerlink" href="#multipole-moment" title="Permalink to this headline">¶</a></h2>
+<p>The calculation of one-electron properties requires density matrix and the
+relevant property integrals. The electronic contribution to the
+electric-miltipole moment may be computed using:</p>
+<div class="math notranslate nohighlight">
+\[{\mu}^{klm}=-\sum_{i}\langle \Psi_0|x_i^ky_i^lz_i^m|\Psi_0 \rangle+\sum_A Z_Ax_A^ky_A^lz_A^m\]</div>
+<p>where L = k+l+m is the angular moment</p>
+<p>In order to compute the total multipole moment, you must include the nuclear
+contribution, which requires the atomic numbers and Cartesian coordinates of
+the nuclei.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/multipole_moment.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">OneElectronProperty</span><span class="o">.</span><span class="n">multipole_moment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">,</span><span class="n">hfwavefunction</span><span class="p">,[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="multipole-polarizability">
+<h2>6.3. Multipole Polarizability<a class="headerlink" href="#multipole-polarizability" title="Permalink to this headline">¶</a></h2>
+<p>Second-order energy E^{(2)} is the second derivative of E(vec{F}), is connected with the {color{red}{polarizability}} {color{blue}{$alpha$}} of the molecule:</p>
+<div class="math notranslate nohighlight">
+\[E^{(2)}_{ij} = -\frac{1}{2!}\alpha_{ij}\]</div>
+<p>item The alpha_{ij} polarizability tensor is defined through the proportionality of the induced dipole moment to the field strength {vec{F} in the limit vec{F} = 0</p>
+<div class="math notranslate nohighlight">
+\[\alpha_{ij} = \frac{\partial \mu_i}{\partial F_j}\]</div>
+<p>Here we go back to the definitions of the properties as derivatives of the
+energy in the presence of the perturbation by electric field.</p>
+<div class="math notranslate nohighlight">
+\[\epsilon(\upsilon) = \epsilon^{(0)} +\epsilon^{(1)}\upsilon+ \frac{1}{2}\epsilon^{(2)}\upsilon^{2}+\dots\]</div>
+<p>Rational models are defined as ratios of polynomials and are given by</p>
+<div class="math notranslate nohighlight">
+\[y = \frac{\sum_{i=1}^{n+1}p_ix^{n+1-i}}{x^m+\sum_{i=1}^{m}q_ix^{m-1}}\]</div>
+<p>where the coefficient associated with x^m is always 1. This
+makes the numerator and denominator unique when the polynomial degrees are the same. In our polarizability calculations, the expression is:</p>
+<div class="math notranslate nohighlight">
+\[E(\vec{F}) = \frac{E(0)+\sum_i b_iF_i +\sum_{ij}
+c_{ij}F_iF_j+\dots}{1+\sum_i B_iF_i} +\dots\]</div>
+</div>
+<div class="section" id="excitation-energy">
+<h2>6.4. Excitation energy<a class="headerlink" href="#excitation-energy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="configuration-interaction-singles-cis">
+<h3>6.4.1. Configuration Interaction Singles (CIS)<a class="headerlink" href="#configuration-interaction-singles-cis" title="Permalink to this headline">¶</a></h3>
+<p>The fundamental idea behind CIS is the representation of the excited-state wave functions as linear combinations of singly excited determinants relative to the Hartree-Fock reference wave function, viz.</p>
+<div class="math notranslate nohighlight">
+\[|\Psi(m)\rangle = \sum_{jb} c_j^b(m) \{ a^+_b a_j \} |\Phi_0\rangle =
+\sum_{jb} c_j^b(m) |\phi_j^b\rangle\]</div>
+<p>where m identifies the various excited states, and we will use i and j (a and b) to denote occupied (unoccupied) spin-orbitals. Inserting this into the Schrödinger equation and left-projecting onto a particular singly excited determinant gives</p>
+<div class="math notranslate nohighlight">
+\[\sum_{jb} \langle \phi_i^a|H|\phi_j^b\rangle c_j^b(m) = E(m) c_i^a(m)\]</div>
+<p>If we recognize that we have one of these equations for every combination of i and a spin-orbitals, then this equation may be viewed as a matrix eigenvalue problem:</p>
+<div class="math notranslate nohighlight">
+\[{\mathbf {\underline{\underline H}}}\ {\mathbf {\underline c}}(m) = E(m) {\mathbf {\underline c}}(m)\]</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">/data/examples/cis_excitation_energy.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">ExcitationEnergy</span><span class="o">.</span><span class="n">cis</span><span class="p">(</span><span class="n">hfwavefunction</span><span class="p">,</span><span class="n">ham</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="time-dependent-hartree-fock-tdhf-the-random-phase-approximation-rpa">
+<h3>6.4.2. Time-Dependent Hartree Fock (TDHF)/The Random Phase Approximation (RPA)<a class="headerlink" href="#time-dependent-hartree-fock-tdhf-the-random-phase-approximation-rpa" title="Permalink to this headline">¶</a></h3>
+<p>The TDHF/RPA approach is closely related to CIS in that only singles are involved in the wave function expansion, except that both excitation and “de-excitation” operators are involved. (It is probably better to view the TDHF/RPA wave function expansion in terms of orbital rotations instead of Slater determinants, but that’s a discussion for another day.) The TDHF/RPA eigenvalue equations take the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{cc}
+{\mathbf {\underline{\underline A}}} &amp; {\mathbf {\underline{\underline B}}} \\
+-{\mathbf {\underline{\underline B}}} &amp; - {\mathbf {\underline{\underline A}}} \\
+\end{array}
+\right) \left(
+\begin{array}{c}
+{\mathbf {\underline X}} \\
+{\mathbf {\underline Y}} \\
+\end{array}
+\right) = E \left(
+\begin{array}{c}
+{\mathbf {\underline X}} \\
+{\mathbf {\underline Y}} \\
+\end{array}
+\right).\end{split}\]</div>
+<p>The definition of the A matrix is just the CIS matrix itself, viz.</p>
+<div class="math notranslate nohighlight">
+\[A_{ia,jb} \equiv \langle \phi_i^a | H | \phi_j^b \rangle = f_{ab} \delta_{ij} - f_{ij} \delta_{ab} + \langle aj || ib \rangle,\]</div>
+<p>while X and Y are the parameters of single excitations and de-excitations, respectively, and the B matrix is simply</p>
+<div class="math notranslate nohighlight">
+\[B_{ia,jb} \equiv \langle ab || ij \rangle.\]</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/data/examples/tdhf_excitation_energy.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">ExcitationEnergy</span><span class="o">.</span><span class="n">tdhf</span><span class="p">(</span><span class="n">hfwavefunction</span><span class="p">,</span><span class="n">ham</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developer_api.html" class="btn btn-neutral float-right" title="1. AI Doucmentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user_tensor_network.html" class="btn btn-neutral float-left" title="5. Tensor Network State" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

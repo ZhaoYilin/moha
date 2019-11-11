@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1.3. moha.system.operator &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2.1. moha.modelsystem.lattice" href="moha.modelsystem.lattice.html" />
+    <link rel="prev" title="1.1.2. moha.system.basis" href="moha.system.basis.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../posthf.html">3. SCF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../properties.html">4. Properties</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../developer_api.html">1. API Doucmentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../developer_api.html#molecule-system">1.1. Molecule System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="moha.system.molecule.html">1.1.1. moha.system.molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moha.system.basis.html">1.1.2. moha.system.basis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.1.3. moha.system.operator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_api.html#model-system">1.2. Model System</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_derivation.html">2. API Doucmentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../developer_api.html">1. API Doucmentation</a> &raquo;</li>
+        
+      <li>1.1.3. moha.system.operator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated/moha.system.operator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-moha.system.operator">
+<span id="moha-system-operator"></span><h1>1.1.3. moha.system.operator<a class="headerlink" href="#module-moha.system.operator" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnnihilationOperator</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">CreationOperator</span></code>()</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#moha.system.operator.Hamiltonian" title="moha.system.operator.Hamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Hamiltonian</span></code></a>(dim[,&nbsp;operators])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#moha.system.operator.OneElectronOperator" title="moha.system.operator.OneElectronOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OneElectronOperator</span></code></a>(name,&nbsp;dim,&nbsp;value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#moha.system.operator.Operator" title="moha.system.operator.Operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operator</span></code></a>(name,&nbsp;dim,&nbsp;value)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#moha.system.operator.TwoElectronOperator" title="moha.system.operator.TwoElectronOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TwoElectronOperator</span></code></a>(name,&nbsp;dim,&nbsp;value)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#moha.system.operator.ZeroElectronOperator" title="moha.system.operator.ZeroElectronOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZeroElectronOperator</span></code></a>(name,&nbsp;value)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="moha.system.operator.Hamiltonian">
+<em class="property">class </em><code class="descclassname">moha.system.operator.</code><code class="descname">Hamiltonian</code><span class="sig-paren">(</span><em>dim</em>, <em>operators={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#Hamiltonian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.Hamiltonian" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="moha.system.operator.Hamiltonian.add_operator">
+<code class="descname">add_operator</code><span class="sig-paren">(</span><em>molecule</em>, <em>basis_set</em>, <em>operator_name</em>, <em>type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#Hamiltonian.add_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.Hamiltonian.add_operator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an operator to the hamiltonian.</p>
+<dl class="docutils">
+<dt>operator_name <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd>The operator name.</dd>
+<dt>type <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>type of operator</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.system.operator.OneElectronOperator">
+<em class="property">class </em><code class="descclassname">moha.system.operator.</code><code class="descname">OneElectronOperator</code><span class="sig-paren">(</span><em>name</em>, <em>dim</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#OneElectronOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.OneElectronOperator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="moha.system.operator.OneElectronOperator.basis_transformation">
+<code class="descname">basis_transformation</code><span class="sig-paren">(</span><em>C</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#OneElectronOperator.basis_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.OneElectronOperator.basis_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>C:coefficent matrix</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.system.operator.Operator">
+<em class="property">class </em><code class="descclassname">moha.system.operator.</code><code class="descname">Operator</code><span class="sig-paren">(</span><em>name</em>, <em>dim</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#Operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.Operator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="moha.system.operator.TwoElectronOperator">
+<em class="property">class </em><code class="descclassname">moha.system.operator.</code><code class="descname">TwoElectronOperator</code><span class="sig-paren">(</span><em>name</em>, <em>dim</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#TwoElectronOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.TwoElectronOperator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="moha.system.operator.TwoElectronOperator.basis_transformation">
+<code class="descname">basis_transformation</code><span class="sig-paren">(</span><em>C</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#TwoElectronOperator.basis_transformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.TwoElectronOperator.basis_transformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform electron repulsion integral from atomic orbtial to molecular orbtial
+C:coefficent matrix</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="moha.system.operator.TwoElectronOperator.double_bar">
+<code class="descname">double_bar</code><a class="headerlink" href="#moha.system.operator.TwoElectronOperator.double_bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>antisymmetrized two electron integral</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.system.operator.ZeroElectronOperator">
+<em class="property">class </em><code class="descclassname">moha.system.operator.</code><code class="descname">ZeroElectronOperator</code><span class="sig-paren">(</span><em>name</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator.html#ZeroElectronOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.operator.ZeroElectronOperator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="moha.modelsystem.lattice.html" class="btn btn-neutral float-right" title="1.2.1. moha.modelsystem.lattice" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="moha.system.basis.html" class="btn btn-neutral" title="1.1.2. moha.system.basis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

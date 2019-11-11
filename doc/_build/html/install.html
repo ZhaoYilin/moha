@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="moha 1.0.0 documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/MoHa.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="properties.html">2. Properties</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<span id="installing"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>We provide three ways to install PySCF package.</p>
+<div class="section" id="installation-with-pip">
+<h2>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline">¶</a></h2>
+<p>This is the recommended way to install PySCF:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install pyscf
+</pre></div>
+</div>
+<p>Pypi provides a precompiled PySCF code (python wheel) which works on almost all
+Linux systems, and most of Mac OS X systems, and the ubuntu subsystems on Windows 10.</p>
+<p>Note we observed that our precompiled python wheels sometimes does not work with
+certain version of Python (python-3.4 and python-3.5).  If you’re using mac OS X
+with python-3.4 or python-3.5, pip may execute the setup.py file in the source
+code and it may be terminated due to an error of library path of BLAS library.
+BLAS library is required to install PySCF library.  The installation script can
+detect the installed BLAS libraries in the system and choose one for the
+program.  If BLAS library is existed but wasn’t found by the installation
+script, you can specify the BLAS library either through the environment
+<code class="docutils literal"><span class="pre">LDFLAGS</span></code>, e.g. <code class="docutils literal"><span class="pre">LDFLAGS=&quot;-L/path/to/blas</span> <span class="pre">-lblas&quot;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pyscf</span></code> or the
+environment variable <code class="docutils literal"><span class="pre">PYSCF_INC_DIR</span></code>, e.g.
+<code class="docutils literal"><span class="pre">PYSCF_INC_DIR=/path/to/blas:/path/to/other/lib</span> <span class="pre">pip</span> <span class="pre">install</span></code> to tell the
+installation script which BLAS libraries to link against.
+Another issue of the installation script you may get is that pyscf.dft module is
+not working.  pyscf.dft module requires the exchange-correlation functional
+library <code class="docutils literal"><span class="pre">libxc</span></code> which was not yet available in the PyPI repository. To enable
+pyscf.dft module, you can download and manually compile libxc library and set
+the environment variable <code class="docutils literal"><span class="pre">PYSCF_INC_DIR</span></code>, e.g. <code class="docutils literal"><span class="pre">export</span> <span class="pre">PYSCF_INC_DIR=/path/to/libxc</span></code>
+before calling <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span></code> command.  Libxc library can be found in
+<a class="reference external" href="http://octopus-code.org/wiki/Libxc:download">http://octopus-code.org/wiki/Libxc:download</a>.  When compiling the libxc library,
+you need to add –enable-shared flag.</p>
+</div>
+<div class="section" id="installation-with-conda">
+<h2>Installation with conda<a class="headerlink" href="#installation-with-conda" title="Permalink to this headline">¶</a></h2>
+<p>If you have <a class="reference external" href="https://conda.io/docs/">Conda</a>
+(or <a class="reference external" href="https://www.continuum.io/downloads#linux">Anaconda</a>)
+environment, PySCF package can be installed through Conda cloud:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ conda install -c pyscf pyscf
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual-installation-from-github-repo">
+<h2>Manual installation from github repo<a class="headerlink" href="#manual-installation-from-github-repo" title="Permalink to this headline">¶</a></h2>
+<p>Manual installation requires <a class="reference external" href="http://www.cmake.org">cmake</a>,
+<a class="reference external" href="http://www.numpy.org/">numpy</a>, <a class="reference external" href="http://www.scipy.org/">scipy</a>
+and <a class="reference external" href="http://www.h5py.org/">h5py</a> libraries.
+You can download the latest PySCF (or the development branch) from github:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/sunqm/pyscf
+$ cd pyscf
+$ git checkout dev  # optional if you&#39;d like to try out the development branch
+</pre></div>
+</div>
+<p>Build the C extensions in <code class="file docutils literal"><span class="pre">pyscf/lib</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd pyscf/lib
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+</pre></div>
+</div>
+<p>This will automatically download the analytical GTO integral library <a class="reference external" href="https://github.com/sunqm/libcint.git">libcint</a> and the DFT exchange correlation
+functional libraries <a class="reference external" href="http://www.tddft.org/programs/Libxc">libxc</a> and <a class="reference external" href="https://github.com/dftlibs/xcfun.git">xcfun</a>.  Finally, to make Python find
+the <code class="code docutils literal"><span class="pre">pyscf</span></code> package, add the top-level <code class="code docutils literal"><span class="pre">pyscf</span></code> directory (not
+the <code class="code docutils literal"><span class="pre">pyscf/pyscf</span></code> subdirectory) to <code class="code docutils literal"><span class="pre">PYTHONPATH</span></code>.  For example, if
+<code class="code docutils literal"><span class="pre">pyscf</span></code> is installed in <code class="docutils literal"><span class="pre">/opt</span></code>, <code class="code docutils literal"><span class="pre">PYTHONPATH</span></code> should be like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>export PYTHONPATH=/opt/pyscf:$PYTHONPATH
+</pre></div>
+</div>
+<p>To ensure the installation is successful, start a Python shell, and type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyscf</span>
+</pre></div>
+</div>
+<p>For Mac OS X/macOS, you may get an import error if your OS X/macOS version is
+10.11 or newer:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ne">OSError</span><span class="p">:</span> <span class="n">dlopen</span><span class="p">(</span><span class="n">xxx</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libcgto</span><span class="o">.</span><span class="n">dylib</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span> <span class="n">Library</span> <span class="ow">not</span> <span class="n">loaded</span><span class="p">:</span> <span class="n">libcint</span><span class="o">.</span><span class="mf">3.0</span><span class="o">.</span><span class="n">dylib</span>
+<span class="n">Referenced</span> <span class="n">from</span><span class="p">:</span> <span class="n">xxx</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libcgto</span><span class="o">.</span><span class="n">dylib</span>
+<span class="n">Reason</span><span class="p">:</span> <span class="n">unsafe</span> <span class="n">use</span> <span class="n">of</span> <span class="n">relative</span> <span class="n">rpath</span> <span class="n">libcint</span><span class="o">.</span><span class="mf">3.0</span><span class="o">.</span><span class="n">dylib</span> <span class="ow">in</span> <span class="n">xxx</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">pyscf</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libcgto</span><span class="o">.</span><span class="n">dylib</span> <span class="k">with</span> <span class="n">restricted</span> <span class="n">binary</span>
+</pre></div>
+</div>
+<p>This is caused by the incorrect RPATH.  Script
+<code class="docutils literal"><span class="pre">pyscf/lib/_runme_to_fix_dylib_osx10.11.sh</span></code> in <code class="docutils literal"><span class="pre">pyscf/lib</span></code> directory can be
+used to fix this problem:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">pyscf</span><span class="o">/</span><span class="n">lib</span>
+<span class="n">sh</span> <span class="n">_runme_to_fix_dylib_osx10</span><span class="o">.</span><span class="mf">11.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">RPATH has been built in the dynamic library.  This may cause library loading
+error on some systems.  You can run <code class="docutils literal"><span class="pre">pyscf/lib/_runme_to_remove_rpath.sh</span></code> to
+remove the rpath code from the library head.  Another workaround is to set
+<code class="docutils literal"><span class="pre">-DCMAKE_SKIP_RPATH=1</span></code> and <code class="docutils literal"><span class="pre">-DCMAKE_MACOSX_RPATH=0</span></code> in cmake command line.
+When the RPATH was removed, you need to add <code class="docutils literal"><span class="pre">pyscf/lib</span></code> and
+<code class="docutils literal"><span class="pre">pyscf/lib/deps/lib</span></code> in <code class="docutils literal"><span class="pre">LD_LIBRARY_PATH</span></code>.</p>
+</div>
+<p>Last, it’s recommended to set a scratch directory for PySCF.  The default scratch
+directory is controlled by environment variable <code class="code docutils literal"><span class="pre">PYSCF_TMPDIR</span></code>.  If it’s
+not specified, the system temporary directory <code class="code docutils literal"><span class="pre">TMPDIR</span></code> will be used as the
+scratch directory.</p>
+</div>
+<div class="section" id="installation-without-network">
+<h2>Installation without network<a class="headerlink" href="#installation-without-network" title="Permalink to this headline">¶</a></h2>
+<p>If you have problems to download the external libraries on your computer, you can
+manually build the libraries, as shown in the following instructions.  First,
+you need to install libcint, libxc or xcfun libraries.
+<a class="reference external" href="https://github.com/sunqm/libcint/tree/cint3">libcint cint3 branch</a>
+and <a class="reference external" href="https://github.com/dftlibs/xcfun/tree/stable-1.x">xcfun stable-1.x branch</a>
+are required by PySCF.  They can be downloaded from github:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/sunqm/libcint.git
+$ cd libcint
+$ git checkout origin/cint3
+$ cd .. &amp;&amp; tar czf libcint.tar.gz libcint
+
+$ git clone https://github.com/sunqm/xcfun.git
+$ cd xcfun
+$ git checkout origin/stable-1.x
+$ cd .. &amp;&amp; tar czf xcfun.tar.gz xcfun
+</pre></div>
+</div>
+<p>libxc-3.* can be found in <a class="reference external" href="http://octopus-code.org/wiki/Main_Page">http://octopus-code.org/wiki/Main_Page</a> or
+<a class="reference external" href="http://sunqm.net/pyscf/files/src/libxc-3.0.0.tar.gz">here</a>.
+Assuming <code class="docutils literal"><span class="pre">/opt</span></code> is the place where these libraries will be installed, these
+packages should be compiled with the flags:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ tar xvzf libcint.tar.gz
+$ cd libcint
+$ mkdir build &amp;&amp; cd build
+$ cmake -DWITH_F12=1 -DWITH_RANGE_COULOMB=1 -DWITH_COULOMB_ERF=1 \
+    -DCMAKE_INSTALL_PREFIX:PATH=/opt -DCMAKE_INSTALL_LIBDIR:PATH=lib ..
+$ make &amp;&amp; make install
+
+$ tar xvzf libxc-3.0.0.tar.gz
+$ cd libxc-0.0.0
+$ mkdir build &amp;&amp; cd build
+$ ../configure --prefix=/opt --libdir=/opt/lib --enable-shared --disable-fortran LIBS=-lm
+$ make &amp;&amp; make install
+
+$ tar xvzf xcfun.tar.gz
+$ cd xcfun
+$ mkdir build &amp;&amp; cd build
+$ cmake -DCMAKE_BUILD_TYPE=RELEASE -DBUILD_SHARED_LIBS=1 -DXC_MAX_ORDER=3 -DXCFUN_ENABLE_TESTS=0 \
+    -DCMAKE_INSTALL_PREFIX:PATH=/opt -DCMAKE_INSTALL_LIBDIR:PATH=lib ..
+$ make &amp;&amp; make install
+</pre></div>
+</div>
+<p>Next compile PySCF:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd pyscf/pyscf/lib
+$ mkdir build &amp;&amp; cd build
+$ cmake -DBUILD_LIBCINT=0 -DBUILD_LIBXC=0 -DBUILD_XCFUN=0 -DCMAKE_INSTALL_PREFIX:PATH=/opt ..
+$ make
+</pre></div>
+</div>
+<p>Finally update the <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment for Python interpreter.</p>
+</div>
+<div class="section" id="using-optimized-blas">
+<span id="installing-blas"></span><h2>Using optimized BLAS<a class="headerlink" href="#using-optimized-blas" title="Permalink to this headline">¶</a></h2>
+<p>The default installation tries to find BLAS libraries automatically. This
+automated setup script may link the code to slow BLAS libraries.  You can
+compile the package with other BLAS vendors to improve performance, for example
+the Intel Math Kernel Library (MKL), which can provide 10x speedup in many
+modules:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd pyscf/lib/build
+$ cmake -DBLA_VENDOR=Intel10_64lp_seq ..
+$ make
+</pre></div>
+</div>
+<p>When linking the program to MKL library, for some MKL versions, cmake may have
+problems to find the correct MKL libraries.  Setting <code class="docutils literal"><span class="pre">LD_LIBRARY_PATH</span></code> to
+include the MKL dynamic libraries sometimes can help cmake to find the MKL
+libraries, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>export LD_LIBRARY_PATH=/opt/intel/compilers_and_libraries_2018/linux/mkl/lib/intel64:$LD_LIBRARY_PATH
+</pre></div>
+</div>
+<p>If you are using Anaconda as your Python-side platform, you can link PySCF
+to the MKL library coming with Anaconda package:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ export MKLROOT=/path/to/anaconda2
+$ export LD_LIBRARY_PATH=$MKLROOT/lib:$LD_LIBRARY_PATH
+$ cd pyscf/lib/build
+$ cmake -DBLA_VENDOR=Intel10_64lp_seq ..
+$ make
+</pre></div>
+</div>
+<p>You can link to other BLAS libraries by setting <code class="docutils literal"><span class="pre">BLA_VENDOR</span></code>, eg
+<code class="docutils literal"><span class="pre">BLA_VENDOR=ATLAS</span></code>, <code class="docutils literal"><span class="pre">BLA_VENDOR=IBMESSL</span></code>, <code class="docutils literal"><span class="pre">BLA_VENDOR=OpenBLAS</span></code> (requiring cmake-3.6).
+Please refer to <a class="reference external" href="http://www.cmake.org/cmake/help/v3.6/module/FindBLAS.html">cmake mannual</a>
+for more details of the use of <code class="docutils literal"><span class="pre">FindBLAS</span></code> macro.</p>
+<p>If the cmake <code class="docutils literal"><span class="pre">BLA_VENDOR</span></code> cannot find the right BLAS library as you expected,
+you can assign the libraries to the variable <code class="docutils literal"><span class="pre">BLAS_LIBRARIES</span></code> in
+<code class="file docutils literal"><span class="pre">lib/CMakeLists.txt</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">BLAS_LIBRARIES</span> <span class="s2">&quot;$</span><span class="si">{BLAS_LIBRARIES}</span><span class="s2">;/path/to/mkl/lib/intel64/libmkl_intel_lp64.so&quot;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">BLAS_LIBRARIES</span> <span class="s2">&quot;$</span><span class="si">{BLAS_LIBRARIES}</span><span class="s2">;/path/to/mkl/lib/intel64/libmkl_sequential.so&quot;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">BLAS_LIBRARIES</span> <span class="s2">&quot;$</span><span class="si">{BLAS_LIBRARIES}</span><span class="s2">;/path/to/mkl/lib/intel64/libmkl_core.so&quot;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">BLAS_LIBRARIES</span> <span class="s2">&quot;$</span><span class="si">{BLAS_LIBRARIES}</span><span class="s2">;/path/to/mkl/lib/intel64/libmkl_avx.so&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">MKL library may lead to an OSError at runtime:
+<code class="docutils literal"><span class="pre">OSError:</span> <span class="pre">...</span> <span class="pre">mkl/lib/intel64/libmkl_avx.so:</span> <span class="pre">undefined</span> <span class="pre">symbol:</span> <span class="pre">ownLastTriangle_64fc</span></code>
+or <code class="docutils literal"><span class="pre">MKL</span> <span class="pre">FATAL</span> <span class="pre">ERROR:</span> <span class="pre">Cannot</span> <span class="pre">load</span> <span class="pre">libmkl_avx.so</span> <span class="pre">or</span> <span class="pre">libmkl_def.so.</span></code>.
+It can be solved by preloading MKL core library with:
+<code class="docutils literal"><span class="pre">export</span> <span class="pre">LD_PRELOAD=$MKLROOT/lib/intel64/libmkl_avx.so:$MKLROOT/lib/intel64/libmkl_core.so</span></code></p>
+</div>
+</div>
+<div class="section" id="using-optimized-integral-library">
+<span id="installing-qcint"></span><h2>Using optimized integral library<a class="headerlink" href="#using-optimized-integral-library" title="Permalink to this headline">¶</a></h2>
+<p>The default integral library used by PySCF is
+libcint (<a class="reference external" href="https://github.com/sunqm/libcint">https://github.com/sunqm/libcint</a>).  This integral library was
+implemented in the model that ensures the compatibility on various high
+performance computer systems.  For X86-64 platforms, libcint library has an
+efficient counterpart Qcint (<a class="reference external" href="https://github.com/sunqm/qcint">https://github.com/sunqm/qcint</a>)
+which is heavily optimized against X86 SIMD instructions (AVX-512/AVX2/AVX/SSE3).
+To replace the default libcint library with qcint library, edit the URL
+of the integral library in lib/CMakeLists.txt file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ExternalProject_Add</span><span class="p">(</span><span class="n">libcint</span>
+   <span class="n">GIT_REPOSITORY</span>
+   <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sunqm</span><span class="o">/</span><span class="n">qcint</span><span class="o">.</span><span class="n">git</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cmake-config-file">
+<h2>Cmake config file<a class="headerlink" href="#cmake-config-file" title="Permalink to this headline">¶</a></h2>
+<p>Cmake options can be saved in a config file <code class="docutils literal"><span class="pre">pyscf/lib/cmake.arch.inc</span></code>.
+Settings in this config file will be automatically loaded and overwritten the
+default cmake options during compilation.  For example, you can put
+<code class="docutils literal"><span class="pre">CMAKE_C_FLAGS</span></code> in this config file to include advanced compiler optimization
+flags:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">CMAKE_C_FLAGS</span> <span class="s2">&quot;$</span><span class="si">{CMAKE_C_FLAGS}</span><span class="s2"> -ffast-math -mtune=native -march=native&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Other settings and variables and flags can all be put in this config file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="n">ENABLE_XCFUN</span> <span class="n">Off</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="n">WITH_F12</span> <span class="n">Off</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some examples of platform specific configurations can be found in directory
+<code class="docutils literal"><span class="pre">pyscf/lib/cmake_arch_config</span></code>.</p>
+</div>
+<div class="section" id="plugins">
+<span id="installing-plugin"></span><h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nao">
+<h3>nao<a class="headerlink" href="#nao" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-mod docutils literal"><span class="pre">pyscf/nao</span></code> module includes the basic functions of numerical atomic orbitals
+(NAO) and the (nao based) TDDFT methods.  This module was contributed by Marc
+Barbry and Peter Koval.  You can enable this module with a cmake flag:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cmake -DENABLE_NAO=1 ..
+</pre></div>
+</div>
+<p>More information of the compilation can be found in <code class="file docutils literal"><span class="pre">pyscf/lib/nao/README.md</span></code>.</p>
+</div>
+<div class="section" id="dmrg-solver">
+<h3>DMRG solver<a class="headerlink" href="#dmrg-solver" title="Permalink to this headline">¶</a></h3>
+<p>Density matrix renormalization group (DMRG) implementations Block
+(<a class="reference external" href="http://chemists.princeton.edu/chan/software/block-code-for-dmrg">http://chemists.princeton.edu/chan/software/block-code-for-dmrg</a>) and
+CheMPS2 (<a class="reference external" href="http://sebwouters.github.io/CheMPS2/index.html">http://sebwouters.github.io/CheMPS2/index.html</a>)
+are efficient DMRG solvers for ab initio quantum chemistry problem.
+<a class="reference external" href="http://sanshar.github.io/Block/build.html">Installing Block</a> requires
+C++11 compiler.  If C++11 is not supported by your compiler, you can
+register and download the precompiled Block binary from
+<a class="reference external" href="http://chemists.princeton.edu/chan/software/block-code-for-dmrg">http://chemists.princeton.edu/chan/software/block-code-for-dmrg</a>.
+Before using the Block or CheMPS2, you need create a config file
+future/dmrgscf/settings.py  (as shown by settings.py.example) to store
+the path where the DMRG solver was installed.</p>
+</div>
+<div class="section" id="fciqmc">
+<h3>FCIQMC<a class="headerlink" href="#fciqmc" title="Permalink to this headline">¶</a></h3>
+<p>NECI (<a class="reference external" href="https://github.com/ghb24/NECI_STABLE">https://github.com/ghb24/NECI_STABLE</a>) is FCIQMC code developed by
+George Booth and Ali Alavi.  PySCF has an interface to call FCIQMC
+solver NECI.  To use NECI, you need create a config file
+future/fciqmc/settings.py to store the path where NECI was installed.</p>
+</div>
+<div class="section" id="id1">
+<h3>Libxc<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>By default, building PySCF will automatically download and install
+<a class="reference external" href="http://www.tddft.org/programs/octopus/wiki/index.php/Libxc:download">Libxc 3.0.0</a>.
+<code class="xref py py-mod docutils literal"><span class="pre">pyscf.dft.libxc</span></code> module provided a general interface to access Libxc functionals.</p>
+</div>
+<div class="section" id="id2">
+<h3>Xcfun<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>By default, building PySCF will automatically download and install
+latest xcfun code from <a class="reference external" href="https://github.com/dftlibs/xcfun">https://github.com/dftlibs/xcfun</a>.
+<code class="xref py py-mod docutils literal"><span class="pre">pyscf.dft.xcfun</span></code> module provided a general interface to access Libxc
+functionals.</p>
+</div>
+<div class="section" id="xianci">
+<h3>XianCI<a class="headerlink" href="#xianci" title="Permalink to this headline">¶</a></h3>
+<p>XianCI is a spin-adapted MRCI program.  “Bingbing Suo” &lt;<a class="reference external" href="mailto:bsuo&#37;&#52;&#48;nwu&#46;edu&#46;cn">bsuo<span>&#64;</span>nwu<span>&#46;</span>edu<span>&#46;</span>cn</a>&gt;
+is the main developer of XianCI program.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+.. _properties.rst:
+
+Properties
+==========
+
+This section containts information about atomic and molecular properties that can be calculated.
+
+Population Analysis/Atomic Charges
+----------------
+
+
+Multipole Moment
+----------------
+
+Random-Phase Approximation Excitation energy
+--------------------------------------------
+

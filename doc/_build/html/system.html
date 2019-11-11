@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. Molecular System &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Model System" href="modelsystem.html" />
+    <link rel="prev" title="2. Installation" href="installation.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Molecular System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#molecule">1.1. Molecule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basis-set">1.2. Basis Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hamilonian">1.3. Hamilonian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#molecular-integrals">1.4. Molecular Integrals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#boys-function">1.4.1. Boys Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expansion-coefficients">1.4.2. Expansion coefficients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overlap">1.4.3. Overlap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kinetic-energy">1.4.4. Kinetic energy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#electron-nuclear-attraction">1.4.5. Electron-nuclear attraction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#electron-electron-repulsion">1.4.6. Electron-electron repulsion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-hamilton">1.5. Build Hamilton</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelsystem.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="posthf.html">3. SCF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="properties.html">4. Properties</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. Molecular System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/system.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="molecular-system">
+<h1>1. Molecular System<a class="headerlink" href="#molecular-system" title="Permalink to this headline">¶</a></h1>
+<p>To begin a calculation with MoHa, the first step is to build a Hamiltonian of a
+system, either molecular system or model system. In most cases, we need to build a molecular
+system</p>
+<p>In terms of second quantisation operators, a general Hamiltonian can be written
+as</p>
+<div class="math notranslate nohighlight">
+\[H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
+V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
+<p>The construction of molecular Hamiltonian usually set up in three steps.</p>
+<ul class="simple">
+<li>First, construct a molecular geometry.</li>
+<li>Second, generate a Gaussian basis set for the molecular.</li>
+<li>Finally, compute all kinds of one body terms and two body terms with that basis
+to define a Hamiltonian.</li>
+</ul>
+<div class="section" id="molecule">
+<h2>1.1. Molecule<a class="headerlink" href="#molecule" title="Permalink to this headline">¶</a></h2>
+<p>Molecule is a system consist with nucleus and electrons. For quantum chemistry
+calculation, we will always used the Born-Oppenheimer apporimation, which assumption
+that the motion of atomic nuclei and electrons in a molecule can be separated</p>
+<div class="math notranslate nohighlight">
+\[\Psi_{molecule} = \psi_{electronic} \otimes \psi_{nuclear}\]</div>
+<p>The module <code class="docutils literal notranslate"><span class="pre">molecule</span></code> in MoHa actually only contains imformation of the
+nuclear. It has three class:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Element</span></code></li>
+</ul>
+<p>Represents an element from the periodic table. The following attributes are supported for all elements:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>number</dt>
+<dd>The atomic number.</dd>
+<dt>symbol</dt>
+<dd>A string with the symbol of the element.</dd>
+<dt>name</dt>
+<dd>The full element name.</dd>
+<dt>group</dt>
+<dd>The group of the element (not for actinides and lanthanides).</dd>
+<dt>period</dt>
+<dd>The row of the periodic system.</dd>
+</dl>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Atom</span></code></li>
+</ul>
+<p>Represents an Atom. The following attributes are supported for all atoms:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>element</dt>
+<dd>A object of <code class="docutils literal notranslate"><span class="pre">Element</span></code> class.</dd>
+<dt>coordinate</dt>
+<dd>The coordinate of the atom object.</dd>
+</dl>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Molecule</span></code></li>
+</ul>
+<p>Represents an Molecule. The following attributes are supported for all molecule
+object:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>title</dt>
+<dd>type: string
+title of the system</dd>
+<dt>size</dt>
+<dd>type: intager
+number of atoms</dd>
+<dt>symmetry</dt>
+<dd>type: string
+point group of the molecule</dd>
+<dt>bond_length</dt>
+<dd><dl class="first docutils">
+<dt>Calculate the interatomic distances using the expression:</dt>
+<dd><div class="first last math notranslate nohighlight">
+\[R_{ij}=\sqrt{(x_i-x_j)^2 + (y_i - y_j)^2 + (z_i - z_j)^2}\]</div>
+</dd>
+</dl>
+<p class="last">where x, y, and z are Cartesian coordinates and i and j denote atomic indices.</p>
+</dd>
+<dt>bond_angle</dt>
+<dd><p class="first">Calculate all possible bond angles. For example, the angle, <span class="math notranslate nohighlight">\(\phi_{ijk}\)</span>, between atoms i-j-k, where j is the central atom is given by:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\cos {\phi_{ijk}} = {\bf \vec{e}_{ji} } \cdot {\bf \vec{e}_{jk}}\]</div>
+</div></blockquote>
+<p>where the <span class="math notranslate nohighlight">\(\bf \vec{e}_{ij}\)</span> are unit vectors between the atoms, e.g.,</p>
+<blockquote class="last">
+<div><div class="math notranslate nohighlight">
+\[e_{ij}^x = - \left(x_i - x_j \right)/R_{ij},\ \ \ \ \
+e_{ij}^y = - \left(y_i - y_j \right)/R_{ij},\ \ \ \ \
+e_{ij}^z = - \left(z_i - z_j \right)/R_{ij}\]</div>
+</div></blockquote>
+</dd>
+<dt>out_of_plane_angle</dt>
+<dd><p class="first">Calculate all possible out-of-plane angles. For example, the angle <span class="math notranslate nohighlight">\(\theta_{ijkl}\)</span> for atom i out of the plane containing atoms j-k-l (with k as the central atom, connected to i) is given by:</p>
+<blockquote class="last">
+<div><div class="math notranslate nohighlight">
+\[\sin {\theta_{ijkl}} =  \frac{{\bf \vec{e}_{kj} \times \vec{e}_{kl} }}{ \sin {\phi_{jkl}}} \cdot  {\bf \vec{e}_{ki} }\]</div>
+</div></blockquote>
+</dd>
+</dl>
+<p>dihedral_angle</p>
+<blockquote>
+<div><p>Calculate all possible torsional angles. For example, the torsional angle <span class="math notranslate nohighlight">\(\tau_{ijkl}\)</span> for the atom connectivity i-j-k-l is given by:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\cos {\tau_{ijkl}} = \frac{ ({\bf \vec{e}_{ij} \times \vec{e}_{jk} }) \cdot ( {\bf \vec{e}_{jk} \times \vec{e}_{kl} } ) }{  \sin {\phi_{ijk}} \  \ \sin{\phi_{jkl}}}\]</div>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p>To be convenient, we can specify the molecular object by load the molecular geometry from file formats.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="basis-set">
+<h2>1.2. Basis Set<a class="headerlink" href="#basis-set" title="Permalink to this headline">¶</a></h2>
+<p>MoHa supports basis sets consisting of generally contracted Cartesian Gaussian functions up to a maximum angular momentum of seven (I functions). HORTON is using the same basis set format as NWChem, and the basis sets can be downloaded from the EMSL webpage (<a class="reference external" href="https://bse.pnl.gov/bse/portal">https://bse.pnl.gov/bse/portal</a>).</p>
+<p>The basis object is a list of list with the follwing structure</p>
+<div class="math notranslate nohighlight">
+\[[Idx x y z #CONTR CONTR Atomidx]\]</div>
+<p>Idx is the AO index. Atomidx, is the index of the associated atom. #CONTR contains the number of primitive functions in the contracted.</p>
+<p>CONTR contains all the information about the primitive functions and have the form:</p>
+<div class="math notranslate nohighlight">
+\[[N ζ c l m n]\]</div>
+<p>Inside the integral call, the basisset file is reconstructed into three different arrays, containing the basisset information. The first one is basisidx that have the following form:</p>
+<div class="math notranslate nohighlight">
+\[[#primitives\ \ \ loopstartidx]\]</div>
+<p>It thus contains the number of primitives in each basisfunction, and what start index it have for loop inside the integral code.</p>
+<p>The second array is basisint, that have the following forms:</p>
+<div class="math notranslate nohighlight">
+\[[l m n]
+[l m n atomidx]\]</div>
+<p>The first one is for regular integrals and the second one is for derivatives. Both contains all the angular momentum quantum numbers, and the derivative also contains the atom index (used in derivative of VNe).</p>
+<p>The last array is basisfloat and have the following forms:</p>
+<div class="math notranslate nohighlight">
+\[[N ζ c x y z]
+[N ζ c x y z N_{x,+} N_{x,−} N_{y,+} N_{y,−} N_{z,+} N_{z,−}]\]</div>
+<p>basisfloat contains the normalization constants, Gaussian exponent and prefacor and the coordinates of the atoms. The second one is again for the derivatives, it contains normalization constants of the differentiated primitives.</p>
+</div>
+<div class="section" id="hamilonian">
+<h2>1.3. Hamilonian<a class="headerlink" href="#hamilonian" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="molecular-integrals">
+<h2>1.4. Molecular Integrals<a class="headerlink" href="#molecular-integrals" title="Permalink to this headline">¶</a></h2>
+<p>Contains the information about how the integrals are calculated. In the equations in this section the following definitions is used.</p>
+<div class="math notranslate nohighlight">
+\[p=a+b
+μ=aba+b
+Px=aAx+bBxp
+XAB=Ax−Bx\]</div>
+<p>Here a and b are Gaussian exponent factors. Ax and Bx are the position of the Gaussians in one dimension. Further the basisset functions is of Gaussian kind and given as:</p>
+<div class="math notranslate nohighlight">
+\[ϕA(r)=N(x−Ax)l(y−Ay)m(z−Az)nexp(−ζ(r⃗ −A⃗ )2)\]</div>
+<p>with a normalization constant given as:</p>
+<div class="math notranslate nohighlight">
+\[N=(2απ)3/4[(8α)l+m+nl!m!n!(2l)!(2m)!(2n)!]\]</div>
+<div class="section" id="boys-function">
+<h3>1.4.1. Boys Function<a class="headerlink" href="#boys-function" title="Permalink to this headline">¶</a></h3>
+<p>The Boys function is given as:
+.. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Fn(x)=∫10exp(−xt2)t2ndt
+</pre></div>
+</div>
+<p>FUNCTION:</p>
+<p>MIcython.boys(m,T)
+return value
+Input:</p>
+<p>m, subscript of the Boys function
+T, argument of the Boys function
+Output:</p>
+<p>value, value corrosponding to given m and T</p>
+</div>
+<div class="section" id="expansion-coefficients">
+<h3>1.4.2. Expansion coefficients<a class="headerlink" href="#expansion-coefficients" title="Permalink to this headline">¶</a></h3>
+<p>The expansion coefficient is found by the following recurrence relation:</p>
+<p>Ei,jt=0,t&lt;0ort&gt;i+j
+Ei+1,jt=12pEi,jt−1+XPAEi,jt+(t+1)Ei,jt+1
+Ei,j+1t=12pEi,jt−1+XPBEi,jt+(t+1)Ei,jt+1
+With the boundary condition that:</p>
+<p>E0,00=exp(−pX2AB)
+FUNCTION:</p>
+<p>MolecularIntegrals.E(i,j,t,Qx,a,b,XPA,XPB,XAB)
+return val
+Input:</p>
+<p>i, input values
+j, input values
+t, input values
+Qx, input values
+a, input values
+b, input values
+XPA, input values
+XPB, input values
+XAB, input values
+Output:</p>
+<p>val, value corrosponding to the given input</p>
+</div>
+<div class="section" id="overlap">
+<h3>1.4.3. Overlap<a class="headerlink" href="#overlap" title="Permalink to this headline">¶</a></h3>
+<p>The overlap integrals are solved by the following recurrence relation:</p>
+<div class="math notranslate nohighlight">
+\[Si+1,j=XPASij+12p(iSi−1,j+jSi,j−1)
+Si,j+1=XPBSij+12p(iSi−1,j+jSi,j−1)\]</div>
+<p>With the boundary condition that:</p>
+<div class="math notranslate nohighlight">
+\[S00=πp‾‾√exp(−μX2AB)\]</div>
+<p>FUNCTION:</p>
+<p>MolecularIntegrals.Overlap(a, b, la, lb, Ax, Bx)
+return Sij
+Input:</p>
+<p>a, Gaussian exponent factor
+b, Gaussian exponent factor
+la, angular momentum quantum number
+lb, angular momentum quantum number
+Ax, position along one axis
+Bx, position along one axis
+Output:</p>
+<p>Sij, non-normalized overlap element in one dimension</p>
+</div>
+<div class="section" id="kinetic-energy">
+<h3>1.4.4. Kinetic energy<a class="headerlink" href="#kinetic-energy" title="Permalink to this headline">¶</a></h3>
+<p>The kinetic energy integrals are solved by the following recurrence relation:</p>
+<div class="math notranslate nohighlight">
+\[Ti+1,j=XPATi,j+12p(iTi−1,j+jTi,j−1)+bp(2aSi+1,j−iSi−1,j)
+Ti,j+1=XPBTi,j+12p(iTi−1,j+jTi,j−1)+ap(2bSi,j+1−iSi,j−1)\]</div>
+<p>With the boundary condition that:</p>
+<div class="math notranslate nohighlight">
+\[T00=[a−2a2(X2PA+12p)]S00\]</div>
+<p>FUNCTION:</p>
+<p>Kin(a, b, Ax, Ay, Az, Bx, By, Bz, la, lb, ma, mb, na, nb, N1, N2, c1, c2)
+return Tij, Sij
+Input:</p>
+<p>a, Gaussian exponent factor
+b, Gaussian exponent factor
+Ax, position along the x-axis
+Bx, position along the x-axis
+Ay, position along the y-axis
+By, position along the y-axis
+Az, position along the z-axis
+Bz, position along the z-axis
+la, angular momentum quantum number
+lb, angular momentum quantum number
+ma, angular momentum quantum number
+mb, angular momentum quantum number
+na, angular momentum quantum number
+nb, angular momentum quantum number
+N1, normalization constant
+N2, normalization constant
+c1, Gaussian prefactor
+c2, Gaussian prefactor
+Output:</p>
+<p>Tij, normalized kinetic energy matrix element
+Sij, normalized overlap matrix element</p>
+</div>
+<div class="section" id="electron-nuclear-attraction">
+<h3>1.4.5. Electron-nuclear attraction<a class="headerlink" href="#electron-nuclear-attraction" title="Permalink to this headline">¶</a></h3>
+<p>The electron-nuclear interaction integral is given as:</p>
+<p>V000ijklmn=2πp∑ti+jEijt∑uk+lEklu∑vm+nEmnvRtuv
+FUNCTION:</p>
+<p>MolecularIntegrals.elnuc(P, p, l1, l2, m1, m2, n1, n2, N1, N2, c1, c2, Zc, Ex, Ey, Ez, R1)
+return Vij
+Input:</p>
+<p>P, Gaussian product
+p, exponent from Guassian product
+l1, angular momentum quantum number
+l2, angular momentum quantum number
+m1, angular momentum quantum number
+n1, angular momentum quantum number
+n2, angular momentum quantum number
+N1, normalization constant
+N2, normalization constant
+c1, Gaussian prefactor
+c2, Gaussian prefactor
+Zc, Nuclear charge
+Ex, expansion coefficients
+Ey, expansion coefficients
+Ez, expansion coefficients
+R1, hermite coulomb integrals
+Output:</p>
+<p>Vij, normalized electron-nuclei attraction matrix element</p>
+</div>
+<div class="section" id="electron-electron-repulsion">
+<h3>1.4.6. Electron-electron repulsion<a class="headerlink" href="#electron-electron-repulsion" title="Permalink to this headline">¶</a></h3>
+<p>The electron-electron repulsion integral is calculated as:</p>
+<p>gabcd=∑tl1+l2Eabt∑um1+m2Eabu∑vn1+n2Eabv∑τl3+l4Ecdτ∑νm3+m4Ecdν∑ϕn3+n4Ecdϕ(−1)τ+ν+ϕ2π5/2pqp+q‾‾‾‾‾√Rt+τ,u+ν,v+ϕ(α,RPQ)
+FUNCTION:</p>
+<p>MIcython.elelrep(p, q, l1, l2, l3, l4, m1, m2, m3, m4, n1, n2, n3, n4, N1, N2, N3, N4, c1, c2, c3, c4, E1, E2, E3, E4, E5, E6, Rpre)
+return Veeijkl
+Input:</p>
+<p>p, Gaussian exponent factor from Gaussian product
+q, Gaussian exponent factor from Gaussian product
+l1, angular momentum quantum number
+l2, angular momentum quantum number
+l3, angular momentum quantum number
+l4, angular momentum quantum number
+m1, angular momentum quantum number
+m2, angular momentum quantum number
+m3, angular momentum quantum number
+m4, angular momentum quantum number
+n1, angular momentum quantum number
+n2, angular momentum quantum number
+n3, angular momentum quantum number
+n4, angular momentum quantum number
+N1, normalization constant
+N2, normalization constant
+N3, normalization constant
+N4, normalization constant
+c1, Gaussian prefactor
+c2, Gaussian prefactor
+c3, Gaussian prefactor
+c4, Gaussian prefactor
+E1, expansion coefficient
+E2, expansion coefficient
+E3, expansion coefficient
+E4, expansion coefficient
+E5, expansion coefficient
+E6, expansion coefficient
+Rpre, hermite coulomb integral
+Output:</p>
+<p>Veeijkl, normalized electron-electron repulsion matrix element</p>
+</div>
+</div>
+<div class="section" id="build-hamilton">
+<h2>1.5. Build Hamilton<a class="headerlink" href="#build-hamilton" title="Permalink to this headline">¶</a></h2>
+<p>To build a Hamiltonian object, MoHa can load the molecular geometry and and basis from file
+format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modelsystem.html" class="btn btn-neutral float-right" title="2. Model System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="2. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

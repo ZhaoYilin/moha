@@ -1,0 +1,46 @@
+moha.posthf.ci package
+======================
+
+Submodules
+----------
+
+moha.posthf.ci.cis module
+-------------------------
+
+.. automodule:: moha.posthf.ci.cis
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.posthf.ci.cisd module
+--------------------------
+
+.. automodule:: moha.posthf.ci.cisd
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.posthf.ci.configuration module
+-----------------------------------
+
+.. automodule:: moha.posthf.ci.configuration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+moha.posthf.ci.fullci module
+----------------------------
+
+.. automodule:: moha.posthf.ci.fullci
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: moha.posthf.ci
+    :members:
+    :undoc-members:
+    :show-inheritance:

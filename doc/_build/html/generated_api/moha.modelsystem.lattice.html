@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.2.1. moha.modelsystem.lattice &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2.2. moha.modelsystem.sites" href="moha.modelsystem.sites.html" />
+    <link rel="prev" title="1.1.3. moha.system.operator" href="moha.system.operator.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post HF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../developer_api.html">1. API Doucmentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../developer_api.html#molecule-system">1.1. Molecule System</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../developer_api.html#model-system">1.2. Model System</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1.2.1. moha.modelsystem.lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moha.modelsystem.sites.html">1.2.2. moha.modelsystem.sites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moha.modelsystem.modeloperator.html">1.2.3. moha.modelsystem.modeloperator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_derivation.html">2. Notes and Derivation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../developer_api.html">1. API Doucmentation</a> &raquo;</li>
+        
+      <li>1.2.1. moha.modelsystem.lattice</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/generated_api/moha.modelsystem.lattice.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-moha.modelsystem.lattice">
+<span id="moha-modelsystem-lattice"></span><h1>1.2.1. moha.modelsystem.lattice<a class="headerlink" href="#module-moha.modelsystem.lattice" title="Permalink to this headline">¶</a></h1>
+<p>Lattice for Model Hamiltonian</p>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#moha.modelsystem.lattice.Cell" title="moha.modelsystem.lattice.Cell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cell</span></code></a>(dimension,&nbsp;a1,&nbsp;a2,&nbsp;a3)</td>
+<td>Primitive cell of the lattice</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#moha.modelsystem.lattice.Lattice" title="moha.modelsystem.lattice.Lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Lattice</span></code></a>(cell,&nbsp;shape)</td>
+<td>Class for lattice</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#moha.modelsystem.lattice.LatticeBond" title="moha.modelsystem.lattice.LatticeBond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LatticeBond</span></code></a>(cell1,&nbsp;site1,&nbsp;cell2,&nbsp;site2[,&nbsp;…])</td>
+<td>Bond of Lattice</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#moha.modelsystem.lattice.LatticeSite" title="moha.modelsystem.lattice.LatticeSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LatticeSite</span></code></a>(coordinate[,&nbsp;label,&nbsp;color,&nbsp;…])</td>
+<td>Child class of LatticeSite</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="moha.modelsystem.lattice.Cell">
+<em class="property">class </em><code class="descclassname">moha.modelsystem.lattice.</code><code class="descname">Cell</code><span class="sig-paren">(</span><em>dimension</em>, <em>a1</em>, <em>a2</em>, <em>a3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Primitive cell of the lattice</p>
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Cell.add_bond">
+<code class="descname">add_bond</code><span class="sig-paren">(</span><em>bond</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Cell.add_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Cell.add_bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a lattice bond instance to the cell</p>
+<dl class="docutils">
+<dt>bond <span class="classifier-delimiter">:</span> <span class="classifier">LatticeBond </span></dt>
+<dd>lattice bond class</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Cell.add_site">
+<code class="descname">add_site</code><span class="sig-paren">(</span><em>site</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Cell.add_site"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Cell.add_site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a lattice site instance to the cell</p>
+<dl class="docutils">
+<dt>site <span class="classifier-delimiter">:</span> <span class="classifier">LatticeXSite </span></dt>
+<dd>lattice site class</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.modelsystem.lattice.Lattice">
+<em class="property">class </em><code class="descclassname">moha.modelsystem.lattice.</code><code class="descname">Lattice</code><span class="sig-paren">(</span><em>cell</em>, <em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for lattice</p>
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Lattice.build_bonds">
+<code class="descname">build_bonds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice.build_bonds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice.build_bonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all bonds to the lattice.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Lattice.build_sites">
+<code class="descname">build_sites</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice.build_sites"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice.build_sites" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all sites to the lattice.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Lattice.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot lattice and show it with matplotlib.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Lattice.plotbond">
+<code class="descname">plotbond</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice.plotbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice.plotbond" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot bonds with matplotlib.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.modelsystem.lattice.Lattice.plotsite">
+<code class="descname">plotsite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#Lattice.plotsite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.Lattice.plotsite" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot sites with matplotlib.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.modelsystem.lattice.LatticeBond">
+<em class="property">class </em><code class="descclassname">moha.modelsystem.lattice.</code><code class="descname">LatticeBond</code><span class="sig-paren">(</span><em>cell1</em>, <em>site1</em>, <em>cell2</em>, <em>site2</em>, <em>color=None</em>, <em>label=None</em>, <em>linewidth=None</em>, <em>linetype=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#LatticeBond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.LatticeBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bond of Lattice</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="moha.modelsystem.lattice.LatticeSite">
+<em class="property">class </em><code class="descclassname">moha.modelsystem.lattice.</code><code class="descname">LatticeSite</code><span class="sig-paren">(</span><em>coordinate</em>, <em>label=None</em>, <em>color=None</em>, <em>markersize=80</em>, <em>marker='o'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/lattice.html#LatticeSite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.lattice.LatticeSite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Child class of LatticeSite</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="moha.modelsystem.sites.html" class="btn btn-neutral float-right" title="1.2.2. moha.modelsystem.sites" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="moha.system.operator.html" class="btn btn-neutral" title="1.1.3. moha.system.operator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
