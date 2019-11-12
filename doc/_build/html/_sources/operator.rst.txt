@@ -1,8 +1,0 @@
-.. _operator:
-
-Operator
-############
-
-.. toctree::
-   :maxdepth: 3
-

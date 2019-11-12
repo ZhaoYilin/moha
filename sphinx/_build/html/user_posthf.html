@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. Post Hartree-Fock &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Tensor Network State" href="user_tensor_network.html" />
+    <link rel="prev" title="3. Hartree-Fock" href="user_scf.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Post Hartree-Fock</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-interaction">4.1. Configuration Interaction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cid">4.1.1. CID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cisd">4.1.2. CISD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cisd-t">4.1.3. CISD(T)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-ci">4.1.4. Full CI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coupled-cluster">4.2. Coupled-Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ccd">4.2.1. CCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ccsd">4.2.2. CCSD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#perturbation-theory">4.3. Perturbation Theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mp2">4.3.1. MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mp3">4.3.2. MP3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_tensor_network.html">5. Tensor Network State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. AI Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>4. Post Hartree-Fock</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_posthf.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="post-hartree-fock">
+<h1>4. Post Hartree-Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline">¶</a></h1>
+<p>Quantum chemistry is mature enough to have a canonical approaches followed by
+Hartree-Fock method. Their behaviour, successes, and most importantly their
+failures are widely known and accepted. With a couple of exceptions which we
+will not mention, they are known as:</p>
+<ul class="simple">
+<li><p>Configuration Interaction(CI)</p></li>
+<li><p>Coupled-Cluster(CC)</p></li>
+<li><p>Perturbation Theory(PT)</p></li>
+</ul>
+<div class="section" id="configuration-interaction">
+<h2>4.1. Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cid">
+<h3>4.1.1. CID<a class="headerlink" href="#cid" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="cisd">
+<h3>4.1.2. CISD<a class="headerlink" href="#cisd" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="cisd-t">
+<h3>4.1.3. CISD(T)<a class="headerlink" href="#cisd-t" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="full-ci">
+<h3>4.1.4. Full CI<a class="headerlink" href="#full-ci" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="coupled-cluster">
+<h2>4.2. Coupled-Cluster<a class="headerlink" href="#coupled-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Coupled cluster methods are among the most accurate electronic structure
+methods available today. For example, with a good choice for a basis, the
+CCSD(T) equations will give you the correct energy of a molecular system to
+chemical accuracy (~0.1 kcal/mol).</p>
+<div class="section" id="ccd">
+<h3>4.2.1. CCD<a class="headerlink" href="#ccd" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="ccsd">
+<h3>4.2.2. CCSD<a class="headerlink" href="#ccsd" title="Permalink to this headline">¶</a></h3>
+<p>To implement the  CCSD method, we should follow the procedure:</p>
+<ul class="simple">
+<li><p>Preparing the Spin-Orbital Basis Integrals</p></li>
+<li><p>Build the Initial-Guess Cluster Amplitudes</p></li>
+</ul>
+<p>For Hartree-Fock reference determinants, the most common initial guess for the
+cluster amplitudes are the Moller-Plesset first-order perturbed wave function:</p>
+<div class="math notranslate nohighlight">
+\[t_i^a = 0\]</div>
+<div class="math notranslate nohighlight">
+\[t_{ij}^{ab} = \frac{\langle ij || ab \rangle}{\epsilon_i + \epsilon_j -
+\epsilon_a - \epsilon_b}\]</div>
+<ul class="simple">
+<li><p>Calculate the CC Intermediates</p></li>
+</ul>
+<p>Use the spin-orbital Eqs. 3-13 from Stanton’s paper to build the two-index (F)
+and four-index (W) intermediates, as well as the effective doubles (labelled
+with the Greek letter tau).</p>
+<ul class="simple">
+<li><p>Compute the Updated Cluster Amplitudes</p></li>
+</ul>
+<p>Use Eqs. 1 and 2 from Stanton’s paper to compute the updated T1 and T2 cluster amplitudes.</p>
+<ul class="simple">
+<li><p>Check for Convergence and Iterate Calculate the current CC correlation energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E_{\rm CC} = \sum_{ia} f_{ia} t_i^a + \frac{1}{4} \sum_{ijab} \langle
+ij||ab\rangle t_{ij}^{ab} + \frac{1}{2} \sum_{ijab} \langle ij||ab\rangle t_i^a
+t_j^b\]</div>
+<p>Compare energies and cluster amplitudes between
+iterations to check for convergence to some specified cutoff. If convergence is
+reached, you’re done; if not, return to third step and continue.</p>
+<p>To run a CCSD calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/posthf/ccsd.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">CCSolver</span><span class="o">.</span><span class="n">ccsd</span><span class="p">(</span><span class="n">hfwavefunction</span><span class="p">,</span><span class="n">ham</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="perturbation-theory">
+<h2>4.3. Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mp2">
+<h3>4.3.1. MP2<a class="headerlink" href="#mp2" title="Permalink to this headline">¶</a></h3>
+<p>Moller-Plesset Second Order Perturbation theory (MP2) is a non-iterative
+way to calculate electron correlation energy The expression for it’s energy
+contribution can be written as:</p>
+<div class="math notranslate nohighlight">
+\[E_{\rm MP2} = \sum_{ij} \sum_{ab} \frac{(ia|jb) \left[ 2 (ia|jb) -
+(ib|ja) \right]}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}\]</div>
+<p>where the two electron integral are molecular integral and should be transform
+from atomic orbtial to molecular orbital basis.</p>
+<div class="math notranslate nohighlight">
+\[(pq|rs) = \sum_\mu C_\mu^p \left[ \sum_\nu C_\nu^q \left[ \sum_\lambda
+C_\lambda^r \left[ \sum_\sigma C_\sigma^s (\mu \nu|\lambda \sigma) \right]
+\right] \right]\]</div>
+<p>To run a MP2 calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/posthf/mp2.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;h2o.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">hfwavefunction</span> <span class="o">=</span> <span class="n">SCFSolver</span><span class="o">.</span><span class="n">hf</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">occ</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">MPNSolver</span><span class="o">.</span><span class="n">mp2</span><span class="p">(</span><span class="n">hfwavefunction</span><span class="p">,</span><span class="n">ham</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mp3">
+<h3>4.3.2. MP3<a class="headerlink" href="#mp3" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_tensor_network.html" class="btn btn-neutral float-right" title="5. Tensor Network State" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user_scf.html" class="btn btn-neutral float-left" title="3. Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

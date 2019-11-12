@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>moha.hf.scf &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">1. MoHa Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">2. Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_tensor_network.html">5. Tensor Network State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_property.html">6. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_api.html">1. AI Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>moha.hf.scf</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for moha.hf.scf</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">moha.system.state</span> <span class="k">import</span> <span class="n">HFWaveFunction</span>
+<span class="c1">####################################  </span>
+<span class="c1">#                                  #</span>
+<span class="c1">#            FUNCTIONS             #</span>
+<span class="c1">#                                  #</span>
+<span class="c1">####################################  </span>
+
+<span class="k">def</span> <span class="nf">eint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span> <span class="n">ab</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">ab</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">d</span><span class="p">:</span> <span class="n">cd</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">d</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">cd</span> <span class="o">=</span> <span class="n">d</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span>
+    <span class="k">if</span> <span class="n">ab</span> <span class="o">&gt;</span> <span class="n">cd</span><span class="p">:</span> <span class="n">abcd</span> <span class="o">=</span> <span class="n">ab</span><span class="o">*</span><span class="p">(</span><span class="n">ab</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cd</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">abcd</span> <span class="o">=</span> <span class="n">cd</span><span class="o">*</span><span class="p">(</span><span class="n">cd</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ab</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">abcd</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">def tei(a,b,c,d):</span>
+<span class="sd">    return twoe.get(eint(a,b,c,d),0.0)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="orthogonalization_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.scf.html#moha.hf.scf.orthogonalization_matrix">[docs]</a><span class="k">def</span> <span class="nf">orthogonalization_matrix</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Diagonlize the overlap matrix</span>
+<span class="sd">    Schmidt</span>
+<span class="sd">    symmetric</span>
+<span class="sd">    canonical</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;Schmidt&#39;</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">:</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  
+        <span class="n">val_minus_half</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">val</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)))</span>  
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">val_minus_half</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">vec</span><span class="p">)))</span>  
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;canonical&#39;</span><span class="p">:</span>
+        <span class="n">val</span><span class="p">,</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  
+        <span class="n">val_minus_half</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">val</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)))</span>  
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="n">val_minus_half</span><span class="p">)</span>  
+    <span class="k">return</span> <span class="n">X</span></div>
+
+
+<span class="k">def</span> <span class="nf">F_transform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Norb</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">Fprime</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">F</span><span class="p">:</span>
+            <span class="n">Fprime</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">spin</span><span class="p">],</span><span class="n">X</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">Fprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Fprime</span>
+
+
+<div class="viewcode-block" id="C_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.scf.html#moha.hf.scf.C_matrix">[docs]</a><span class="k">def</span> <span class="nf">C_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Norb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    orbital energies and Coefficients matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">eorbital</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Norb</span><span class="p">),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Norb</span><span class="p">)}</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="n">Cprime</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="n">Fprime</span> <span class="o">=</span> <span class="n">F_transform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">F</span><span class="p">:</span>
+            <span class="n">eorbital</span><span class="p">[</span><span class="n">spin</span><span class="p">],</span><span class="n">Cprime</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">Fprime</span><span class="p">[</span><span class="n">spin</span><span class="p">])</span> 
+            <span class="n">e</span><span class="p">,</span><span class="n">evec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">Fprime</span><span class="p">[</span><span class="n">spin</span><span class="p">])</span> 
+            <span class="n">eorbital</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+            <span class="n">Cprime</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="n">evec</span><span class="p">[:,</span><span class="n">eorbital</span><span class="p">[</span><span class="n">spin</span><span class="p">]]</span>
+
+            <span class="n">C</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Cprime</span><span class="p">[</span><span class="n">spin</span><span class="p">])</span>  
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">Fprime</span> <span class="o">=</span> <span class="n">F_transform</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+        <span class="n">eorbital</span><span class="p">,</span><span class="n">Cprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">Fprime</span><span class="p">)</span>  
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Cprime</span><span class="p">)</span>  
+    <span class="k">return</span> <span class="n">eorbital</span><span class="p">,</span><span class="n">C</span></div>
+
+
+<div class="viewcode-block" id="D_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.scf.html#moha.hf.scf.D_matrix">[docs]</a><span class="k">def</span> <span class="nf">D_matrix</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">occ</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Density matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">C</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">occ</span><span class="p">[</span><span class="n">spin</span><span class="p">]):</span>
+                        <span class="n">D</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">C</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">occ</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]):</span>
+                    <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">C</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">D</span></div>
+
+<div class="viewcode-block" id="G_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.scf.html#moha.hf.scf.G_matrix">[docs]</a><span class="k">def</span> <span class="nf">G_matrix</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Eri</span><span class="p">,</span><span class="n">Norb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    G matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">Dtot</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">D</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">D</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                            <span class="n">G</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Dtot</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">Eri</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)]</span><span class="o">-</span><span class="n">D</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="n">Eri</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">l</span><span class="p">)]</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                        <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">Eri</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)]</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">Eri</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">l</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">G</span></div>
+
+<div class="viewcode-block" id="F_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.scf.html#moha.hf.scf.F_matrix">[docs]</a><span class="k">def</span> <span class="nf">F_matrix</span><span class="p">(</span><span class="n">Hcore</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">Norb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fock matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                    <span class="n">F</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Hcore</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">G</span><span class="p">[</span><span class="n">spin</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Hcore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">F</span></div>
+
+<span class="c1"># Calculate change in density matrix</span>
+<span class="k">def</span> <span class="nf">deltap</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">OLDD</span><span class="p">,</span><span class="n">dim</span><span class="p">):</span>
+    <span class="n">DELTA</span> <span class="o">=</span> <span class="mf">0.0e0</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">D</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span>
+        <span class="n">OLDD</span> <span class="o">=</span> <span class="n">OLDD</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">OLDD</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">dim</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">dim</span><span class="p">):</span>
+            <span class="n">DELTA</span> <span class="o">=</span> <span class="n">DELTA</span><span class="o">+</span><span class="p">((</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">OLDD</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">DELTA</span> <span class="o">=</span> <span class="p">(</span><span class="n">DELTA</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">DELTA</span>
+
+<span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Hcore</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">Norb</span><span class="p">):</span>  
+    <span class="n">E</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">Dtot</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">D</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>  
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>  
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">Dtot</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">Hcore</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">F</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">F</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>  
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Norb</span><span class="p">):</span>
+                <span class="n">E</span> <span class="o">=</span> <span class="n">E</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">Hcore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">E</span>
+
+<span class="c1">#####################################  </span>
+<span class="c1">#                                   #</span>
+<span class="c1">#            SCF Solver             #</span>
+<span class="c1">#                                   #</span>
+<span class="c1">#####################################</span>
+<span class="k">class</span> <span class="nc">SCFSolver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">maxiter</span><span class="p">,</span><span class="n">cutoff</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxiter</span> <span class="o">=</span> <span class="n">maxiter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ffffff&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;fffffffff&#39;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">hf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">hamiltonian</span><span class="p">,</span><span class="n">occ</span><span class="p">,</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">cutoff</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+        <span class="n">Norb</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">dim</span>
+        <span class="c1">#Form the core Hamiltonian</span>
+        <span class="n">Hcore</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="s1">&#39;kinetic&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="s1">&#39;nuclear_attraction&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+        <span class="c1">#Build the orthogonalization matrix</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">orthogonalization_matrix</span><span class="p">(</span><span class="n">hamiltonian</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="s1">&#39;overlap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="c1">#Initial guess of density matrix</span>
+        <span class="k">if</span> <span class="n">occ</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">occ</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">)),</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Norb</span><span class="p">,</span><span class="n">Norb</span><span class="p">))}</span>
+        <span class="c1">#iteration section</span>
+        <span class="n">Iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">RMS</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:2s}</span><span class="s1"> </span><span class="si">{1:3s}</span><span class="s1"> </span><span class="si">{2:4s}</span><span class="s1"> </span><span class="si">{3:5s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Iter&#39;</span><span class="p">,</span> <span class="s1">&#39;E(elec)&#39;</span><span class="p">,</span> <span class="s1">&#39;E(tot)&#39;</span><span class="p">,</span><span class="s1">&#39;RMS&#39;</span><span class="p">))</span>
+        <span class="k">while</span> <span class="n">RMS</span> <span class="o">&gt;</span> <span class="n">cutoff</span> <span class="ow">and</span> <span class="n">Iter</span> <span class="o">&lt;</span> <span class="n">maxiter</span><span class="p">:</span>
+            <span class="n">Iter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="n">G_matrix</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">hamiltonian</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="s1">&#39;electron_repulsion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="n">F_matrix</span><span class="p">(</span><span class="n">Hcore</span><span class="p">,</span><span class="n">G</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+            <span class="n">eorbitals</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">C_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+            <span class="n">OLDD</span> <span class="o">=</span> <span class="n">D</span>
+            
+            <span class="n">D</span> <span class="o">=</span> <span class="n">D_matrix</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">Norb</span><span class="p">,</span><span class="n">occ</span><span class="p">)</span>
+            <span class="n">RMS</span> <span class="o">=</span> <span class="n">deltap</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">OLDD</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+
+            <span class="n">Eelec</span> <span class="o">=</span> <span class="n">energy</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Hcore</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">Norb</span><span class="p">)</span>
+            <span class="n">Etot</span> <span class="o">=</span> <span class="n">Eelec</span> <span class="o">+</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">operators</span><span class="p">[</span><span class="s1">&#39;nuclear_repulsion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:2d}</span><span class="s1"> </span><span class="si">{1:3f}</span><span class="s1"> </span><span class="si">{2:4f}</span><span class="s1"> </span><span class="si">{3:5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Iter</span><span class="p">,</span> <span class="n">Eelec</span><span class="p">,</span> <span class="n">Etot</span><span class="p">,</span> <span class="n">RMS</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="n">Norb</span><span class="p">,</span><span class="n">occ</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">eorbitals</span><span class="p">,</span><span class="n">Eelec</span><span class="p">,</span><span class="n">Etot</span><span class="p">)</span>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
