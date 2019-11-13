@@ -11,3 +11,6 @@ MoHa have the following requirements:
 - Python 3.5 or above
 - numpy 1.13.1 
 - scipy 0.19.1  
+
+
+The code is not really optimized, especially cause the moleculer integral are also written in python. It times few seconds for a water calculation with minimal basis at this stage. So it's now a toy. 
