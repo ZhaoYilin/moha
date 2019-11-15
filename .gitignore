@@ -1,3 +1,6 @@
 # Files made by python
 __pycache__
 *.py[cod]
+
+# Files made by Mac
+.DS_Store
