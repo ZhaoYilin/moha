@@ -4,3 +4,6 @@ __pycache__
 
 # Files made by Mac
 .DS_Store
+
+# Files made by setup
+build
