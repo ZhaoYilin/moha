@@ -4,7 +4,7 @@
 </div>
 
 
-MoHa
+MOHA
 ==================================
 
 MoHa is abbreviation of *Mo*lecular&*Mo*del *Ha*miltonian, it is a quantum chemistry program written in python. MoHa now is
