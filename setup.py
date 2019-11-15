@@ -14,7 +14,7 @@ setup(name='moha',
     author='Yilin Zhao',
     author_email='zhaoyilin1991@gmail.com',
     license='MIT',
-    packages=['moha','moha.system','moha.io','moha.system.integral','moha.io.basis','moha.hf','moha.property','moha.posthf','moha.posthf.ci','moha.posthf.cc','moha.posthf.pt','moha.modelsystem','moha.tn'],
+    packages=['moha','moha.system','moha.io','moha.system.integral','moha.io.basis','moha.hf','moha.property','moha.posthf','moha.posthf.ci','moha.posthf.cc','moha.posthf.pt','moha.modelsystem','moha.tn','moha.tools'],
     package_data={'moha': ['io/basis/*']},
     data_files=[
         ('share/moha', glob('data/*.*')),
