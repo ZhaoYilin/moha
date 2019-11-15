@@ -20,9 +20,9 @@ Installation
 
 * Prerequisties:
 
-- Python 3.5 or above
-- numpy 1.13.1 
-- scipy 0.19.1  
+  - Python 3.5 or above
+  - numpy 1.13.1 
+  - scipy 0.19.1  
 
 * Compile
 
