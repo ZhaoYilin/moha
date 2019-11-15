@@ -5,12 +5,18 @@ not a formal program but a toy for practice coding and help myself to have a bet
 
 For more information, visit MoHa's website: http://zhaoyilin.github.io/moha
 
+Installation
+------------
 
-MoHa have the following requirements:
+* Prerequisties:
 
 - Python 3.5 or above
 - numpy 1.13.1 
 - scipy 0.19.1  
 
+* Compile
 
+  cd moha
+  python setup.py install
+  
 The code is not really optimized, especially cause the moleculer integral are also written in python. It times few seconds for a water calculation with minimal basis at this stage. So it's now a toy. 
