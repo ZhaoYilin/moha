@@ -1,7 +1,9 @@
 <div align="left">
   <img src="https://github.com/ZhaoYilin/moha/blob/master/sphinx/pictures/moha.png"
-       height="80px"/>
+       height="100px"/>
 </div>
+
+
 # MoHa
 
 MoHa is abbreviation of *Mo*lecular&*Mo*del *Ha*miltonian, it is a quantum chemistry program written in python. MoHa now is
