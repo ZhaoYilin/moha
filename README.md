@@ -10,9 +10,7 @@ MoHa
 MoHa is abbreviation of *Mo*lecular&*Mo*del *Ha*miltonian, it is a quantum chemistry program written in python. MoHa now is
 not a formal program but a toy for practice coding and help myself to have a better understanding of quantum chemistry.
 
-For more information, visit MoHa's website: http://zhaoyilin.github.io/moha
 
-The code is not really optimized, especially cause the moleculer integral are also written in python. It times few seconds for a water calculation with minimal basis at this stage. So it's now a toy. 
 
 
 Installation
@@ -27,7 +25,11 @@ Installation
 * Compile
 
       cd moha
-      python setup.py install
+      python setup.py install --user
   
   
   
+Tutorial
+--------
+
+For more information, visit MOHA's website: https://zhaoyilin.github.io/moha/
