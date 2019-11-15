@@ -16,7 +16,9 @@ Installation
 
 * Compile
 
-  cd moha
-  python setup.py install
+      cd moha
+      python setup.py install
+  
+  
   
 The code is not really optimized, especially cause the moleculer integral are also written in python. It times few seconds for a water calculation with minimal basis at this stage. So it's now a toy. 
