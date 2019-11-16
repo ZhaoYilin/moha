@@ -24,6 +24,7 @@ Installation
 
 * Compile
 
+      git clone https://github.com/ZhaoYilin/moha.git
       cd moha
       python setup.py install --user
   
