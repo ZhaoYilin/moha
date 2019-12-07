@@ -7,8 +7,7 @@
 MOHA
 ==================================
 
-MoHa is abbreviation of *Mo*lecular&*Mo*del *Ha*miltonian, it is a quantum chemistry program written in python. MoHa now is
-not a formal program but a toy for practice coding and help myself to have a better understanding of quantum chemistry.
+MoHa is abbreviation of *Mo*lecular&*Mo*del *Ha*miltonian, it is a quantum chemistry program written in python. This is a particularly naive implementation in python: little attempt is made to conserve memory or CPU time. Nevertheless, it is useful for small test calculations, in particular for investigating ideas  quantum chemistry.
 
 
 
