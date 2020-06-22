@@ -136,25 +136,19 @@ class SpinOneHalfSite(Site):
         s_x[1, 0] = 0.5
         s_y[0, 1] = 1j*(-0.5)
         s_y[1, 0] = 1j*0.5
-        s_z[0, 0] = -0.5
-        s_z[1, 1] = 0.5
-        s_p[1, 0] = 1.0
-        s_m[0, 1] = 1.0
+        s_z[0, 0] = 0.5
+        s_z[1, 1] = -0.5
+        s_p[0, 1] = 1.0
+        s_m[1, 0] = 1.0
         # add the states
         self.add_state("spin_up")
         self.add_state("spin_down")
-        self.add_state("empty")
-        self.add_state("occupied")
         # for clarity
         state_up = self.states["spin_up"]
         state_down = self.states["spin_down"]
-        state_empty = self.states["empty"]
-        state_occupied = self.states["occupied"]
         # set the list elements different from zero to the right values
-        state_up[1] = 1.0
-        state_down[0] = 1.0
-        state_occupied[1] = 1.0
-        state_empty[0] = 1.0
+        state_up[0] = 1.0
+        state_down[1] = 1.0
 
 
 
@@ -171,7 +165,8 @@ class ElectronicSite(Site):
     
     Notes
     -----
-    Postcond: The site has already built-in the spin operators for: 
+    Postcond: The site has already built-in the  operators in the
+    local basis (0,up,down,double) for: 
 
     - c_up : destroys an spin up electron,
     - c_up_dag, creates an spin up electron,
@@ -184,6 +179,7 @@ class ElectronicSite(Site):
     - n_down, number of electrons with spin down,
     - n, number of electrons, i.e. n_up+n_down, and
     - u, number of double occupancies, i.e. n_up*n_down.
+    - F, Klein operator
 
     """
     def __init__(self):
@@ -193,52 +189,79 @@ class ElectronicSite(Site):
         self.add_operator("c_up_dag")
         self.add_operator("c_down")
         self.add_operator("c_down_dag")
-        self.add_operator("s_z")
+        self.add_operator("S_p_up")
+        self.add_operator("S_p_down")
+        self.add_operator("S_m_up")
+        self.add_operator("S_m_down")
         self.add_operator("n_up")
         self.add_operator("n_down")
         self.add_operator("n")
-        self.add_operator("u")
+        self.add_operator("F_up")
+        self.add_operator("F_down")
+        self.add_operator("F")
         # for clarity
         c_up = self.operators["c_up"]
         c_up_dag = self.operators["c_up_dag"]
         c_down = self.operators["c_down"]
         c_down_dag = self.operators["c_down_dag"]
-        s_z = self.operators["s_z"]
+        S_p_up = self.operators["S_p_up"]
+        S_p_down = self.operators["S_p_down"]
+        S_m_up = self.operators["S_m_up"]
+        S_m_down = self.operators["S_m_down"]
         n_up = self.operators["n_up"]
         n_down = self.operators["n_down"]
         n = self.operators["n"]
-        u = self.operators["u"]
+        F_up = self.operators["F_up"]
+        F_down = self.operators["F_down"]
+        F = self.operators["F"]
         # set the matrix elements different from zero to the right values
-        c_up[0,2] = 1.0
-        c_up[1,3] = 1.0
-        c_up_dag[2,0] = 1.0
-        c_up_dag[3,1] = 1.0
-        c_down[0,1] = 1.0
-        c_down[2,3] = 1.0
-        c_down_dag[1,0] = 1.0
-        c_down_dag[3,2] = 1.0
-        s_z[1,1] = -1.0
-        s_z[2,2] = 1.0
-        n_up[2,2] = 1.0
+        c_up[0,1] = 1.0
+        c_up[2,3] = 1.0
+        c_up_dag[1,0] = 1.0
+        c_up_dag[3,2] = 1.0
+        c_down[0,2] = 1.0
+        c_down[1,3] = -1.0
+        c_down_dag[2,0] = 1.0
+        c_down_dag[3,1] = -1.0
+        S_p_up[1,0] = 1.0
+        S_p_up[3,2] = 1.0
+        S_p_down[2,0] = 1.0
+        S_p_down[3,1] = 1.0
+        S_m_up[0,1] = 1.0
+        S_m_up[2,3] = 1.0
+        S_m_down[0,2] = 1.0
+        S_m_down[1,3] = 1.0
+        n_up[1,1] = 1.0
         n_up[3,3] = 1.0
-        n_down[1,1] = 1.0
+        n_down[2,2] = 1.0
         n_down[3,3] = 1.0
         n[1,1] = 1.0
         n[2,2] = 1.0
         n[3,3] = 2.0
-        u[3,3] = 1.0
+        F_up[0,0] = 1.0
+        F_up[1,1] = -1.0
+        F_up[2,2] = 1.0
+        F_up[3,3] = -1.0
+        F_down[0,0] = 1.0
+        F_down[1,1] = 1.0
+        F_down[2,2] = -1.0
+        F_down[3,3] = -1.0
+        F[0,0] = 1.0
+        F[1,1] = -1.0
+        F[2,2] = -1.0
+        F[3,3] = 1.0
         # add the states
         self.add_state("empty")
-        self.add_state("spin_down")
         self.add_state("spin_up")
+        self.add_state("spin_down")
         self.add_state("double")
         # for clarity
         state_empty = self.states["empty"]
-        state_down = self.states["spin_down"]
         state_up = self.states["spin_up"]
+        state_down = self.states["spin_down"]
         state_double = self.states["double"]
         # set the list elements different from zero to the right values
         state_empty[0] = 1.0
-        state_down[1] = 1.0
-        state_up[2] = 1.0
+        state_up[1] = 1.0
+        state_down[2] = 1.0
         state_double[3] = 1.0

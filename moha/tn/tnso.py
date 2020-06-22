@@ -30,7 +30,7 @@ class MPO(TNSO):
         elif model=='XYZ':
             self.vertices = copy.deepcopy(self.XYZ())
         elif model=='Hubbard':
-            pass
+            self.vertices = copy.deepcopy(self.Hubbard())
         elif model=='t-J':
             pass
 
@@ -95,6 +95,7 @@ class MPO(TNSO):
                J,Jz,h
 
         """
+        print('hello hfwofew')
         self.D =5
         P = self.P
         N = self.N
@@ -151,7 +152,72 @@ class MPO(TNSO):
         pass
 
     def Hubbard(self):
-        pass
+        """
+        XXZ Hamiltonian
+            H = JSzSz - hSx
+        Parameters:
+            P: parameters of the model Hamiltonians for each term
+               J,Jz,h
+
+        """
+        self.D = 6
+        P = self.P
+        N = self.N
+        site = self.site
+        iden = site.operators["id"]
+        S_p_up = site.operators["S_p_up"]
+        S_p_down = site.operators["S_p_down"]
+        S_m_up = site.operators["S_m_up"]
+        S_m_down = site.operators["S_m_down"]
+        n_up = site.operators["n_up"]
+        n_down = site.operators["n_down"]
+        F = site.operators["F"]
+
+        vertices = []
+        
+        row = np.zeros((1, 6, 4, 4))
+        column = np.zeros((6, 1, 4, 4))
+        matrix = np.zeros((6, 6, 4, 4))
+        #Left-hand edge is 1x6 matrix
+        #[[I,   S_p_up*F,  S_p_d*F, S_p_d, S_p_up,  U*n_up*n_down]]
+        row[0, 0, :, :] = iden[:, :]
+        row[0, 1, :, :] = np.dot(S_p_up,F)[:, :]
+        row[0, 2, :, :] = np.dot(S_m_up,F)[:, :]
+        row[0, 3, :, :] = S_p_down[:, :]
+        row[0, 4, :, :] = S_m_down[:, :]
+        row[0, 5, :, :] = P['U']*np.dot(n_up,n_down)[:, :]
+
+        #Right-hand edge is 6x1 matrix
+        #[[U*n_up*n_down],
+        #[-t*S_m_up],
+        #[t*S_p_up],
+        #[-t*F*S_m_down],
+        #[t*F*S_p_down],
+        #[I]]
+        column[0, 0, :, :] = P['U']*np.dot(n_up,n_down)[:, :]
+        column[1, 0, :, :] = -P['t']*S_m_up[:,:]
+        column[2, 0, :, :] = P['t']*S_p_up[:,:]
+        column[3, 0, :, :] = -P['t']*np.dot(F,S_m_down)[:,:]
+        column[4, 0, :, :] = P['t']*np.dot(F,S_p_down)[:,:]
+        column[5, 0, :, :] = iden[:, :]
+
+        #Bulk Hamiltonian MPO
+        #[I,   S_p_up*F,  S_p_d*F, S_p_d, S_p_up,  U*n_up*n_down]
+        #[Z,   Z,         Z,       Z,     Z,       -t*S_m_up]
+        #[Z,   Z,         Z,       Z,     Z,       t*S_p_up]
+        #[Z,   Z,         Z,       Z,     Z,       -t*F*S_m_down]
+        #[Z,   Z,         Z,       Z,     Z,       t*F*S_p_down]
+        #[Z,   Z,         Z,       Z,     Z,       I]
+        matrix[0, :, :, :] = row[0, :]
+        matrix[:, 5, :, :] = column[:, 0]
+
+        #The whole MPO
+        vertices.append(row[:, :])
+        for i in range(1, N-1):
+            vertices.append(matrix[:, :, :, :])
+        vertices.append(column[:, :])
+
+        return vertices
 
     def tJ(self):
         pass
