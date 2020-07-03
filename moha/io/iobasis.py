@@ -50,6 +50,7 @@ def load_nwchem(symbols,coordinates,filename):
         #build orbital and add it to basis set 
         for j,location in enumerate(locations[:-1]):
             words = content[location].split()
+            n_number = j
             for k,shell_symbol in enumerate(list(words[1].lower())):
                 shells = shell_expansion(shell_symbol)
                 for shell in shells:
@@ -59,7 +60,7 @@ def load_nwchem(symbols,coordinates,filename):
                         words = content[l].split()
                         exps.append(float(words[0]))
                         coefs.append(float(words[k+1]))
-                    orb = GaussianOrbital.spatial(i,coordinates[i],shell,exps,coefs)
+                    orb = GaussianOrbital.spatial(i,coordinates[i],n_number,shell,exps,coefs)
                     basis_set.size +=1
                     basis_set.basis.append(orb)
 

@@ -239,16 +239,28 @@ class MPO(TNSO):
 class QCMPO(TNSO):
     """
     """
-    def __init__(self,N,h1e,h2e,partition,isym=0):
+    def __init__(self,hfham,hfwf,partition,isym=0):
         """
         N: numer of site
         P: dic of all parameters for the model hamilton
            {'J':1.0,'Jz':1.0,'h':1.0}
         """
-        self.N=N 
+        h1e,h2e = self.molecular_spin_integral(hfham,hfwf) 
         self.ngroups, self.vertices = copy.deepcopy(self.directHmpo(h1e,h2e,partition,isym=0))
-        #self.directHmpo(h1e,h2e,partition,isym=0)
         
+    def molecular_spin_integral(self,hfham,hfwf):
+        """
+        output
+            h1e h2e
+        """
+        C = np.identity(7)
+        print(C)
+        hfham.operators['electron_repulsion'].basis_transformation(C)
+        h1e = hfham.operators['kinetic'].spin
+        h1e += hfham.operators['nuclear_attraction'].spin
+        h2e = hfham.operators['electron_repulsion'].spin
+        return h1e,h2e
+
     # INPUT: h1e,eri; OUTPUT: MPOs
     def directHmpo(self,h1e,h2e,partition=None,debug=False,iprt=0,isym=0):
         if iprt>0: print('\n[directHmpo]')

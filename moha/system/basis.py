@@ -10,6 +10,9 @@ class NElectronBasis(object):
 
 class GaussianOrbital(OneElectronBasis):
     """
+        n_number:
+            type int
+            principal quantum number
         shell: 
             type list
             angular momentum
@@ -26,10 +29,11 @@ class GaussianOrbital(OneElectronBasis):
             type list
             coordinate of the nuclei
     """
-    def __init__(self,type,atom_index,origin,shell=(),exps=[],coefs=[]):
+    def __init__(self,type,atom_index,origin,n_number,shell=(),exps=[],coefs=[]):
         self.type = type
         self.atom_index = atom_index
         self.origin = origin
+        self.n_number = n_number
         self.shell = shell
         self.exps  = exps
         self.coefs = coefs
@@ -47,13 +51,13 @@ class GaussianOrbital(OneElectronBasis):
         return norm
 
     @classmethod
-    def spatial(cls,atom_index,origin,shell=(),exps=[],coefs=[]):
-        orbital = cls('spatial',atom_index,origin,shell,exps,coefs)
+    def spatial(cls,atom_index,origin,n_number=0,shell=(),exps=[],coefs=[]):
+        orbital = cls('spatial',atom_index,origin,n_number,shell,exps,coefs)
         return orbital
 
     @classmethod
-    def spin(cls,atom_index,origin,spin,shell=(),exps=[],coefs=[]):
-        orbital = cls('spin',atom_index,origin,shell,exps,coefs)
+    def spin(cls,atom_index,origin,spin,n_number=0,shell=(),exps=[],coefs=[]):
+        orbital = cls('spin',atom_index,origin,n_number,shell,exps,coefs)
         orbital.spin = spin
         return orbital
 

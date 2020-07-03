@@ -123,13 +123,14 @@ class OneElectronOperator(Operator):
             self.value = value_prime
             return value_prime
 
+    @property
     def spin(self):
         if type(self.value) is np.ndarray:
             value_prime = np.zeros((self.dim*2,self.dim*2))
             for i in range(self.dim*2): 
                 for j in range(self.dim*2): 
                     if i%2==j%2:
-                        value_prime[i,j]  = self.value[i/2,j/2]
+                        value_prime[i,j]  = self.value[int(i/2),int(j/2)]
             return value_prime
 
         elif type(self.value) is dict:
@@ -137,9 +138,9 @@ class OneElectronOperator(Operator):
             for i in range(self.dim*2): 
                 for j in range(self.dim*2): 
                     if i%2==j%2==0:
-                        value_prime[i,j]  = self.value['alpha'][i/2,j/2]
+                        value_prime[i,j]  = self.value['alpha'][int(i/2),int(j/2)]
                     elif i%2==j%2==1:
-                        value_prime[i,j]  = self.value['beta'][i/2,j/2]
+                        value_prime[i,j]  = self.value['beta'][int(i/2),int(j/2)]
             return value_prime
 
 
