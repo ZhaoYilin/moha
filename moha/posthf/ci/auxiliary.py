@@ -14,8 +14,13 @@ class CI_Basis_Set(NElectronBasisSet):
         self.truncation = truncation
 
     def generate_basis_set(self,truncation):
-        """
-        Generate all the single excitation configuration
+        """Generate N electron basis set.
+
+        Parameters:
+            
+        truncation
+            type list
+            a list of truncation degree
         """
         for i in truncation:
             list = self.generate_annihilation_creation(i)
@@ -58,6 +63,8 @@ class CI_Basis_Set(NElectronBasisSet):
 
 
     def apply_annihilation_creation(self,annihilation_creation):
+        """
+        """
         configuration = copy.deepcopy(self.reference)
         for i in annihilation_creation['annihilation_alpha']:
             configuration['alpha'][i] -= 1 
@@ -84,8 +91,12 @@ class CI_Hamiltonian(object):
         self.h1e,self.h2e = self.molecular_spin_integral()
 
     def generate_matrix(self,ci_basis_set):
-        """
-        generate CI Hamiltonian matrix
+        """Generate CI Hamiltonian matrix.
+
+        Parameters:
+
+        ci_basis_set
+            A CI_Basis_Set instance.
         """
         basis = ci_basis_set.basis_set
         num_det = ci_basis_set.size
@@ -97,8 +108,15 @@ class CI_Hamiltonian(object):
         return matrix
 
     def calculate_matrix_element(self,det1,det2):
-        """
-        calculate matrix element between two determinants
+        """Calculate matrix element between two determinants.
+
+        Parameters:
+
+        det1
+            A SlaterDeterminant instance.
+        
+        det2
+            A SlaterDeterminant instance.
         """
         degree = det1.degree_of_excitation(det2)
         if degree == 0:
@@ -112,10 +130,14 @@ class CI_Hamiltonian(object):
         return value
 
     def calculate_matrix_element_identical(self,det):
+        """Calculate matrix element whose configurations are identical.
+
+        Parameters:
+
+        det
+            A SlaterDeterminant instance.
         """
-        claculate matrix element whose configurations are identical
-        """
-        O1 = 0.0
+        1 = 0.0
         O2 = 0.0
         
         occ_mixed_index = self.mixed_index_transformation(det.occ_index)
@@ -130,8 +152,15 @@ class CI_Hamiltonian(object):
         return value
 
     def calculate_matrix_element_diff1(self,det1,det2):
-        """
-        claculate matrix element whose configuration differ by 1 spin orbitals
+        """Calculate matrix element whose configuration differ by 1 spin orbitals.
+
+        Parameters:
+
+        det1
+            A SlaterDeterminant instance.
+        
+        det2
+            A SlaterDeterminant instance.
         """
         O1 = 0.0
         O2 = 0.0
@@ -158,8 +187,15 @@ class CI_Hamiltonian(object):
         return value*sign
 
     def calculate_matrix_element_diff2(self,det1,det2):
-        """
-        claculate matrix element whose configuration differ by 2 spin orbitals
+        """Calculate matrix element whose configuration differ by 2 spin orbitals.
+
+        Parameters:
+
+        det1
+            A SlaterDeterminant instance.
+        
+        det2
+            A SlaterDeterminant instance.
         """
         value = 0.0
 
@@ -172,7 +208,13 @@ class CI_Hamiltonian(object):
         return value*sign
 
     def mixed_index_transformation(self,dic):
-        """
+        """Convert a configuration from dict form to list.
+
+        Parameters:
+
+        dic
+            type dict
+            A configuration in dict form
         """
         l = []
         for k in dic.keys():
@@ -187,7 +229,8 @@ class CI_Hamiltonian(object):
         
 
     def molecular_spin_integral(self):
-        """
+        """Compute the one and two electron integral in molecular spin orbital.
+
         output
             h1e h2e
         """

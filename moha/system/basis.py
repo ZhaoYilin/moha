@@ -81,23 +81,32 @@ class SlaterDeterminant(NElectronBasis):
     """
 
     def __init__(self,configuration={}):
-        """
-        Constructor for the Determinant
+        """Constructor for the Slater Determinant.
+
+        Parameter:
+
+        configuration
+            type dict
+            a dict to describle the configuration of slater determinant
         """
         self.configuration = configuration
 
     @property
     def configuration_alpha(self):
-        """
+        """configuraiton of alpha spin orbitals.
         """
         return self.configuration['alpha']
 
     @property
     def configuration_beta(self):
+        """configuraiton of beta spin orbitals.
+        """
         return self.configuration['beta']
 
     @property
     def occ_index(self):
+        """occupation index of alpha and beta spin orbitals.
+        """
         occ_alpha = []
         occ_beta = []
         for index,item in enumerate(self.configuration['alpha']):
@@ -111,8 +120,12 @@ class SlaterDeterminant(NElectronBasis):
         return {"alpha":occ_alpha,"beta":occ_beta}
 
     def degree_of_excitation_alpha(self,det):
-        """
-        Compute the degree of excitation between D1 and D2 for alpha spin.
+        """Compute the degree of excitation between D1 and D2 for alpha spin.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
 
         diff = list(np.array(det.configuration['alpha']) - np.array(self.configuration['alpha']))
@@ -120,8 +133,12 @@ class SlaterDeterminant(NElectronBasis):
         return degree
     
     def degree_of_excitation_beta(self,det):
-        """
-        Compute the degree of excitation between D1 and D2 for beta spin.
+        """Compute the degree of excitation between D1 and D2 for beta spin.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
 
         diff = list(np.array(det.configuration['beta']) - np.array(self.configuration['beta']))
@@ -129,8 +146,12 @@ class SlaterDeterminant(NElectronBasis):
         return degree
 
     def degree_of_excitation(self,det):
-        """
-        Compute the degree of excitation between D1 and D2.
+        """Compute the degree of excitation between D1 and D2.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         alpha_degree = self.degree_of_excitation_alpha(det)
         beta_degree = self.degree_of_excitation_beta(det)
@@ -138,8 +159,12 @@ class SlaterDeterminant(NElectronBasis):
         return degree
 
     def annihilation_list_alpha(self,det):
-        """
-        Identifying the annihilated alpha spin orbitals
+        """Identifying the annihilated alpha spin orbitals.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         diff = np.array(det.configuration['alpha']) - np.array(self.configuration['alpha'])
         if np.sum(np.abs(diff)) == 0: 
@@ -150,8 +175,12 @@ class SlaterDeterminant(NElectronBasis):
 
 
     def annihilation_list_beta(self,det):
-        """
-        Identifying the annihilated beta spin orbitals
+        """Identifying the annihilated beta spin orbitals.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         diff = np.array(det.configuration['beta']) - np.array(self.configuration['beta'])
         if np.sum(np.abs(diff)) == 0: 
@@ -161,8 +190,12 @@ class SlaterDeterminant(NElectronBasis):
         return index
 
     def creation_list_alpha(self,det):
-        """
-        Identifying the created alpha spin orbitals
+        """Identifying the created alpha spin orbitals.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         diff = np.array(det.configuration['alpha']) - np.array(self.configuration['alpha'])
         if np.sum(np.abs(diff)) == 0: 
@@ -172,8 +205,12 @@ class SlaterDeterminant(NElectronBasis):
         return index
 
     def creation_list_beta(self,det):
-        """
-        Identifying the created beta spin orbitals
+        """Identifying the created beta spin orbitals.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         diff = np.array(det.configuration['beta']) - np.array(self.configuration['beta'])
         if np.sum(np.abs(diff)) == 0: 
@@ -183,10 +220,10 @@ class SlaterDeterminant(NElectronBasis):
         return index
 
     def annihilation_list(self,det):
-        """Identifying the annihilated spin orbitals
+        """Identifying the annihilated spin orbitals.
+
         det
-            type object
-            another Slater Determinant
+            A SlaterDeterminant instance.
         """
         alpha_list = self.annihilation_list_alpha(det)
         beta_list = self.annihilation_list_beta(det)
@@ -194,8 +231,12 @@ class SlaterDeterminant(NElectronBasis):
         return index
     
     def creation_list(self,det):
-        """
-        Identifying the created spin orbitals
+        """Identifying the created spin orbitals.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         alpha_list = self.creation_list_alpha(det)
         beta_list = self.creation_list_beta(det)
@@ -203,7 +244,13 @@ class SlaterDeterminant(NElectronBasis):
         return index
 
     def phase(self,det):
-        """
+        """The phase is calculated as −1^{Nperm}.This number is equal
+        to the number of occupied spin-orbitals between these two positions.
+
+        Parameter:
+
+        det
+            A SlaterDeterminant instance.
         """
         tmp_configuration = copy.deepcopy(self.configuration)
         sign = 1
