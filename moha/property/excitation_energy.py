@@ -83,6 +83,7 @@ class ExcitationEnergy(object):
                         H[I,J] = (fs[a,a] - fs[i,i])*(i==j)*(a==b)+spinints[a,j,i,b]
         ECIS,CCIS = np.linalg.eig(H)
         print(ECIS)
+        print(sorted(ECIS))
 
 
 

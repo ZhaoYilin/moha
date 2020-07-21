@@ -137,7 +137,7 @@ class CI_Hamiltonian(object):
         det
             A SlaterDeterminant instance.
         """
-        1 = 0.0
+        O1 = 0.0
         O2 = 0.0
         
         occ_mixed_index = self.mixed_index_transformation(det.occ_index)

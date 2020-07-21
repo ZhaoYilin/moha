@@ -170,6 +170,21 @@ class TwoElectronOperator(Operator):
         operator = cls(name,basis_set.size,value)
         return operator
 
+    def tensor_format(self):
+        """
+        transform electron repulsion integral from list format to tensor format
+        """
+        from .auxiliary import eint
+        Norb = self.dim
+        Eri_tensor = np.zeros((Norb,Norb,Norb,Norb))
+        for i in range(Norb):
+            for j in range(Norb):
+                for k in range(Norb):
+                    for l in range(Norb):
+                        Eri_tensor[i,j,k,l] = self.value[eint(i,j,k,l)]
+ 
+        return Eri_tensor
+
     def basis_transformation(self,C):
         """
         transform electron repulsion integral from atomic orbtial to molecular orbtial
