@@ -29,7 +29,6 @@ class FullCISolver(object):
         ci_basis.generate_basis_set(excitation_level)
         H = CI_Hamiltonian(ham,hfwavefunction,ci_basis)
         ci_matrix = H.generate_matrix(ci_basis)
-        print(ci_matrix.shape)
         e_fci, vec_fci = np.linalg.eigh(ci_matrix)
         E_fci_elec = e_fci[0]
         E_hf_elec = hfwavefunction.Eelec
