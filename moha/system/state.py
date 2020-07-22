@@ -29,4 +29,13 @@ class HFWaveFunction(WaveFunction):
             c[spin] = [1]*self.occ[spin] + [0]*(self.dim - self.occ[spin])
         return c
         
-
+class CIWaveFunction(WaveFunction):
+    """
+    """
+    def __init__(self,ndet,NEbasis_set,coefficient,Evec,Eelec,Etot):
+        self.ndet = ndet
+        self.NEbasis_set = NEbasis_set
+        self.coefficient = coefficient
+        self.Evec = Evec
+        self.Eelec = Eelec
+        self.Etot = Etot
