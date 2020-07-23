@@ -1,5 +1,50 @@
 import numpy as np
 
+def D3_element(fs,a,b,c,i,j,k):
+    tmp = fs[i,i] + fs[j,j] + fs[k,k]\
+    - fs[a,a] - fs[b,b] - fs[c,c]
+    return tmp
+
+def t3d_element(fs,ts,spinints,a,b,c,i,j,k):
+    tmp = 0
+    tmp += fun_d(ts,spinints,a,b,c,i,j,k)
+    tmp -= fun_d(ts,spinints,b,a,c,i,j,k)
+    tmp -= fun_d(ts,spinints,c,b,a,i,j,k)
+    tmp -= fun_d(ts,spinints,a,b,c,j,i,k)
+    tmp += fun_d(ts,spinints,b,a,c,j,i,k)
+    tmp += fun_d(ts,spinints,c,b,a,j,i,k)
+    tmp -= fun_d(ts,spinints,a,b,c,k,j,i)
+    tmp += fun_d(ts,spinints,b,a,c,k,j,i)
+    tmp += fun_d(ts,spinints,c,b,a,k,j,i)
+    tmp /= D3_element(fs,a,b,c,i,j,k)
+    return tmp
+
+def t3c_element(Nelec,dim,fs,td,spinints,a,b,c,i,j,k):
+    tmp = 0
+    tmp += fun_c(Nelec,dim,td,spinints,a,b,c,i,j,k)
+    tmp -= fun_c(Nelec,dim,td,spinints,b,a,c,i,j,k)
+    tmp -= fun_c(Nelec,dim,td,spinints,c,b,a,i,j,k)
+    tmp -= fun_c(Nelec,dim,td,spinints,a,b,c,j,i,k)
+    tmp += fun_c(Nelec,dim,td,spinints,b,a,c,j,i,k)
+    tmp += fun_c(Nelec,dim,td,spinints,c,b,a,j,i,k)
+    tmp -= fun_c(Nelec,dim,td,spinints,a,b,c,k,j,i)
+    tmp += fun_c(Nelec,dim,td,spinints,b,a,c,k,j,i)
+    tmp += fun_c(Nelec,dim,td,spinints,c,b,a,k,j,i)
+    tmp /= D3_element(fs,a,b,c,i,j,k)
+    return tmp
+
+def fun_d (ts,spinints,a,b,c,i,j,k):
+    tmp = ts[a,i]*spinints[j,k,b,c]
+    return tmp
+
+def fun_c (Nelec,dim,td,spinints,a,b,c,i,j,k):
+    tmp = 0
+    for e in range(Nelec,dim):
+        tmp += td[a,e,j,k]*spinints[e,i,b,c]
+    for m in range(0,Nelec):
+        tmp -= td[b,c,i,m]*spinints[m,a,j,k]
+    return tmp
+################################
 def spinfock(eorbitals):
     """
     """
@@ -216,3 +261,16 @@ def ccsdenergy(Nelec,dim,fs,spinints,ts,td):
         for b in range(Nelec,dim):
           ECCSD += 0.25*spinints[i,j,a,b]*td[a,b,i,j] + 0.5*spinints[i,j,a,b]*(ts[a,i])*(ts[b,j]) 
   return ECCSD
+
+def E_triples_correction(Nelec,dim,fs,ts,td,spinints):
+  Et = 0.0
+  for i in range(0,Nelec):
+    for j in range(0,Nelec):
+        for k in range(0,Nelec):
+            for a in range(Nelec,dim):
+                for b in range(Nelec,dim):
+                    for c in range(Nelec,dim):
+                        Et += t3c_element(Nelec,dim,fs,td,spinints,a,b,c,i,j,k)*D3_element(fs,a,b,c,i,j,k)\
+                        *(t3c_element(Nelec,dim,fs,td,spinints,a,b,c,i,j,k)+t3d_element(fs,ts,spinints,a,b,c,i,j,k))
+  Et *= 1/36
+  return Et
