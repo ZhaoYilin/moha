@@ -5,3 +5,4 @@ from moha.modelsystem.auxiliary import *
 from moha.modelsystem.sites import *
 from moha.modelsystem.lattice import *
 from moha.modelsystem.modeloperator import *
+#from moha.modelsystem.modelhamiltonian import *

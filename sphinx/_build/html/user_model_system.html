@@ -205,8 +205,8 @@ discrete translation operations described by:</p>
 <p>where <span class="math notranslate nohighlight">\(n_i\)</span> are any integers and <span class="math notranslate nohighlight">\(\vec{a}_i\)</span> are known as the primitive
 vectors which lie in different directions and span the lattice. The discrete points
 can be atoms, ions, electronic site, spin one-half site, spinless fermion site, etc.</p>
-<p>Generaly speaking, to build a The <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice" title="moha.modelsystem.lattice.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code></a> object, we need first define a
-<a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Cell" title="moha.modelsystem.lattice.Cell"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object. <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Cell" title="moha.modelsystem.lattice.Cell"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> has attribute of dimension and three primitive
+<p>Generaly speaking, to build a The <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code> object, we need first define a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code> object. <code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code> has attribute of dimension and three primitive
 vectors <span class="math notranslate nohighlight">\(\vec{a}_1\)</span> <span class="math notranslate nohighlight">\(\vec{a}_2\)</span> and <span class="math notranslate nohighlight">\(\vec{a}_3\)</span>. To initialize a
 cell:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
@@ -223,12 +223,12 @@ second site in second cell:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Finally complete it by assign the cell and shpe to the lattice to <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice" title="moha.modelsystem.lattice.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code></a>:</p>
+<p>Finally complete it by assign the cell and shpe to the lattice to <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>It may not be immediately obvious what this code does. Fortunately, <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice" title="moha.modelsystem.lattice.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code></a> objects
-have a convenient <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method to easily visualize the constructed lattice.</p>
+<p>It may not be immediately obvious what this code does. Fortunately, <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code> objects
+have a convenient <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method to easily visualize the constructed lattice.</p>
 <div class="section" id="linear-lattice">
 <h3>2.1.1. Linear lattice<a class="headerlink" href="#linear-lattice" title="Permalink to this headline">¶</a></h3>
 <p>Starting from the basics, we’ll build a simple linear lattice with only one site.</p>
@@ -255,7 +255,7 @@ have a convenient <a class="reference internal" href="developer_api/moha.modelsy
 </pre></div>
 </div>
 </div>
-<p>Visualize the lattice by <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method.</p>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/linear.png"><img alt="_images/linear.png" src="_images/linear.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
@@ -289,7 +289,7 @@ lattice is consist of two different sites.</p>
 </pre></div>
 </div>
 </div>
-<p>Visualize the lattice by <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method.</p>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/two_sites_linear.png"><img alt="_images/two_sites_linear.png" src="_images/two_sites_linear.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
@@ -322,7 +322,7 @@ lattice is consist of two different sites.</p>
 </pre></div>
 </div>
 </div>
-<p>Visualize the lattice by <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method.</p>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/square.png"><img alt="_images/square.png" src="_images/square.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
@@ -372,7 +372,7 @@ lattice is consist of two different sites.</p>
 </pre></div>
 </div>
 </div>
-<p>Visualize the lattice by <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method.</p>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/graphene.png"><img alt="_images/graphene.png" src="_images/graphene.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
@@ -410,7 +410,7 @@ lattice is consist of two different sites.</p>
 </pre></div>
 </div>
 </div>
-<p>Visualize the lattice by <a class="reference internal" href="developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot" title="moha.modelsystem.lattice.Lattice.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code></a> method.</p>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/cubic.png"><img alt="_images/cubic.png" src="_images/cubic.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>

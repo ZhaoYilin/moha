@@ -3,10 +3,17 @@ import numpy as np
 def S(i,j,A,B,a,b):
     ''' Recursive definition of Hermite Gaussian coefficients.
         Returns a float.
-        a: orbital exponent on Gaussian 'a' (e.g. alpha in the text)
-        b: orbital exponent on Gaussian 'b' (e.g. beta in the text)
-        i,j: orbital angular momentum number on Gaussian 'a' and 'b'
-        t: number nodes in Hermite (depends on type of integral,
+
+    Parameters
+    ----------
+    a : 
+        orbital exponent on Gaussian 'a' (e.g. alpha in the text)
+    b : 
+        orbital exponent on Gaussian 'b' (e.g. beta in the text)
+    i,j: 
+        orbital angular momentum number on Gaussian 'a' and 'b'
+    t: 
+        number nodes in Hermite (depends on type of integral,
            e.g. always zero for overlap integrals)
         Qx: distance between origins of Gaussian 'a' and 'b'
     '''
@@ -39,6 +46,9 @@ def S(i,j,A,B,a,b):
 def Sxyz(a,lmn1,A,b,lmn2,B):
     ''' Evaluates overlap integral between two Gaussians
         Returns a float.
+
+    Parameters
+    ----------
         a:    orbital exponent on Gaussian 'a' (e.g. alpha in the text)
         b:    orbital exponent on Gaussian 'b' (e.g. beta in the text)
         lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))

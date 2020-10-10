@@ -1,6 +1,6 @@
 import numpy as np
 from moha.log import log,timer
-from moha.system.operator import OneElectronOperator
+from moha.system.operator import RestrictedOneElectronOperator
 class OneElectronProperty(object):
     def __init__(self):
         pass
@@ -9,7 +9,7 @@ class OneElectronProperty(object):
         D = wavefunction.density
         mms = []
         for lmn in lmns:
-            mm_matrix = OneElectronOperator.build('multipole_moment',mol,orbs,lmn,coordinate).value
+            mm_matrix = RestrictedOneElectronOperator.build('multipole_moment',mol,orbs,lmn,coordinate).value
             mm = np.dot(D,mm_matrix)
             mm = np.trace(mm,axis1=0,axis2=1)
             mms.append(mm)

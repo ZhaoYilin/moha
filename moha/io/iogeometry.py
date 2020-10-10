@@ -1,6 +1,7 @@
 import os
 from moha.system.periodic import load_periodic
-from moha.system.molecule import Atom,Molecule
+from moha.system.atom import Atom
+from moha.system.molecule import Molecule
 
 def load_xyz(filename):
     '''Load a molecular geometry from a .xyz file.

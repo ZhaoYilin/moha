@@ -1,3 +1,4 @@
+from moha.system.hamiltonian.chemical_hamiltonian import *
 from moha.posthf.pt.auxiliary import *
 from moha.log import log, timer
 
@@ -7,46 +8,136 @@ import copy
 __all__ = ['MP2Solver']
 
 class MP2Solver(object):
-    """
-    """
-    def __init__(self,ham,hfwavefunction):
-        """
-        """
-        self.ham = ham
-        self.hfwavefunction = hfwavefunction
+    """Second-order Moller-Plesset perturbation solver.
+     
+    Attributes
+    ----------
+    ham
+        Chemical Hamiltonian.
 
+    wfn
+        Hartree Fock wavefunction.
+    
+    hf_results : dict
+        Hartree Fock calculation results.
+    
+    Methods
+    -------
+    __init__(self,ham,wfn,hf_results)
+        Initialize the solver.
+
+    kernel(self)
+        Kernel of the solver.
+
+    assign_hamiltonian(self,ham)
+        Assign the chemical Hamiltonian to the solver.
+
+    assign_wavefunction(self,wfn)
+        Assign the Hartree Fock wavefunction to the solver.
+    
+    assign_hartree_fock_results(self,hf_results)
+        Assign the Hartree Fock calculation results to the solver.
+    """
+    def __init__(self,ham,wfn,hf_results):
+        """Initialize the solver.
+ 
+        Attributes
+        ----------
+        ham
+            Chemical Hamiltonian.
+ 
+        wfn
+            Hartree Fock wavefunction.
+        
+        hf_results : dict
+            Hartree Fock calculation results.
+        """
+        self.assign_hamiltonian(ham)
+        self.assign_wavefunction(wfn)        
+        self.assign_hartree_fock_results(hf_results)
+
+    @timer.with_section('MP2')
     def kernel(self):
-        """
+        """Kernel of the solver.
+
+        Returns
+        -------
+        results : dict
+            MP2 calculation results.    
         """
         log.hline()
-        log('MP2 Calculation'.format())
+        log('MP2 calculation section'.format())
         log.hline()
+
         ham = copy.deepcopy(self.ham)
-        hfwavefunction = copy.deepcopy(self.hfwavefunction)
-        occ = hfwavefunction.occ
-        C = hfwavefunction.coefficient
-        eorbitals = hfwavefunction.eorbitals
+        wfn = copy.deepcopy(self.wfn)
+        hf_results = self.hf_results
+        
+        nspatial = ham.nspatial
+        occ = wfn.occ
+        C = wfn.coefficients
+        eorbitals = hf_results['orbital_energies']
+
         Emp2 = 0.0
-        if occ['alpha'] == occ['beta']:
-            Eri = ham.operators['electron_repulsion'].basis_transformation(C)
+        if isinstance(ham,RestrictedChemicalHamiltonian):
+            ham.operators['electron_repulsion'].basis_transformation(C)
+            Eri = ham.operators['electron_repulsion'].integral
             for i in range(occ['alpha']):
                 for j in range(occ['alpha']):
-                    for a in range(occ['alpha'],ham.dim):
-                        for b in range(occ['alpha'],ham.dim):
-                            Emp2 += Eri[i,a,j,b]*(2*Eri[i,a,j,b]-Eri[i,b,j,a])/(eorbitals[i] + eorbitals[j] -eorbitals[a] - eorbitals[b])
-
-        elif occ['alpha'] != occ['beta']:
-            for spin in C:
-                Eri = ham.operators['electron_repulsion'].basis_transformation(C[spin])
-                for i in range(occ[spin]):
-                    for j in range(occ[spin]):
-                        for a in range(occ[spin],ham.dim):
-                            for b in range(occ[spin],ham.dim):
-                                Emp2 += Eri[i,a,j,b]*(Eri[i,a,j,b]-0.5*Eri[i,b,j,a])/(eorbitals[spin][i] + eorbitals[spin][j] -eorbitals[spin][a] - eorbitals[spin][b])
+                    for a in range(occ['alpha'],nspatial):
+                        for b in range(occ['alpha'],nspatial):
+                            Emp2 += Eri[i,a,j,b]*(2*Eri[i,a,j,b]-Eri[i,b,j,a])\
+                            /(eorbitals[i] + eorbitals[j] -eorbitals[a] - eorbitals[b])
+        
         log.hline()
-        log('{0:2s} {1:3f}'.format('Escf', hfwavefunction.Etot))
+        log('MP2 Results'.format())
+        log.hline()
+        log('{0:2s} {1:3f}'.format('Escf', hf_results['total_energy']))
         log('{0:2s} {1:3f}'.format('Emp2', Emp2))
-        log('{0:2s} {1:3f}'.format('Etot', hfwavefunction.Etot+Emp2))
+        log('{0:2s} {1:3f}'.format('Etot', hf_results['total_energy']+Emp2))
         log.hline()
+        
+        results = {
+        "success": True,
+        "MP2_energy":Emp2,
+        "total_energy":hf_results['total_energy']+Emp2
+        }
 
-        return Emp2
+        return results
+
+    def assign_hamiltonian(self,ham):
+        """Assign the chemical Hamiltonian to the solver.
+
+        Attributes
+        ----------
+        ham
+            Chemical Hamiltonian.
+        """
+        self.ham = ham
+
+    def assign_wavefunction(self,wfn):
+        """Assign the Hartree Fock wavefunction to the solver.
+
+        Attributes
+        ----------
+        wfn
+            Hartree Fock wavefunction.
+        """
+        self.wfn = wfn  
+    
+    def assign_hartree_fock_results(self,hf_results):
+        """Assign the Hartree Fock calculation results to the solver.
+
+        Attributes
+        ----------
+        hf_results : dict
+            Hartree Fock calculation results.
+
+        Raises
+        ------
+        TypeError
+            If Hartree Fock calculation results is not a dictionary.
+        """
+        if not isinstance(hf_results, dict):
+            raise TypeError("Hartree Fock calculation results must be a dictionary")
+        self.hf_results = hf_results        

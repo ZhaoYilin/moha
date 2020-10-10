@@ -195,27 +195,30 @@
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasisSet</span></code>([size, basis])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.GaussianOrbital" title="moha.system.basis.GaussianOrbital"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianOrbital</span></code></a>(type, atom_index, origin[, …])</p></td>
-<td><p>shell:</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.GaussianOrbital" title="moha.system.basis.GaussianOrbital"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianOrbital</span></code></a>(type, atom_index, origin, …)</p></td>
+<td><p>n_number:</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">NElectronBasis</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.NElectronBasisSet" title="moha.system.basis.NElectronBasisSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NElectronBasisSet</span></code></a>([size, basis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.NElectronBasisSet" title="moha.system.basis.NElectronBasisSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NElectronBasisSet</span></code></a>([size, basis_set])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OneElectronBasis</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.SlaterDeterminant" title="moha.system.basis.SlaterDeterminant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SlaterDeterminant</span></code></a>(configuration)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#moha.system.basis.SlaterDeterminant" title="moha.system.basis.SlaterDeterminant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SlaterDeterminant</span></code></a>([configuration])</p></td>
 <td><p>configuration:</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
 <dt id="moha.system.basis.GaussianOrbital">
-<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">GaussianOrbital</code><span class="sig-paren">(</span><em class="sig-param">type</em>, <em class="sig-param">atom_index</em>, <em class="sig-param">origin</em>, <em class="sig-param">shell=()</em>, <em class="sig-param">exps=[]</em>, <em class="sig-param">coefs=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#GaussianOrbital"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.GaussianOrbital" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">GaussianOrbital</code><span class="sig-paren">(</span><em class="sig-param">type</em>, <em class="sig-param">atom_index</em>, <em class="sig-param">origin</em>, <em class="sig-param">n_number</em>, <em class="sig-param">shell=()</em>, <em class="sig-param">exps=[]</em>, <em class="sig-param">coefs=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#GaussianOrbital"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.GaussianOrbital" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
+<dt>n_number:</dt><dd><p>type int
+principal quantum number</p>
+</dd>
 <dt>shell: </dt><dd><p>type list
 angular momentum</p>
 </dd>
@@ -242,16 +245,146 @@ coordinate of the nuclei</p>
 
 <dl class="class">
 <dt id="moha.system.basis.NElectronBasisSet">
-<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">NElectronBasisSet</code><span class="sig-paren">(</span><em class="sig-param">size=0</em>, <em class="sig-param">basis=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#NElectronBasisSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.NElectronBasisSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">NElectronBasisSet</code><span class="sig-paren">(</span><em class="sig-param">size=0</em>, <em class="sig-param">basis_set=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#NElectronBasisSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.NElectronBasisSet" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="class">
 <dt id="moha.system.basis.SlaterDeterminant">
-<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">SlaterDeterminant</code><span class="sig-paren">(</span><em class="sig-param">configuration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">moha.system.basis.</code><code class="sig-name descname">SlaterDeterminant</code><span class="sig-paren">(</span><em class="sig-param">configuration={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>configuration:</dt><dd><p>{‘alpha’:[1,1,0,0],’beta’:[1,1,0,0]}</p>
+<dt>configuration:</dt><dd><p>type dict
+Binary representation of the determinants
+{‘alpha’:[1,1,0,0],’beta’:[1,1,0,0]}</p>
 </dd>
 </dl>
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.annihilation_list">
+<code class="sig-name descname">annihilation_list</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.annihilation_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.annihilation_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the annihilated spin orbitals.</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.annihilation_list_alpha">
+<code class="sig-name descname">annihilation_list_alpha</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.annihilation_list_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.annihilation_list_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the annihilated alpha spin orbitals.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.annihilation_list_beta">
+<code class="sig-name descname">annihilation_list_beta</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.annihilation_list_beta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.annihilation_list_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the annihilated beta spin orbitals.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.creation_list">
+<code class="sig-name descname">creation_list</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.creation_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.creation_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the created spin orbitals.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.creation_list_alpha">
+<code class="sig-name descname">creation_list_alpha</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.creation_list_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.creation_list_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the created alpha spin orbitals.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.creation_list_beta">
+<code class="sig-name descname">creation_list_beta</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.creation_list_beta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.creation_list_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifying the created beta spin orbitals.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.degree_of_excitation">
+<code class="sig-name descname">degree_of_excitation</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.degree_of_excitation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.degree_of_excitation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the degree of excitation between D1 and D2.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.degree_of_excitation_alpha">
+<code class="sig-name descname">degree_of_excitation_alpha</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.degree_of_excitation_alpha"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.degree_of_excitation_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the degree of excitation between D1 and D2 for alpha spin.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.degree_of_excitation_beta">
+<code class="sig-name descname">degree_of_excitation_beta</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.degree_of_excitation_beta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.degree_of_excitation_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the degree of excitation between D1 and D2 for beta spin.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.phase">
+<code class="sig-name descname">phase</code><span class="sig-paren">(</span><em class="sig-param">det</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/basis.html#SlaterDeterminant.phase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>The phase is calculated as −1^{Nperm}.This number is equal
+to the number of occupied spin-orbitals between these two positions.</p>
+<p>Parameter:</p>
+<dl class="simple">
+<dt>det</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.configuration_alpha">
+<em class="property">property </em><code class="sig-name descname">configuration_alpha</code><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.configuration_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>configuraiton of alpha spin orbitals.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.configuration_beta">
+<em class="property">property </em><code class="sig-name descname">configuration_beta</code><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.configuration_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>configuraiton of beta spin orbitals.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.basis.SlaterDeterminant.occ_index">
+<em class="property">property </em><code class="sig-name descname">occ_index</code><a class="headerlink" href="#moha.system.basis.SlaterDeterminant.occ_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>occupation index of alpha and beta spin orbitals.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

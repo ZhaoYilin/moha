@@ -14,7 +14,7 @@ setup(name='moha',
     author='Yilin Zhao',
     author_email='zhaoyilin1991@gmail.com',
     license='MIT',
-    packages=['moha','moha.system','moha.io','moha.system.integral','moha.io.basis','moha.hf','moha.property','moha.posthf','moha.posthf.ci','moha.posthf.cc','moha.posthf.pt','moha.modelsystem','moha.tn','moha.tools','moha.tools.orbital_order','moha.tools.orbital_entanglement'],
+    packages=['moha','moha.system','moha.io','moha.system.integral','moha.system.operator','moha.system.hamiltonian','moha.system.wavefunction','moha.io.basis','moha.hf','moha.property','moha.posthf','moha.posthf.ci','moha.posthf.cc','moha.posthf.pt','moha.modelsystem','moha.tn','moha.tools','moha.tools.orbital_order','moha.tools.orbital_entanglement'],
     package_data={'moha': ['io/basis/*']},
     data_files=[
         ('share/moha', glob('data/*.*')),

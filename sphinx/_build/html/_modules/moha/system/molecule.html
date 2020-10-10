@@ -167,72 +167,197 @@
             
   <h1>Source code for moha.system.molecule</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">moha.system.periodic</span> <span class="k">import</span> <span class="n">Element</span>
 
-
-<div class="viewcode-block" id="Atom"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Atom">[docs]</a><span class="k">class</span> <span class="nc">Atom</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Class for atom</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">element</span><span class="p">,</span><span class="n">coordinate</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span> <span class="o">=</span> <span class="n">coordinate</span></div>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Molecule&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Molecule"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule">[docs]</a><span class="k">class</span> <span class="nc">Molecule</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Molecular Class</span>
-<span class="sd">        title</span>
-<span class="sd">            type: string</span>
-<span class="sd">            title of the system</span>
-<span class="sd">        size</span>
-<span class="sd">            type: intager</span>
-<span class="sd">            number of atoms</span>
-<span class="sd">        symmetry</span>
-<span class="sd">            type: string</span>
-<span class="sd">            point group of the molecule</span>
+    <span class="sd">&quot;&quot;&quot;Molecular Class.</span>
 
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    title : str</span>
+<span class="sd">        Title of the system.</span>
+
+<span class="sd">    size : int</span>
+<span class="sd">        Number of atoms.</span>
+
+<span class="sd">    symmetry : str</span>
+<span class="sd">        Point group of the molecule.</span>
+
+<span class="sd">    Property</span>
+<span class="sd">    --------</span>
+<span class="sd">    center_of_mass(self)</span>
+<span class="sd">        Calculate the center of mass for molecular.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    bond_length(self,i,j)</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">atoms</span><span class="o">=</span><span class="p">[],</span><span class="n">symmetry</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the instance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : str</span>
+<span class="sd">            Title of the system.</span>
+
+<span class="sd">        size : int</span>
+<span class="sd">            Number of atoms.</span>
+
+<span class="sd">        symmetry : str</span>
+<span class="sd">            Point group of the molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">atoms</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">symmetry</span> <span class="o">=</span> <span class="n">symmetry</span>
 
-<div class="viewcode-block" id="Molecule.bond_length"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.bond_length">[docs]</a>    <span class="k">def</span> <span class="nf">bond_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the the distances between atom i and j</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the center of mass for molecular.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Molecule.bond_length"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.bond_length">[docs]</a>    <span class="k">def</span> <span class="nf">bond_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the the distances between atom i and j.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i : int</span>
+<span class="sd">            Index of first atom.</span>
+<span class="sd">        </span>
+<span class="sd">        j : int</span>
+<span class="sd">            Index of second atom.</span>
+<span class="sd">            </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If index of atom is not int.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If index of atom is not zero or positive number.            </span>
+<span class="sd">            If index of atom is not samller than number of atoms.            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be int&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be none negative number&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be smaller than number of atoms&quot;</span><span class="p">)</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
         <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Molecule.bond_angle"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.bond_angle">[docs]</a>    <span class="k">def</span> <span class="nf">bond_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the bond angle between atoms A B and C,</span>
-<span class="sd">        where B is the central atom</span>
+<div class="viewcode-block" id="Molecule.bond_angle"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.bond_angle">[docs]</a>    <span class="k">def</span> <span class="nf">bond_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the bond angle between atoms i,j,k.</span>
+<span class="sd">           Where atom j is the central atom.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i : int</span>
+<span class="sd">            Index of first atom.</span>
+<span class="sd">        </span>
+<span class="sd">        j : int</span>
+<span class="sd">            Index of second atom.</span>
+<span class="sd">            </span>
+<span class="sd">        k : int</span>
+<span class="sd">            Index of third atom.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If index of atom is not int.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If index of atom is not zero or positive number.            </span>
+<span class="sd">            If index of atom is not samller than number of atoms.            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be int&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be none negative number&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be smaller than number of atoms&quot;</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Molecule.out_of_plane_angle"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.out_of_plane_angle">[docs]</a>    <span class="k">def</span> <span class="nf">out_of_plane_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate out of plane angle, which is for atom A</span>
-<span class="sd">        out of the plane consist by atoms B C D </span>
+<div class="viewcode-block" id="Molecule.out_of_plane_angle"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.out_of_plane_angle">[docs]</a>    <span class="k">def</span> <span class="nf">out_of_plane_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate out of plane angle, which is for atom A</span>
+<span class="sd">           out of the plane consist by atoms B C D </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i : int</span>
+<span class="sd">            Index of first atom.</span>
+<span class="sd">        </span>
+<span class="sd">        j : int</span>
+<span class="sd">            Index of second atom.</span>
+<span class="sd">            </span>
+<span class="sd">        k : int</span>
+<span class="sd">            Index of third atom.</span>
+
+<span class="sd">        l : int</span>
+<span class="sd">            Index of fourth atom.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If index of atom is not int.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If index of atom is not zero or positive number.            </span>
+<span class="sd">            If index of atom is not samller than number of atoms.            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be int&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be none negative number&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be smaller than number of atoms&quot;</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Molecule.dihedral_angle"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.dihedral_angle">[docs]</a>    <span class="k">def</span> <span class="nf">dihedral_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate dihedral angle for atom connectivit A B </span>
-<span class="sd">        C D</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span></div>
+        <span class="sd">&quot;&quot;&quot;Calculate dihedral angle for atom connectivit A,B,C,D.</span>
 
-<div class="viewcode-block" id="Molecule.center_of_mass"><a class="viewcode-back" href="../../../developer_api/moha.system.molecule.html#moha.system.molecule.Molecule.center_of_mass">[docs]</a>    <span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the center of mass for molecular</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        i : int</span>
+<span class="sd">            Index of first atom.</span>
+<span class="sd">        </span>
+<span class="sd">        j : int</span>
+<span class="sd">            Index of second atom.</span>
+<span class="sd">            </span>
+<span class="sd">        k : int</span>
+<span class="sd">            Index of third atom.</span>
+
+<span class="sd">        l : int</span>
+<span class="sd">            Index of fourth atom.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If index of atom is not int.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If index of atom is not zero or positive number.            </span>
+<span class="sd">            If index of atom is not samller than number of atoms.            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div></div>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be int&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be none negative number&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Index of atom must be smaller than number of atoms&quot;</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span><span class="p">)</span></div></div>
 
 </pre></div>
 

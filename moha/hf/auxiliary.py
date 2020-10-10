@@ -104,14 +104,14 @@ def G_matrix(D,Eri,Norb):
                 for j in range(Norb):
                     for k in range(Norb):
                         for l in range(Norb):
-                            G[spin][i,j] += Dtot[k,l]*Eri[eint(i,j,k,l)]-D[spin][k,l]*Eri[eint(i,k,j,l)]
+                            G[spin][i,j] += Dtot[k,l]*Eri[i,j,k,l]-D[spin][k,l]*Eri[i,k,j,l]
     elif type(D) is np.ndarray:
         G = np.zeros((Norb,Norb))
         for i in range(Norb):
             for j in range(Norb):
                 for k in range(Norb):
                     for l in range(Norb):
-                        G[i][j] += D[k][l]*(Eri[eint(i,j,k,l)]-0.5*Eri[eint(i,k,j,l)])
+                        G[i][j] += D[k][l]*(Eri[i,j,k,l]-0.5*Eri[i,k,j,l])
     return G
 
 def F_matrix(Hcore,G,Norb):
@@ -132,13 +132,13 @@ def F_matrix(Hcore,G,Norb):
     return F
 
 # Calculate change in density matrix
-def deltap(D,OLDD,dim):
+def deltap(D,OLDD,nspatial):
     DELTA = 0.0e0
     if type(D) is dict:
         D = D['alpha']+D['beta']
         OLDD = OLDD['alpha']+OLDD['beta']
-    for i in range(0,dim):
-        for j in range(0,dim):
+    for i in range(0,nspatial):
+        for j in range(0,nspatial):
             DELTA = DELTA+((D[i,j]-OLDD[i,j])**2)
     DELTA = (DELTA/4)**(0.5)
     return DELTA

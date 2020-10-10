@@ -183,75 +183,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-moha.modelsystem.modeloperator">
-<span id="moha-modelsystem-modeloperator"></span><h1>1.2.3. moha.modelsystem.modeloperator<a class="headerlink" href="#module-moha.modelsystem.modeloperator" title="Permalink to this headline">¶</a></h1>
-<p class="rubric">Classes</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#moha.modelsystem.modeloperator.ModelHamiltonian" title="moha.modelsystem.modeloperator.ModelHamiltonian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelHamiltonian</span></code></a>(lattice, site[, pbc])</p></td>
-<td><p>Base class for the Physical Model Hamiltonians:  1-D Hubbard, PPP, Ising, etc.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#moha.modelsystem.modeloperator.OneBodyTerm" title="moha.modelsystem.modeloperator.OneBodyTerm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OneBodyTerm</span></code></a>(terms, cell1, site1, cell2, …)</p></td>
-<td><p>Operator for one body interaction</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#moha.modelsystem.modeloperator.TwoBodyTerm" title="moha.modelsystem.modeloperator.TwoBodyTerm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TwoBodyTerm</span></code></a>(terms, cell1, site1, cell2, …)</p></td>
-<td><p>Operator for two body interaction</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="class">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian">
-<em class="property">class </em><code class="sig-prename descclassname">moha.modelsystem.modeloperator.</code><code class="sig-name descname">ModelHamiltonian</code><span class="sig-paren">(</span><em class="sig-param">lattice</em>, <em class="sig-param">site</em>, <em class="sig-param">pbc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#ModelHamiltonian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for the Physical Model Hamiltonians: 
-1-D Hubbard, PPP, Ising, etc.</p>
-<dl class="method">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian.add_operator">
-<code class="sig-name descname">add_operator</code><span class="sig-paren">(</span><em class="sig-param">operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#ModelHamiltonian.add_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian.add_operator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add operator to the model Hamiltonian.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian.compute_operator">
-<code class="sig-name descname">compute_operator</code><span class="sig-paren">(</span><em class="sig-param">operator</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#ModelHamiltonian.compute_operator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian.compute_operator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the one-body term of the model Hamiltonian.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian.compute_overlap">
-<code class="sig-name descname">compute_overlap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#ModelHamiltonian.compute_overlap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian.compute_overlap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate overlap of the model Hamiltonian, (identity matrix).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian.nbasis">
-<em class="property">property </em><code class="sig-name descname">nbasis</code><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian.nbasis" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of sites.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="moha.modelsystem.modeloperator.ModelHamiltonian.pbc">
-<em class="property">property </em><code class="sig-name descname">pbc</code><a class="headerlink" href="#moha.modelsystem.modeloperator.ModelHamiltonian.pbc" title="Permalink to this definition">¶</a></dt>
-<dd><p>The periodic boundary condition.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="moha.modelsystem.modeloperator.OneBodyTerm">
-<em class="property">class </em><code class="sig-prename descclassname">moha.modelsystem.modeloperator.</code><code class="sig-name descname">OneBodyTerm</code><span class="sig-paren">(</span><em class="sig-param">terms</em>, <em class="sig-param">cell1</em>, <em class="sig-param">site1</em>, <em class="sig-param">cell2</em>, <em class="sig-param">site2</em>, <em class="sig-param">parameter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#OneBodyTerm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.OneBodyTerm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Operator for one body interaction</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="moha.modelsystem.modeloperator.TwoBodyTerm">
-<em class="property">class </em><code class="sig-prename descclassname">moha.modelsystem.modeloperator.</code><code class="sig-name descname">TwoBodyTerm</code><span class="sig-paren">(</span><em class="sig-param">terms</em>, <em class="sig-param">cell1</em>, <em class="sig-param">site1</em>, <em class="sig-param">cell2</em>, <em class="sig-param">site2</em>, <em class="sig-param">parameter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/modelsystem/modeloperator.html#TwoBodyTerm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.modelsystem.modeloperator.TwoBodyTerm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Operator for two body interaction</p>
-</dd></dl>
-
+  <div class="section" id="moha-modelsystem-modeloperator">
+<h1>1.2.3. moha.modelsystem.modeloperator<a class="headerlink" href="#moha-modelsystem-modeloperator" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

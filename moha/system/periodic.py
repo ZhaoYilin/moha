@@ -1,23 +1,20 @@
 class Element(object):
-    '''Represents an element from the periodic table.
+    """Represents an element from the periodic table.
+               
+    Attributes
+    ----------
+    number : int
+        The atomic number.
 
-       The following attributes are supported for all elements:
+    symbol : str
+        A string with the symbol of the element.
 
-       number
-            The atomic number.
+    name : str
+        The full element name.
 
-       symbol
-            A string with the symbol of the element.
-
-       name
-            The full element name.
-
-       group
-            The group of the element (not for actinides and lanthanides).
-
-       period
-            The row of the periodic system.
-    '''
+    group : int
+        The group of the element (not for actinides and lanthanides).
+    """    
 
     def __init__(self, number=None, symbol=None, **kwargs):
         self.number = number
@@ -28,13 +25,16 @@ class Element(object):
 
 
 class Periodic(object):
-    '''A periodic table data structure.'''
+    """A periodic table data structure.
+    """
     def __init__(self, elements):
-        '''**Arguments:**
+        """Initialize the instance
 
-           elements
-                A list of :class:`Element` instances.
-        '''
+        Parameters
+        ----------
+        elements
+            A list of :class:`Element` instances.
+        """
         self.elements = elements
         self._lookup = {}
         for element in elements:
@@ -42,16 +42,19 @@ class Periodic(object):
             self._lookup[element.symbol.lower()] = element
 
     def __getitem__(self, index):
-        '''Get an element from the table based on a flexible index.
+        """Get an element from the table based on a flexible index.
 
-           **Argument:**
+        Parameters
+        ----------
+        index
+            This can be either an integer atomic number, a string with the
+            elemental symbol (any case), or a string with the atomic number.
 
-           index
-                This can be either an integer atomic number, a string with the
-                elemental symbol (any case), or a string with the atomic number.
-
-           **Returns:** the corresponding :class:`Element` instance
-        '''
+        Returns
+        -------
+        result : 
+            The corresponding :class:`Element` instance.
+        """
         result = self._lookup.get(index)
         if result is None and isinstance(index, str):
             index = index.strip()

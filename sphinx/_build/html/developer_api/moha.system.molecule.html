@@ -192,71 +192,130 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#moha.system.molecule.Atom" title="moha.system.molecule.Atom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atom</span></code></a>(element, coordinate)</p></td>
-<td><p>Class for atom</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atom</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code>([number, symbol])</p></td>
-<td><p>Represents an element from the periodic table.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#moha.system.molecule.Molecule" title="moha.system.molecule.Molecule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Molecule</span></code></a>(title, size[, atoms, symmetry])</p></td>
-<td><p>Molecular Class</p></td>
+<td><p>Molecular Class.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="class">
-<dt id="moha.system.molecule.Atom">
-<em class="property">class </em><code class="sig-prename descclassname">moha.system.molecule.</code><code class="sig-name descname">Atom</code><span class="sig-paren">(</span><em class="sig-param">element</em>, <em class="sig-param">coordinate</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Atom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Atom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class for atom</p>
-</dd></dl>
-
-<dl class="class">
 <dt id="moha.system.molecule.Molecule">
 <em class="property">class </em><code class="sig-prename descclassname">moha.system.molecule.</code><code class="sig-name descname">Molecule</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">size</em>, <em class="sig-param">atoms=[]</em>, <em class="sig-param">symmetry='C1'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Molecular Class</dt><dd><dl class="simple">
-<dt>title</dt><dd><p>type: string
-title of the system</p>
+<dd><p>Molecular Class.</p>
+<dl class="simple">
+<dt>title<span class="classifier">str</span></dt><dd><p>Title of the system.</p>
 </dd>
-<dt>size</dt><dd><p>type: intager
-number of atoms</p>
+<dt>size<span class="classifier">int</span></dt><dd><p>Number of atoms.</p>
 </dd>
-<dt>symmetry</dt><dd><p>type: string
-point group of the molecule</p>
+<dt>symmetry<span class="classifier">str</span></dt><dd><p>Point group of the molecule.</p>
 </dd>
 </dl>
+<dl class="simple">
+<dt>center_of_mass(self)</dt><dd><p>Calculate the center of mass for molecular.</p>
 </dd>
 </dl>
+<p>bond_length(self,i,j)</p>
 <dl class="method">
 <dt id="moha.system.molecule.Molecule.bond_angle">
-<code class="sig-name descname">bond_angle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.bond_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.bond_angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the bond angle between atoms A B and C,
-where B is the central atom</p>
+<code class="sig-name descname">bond_angle</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.bond_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.bond_angle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Calculate the bond angle between atoms i,j,k.</dt><dd><p>Where atom j is the central atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="moha.system.molecule.Molecule.bond_length">
 <code class="sig-name descname">bond_length</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.bond_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.bond_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the the distances between atom i and j</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="moha.system.molecule.Molecule.center_of_mass">
-<code class="sig-name descname">center_of_mass</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.center_of_mass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.center_of_mass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the center of mass for molecular</p>
+<dd><p>Calculate the the distances between atom i and j.</p>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="moha.system.molecule.Molecule.dihedral_angle">
 <code class="sig-name descname">dihedral_angle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.dihedral_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.dihedral_angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate dihedral angle for atom connectivit A B 
-C D</p>
+<dd><p>Calculate dihedral angle for atom connectivit A,B,C,D.</p>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+<dt>l<span class="classifier">int</span></dt><dd><p>Index of fourth atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="moha.system.molecule.Molecule.out_of_plane_angle">
-<code class="sig-name descname">out_of_plane_angle</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">C</em>, <em class="sig-param">D</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.out_of_plane_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.out_of_plane_angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate out of plane angle, which is for atom A
-out of the plane consist by atoms B C D</p>
+<code class="sig-name descname">out_of_plane_angle</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">k</em>, <em class="sig-param">l</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.out_of_plane_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#moha.system.molecule.Molecule.out_of_plane_angle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Calculate out of plane angle, which is for atom A</dt><dd><p>out of the plane consist by atoms B C D</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+<dt>l<span class="classifier">int</span></dt><dd><p>Index of fourth atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="moha.system.molecule.Molecule.center_of_mass">
+<em class="property">property </em><code class="sig-name descname">center_of_mass</code><a class="headerlink" href="#moha.system.molecule.Molecule.center_of_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the center of mass for molecular.</p>
 </dd></dl>
 
 </dd></dl>
