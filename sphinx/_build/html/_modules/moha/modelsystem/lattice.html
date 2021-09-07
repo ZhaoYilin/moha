@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>moha.modelsystem.lattice &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_linux.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_mac.html">2. Installation For macOS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_api.html">1. API Doucmentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>moha.modelsystem.lattice</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for moha.modelsystem.lattice</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;Lattice for Model Hamiltonian&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">site_label_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">:</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">}</span>
+<span class="n">site_color_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">:</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">:</span><span class="s1">&#39;g&#39;</span><span class="p">}</span>
+<span class="n">bond_label_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">:</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">:</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">:</span><span class="s1">&#39;e&#39;</span><span class="p">}</span>
+<span class="n">bond_color_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">:</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">:</span><span class="s1">&#39;g&#39;</span><span class="p">}</span>
+
+<div class="viewcode-block" id="LatticeSite"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.LatticeSite">[docs]</a><span class="k">class</span> <span class="nc">LatticeSite</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Child class of LatticeSite&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coordinate</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize of lattice  site instance</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        coordinate : list</span>
+<span class="sd">            coordinate of the site</span>
+
+<span class="sd">        label : str</span>
+<span class="sd">            label of the site</span>
+
+<span class="sd">        color : str</span>
+<span class="sd">            color the the site in matplotlib</span>
+
+<span class="sd">        marker : str</span>
+<span class="sd">            type of marker in matplotlib</span>
+
+<span class="sd">        markersize : int</span>
+<span class="sd">            size of the marker in matplotlib</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coordinate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coordinate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marker</span> <span class="o">=</span> <span class="n">marker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">markersize</span> <span class="o">=</span> <span class="n">markersize</span></div>
+
+
+<div class="viewcode-block" id="LatticeBond"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.LatticeBond">[docs]</a><span class="k">class</span> <span class="nc">LatticeBond</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bond of Lattice&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cell1</span><span class="p">,</span><span class="n">site1</span><span class="p">,</span><span class="n">cell2</span><span class="p">,</span><span class="n">site2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linetype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize of lattice bond instance</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cell1 : list</span>
+<span class="sd">            integer coordinate of first cell</span>
+
+<span class="sd">        site1 : int</span>
+<span class="sd">            index of first site</span>
+
+<span class="sd">        cell2 : list</span>
+<span class="sd">            integer coordinate of second cell</span>
+
+<span class="sd">        site2 : int</span>
+<span class="sd">            index of second site</span>
+
+<span class="sd">        label : str</span>
+<span class="sd">            label of the bond</span>
+
+<span class="sd">        color : str</span>
+<span class="sd">            color of the line in matplotlib</span>
+
+<span class="sd">        linewidth : int</span>
+<span class="sd">            integer to represent the width of line in matplotlib</span>
+
+<span class="sd">        linetype : str</span>
+<span class="sd">            str to represent the type of line in matplotlib</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site1</span> <span class="o">=</span> <span class="n">site1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site2</span> <span class="o">=</span> <span class="n">site2</span>
+        <span class="n">coordinate1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">coordinate2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linewidth</span> <span class="o">=</span> <span class="n">linewidth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linetype</span> <span class="o">=</span> <span class="n">linetype</span></div>
+
+
+<div class="viewcode-block" id="Cell"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Cell">[docs]</a><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Primitive cell of the lattice&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dimension</span><span class="p">,</span><span class="n">a1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">a3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize of cell instance</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dimension : int</span>
+<span class="sd">            dimension of the cell, which can be 1, 2 or 3</span>
+
+<span class="sd">        a1 : list</span>
+<span class="sd">            first component of primitive vector </span>
+
+<span class="sd">        a2 : list</span>
+<span class="sd">            second component of primitive vector </span>
+
+<span class="sd">        a3 : list</span>
+<span class="sd">            third component of primitive vector </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">dimension</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sites</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nsites</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nbonds</span> <span class="o">=</span> <span class="mi">0</span> 
+
+<div class="viewcode-block" id="Cell.add_site"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Cell.add_site">[docs]</a>    <span class="k">def</span> <span class="nf">add_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">site</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a lattice site instance to the cell</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        site : LatticeXSite </span>
+<span class="sd">            lattice site class</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">label</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="n">site</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">site_label_dir</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nsites</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">color</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="n">site</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">site_color_dir</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nsites</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nsites</span> <span class="o">+=</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Cell.add_bond"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Cell.add_bond">[docs]</a>    <span class="k">def</span> <span class="nf">add_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">bond</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a lattice bond instance to the cell</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        bond : LatticeBond </span>
+<span class="sd">            lattice bond class</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">bond</span><span class="o">.</span><span class="n">label</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="n">bond</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">bond_label_dir</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Nbonds</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">bond</span><span class="o">.</span><span class="n">color</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+            <span class="n">bond</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nbonds</span> <span class="o">+=</span><span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="Lattice"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice">[docs]</a><span class="k">class</span> <span class="nc">Lattice</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class for lattice&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize of lattice instance</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        cell : Cell </span>
+<span class="sd">            Cell class</span>
+
+<span class="sd">        shape : list</span>
+<span class="sd">            a list of three integer</span>
+
+<span class="sd">        dimension : int</span>
+<span class="sd">            dimension of the lattice, which can be one two or three</span>
+
+<span class="sd">        Nsites : int</span>
+<span class="sd">            number of sites in the lattice</span>
+
+<span class="sd">        sites : numpy array</span>
+<span class="sd">            numpy array for element of site object</span>
+
+<span class="sd">        bonds : list</span>
+<span class="sd">            list of bond object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="n">cell</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">cell</span><span class="o">.</span><span class="n">dimension</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Nsites</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">Nsites</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sites</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="o">+</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">Nsites</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_sites</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_bonds</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Lattice.build_sites"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.build_sites">[docs]</a>    <span class="k">def</span> <span class="nf">build_sites</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add all sites to the lattice.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">sites</span><span class="p">):</span>
+                        <span class="n">newsite</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+                        <span class="n">coordinate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">a1</span><span class="o">*</span><span class="n">i</span><span class="o">+</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">a2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">a3</span><span class="o">*</span><span class="n">k</span>
+                        <span class="n">newsite</span><span class="o">.</span><span class="n">coordinate</span> <span class="o">+=</span> <span class="n">coordinate</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">newsite</span></div>
+
+<div class="viewcode-block" id="Lattice.build_bonds"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.build_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">build_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add all bonds to the lattice.&quot;&quot;&quot;</span>
+        <span class="n">shape_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+                    <span class="k">for</span> <span class="n">b</span><span class="p">,</span><span class="n">bond</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">bonds</span><span class="p">):</span>
+                        <span class="n">newbond</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+                        <span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+                        <span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+                        <span class="c1">#ToDo make a function to shorten those lines</span>
+                        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span> <span class="o">&lt;=</span> <span class="n">shape_prime</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span><span class="o">&lt;=</span><span class="n">shape_prime</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">zeros</span> <span class="o">&lt;=</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">zeros</span> <span class="o">&lt;=</span> <span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span><span class="p">):</span>
+                            <span class="n">newbond</span><span class="o">.</span><span class="n">coordinate1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="p">[</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">site1</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span>
+                            <span class="n">newbond</span><span class="o">.</span><span class="n">coordinate2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="p">[</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">cell2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">newbond</span><span class="o">.</span><span class="n">site2</span><span class="p">]</span><span class="o">.</span><span class="n">coordinate</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newbond</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Lattice.plotsite"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plotsite">[docs]</a>    <span class="k">def</span> <span class="nf">plotsite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot sites with matplotlib.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">site</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">marker</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">markersize</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">site</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">site</span><span class="o">.</span><span class="n">coordinate</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">marker</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">marker</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">markersize</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Lattice.plotbond"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plotbond">[docs]</a>    <span class="k">def</span> <span class="nf">plotbond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot bonds with matplotlib.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">bond</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate1</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">bond</span><span class="o">.</span><span class="n">coordinate2</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">bond</span><span class="o">.</span><span class="n">color</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Lattice.plot"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.lattice.html#moha.modelsystem.lattice.Lattice.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot lattice and show it with matplotlib.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plotsite</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plotbond</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
