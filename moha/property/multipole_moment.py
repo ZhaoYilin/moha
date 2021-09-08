@@ -1,5 +1,5 @@
 import numpy as np
-from moha.log import log,timer
+from moha.io.log import log,timer
 from moha.system.operator import RestrictedOneElectronOperator
 class OneElectronProperty(object):
     def __init__(self):

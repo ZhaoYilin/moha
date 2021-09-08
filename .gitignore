@@ -7,3 +7,5 @@ __pycache__
 
 # Files made by setup
 build
+dist
+moha.egg-info

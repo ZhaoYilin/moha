@@ -1,6 +1,6 @@
 from moha.system.hamiltonian.chemical_hamiltonian import *
 from moha.posthf.pt.auxiliary import *
-from moha.log import log, timer
+from moha.io.log import log, timer
 
 import numpy as np
 import copy

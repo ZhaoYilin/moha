@@ -1,17 +1,19 @@
-import setuptools
+#from distutils.core import setup
+from setuptools import setup,find_packages
+
+from glob import glob
+
 import os
 import sys
 import platform
 
-setuptools.setup(
-    name='moha',
-    version='1.0.0',
+
+setup(name='moha',
+    version='0.1',
     description='A QM package',
-    url='https://zhaoyilin.github.io/moha',
+    url='http://github.com/fhqgfss/penta',
     author='Yilin Zhao',
     author_email='zhaoyilin1991@gmail.com',
     license='MIT',
-    packages=['moha','moha.system','moha.io','moha.system.integral','moha.system.operator',
-        'moha.system.hamiltonian','moha.system.wavefunction','moha.io.basis','moha.hf',
-        'moha.property','moha.posthf','moha.posthf.ci','moha.posthf.cc','moha.posthf.pt'],
+    packages=find_packages(),
     package_data={'moha': ['io/basis/*']})

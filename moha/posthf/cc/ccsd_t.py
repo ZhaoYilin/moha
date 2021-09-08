@@ -1,5 +1,5 @@
 from moha.posthf.cc.auxiliary import *
-from moha.log import log, timer
+from moha.io.log import log, timer
 
 import numpy as np
 import copy

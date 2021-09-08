@@ -1,7 +1,7 @@
 import numpy as np
 from moha.system.operator import *
 from moha.system.hamiltonian.base import BaseHamiltonian
-from moha.log import timer
+from moha.io.log import timer
 
 __all__ = ['RestrictedChemicalHamiltonian','UnrestrictedChemicalHamiltonian']
 

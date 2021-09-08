@@ -1,5 +1,5 @@
 import numpy as np
-from moha.log import log, timer
+from moha.io.log import log, timer
 
 def spinfock(eorbitals):
     """

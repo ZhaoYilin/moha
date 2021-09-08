@@ -1,6 +1,6 @@
 from moha.hf.auxiliary import *
 from moha.hf.hf_wavefunction import HFWaveFunction
-from moha.log import log,timer
+from moha.io.log import log,timer
 
 import copy
 
