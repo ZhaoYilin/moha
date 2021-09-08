@@ -29,7 +29,10 @@ Installation
       
 * From pypi
 
-      pip install moha      
+      pip install moha  
+  Or
+      pip install git+https://github.com/ZhaoYilin/moha
+
   
   
   
