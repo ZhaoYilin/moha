@@ -30,7 +30,9 @@ Installation
 * From pypi
 
       pip install moha  
-  Or
+  
+* Using pip to install python package on GitHub
+
       pip install git+https://github.com/ZhaoYilin/moha
 
   
