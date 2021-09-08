@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. Tensor Network State &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Property" href="user_property.html" />
+    <link rel="prev" title="4. Post Hartree-Fock" href="user_posthf.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install_linux.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_mac.html">2. Installation For macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_windows.html">3. Installation For Windows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_model_system.html">2. Model System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Tensor Network State</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#time-evolving-block-decimation-tebd">5.1. Time-evolving block decimation (TEBD)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variational-optimization">5.2. Variational Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#projected-optimization">5.3. Projected Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. API Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>5. Tensor Network State</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_tensor_network.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tensor-network-state">
+<h1>5. Tensor Network State<a class="headerlink" href="#tensor-network-state" title="Permalink to this headline">¶</a></h1>
+<p>In differential geometry, the tensor at a point is based on the tangent space at
+that point on the manifold. A (m, n) type tensor refers to a multi-linear map
+that maps m covariant vectors (cotangent vectors) and n inverter vectors (tangent
+vectors) to the number domain. Given a set of bases, this multi-linear mapping
+can be represented by a series of components. These components are of course
+related to the choice of basis. In a tensor network, we usually don’t do
+coordinate transformation, so any component set with n indicators is called a
+tensor.</p>
+<p>begin{figure}[H]
+centering
+includegraphics{./images/tensor_notation}
+caption{Tensor diagrams: (a) scalar, (b) vector, (c) matrix  (d) rank-3 tensor}
+end{figure}</p>
+<p>Quantum mechanics has a basic assumption: Hilbert space of a composite system
+is the tensor product of its subsystem Hilbert space. Therefore, the multi-body
+wave function is naturally a tensor,
+for an n-body system, its wave function is an n–th order tensor. Of course,
+since the linear space with the same dimension is isomorphic, the wave function
+can also be regarded as a vector, and the dimension of this vector is $d^n$.
+The Hamiltonian of the n-body system is a $d^n$-dimensional matrix, which can of
+course also be regarded as a (n, n) tensor. The single operator can be viewed as
+a second-order tensor. The two-body operator can be viewed as a second-order
+tensor with $d^2$ dimensions, or as a (2,2) type (fourth-order) tensor with
+dimension d. The average value of all observable measurements in quantum
+mechanics can be written as an inner product, which is quadratic from the matrix
+point of view. If the wave function is in the form of a tensor, the operator can
+also be written as the sum of local tensors, then the average value of the
+operator can also be regarded as the sum of the contractions of these tensors.
+begin{table}[ht]
+centering
+% To place a caption above a table
+begin{tabular}{l|c|l|c}</p>
+<blockquote>
+<div><p>hline
+Type&amp;  Rank &amp;  Example &amp;      Notation\
+hline
+hline
+Scalar&amp;        0&amp;     Constants &amp; $lambda$ \
+hline
+Vector&amp; 1&amp; Wave function &amp;$psi_{i}$\
+hline
+Matrix&amp; 2 &amp;Operator &amp; $O_{i,j}$\
+hline
+$vdots$ &amp; $vdots$    &amp; $vdots$ &amp; $vdots$ \
+hline
+Rank–N tensor&amp; N &amp; N–body wave function &amp; $Psi_{alpha_1,dots,alpha_N}$\
+hline</p>
+</div></blockquote>
+<p>end{tabular}
+% Or to place a caption below a table
+caption{Tensors of different rank-N.}
+label{tab:tensor_type}
+end{table}%</p>
+<p>Tensor network states ansatz is used to solve chemistry system with a strong
+correlation. Two optimization methods base on tensor network states are
+implemented in MoHa, which include variational optimization and time-evolving
+block decimation method.</p>
+<div class="section" id="time-evolving-block-decimation-tebd">
+<h2>5.1. Time-evolving block decimation (TEBD)<a class="headerlink" href="#time-evolving-block-decimation-tebd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Consider a Hamiltonian of the form</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H = \sum_j h^{[j,j+1]}\]</div>
+<ul class="simple">
+<li><p>Decompose the Hamiltonian as $H=F+G$</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F = \sum_{even} F^{[j]} = \sum_{even j}h^{[j,j+1]}
+G = \sum_{odd} G^{[j]} = \sum_{odd j}h^{[j,j+1]}\]</div>
+<ul class="simple">
+<li><p>Apply Suzuki-Trotter decomposition, and two chanins of two-site gets</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[U_{F} = \prod_{even r}exp(-iF^{[r]}\delta t)
+U_{G} = \prod_{odd r}exp(-iG^{[r]}\delta t)\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/tebd.png"><img alt="_images/tebd.png" src="_images/tebd.png" style="width: 648.0px; height: 522.5px;" /></a>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/tns/tebd_heisenberg.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha.modelsystem</span> <span class="k">import</span> <span class="n">sites</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">tns</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">tnso</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">optimizer</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">Site</span> <span class="o">=</span> <span class="n">sites</span><span class="o">.</span><span class="n">SpinOneHalfSite</span><span class="p">()</span>
+<span class="c1">### initial state |+-+-+-+-+-&gt;</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">tns</span><span class="o">.</span><span class="n">MPS</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;MPS&#39;</span><span class="p">)</span>
+<span class="c1">### Hamiltonian MPO5</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">tnso</span><span class="o">.</span><span class="n">MPO</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="s1">&#39;Heisenberg&#39;</span><span class="p">,{</span><span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;Jz&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">:</span><span class="mf">0.0</span><span class="p">})</span>
+<span class="n">Optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">Time_evolution</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span><span class="n">H</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Optimizer</span><span class="o">.</span><span class="n">tebd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="variational-optimization">
+<h2>5.2. Variational Optimization<a class="headerlink" href="#variational-optimization" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Variation principle</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\langle\Psi |H| \Psi\rangle}{\langle\Psi|\Psi\rangle}\geq E_0\]</div>
+<ul class="simple">
+<li><p>Approach the ground state energy by minimizing</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[min_{|\Psi\rangle}(\langle\Psi |H| \Psi\rangle - \lambda \langle\Psi|\Psi\rangle)\]</div>
+<ul class="simple">
+<li><p>Minimize one tensor each time, keeping the other fixed</p></li>
+<li><p>sweep over all the tensor several times</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/tns/dmrg_heisenberg.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha.modelsystem</span> <span class="k">import</span> <span class="n">sites</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">tns</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">tnso</span>
+<span class="kn">from</span> <span class="nn">moha.tn</span> <span class="k">import</span> <span class="n">optimizer</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">Site</span> <span class="o">=</span> <span class="n">sites</span><span class="o">.</span><span class="n">SpinOneHalfSite</span><span class="p">()</span>
+<span class="c1">### initial state |+-+-+-+-+-&gt;</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">tns</span><span class="o">.</span><span class="n">MPS</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;MPS&#39;</span><span class="p">)</span>
+<span class="c1">### Hamiltonian MPO5</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">tnso</span><span class="o">.</span><span class="n">MPO</span><span class="p">(</span><span class="n">Site</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="s1">&#39;Heisenberg&#39;</span><span class="p">,{</span><span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;Jz&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">:</span><span class="mf">0.0</span><span class="p">})</span>
+<span class="n">Optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">Variational</span><span class="p">(</span><span class="n">Psi</span><span class="p">,</span><span class="n">H</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Optimizer</span><span class="o">.</span><span class="n">dmrg</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="projected-optimization">
+<h2>5.3. Projected Optimization<a class="headerlink" href="#projected-optimization" title="Permalink to this headline">¶</a></h2>
+<p>We can have a trial for solving tensor network state problem by projected approach.
+For simplisity, we start with MPS which is</p>
+<div class="math notranslate nohighlight">
+\[|MPS\rangle
+=\sum_{\textbf{n}}Tr(U^{\alpha_1}_{m_1}U^{\alpha_2}_{m_1m_2}U^{\alpha_3}_{m_2m_3}\dots)
+|\textbf{n}\rangle\]</div>
+<p>To slove $hat{H}|MPSrangle = E|MPSrangle$, We may set up N equantions to
+find out the energy and amplitudes by left projecting a known simple states
+${Phi_{alpha}}$i,</p>
+<div class="math notranslate nohighlight">
+\[\langle HF|\hat{H}|MPS\rangle = E\langle HF|MPS\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\langle \Phi_1|\hat{H}|MPS\rangle = E\langle \Phi_1|MPS\rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\dots\]</div>
+<div class="math notranslate nohighlight">
+\[\langle \Phi_N|\hat{H}|MPS\rangle = E\langle \Phi_N|MPS\rangle\]</div>
+<p>To get the approximate amplitudes, a set of nonlinear equation should be sloved</p>
+<div class="math notranslate nohighlight">
+\[f_{\alpha}(\textbf{U}) := \langle
+\Phi_{\alpha}|\hat{H}-E|MPS(\textbf{U})\rangle  = 0\]</div>
+<p>Which is usually sloved by quasi-Newton methods,</p>
+<div class="math notranslate nohighlight">
+\[\textbf{U}^{(\alpha+1)} = \textbf{U}^{(\alpha)} -
+\textbf{F}^{-1}f(\textbf{U}^{(\alpha)}) \ \ \textbf{U}^{0} = 0\]</div>
+<p>The last step of projected MPS is by solving these equantions self consistently, yields approximate amplitudes and an approximate energy.</p>
+<p>TODO</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_property.html" class="btn btn-neutral float-right" title="6. Property" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user_posthf.html" class="btn btn-neutral float-left" title="4. Post Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

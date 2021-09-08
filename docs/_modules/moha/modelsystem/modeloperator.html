@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>moha.modelsystem.modeloperator &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html">
+          
+
+          
+            
+            <img src="../../../_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_linux.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install_mac.html">2. Installation For macOS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_api.html">1. API Doucmentation</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>moha.modelsystem.modeloperator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for moha.modelsystem.modeloperator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">moha.system.operator</span> <span class="k">import</span> <span class="n">Hamiltonian</span>
+<span class="kn">from</span> <span class="nn">moha.modelsystem.auxiliary</span> <span class="k">import</span> <span class="n">tensor_enumerate</span>
+<span class="kn">from</span> <span class="nn">moha.modelsystem.auxiliary</span> <span class="k">import</span> <span class="n">is_interaction</span>
+<span class="kn">from</span> <span class="nn">moha.modelsystem.auxiliary</span> <span class="k">import</span> <span class="n">expectation</span>
+
+<div class="viewcode-block" id="OneBodyTerm"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.OneBodyTerm">[docs]</a><span class="k">class</span> <span class="nc">OneBodyTerm</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Operator for one body interaction&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terms</span><span class="p">,</span><span class="n">cell1</span><span class="p">,</span><span class="n">site1</span><span class="p">,</span><span class="n">cell2</span><span class="p">,</span><span class="n">site2</span><span class="p">,</span><span class="n">parameter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a OneBodyTerm instance</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        terms : list</span>
+<span class="sd">            A list of length 2 for one body interaction</span>
+
+<span class="sd">        cell1 : list</span>
+<span class="sd">            Integer coordinate of first cell</span>
+
+<span class="sd">        site1 : int</span>
+<span class="sd">            Index of first site</span>
+
+<span class="sd">        cell2 : list</span>
+<span class="sd">            Integer coordinate of second cell</span>
+
+<span class="sd">        site2 : int</span>
+<span class="sd">            Index of second site</span>
+<span class="sd">        </span>
+<span class="sd">        parameter: float</span>
+<span class="sd">            Parameter of the interaction</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terms</span> <span class="o">=</span> <span class="n">terms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site1</span> <span class="o">=</span> <span class="n">site1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site2</span> <span class="o">=</span> <span class="n">site2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="o">=</span> <span class="n">parameter</span></div>
+
+
+<div class="viewcode-block" id="TwoBodyTerm"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.TwoBodyTerm">[docs]</a><span class="k">class</span> <span class="nc">TwoBodyTerm</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Operator for two body interaction&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">terms</span><span class="p">,</span><span class="n">cell1</span><span class="p">,</span><span class="n">site1</span><span class="p">,</span><span class="n">cell2</span><span class="p">,</span><span class="n">site2</span><span class="p">,</span><span class="n">parameter</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a TwoBodyTerm instance</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        terms : list</span>
+<span class="sd">            A list of two body interaction terms</span>
+
+<span class="sd">        cell1 : list</span>
+<span class="sd">            Integer coordinate of first and second cell</span>
+
+<span class="sd">        site1 : int</span>
+<span class="sd">            Index of first and second site</span>
+
+<span class="sd">        cell2 : list</span>
+<span class="sd">            Integer coordinate of third and fourth cell</span>
+
+<span class="sd">        site2 : int</span>
+<span class="sd">            Index of third and fourth site</span>
+<span class="sd">        </span>
+<span class="sd">        parameter: float</span>
+<span class="sd">            Parameter of the interaction</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terms</span> <span class="o">=</span> <span class="n">terms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site1</span> <span class="o">=</span> <span class="n">site1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site2</span> <span class="o">=</span> <span class="n">site2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="o">=</span> <span class="n">parameter</span></div>
+
+
+<div class="viewcode-block" id="ModelHamiltonian"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.ModelHamiltonian">[docs]</a><span class="k">class</span> <span class="nc">ModelHamiltonian</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for the Physical Model Hamiltonians: </span>
+<span class="sd">    1-D Hubbard, PPP, Ising, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">,</span><span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a ModelHamiltonian instance.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lattice : Lattice</span>
+<span class="sd">            The lattice of the model hamiltonian.</span>
+
+<span class="sd">        site : Site</span>
+<span class="sd">            The site of the model hamiltonian</span>
+
+<span class="sd">        nbasis : int</span>
+<span class="sd">            The number of sites.</span>
+
+<span class="sd">        pdb : bool</span>
+<span class="sd">            Periodic boundary conditions. Default, pdb=true</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">lattice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">site</span> <span class="o">=</span> <span class="n">site</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pbc</span> <span class="o">=</span> <span class="n">pbc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nbasis</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">Nsites</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operators</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pbc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The periodic boundary condition.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pbc</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nbasis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The number of sites.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nbasis</span>
+
+<div class="viewcode-block" id="ModelHamiltonian.add_operator"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.ModelHamiltonian.add_operator">[docs]</a>    <span class="k">def</span> <span class="nf">add_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add operator to the model Hamiltonian.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_operator</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ModelHamiltonian.compute_operator"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.ModelHamiltonian.compute_operator">[docs]</a>    <span class="k">def</span> <span class="nf">compute_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate the one-body term of the model Hamiltonian.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">listi</span> <span class="ow">in</span> <span class="n">tensor_enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sites</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">listj</span> <span class="ow">in</span> <span class="n">tensor_enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sites</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">is_interaction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">listi</span><span class="p">,</span><span class="n">listj</span><span class="p">,</span><span class="n">operator</span><span class="p">,</span><span class="kc">False</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">operator</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;OneBodyTerm&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">operator</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;TwoBodyTerm&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pbc</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>                
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">listi</span> <span class="ow">in</span> <span class="n">tensor_enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sites</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">listj</span> <span class="ow">in</span> <span class="n">tensor_enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">sites</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">is_interaction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">listi</span><span class="p">,</span><span class="n">listj</span><span class="p">,</span><span class="n">operator</span><span class="p">,</span><span class="kc">True</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">operator</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;OneBodyTerm&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">operator</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;TwoBodyTerm&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">expectation</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">site</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ModelHamiltonian.compute_overlap"><a class="viewcode-back" href="../../../developer_api/moha.modelsystem.modeloperator.html#moha.modelsystem.modeloperator.ModelHamiltonian.compute_overlap">[docs]</a>    <span class="k">def</span> <span class="nf">compute_overlap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate overlap of the model Hamiltonian, (identity matrix).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ham</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nbasis</span><span class="p">)</span>
+        <span class="n">overlap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_overlap</span><span class="p">()</span>
+        <span class="n">nuclear_attraction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_nbasis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_nbasis</span><span class="p">))</span>
+        <span class="n">Eri_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbasis</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
+                        <span class="n">ij</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">j</span>
+                        <span class="n">kl</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">l</span>
+                        <span class="k">if</span> <span class="n">ij</span><span class="o">&gt;=</span><span class="n">kl</span><span class="p">:</span>
+                            <span class="n">Eri_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">two_body_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">])</span>
+
+        <span class="n">ham</span><span class="o">.</span><span class="n">add_operator_by_value</span><span class="p">(</span><span class="s1">&#39;nuclear_repulsion&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="n">ham</span><span class="o">.</span><span class="n">add_operator_by_value</span><span class="p">(</span><span class="s1">&#39;overlap&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">overlap</span><span class="p">)</span>
+        <span class="n">ham</span><span class="o">.</span><span class="n">add_operator_by_value</span><span class="p">(</span><span class="s1">&#39;kinetic&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">one_body_matrix</span><span class="p">)</span>
+        <span class="n">ham</span><span class="o">.</span><span class="n">add_operator_by_value</span><span class="p">(</span><span class="s1">&#39;nuclear_attraction&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nuclear_attraction</span><span class="p">)</span>
+        <span class="n">ham</span><span class="o">.</span><span class="n">add_operator_by_value</span><span class="p">(</span><span class="s1">&#39;electron_repulsion&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">Eri_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ham</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

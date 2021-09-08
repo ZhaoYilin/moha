@@ -1,0 +1,755 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Model System &mdash; moha 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Hartree-Fock" href="user_scf.html" />
+    <link rel="prev" title="1. Molecular System" href="user_molecular_system.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">INSTALL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install_linux.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_mac.html">2. Installation For macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_windows.html">3. Installation For Windows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Model System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lattice">2.1. Lattice</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linear-lattice">2.1.1. Linear lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#two-sites-linear-lattice">2.1.2. Two sites linear lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#square-lattice">2.1.3. Square lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graphene-lattice">2.1.4. Graphene lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cubic-lattice">2.1.5. Cubic lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#model-hamiltonian">2.2. Model Hamiltonian</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fermion-model">2.2.1. Fermion Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spin-model">2.2.2. Spin Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#band-structure">2.3. Band Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_scf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_tensor_network.html">5. Tensor Network State</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. API Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_notes/index.html">2. Notes and Deviration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>2. Model System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/user_model_system.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="model-system">
+<h1>2. Model System<a class="headerlink" href="#model-system" title="Permalink to this headline">¶</a></h1>
+<p>In terms of second quantisation operators, a general Hamiltonian can be written as</p>
+<div class="math notranslate nohighlight">
+\[H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
+V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_{i, \sigma}\)</span> is the destruction operator for an electron at site <span class="math notranslate nohighlight">\(i\)</span>
+and spin <span class="math notranslate nohighlight">\(\sigma\)</span>, <span class="math notranslate nohighlight">\(c^{\dagger}_{i, \sigma}\)</span> is the creation operator for an
+electron at site <span class="math notranslate nohighlight">\(i\)</span> and spin <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>Model Hamiltonians geared to simulate the key physics of notoriously complicated
+complete Hamiltonians of large-scale interacting systems.</p>
+<div class="section" id="lattice">
+<h2>2.1. Lattice<a class="headerlink" href="#lattice" title="Permalink to this headline">¶</a></h2>
+<p>Lattice is an periodic array of discrete points in space generated by a set of
+discrete translation operations described by:</p>
+<div class="math notranslate nohighlight">
+\[\vec{R} = n_1\vec{a}_1 + n_2\vec{a}_2 + n_3\vec{a}_3\]</div>
+<p>where <span class="math notranslate nohighlight">\(n_i\)</span> are any integers and <span class="math notranslate nohighlight">\(\vec{a}_i\)</span> are known as the primitive
+vectors which lie in different directions and span the lattice. The discrete points
+can be atoms, ions, electronic site, spin one-half site, spinless fermion site, etc.</p>
+<p>Generaly speaking, to build a The <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code> object, we need first define a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code> object. <code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code> has attribute of dimension and three primitive
+vectors <span class="math notranslate nohighlight">\(\vec{a}_1\)</span> <span class="math notranslate nohighlight">\(\vec{a}_2\)</span> and <span class="math notranslate nohighlight">\(\vec{a}_3\)</span>. To initialize a
+cell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Then we can add arbitrary sites to this cell by assign coordinate and label of the
+site:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Then we add bonds to this cell by assign the integer coordinate of first cell, index
+of first site in first cell and the integer coordinate of second cell, index of the
+second site in second cell:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Finally complete it by assign the cell and shpe to the lattice to <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>It may not be immediately obvious what this code does. Fortunately, <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code> objects
+have a convenient <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method to easily visualize the constructed lattice.</p>
+<div class="section" id="linear-lattice">
+<h3>2.1.1. Linear lattice<a class="headerlink" href="#linear-lattice" title="Permalink to this headline">¶</a></h3>
+<p>Starting from the basics, we’ll build a simple linear lattice with only one site.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/linear.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># unit cell length</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1">#define a 1D linear lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,1,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1">#plot the lattice we constructed</span>
+<span class="n">lattice</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/linear.png"><img alt="_images/linear.png" src="_images/linear.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+<div class="section" id="two-sites-linear-lattice">
+<h3>2.1.2. Two sites linear lattice<a class="headerlink" href="#two-sites-linear-lattice" title="Permalink to this headline">¶</a></h3>
+<p>The next example is also linear lattice but a slightly more complicated, the cell of the
+lattice is consist of two different sites.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/two_sites_linear.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># unit cell length</span>
+<span class="n">d_ab</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># distance between site A and B</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">d_ab</span><span class="p">):</span>
+    <span class="c1">#define a 1D linear lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0., 0., 0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a site labeled &#39;B&#39; at positon [d_ab, 0., 0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="n">d_ab</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [0,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#add a bond from second site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,1,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+</pre></div>
+</div>
+</div>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/two_sites_linear.png"><img alt="_images/two_sites_linear.png" src="_images/two_sites_linear.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+<div class="section" id="square-lattice">
+<h3>2.1.3. Square lattice<a class="headerlink" href="#square-lattice" title="Permalink to this headline">¶</a></h3>
+<p>From 1D to 2D, the most basic example square lattice.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/square.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1">#unit cell length</span>
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1">#define a 2D square lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">2</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,4,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="c1">#plot the lattice we constructed</span>
+<span class="n">lattice</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/square.png"><img alt="_images/square.png" src="_images/square.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+<div class="section" id="graphene-lattice">
+<h3>2.1.4. Graphene lattice<a class="headerlink" href="#graphene-lattice" title="Permalink to this headline">¶</a></h3>
+<p>Graphene lattice is a more general example:</p>
+<ul class="simple">
+<li><p>It is two dimension.</p></li>
+<li><p>The cell of graphene contain two sites.</p></li>
+<li><p>The primitive vectors of the cell are non-orthogonal.</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/graphene.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.24595</span>     <span class="c1"># unit cell length</span>
+<span class="n">a_cc</span> <span class="o">=</span> <span class="mf">0.142</span>    <span class="c1"># carbon carbon distance</span>
+
+<span class="k">def</span> <span class="nf">graphene</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a_cc</span><span class="p">):</span>
+
+
+    <span class="c1">#define a 2D graphene lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">2</span><span class="p">,[[</span><span class="n">a</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">]])</span>
+
+
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0., -a_cc/2., 0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="n">a_cc</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a site labeled &#39;B&#39; at positon [0., a_cc/2., 0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="n">a_cc</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
+
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [0,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#add a bond from second site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [1,-1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1">#buld a lattice of shape [4,4,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">graphene</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a_cc</span><span class="p">)</span>
+<span class="c1">#plot the lattice we constructed</span>
+<span class="n">lattice</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/graphene.png"><img alt="_images/graphene.png" src="_images/graphene.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+<div class="section" id="cubic-lattice">
+<h3>2.1.5. Cubic lattice<a class="headerlink" href="#cubic-lattice" title="Permalink to this headline">¶</a></h3>
+<p>Final example is a 3d cubic lattice.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/cubic.py</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span>     <span class="c1"># unit cell length</span>
+
+<span class="k">def</span> <span class="nf">cube</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1">#define a 3D cubic lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">3</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span>
+
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [0,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from second site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from second site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="c1">#buld a lattice of shape [4,4,4] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">cube</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c1">#plot the lattice we constructed</span>
+<span class="n">lattice</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Visualize the lattice by <code class="xref py py-meth docutils literal notranslate"><span class="pre">Lattice.plot()</span></code> method.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/cubic.png"><img alt="_images/cubic.png" src="_images/cubic.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="model-hamiltonian">
+<h2>2.2. Model Hamiltonian<a class="headerlink" href="#model-hamiltonian" title="Permalink to this headline">¶</a></h2>
+<p>Analogy to the construction of molecular Hamiltonian, model hamiltonian usually set up
+in three steps.</p>
+<ul class="simple">
+<li><p>First, construct a lattice.</p></li>
+<li><p>Second, generate a basis set for the lattice.To simplifies the mathematics, In what
+follows we will assume that the basis set is orthonormal.</p></li>
+<li><p>Finally, compute all kinds of one body terms and two body terms with that basis
+to define a Hamiltonian.</p></li>
+</ul>
+<p>With the definition of lattice and site object done, to construct a model Hamiltonian, we need:</p>
+<ul class="simple">
+<li><p>Initialize the model Hamiltonian by assign lattice and site</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">moha</span> <span class="o">=</span> <span class="n">ModelHamiltonian</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Then add one and two body interaction terms</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">))</span>
+
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">TwoBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can check the one body interaction matrix and two body interaction tensor by</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">moha</span><span class="o">.</span><span class="n">one_body_matrix</span>
+
+<span class="n">moha</span><span class="o">.</span><span class="n">two_body_tensor</span>
+</pre></div>
+</div>
+<div class="section" id="fermion-model">
+<h3>2.2.1. Fermion Model<a class="headerlink" href="#fermion-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Tight Binding Model</p></li>
+</ul>
+<p>In solid-state physics, the tight-binding model (or TB model) is an approach to the calculation
+of electronic band structure using an approximate set of wave functions based upon superposition
+of wave functions for isolated atoms located at each atomic site.</p>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} =-t\sum_{&lt;i,j&gt; \sigma}\hat{c}^{\dagger}_{i, \sigma}\hat{c}_{j, \sigma}
+   -\mu\sum_{i\sigma}\hat{c}^{\dagger}_{i\sigma}\hat{c}_{i\sigma}\]</div>
+<p>Often one considers models with only nearest neighbour terms, <span class="math notranslate nohighlight">\(&lt;ij&gt;\)</span> indicates nearest
+neighbours. And one takes <span class="math notranslate nohighlight">\(t_{ij}=t\)</span> if i and j are at nearest neighbour sites, and
+<span class="math notranslate nohighlight">\(t_{ij}=0\)</span> otherwise, <span class="math notranslate nohighlight">\(\mu\)</span> is the chemical potential.</p>
+<p>To represent the Hamilontion in the matrix form, we ignore the spin of the Hamiltonian and transform
+the Hamiltonion to</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} =-t\sum_{&lt;i,j&gt;}\hat{c}^{\dagger}_{i}\hat{c}_{j}
+   -\mu\sum_{i}\hat{c}^{\dagger}_{i}\hat{c}_{i}\]</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/tight_binding.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.24595</span>     <span class="c1"># unit cell length</span>
+<span class="n">a_cc</span> <span class="o">=</span> <span class="mf">0.142</span>    <span class="c1"># carbon carbon distance</span>
+
+<span class="k">def</span> <span class="nf">graphene</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a_cc</span><span class="p">):</span>
+
+
+    <span class="c1">#define a 2D graphene lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">2</span><span class="p">,[[</span><span class="n">a</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">a</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">]])</span>
+
+
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,-a_cc/2.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="n">a_cc</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a site labeled &#39;B&#39; at positon [0.,-a_cc/2.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="n">a_cc</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
+
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [0,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1">#add a bond from second site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to second site in cell [1,-1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1">#buld a lattice of shape [4,4,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">graphene</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a_cc</span><span class="p">)</span>
+<span class="c1">#use spinless fermion site as basis</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">SpinlessFermionSite</span><span class="p">()</span>
+<span class="c1">#build model hamiltonian</span>
+<span class="n">mh</span> <span class="o">=</span> <span class="n">ModelHamiltonian</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">)</span>
+<span class="c1">#add on-site term of site A</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="c1">#add on-site term of site B</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">))</span>
+<span class="c1">#add hopping term of site between site A and B</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">4.0</span><span class="p">))</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">4.0</span><span class="p">))</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">4.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Hubbard Model</p></li>
+</ul>
+<p>The Hubbard model is an approximate model used, especially in solid-state physics, to describle
+the transition between conducting and insulating systems. The basic hubbard model have only two
+Hamiltonian is the simplest model of interacting particles on a lattice and reads.</p>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}=-t\sum_{&lt;i,j&gt; \sigma}\hat{c}^{\dagger}_{i, \sigma}\hat{c}_{j, \sigma} +
+U\sum_{i}\hat{n}_{i, \uparrow}\hat{n}_{i, \downarrow}\]</div>
+<p>where the first term is a one-electron term and accounts for the nearest-neighbor hopping, while
+the second term is the repulsive on-site interaction. The t and U are user specified parameters
+and σ is the electron spin.</p>
+<p>To represent the Hamilontion in the matrix form, we ignore the spin of the Hamiltonian and transform
+the Hamiltonion to</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}=-t\sum_{&lt;i,j&gt;}\hat{c}^{\dagger}_{i}\hat{c}_{j} +
+U\sum_{i}\hat{n}_{i}\hat{n}_{i}\]</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/hubbard.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1">#unit cell length</span>
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1">#define a 2D square lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">2</span><span class="p">,[</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [0,1,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,4,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="c1">#use spinless fermion site as basis</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">SpinlessFermionSite</span><span class="p">()</span>
+<span class="c1">#build model hamiltonian</span>
+<span class="n">mh</span> <span class="o">=</span> <span class="n">ModelHamiltonian</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">)</span>
+<span class="c1">#add hopping term of site between nearest neighbour A and B</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="c1">#add two body term of site between site A and B</span>
+<span class="n">mh</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">TwoBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="spin-model">
+<h3>2.2.2. Spin Model<a class="headerlink" href="#spin-model" title="Permalink to this headline">¶</a></h3>
+<p>Quantum spins are a complex object to deal with in many-body physics, it’s niether a canonical
+fermions or bosons. However, we can perform the Jordan–Wigner transformation that maps spin
+operators onto fermionic creation and annihilation operators</p>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[S^{z}_j = c^{\dagger}_{j}c_{j}-\frac{1}{2}\]</div>
+<div class="math notranslate nohighlight">
+\[S^{+}_j = c^{\dagger}_{j}e^{i\pi\sum_{l&lt;j}n_{l}}\]</div>
+<div class="math notranslate nohighlight">
+\[S^{-}_j = c_{j}e^{-i\pi\sum_{l&lt;j}n_{l}}\]</div>
+<ul class="simple">
+<li><p>Ising Model</p></li>
+</ul>
+<p>The Ising model is a mathematical model of ferromagnetism in statistical mechanics. The
+model consists of discrete variables that represent magnetic dipole moments of atomic
+spins that can be in one of two states (+1 or −1), allowing each spin to interact
+with its neighbors.</p>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[H=\sum_{&lt;i,j&gt; \sigma}-JS^{z}_{i}S^{z}_{j}\]</div>
+<p>After Jordan–Wigner transformation, it becomes:</p>
+<div class="math notranslate nohighlight">
+\[H = J\sum_{i}n_{i} - J\sum_{i}n_{i+1}n_{i}\]</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/ising.py</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># unit cell length</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># spin interaction parameter</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1">#define a 1D linear lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,1,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">SpinlessFermionSite</span><span class="p">()</span>
+<span class="n">moha</span> <span class="o">=</span> <span class="n">ModelHamiltonian</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">)</span>
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="n">J</span><span class="p">))</span>
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">TwoBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">J</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Heisenberg Model</p></li>
+</ul>
+<p>The Heisenberg model is a statistical mechanical model used in the study of critical points
+and phase transitions of magnetic systems, in which the spins of the magnetic systems are
+treated quantum mechanically.</p>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[H=J\sum_{&lt;i,j&gt;}\vec{S}_{i}\vec{S}_{j} =
+J\sum_{&lt;ij&gt;}\left[S^{z}_{i}S^{z}_{j} +
+\frac{1}{2}\left(S^{+}_{i}S^{-}_{j}+S^{-}_{i}S^{+}_{j}\right)\right]\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\hat{S}_{i}^{+} = \hat{S}_{i}^{x} + i\hat{S}_{i}^{y}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{S}_{i}^{-} = \hat{S}_{i}^{x} - i\hat{S}_{i}^{y}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{S}_{i}^{z} = \frac{1}{2}(\hat{S}_{i}^{+}\hat{S}_{i}^{-}-\hat{S}_{i}^{-}\hat{S}_{i}^{+})\]</div>
+<p>To perform the Jordan-Wigner transformation</p>
+<div class="math notranslate nohighlight">
+\[H=-\frac{J}{2}\sum_{i}\left(c^{\dagger}_{i+1}c_{i}+c^{\dagger}_{i}c_{i+1}\right)
++J\sum_{i}n_{i} - J\sum_{i}n_{i+1}n_{i}\]</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">/data/examples/modelsystem/heisenberg.py</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># unit cell length</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># spin interaction parameter</span>
+
+<span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1">#define a 1D linear lattice cell with vectors a1 a2 and a3</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">d</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">])</span>
+    <span class="c1">#add a site labeled &#39;A&#39; at positon [0.,0.,0.]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_site</span><span class="p">(</span><span class="n">LatticeSite</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="s1">&#39;A&#39;</span><span class="p">))</span>
+    <span class="c1">#add a bond from first site in cell [0,0,0] to first site in cell [1,0,0]</span>
+    <span class="n">cell</span><span class="o">.</span><span class="n">add_bond</span><span class="p">(</span><span class="n">LatticeBond</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="c1">#buld a lattice of shape [4,1,1] with cell we defined</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Lattice</span><span class="p">(</span><span class="n">cell</span><span class="p">,[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">lattice</span>
+
+<span class="n">lattice</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">SpinlessFermionSite</span><span class="p">()</span>
+<span class="n">moha</span> <span class="o">=</span> <span class="n">ModelHamiltonian</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span><span class="n">site</span><span class="p">)</span>
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;c_dag&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">J</span><span class="o">/</span><span class="mf">2.</span><span class="p">))</span>
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">OneBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="n">J</span><span class="p">))</span>
+<span class="n">moha</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">TwoBodyTerm</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">J</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>XXZ Model</p></li>
+</ul>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[H=\sum_{&lt;ij&gt;}J_{z}S^{z}_{i}S^{z}_{j} +
+\frac{J}{2}\left(S^{+}_{i}S^{-}_{j}+S^{-}_{i}S^{+}_{j}\right)\]</div>
+<p>To perform the Jordan-Wigner transformation</p>
+<div class="math notranslate nohighlight">
+\[H=-\frac{J}{2}\sum_{i}\left(c^{\dagger}_{i+1}c_{i}+c^{\dagger}_{i}c_{i+1}\right)
++J_{z}\sum_{i}n_{i} - J_{z}\sum_{i}n_{i+1}n_{i}\]</div>
+<ul class="simple">
+<li><p>XY Model</p></li>
+</ul>
+<p>The Hamiltonian is:</p>
+<div class="math notranslate nohighlight">
+\[H=\sum_{&lt;ij&gt;}\frac{J}{2}\left(S^{+}_{i}S^{-}_{j}+S^{-}_{i}S^{+}_{j}\right)\]</div>
+<p>To perform the Jordan-Wigner transformation</p>
+<div class="math notranslate nohighlight">
+\[H=-\frac{J}{2}\sum_{i}\left(c^{\dagger}_{i+1}c_{i}+c^{\dagger}_{i}c_{i+1}\right)\]</div>
+</div>
+</div>
+<div class="section" id="band-structure">
+<h2>2.3. Band Structure<a class="headerlink" href="#band-structure" title="Permalink to this headline">¶</a></h2>
+<p>In solid-state physics, the electronic band structure (or simply band structure)
+of a solid describes the range of energies that an electron within the solid
+may have (called energy bands, allowed bands, or simply bands) and ranges of
+energy that it may not have.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="_images/bs.png"><img alt="_images/bs.png" src="_images/bs.png" style="width: 320.0px; height: 240.0px;" /></a>
+</div>
+<p>TODO</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="user_scf.html" class="btn btn-neutral float-right" title="3. Hartree-Fock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="user_molecular_system.html" class="btn btn-neutral float-left" title="1. Molecular System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Yilin Zhao
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

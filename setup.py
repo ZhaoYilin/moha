@@ -1,13 +1,10 @@
-from distutils.core import setup
-
-from glob import glob,iglob
-
+import setuptools
 import os
 import sys
 import platform
 
-
-setup(name='moha',
+setuptools.setup(
+    name='moha',
     version='1.0.0',
     description='A QM package',
     url='https://zhaoyilin.github.io/moha',
