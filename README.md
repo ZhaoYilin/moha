@@ -1,9 +1,3 @@
-<div align="left">
-  <img src="https://github.com/ZhaoYilin/moha/blob/master/sphinx/pictures/moha.png"
-       height="100px"/>
-</div>
-
-
 MOHA
 ==================================
 
