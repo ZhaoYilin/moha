@@ -21,7 +21,7 @@ Installation
   - numpy 1.13.1 
   - scipy 0.19.1  
 
-* Compile
+* Compile from source
 
       git clone https://github.com/ZhaoYilin/moha.git
       cd moha
