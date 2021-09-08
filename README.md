@@ -1,9 +1,3 @@
-<div align="left">
-  <img src="https://github.com/ZhaoYilin/moha/blob/master/sphinx/pictures/moha.png"
-       height="100px"/>
-</div>
-
-
 MOHA
 ==================================
 
@@ -21,11 +15,20 @@ Installation
   - numpy 1.13.1 
   - scipy 0.19.1  
 
-* Compile
+* Compile from source
 
       git clone https://github.com/ZhaoYilin/moha.git
       cd moha
       python setup.py install --user
+      
+* From pypi
+
+      pip install moha  
+  
+* Using pip to install python package on GitHub
+
+      pip install git+https://github.com/ZhaoYilin/moha
+
   
   
   
