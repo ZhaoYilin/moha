@@ -573,7 +573,7 @@ https://zhaoyilin.github.io/moha/
 The purpose of this log file is to track the progress and quality of a
 computation. 
 
-================================================================================""" % ('moha.__version__')
+================================================================================""" % (moha.__version__)
 
 
 foot_banner = """
@@ -582,7 +582,7 @@ foot_banner = """
 End of the MOHA program.
 
 Thank you for using MoHa %s!
-================================================================================""" % ('moha.__version__')
+================================================================================""" % (moha.__version__)
 
 timer = TimerGroup()
 log = ScreenLog('MOHA', 'moha.__version__', head_banner, foot_banner, timer)
