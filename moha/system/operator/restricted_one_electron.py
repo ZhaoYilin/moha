@@ -1,6 +1,6 @@
 from moha.system.operator.base import BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set import GeneralBasisSet
+from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
 
 
@@ -238,17 +238,17 @@ class RestrictedOverlapOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.overlap import overlap
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))     
         for i,oi in enumerate(basis_set.bases):
@@ -335,17 +335,17 @@ class RestrictedKineticOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.kinetic import kinetic
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))     
         for i,oi in enumerate(basis_set.bases):
@@ -435,20 +435,20 @@ class RestrictedNuclearAttractionOperator(RestrictedOneElectronOperator):
         moleucle : Molecule
             Molecule instance.
 
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
             If molecule parameter is not a Molecule instance.
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.nuclear_attraction import nuclear_attraction
         if not isinstance(molecule,Molecule):
             raise TypeError("molecule parameter must be a Molecule instance")
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))     
         for i,oi in enumerate(basis_set.bases):
@@ -536,8 +536,8 @@ class RestrictedMultipoleMomentOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         *args
             Arguments for multipole moment
@@ -545,11 +545,11 @@ class RestrictedMultipoleMomentOperator(RestrictedOneElectronOperator):
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.multipole_moment import multipole_moment
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))     
         for i,oi in enumerate(basis_set.bases):
@@ -636,8 +636,8 @@ class RestrictedDifferentialOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         *args
             Arguments for multipole moment.
@@ -645,11 +645,11 @@ class RestrictedDifferentialOperator(RestrictedOneElectronOperator):
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.differential import differential
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))
         for i,oi in enumerate(basis_set.bases):
@@ -736,17 +736,17 @@ class RestrictedLinearMomentumOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.linear_momentum import linear_momentum
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))
         integral = integral.astype(np.complex)
@@ -834,17 +834,17 @@ class RestrictedAngularMomentumOperator(RestrictedOneElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         from moha.system.integral.angular_momentum import angular_momentum
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")    
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
         nspatial = basis_set.size
         integral = np.zeros((nspatial,nspatial))
         integral = integral.astype(np.complex)

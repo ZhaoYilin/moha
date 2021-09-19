@@ -1,5 +1,5 @@
 from moha.system.wavefunction.base import BaseWaveFunction
-from moha.posthf.ci.ci_basis_set import CIBasisSet
+from moha.system.basis_set.ci_basis_set import CIBasisSet
 import numpy as np 
 
 class CIWaveFunction(BaseWaveFunction):

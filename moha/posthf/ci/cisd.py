@@ -1,6 +1,6 @@
-from moha.posthf.ci.ci_basis_set import CIBasisSet
-from moha.posthf.ci.ci_hamiltonian import RestrictedCIHamiltonian
-from moha.posthf.ci.ci_wavefunction import CIWaveFunction
+from moha.system.basis_set.ci_basis_set import CIBasisSet
+from moha.system.hamiltonian.ci_hamiltonian import RestrictedCIHamiltonian
+from moha.system.wavefunction.ci_wavefunction import CIWaveFunction
 from moha.io.log import log,timer
 import numpy as np
 import copy

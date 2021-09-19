@@ -1,11 +1,11 @@
-from moha.posthf.ci.ci_basis import SlaterDeterminant
-from moha.hf.hf_wavefunction import HFWaveFunction
-from moha.system.basis_set import GeneralBasisSet
+from moha.system.basis.slater_determinant import SlaterDeterminant
+from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+from moha.system.basis_set.base import BaseBasisSet
 import numpy as np
 import copy
 import itertools
 
-class CIBasisSet(GeneralBasisSet):
+class CIBasisSet(BaseBasisSet):
     """Configuration interaction basis set.
 
     Attributes
@@ -21,7 +21,6 @@ class CIBasisSet(GeneralBasisSet):
 
     bases : list
         A list of basis.
-
 
     Methods
     -------
@@ -73,7 +72,25 @@ class CIBasisSet(GeneralBasisSet):
         self.assign_reference(reference)
         self.assign_truncation(truncation)
         self.generate_basis_set(truncation)
-    
+
+    def append_basis(self,basis):
+        """Add one basis to the basis set.
+
+        Parameters
+        ----------
+        basis
+            Basis instance.
+
+        Raises
+        ------
+        TypeError
+            If orb is not a SlaterDeterminant instance.
+        """
+        if not isinstance(basis, SlaterDeterminant):
+            raise TypeError("Basis must be a SlaterDeterminant instance")
+        self.size += 1
+        self.bases.append(basis)  
+
     def assign_reference(self,reference):
         """Assign reference Hartree Fock wavefunction.
 

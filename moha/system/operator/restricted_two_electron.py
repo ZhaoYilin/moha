@@ -1,6 +1,6 @@
 from moha.system.operator.base import BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set import GeneralBasisSet
+from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
 
 class RestrictedTwoElectronOperator(BaseOperator):
@@ -219,18 +219,18 @@ class RestrictedElectronRepulsionOperator(RestrictedTwoElectronOperator):
 
         Parameters
         ----------
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """        
         from moha.system.integral.electron_repulsion import electron_repulsion
         from moha.system.auxiliary import eint
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance")       
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance")       
         nspatial = basis_set.size
         integral_list = []     
         integral = np.zeros((nspatial,nspatial,nspatial,nspatial))

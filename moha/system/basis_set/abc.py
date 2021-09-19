@@ -1,10 +1,9 @@
-#from moha.system.basis import GaussianOrbital
-#from moha.posthf.ci.basis import SlaterDeterminant
+from abc import ABC,abstractmethod,abstractproperty
 
-__all__ = ['GeneralBasisSet']
+__all__ = ['ABCBasisSet']
 
-class GeneralBasisSet(object):
-    """General basis set.
+class ABCBasisSet(ABC):
+    """Abstract basis set.
     
     Attributes
     ----------
@@ -19,6 +18,8 @@ class GeneralBasisSet(object):
     __init__(self,size=0,bases=[])
         Initialize the basis set.
 
+    Abstract Methods
+    ----------------
     assign_size(self,size)
         Assign size to the basis set.
     
@@ -42,6 +43,7 @@ class GeneralBasisSet(object):
         self.assign_size(size)
         self.assign_bases(bases)
     
+    @abstractmethod
     def assign_size(self,size):
         """Assign size to the basis set.
 
@@ -52,18 +54,12 @@ class GeneralBasisSet(object):
 
         Raises
         ------
-        TypeError
-            If size of the basis set is not an integer.
-
-        ValueError
-            If size of the basis set is not a positive number.        
+        NotImplementedError
+            If called.
         """
-        if not isinstance(size, int):
-            raise TypeError("Size of the basis set must be an integer")
-        if size < 0:
-            raise ValueError("Size of the basis set must be a none negative number")
-        self.size = size
+        raise NotImplementedError        
     
+    @abstractmethod
     def assign_bases(self,bases):
         """Assign bases to the basis set.
 
@@ -71,16 +67,15 @@ class GeneralBasisSet(object):
         ----------
         bases : list
             A list of basis.
-        
+
         Raises
         ------
-        TypeError
-            If bases is not a list.
+        NotImplementedError
+            If called.
         """
-        if not isinstance(bases, list):
-            raise TypeError("Bases must be a list")
-        self.bases = bases
+        raise NotImplementedError        
 
+    @abstractmethod
     def append_basis(self,basis):
         """Add one basis to the basis set.
 
@@ -91,10 +86,7 @@ class GeneralBasisSet(object):
         
         Raises
         ------
-        TypeError
-            If orb is not a GaussianOrbital instance.
-        """    
-        #if not isinstance(basis, (GaussianOrbital,SlaterDeterminant)):
-        #    raise TypeError("Basis must be a GaussianOrbital instance")
-        self.size += 1
-        self.bases.append(basis)
+        NotImplementedError
+            If called.
+        """
+        raise NotImplementedError        

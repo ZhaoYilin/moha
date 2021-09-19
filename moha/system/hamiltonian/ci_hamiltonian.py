@@ -1,6 +1,6 @@
 from moha.system.hamiltonian.base import BaseHamiltonian
-from moha.posthf.ci.ci_basis import SlaterDeterminant
-from moha.posthf.ci.ci_basis_set import CIBasisSet
+from moha.system.basis.slater_determinant import SlaterDeterminant
+from moha.system.basis_set.ci_basis_set import CIBasisSet
 import numpy as np
 import copy
 import itertools
@@ -17,7 +17,7 @@ class RestrictedCIHamiltonian(object):
         Hartree Fock wavefunction.
 
     ci_basis_set
-        Hartree Fock calculation results.
+        Configuration interaction basis set.
     
     h1e : np.ndarray
         One electron integral.
@@ -71,7 +71,7 @@ class RestrictedCIHamiltonian(object):
             Hartree Fock wavefunction.
 
         ci_basis_set
-            Hartree Fock calculation results.
+            Configuration interaction basis set.
         """        
         self.assign_hamiltonian(ham)
         self.assign_wavefunction(wfn)
@@ -104,7 +104,7 @@ class RestrictedCIHamiltonian(object):
         Parameters
         ----------
         ci_basis_set
-            CI basis set.
+            Configuration interaction basis set.
         """
         self.ci_basis_set = ci_basis_set
         
@@ -145,7 +145,7 @@ class RestrictedCIHamiltonian(object):
         Parameters
         ----------
         ci_basis_set : CIBasisSet
-            A CI Basis Set instance.
+            Configuration interaction basis set.
 
         Raises
         ------

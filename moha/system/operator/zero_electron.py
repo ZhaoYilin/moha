@@ -1,6 +1,6 @@
 from moha.system.operator.base import BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set import GeneralBasisSet
+from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
 
 class NuclearRepulsionOperator(BaseOperator):
@@ -78,19 +78,19 @@ class NuclearRepulsionOperator(BaseOperator):
         moleucle : Molecule 
             Molecule instance.
 
-        basis_set : GeneralBasisSet
-            General basis set instance.
+        basis_set : HFBasisSet
+            Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
             If molecule parameter is not a Molecule instance.
-            If basis_set parameter is not a GeneralBasisSet instance.
+            If basis_set parameter is not a HFBasisSet instance.
         """
         if not isinstance(molecule,Molecule):
             raise TypeError("molecule parameter must be a Molecule instance.")        
-        if not isinstance(basis_set,GeneralBasisSet):
-            raise TypeError("basis_set parameter must be a GeneralBasisSet instance.")        
+        if not isinstance(basis_set,HFBasisSet):
+            raise TypeError("basis_set parameter must be a HFBasisSet instance.")        
         nspatial = basis_set.size
         E = 0.
         for i,A in enumerate(molecule.atoms):

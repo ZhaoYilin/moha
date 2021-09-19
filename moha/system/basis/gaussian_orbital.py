@@ -1,4 +1,4 @@
-from .auxiliary import fact2
+from moha.system.auxiliary import fact2
 import numpy as np
 import copy
 
