@@ -1,3 +1,8 @@
+# Periodic table used in MoHa
+# Default unit using in the peridoic table
+# mass: amu
+# radius: pm
+
 class Element(object):
     """Represents an element from the periodic table.
                
