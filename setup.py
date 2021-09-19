@@ -1,7 +1,5 @@
 from setuptools import setup,find_packages
 
-from glob import glob
-
 import os
 import sys
 import platform
