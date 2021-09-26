@@ -213,7 +213,7 @@ class ScreenLog(object):
             The line consists a repetition of this character.
         """
         self(char*self.width)
-
+    
     def center(self, *words, **kwargs):
         """Print centered text, optionally with an edge surrounding the text.
 
@@ -302,6 +302,7 @@ class ScreenLog(object):
             self('Current Dir:   &' + os.getcwd())
             self('Command line:  &' + ' '.join(sys.argv))
             self.blank()
+            self.hline(char='=')
 
 
 class ProgressBar(object):
