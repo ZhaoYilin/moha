@@ -19,7 +19,13 @@ class HFWaveFunction(BaseWaveFunction):
         Basis set of the wavefunction.
     
     coefficients : np.ndarray
-        Coefficientss of the wavefunction.
+        Coefficients of the wavefunction.
+    
+    density_matrix : np.ndarray
+        Density matrix of the wavefunction.
+    
+    orbital_energies : np.ndarray
+        Orbital energies of the wavefunction.
 
     Properties
     ----------
@@ -32,7 +38,7 @@ class HFWaveFunction(BaseWaveFunction):
     spin : int
         Spin of the wavefunction
     
-    seniority: int
+    seniority : int
         Seniority of the wavefunction
 
     Methods
@@ -54,9 +60,15 @@ class HFWaveFunction(BaseWaveFunction):
     
     assign_coefficients(self, coefficients)
         Assign coefficients of the wavefunction.
+    
+    assign_density_matrix(self, density_matrix)
+        Assign density matrix of the wavefunction.
+    
+    assign_orbital_energies(self, orbital_energies)
+        Assign orbital energies of the wavefunction.
     """
 
-    def __init__(self,nelec,nspatial,occ={},basis_set=None,coefficients=None):
+    def __init__(self,nelec,nspatial,occ={},basis_set=None,coefficients=None,density_matrix=None,orbital_energies=None):
         """Initialize the wavefunction.
 
         Parameters
@@ -70,16 +82,22 @@ class HFWaveFunction(BaseWaveFunction):
         occ : dict
             Occupation number of the wavefunction.
 
-        dtype : {float, complex, np.float64, np.complex128, None}
-            Numpy data type.
-            Default is `np.float64`.
-        
-        memory : {float, int, str, None}
-            Memory available for the wavefunction.
-            Default does not limit memory usage (i.e. infinite).
+        basis_set
+            Basis set of the wavefunction.
 
+        coefficients : np.ndarray
+            Parameters of the wavefunction.
+        
+        density_matrix : np.ndarray
+            Density matrix of the wavefunction.
+        
+        orbital_energies : np.ndarray
+            Orbital energies of the wavefunction.
         """
-        super().__init__(nelec,nspatial,occ,basis_set,coefficients)
+        super().__init__(nelec,nspatial,occ)
+        self.assign_basis_set(basis_set)
+        self.assign_coefficients(coefficients)
+        self.assign_orbital_energies(orbital_energies)
 
     @property
     def configuration(self):
@@ -151,7 +169,7 @@ class HFWaveFunction(BaseWaveFunction):
 
         Parameters
         ----------
-        coefficients
+        coefficients : np.ndarray
             Parameters of the wavefunction.
 
         Raises
@@ -159,6 +177,41 @@ class HFWaveFunction(BaseWaveFunction):
         """
         if coefficients is None:
             coefficients = np.zeros((self.nspatial,self.nspatial))
-        elif not isinstance(self.coefficients,np.ndarray):
+        elif not isinstance(coefficients,np.ndarray):
             raise TypeError("Coefficients is not a np.ndarray instance.")
         self.coefficients = coefficients
+    
+    def assign_density_matrix(self, density_matrix):
+        """ Assign density matrix of the wavefunction.
+
+        Parameters
+        ----------
+        density_matrix : np.ndarray
+            Density matrix of the wavefunction.
+
+        Raises
+        ------
+        """
+        #if density_matrix is None:
+        #    density_matrix = np.zeros((self.nspatial,self.nspatial))
+        #elif not isinstance(density_matrix,np.ndarray):
+        #    raise TypeError("Density matrix is not a np.ndarray instance.")
+        self.density_matrix = density_matrix
+    
+    def assign_orbital_energies(self, orbital_energies):
+        """Assign orbital energies of the wavefunction.
+
+        Parameters
+        ----------
+        orbital_energies : np.ndarray
+            Orbital energies of the wavefunction.
+
+        Raises
+        ------
+        """
+        if orbital_energies is None:
+            orbital_energies = np.zeros(self.nspatial)
+        elif not isinstance(orbital_energies,np.ndarray):
+            raise TypeError("Orbital energies is not a np.ndarray instance.")
+        self.orbital_energies = orbital_energies
+        

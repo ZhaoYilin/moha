@@ -71,13 +71,11 @@ class BaseWaveFunction(ABCWaveFunction):
         occ : dict
             Occupation number of the wavefunction.
 
-        dtype : {float, complex, np.float64, np.complex128, None}
-            Numpy data type.
-            Default is `np.float64`.
+        basis_set
+            Basis set of the wavefunction.
 
-        memory : {float, int, str, None}
-            Memory available for the wavefunction.
-            Default does not limit memory usage (i.e. infinite).
+        coefficients : np.ndarray
+            Parameters of the wavefunction.
         """
         self.assign_nelec(nelec)
         self.assign_nspatial(nspatial)
