@@ -113,8 +113,7 @@ class Molden(object):
         occ_alpha = [1]*self.wf.occ['alpha']+[0]*(self.wf.nspatial-self.wf.occ['alpha'])
         occ_beta = [1]*self.wf.occ['beta']+[0]*(self.wf.nspatial-self.wf.occ['beta'])
         handler.write("Sym=%s\n"%('A'))
-        handler.write("Ene=%f\n"%(0.0))
-        #handler.write("Ene=%f\n"%(self.wf.eorbitals[i]))
+        handler.write("Ene=%f\n"%(self.wf.orbital_energies[i]))
         handler.write("Spin=%s\n"%('Alpha'))
         handler.write("Occup=%f\n"%(occ_alpha[i]+occ_beta[i]))
 
