@@ -198,6 +198,10 @@ class DIISSCFSolver(object):
             if Iter == maxiter:
                 raise Exception("Maximum number of SCF cycles exceeded.")
 
+        self.wfn.assign_coefficients(C)
+        self.wfn.assign_density_matrix(D)
+        self.wfn.assign_orbital_energies(Eorbs)
+        
         log.hline()
         log('SCF Results'.format())
         log.hline()
@@ -206,14 +210,11 @@ class DIISSCFSolver(object):
         log('Total Energy = {}'.format(Eelec+Enuc))
         log.hline()
 
-        self.wfn.assign_coefficients(C)
-
         results = {
         "success": True,
         "electronic_energy": Eelec,
         "nuclear_energy": Enuc,
-        "total_energy": Eelec+Enuc,
-        "orbital_energies": Eorbs
+        "total_energy": Eelec+Enuc
         }
         return results
     
