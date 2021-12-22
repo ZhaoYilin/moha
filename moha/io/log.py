@@ -362,7 +362,7 @@ class Timer(object):
         """Mark start of a function."""
         if self._depth == 0:
             assert self._start is None
-            self._start = time.clock()
+            self._start = time.time()
         self._depth += 1
 
     def stop(self):
@@ -371,7 +371,7 @@ class Timer(object):
             assert self._start is not None
             self._depth -= 1
         if self._depth == 0:
-            self.cpu += time.clock() - self._start
+            self.cpu += time.time() - self._start
             self._start = None
 
 
