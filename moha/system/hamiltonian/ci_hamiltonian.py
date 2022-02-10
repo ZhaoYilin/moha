@@ -5,8 +5,8 @@ import numpy as np
 import copy
 import itertools
 
-class RestrictedCIHamiltonian(object):
-    """Restricted configuration interaction Hamiltonian for a Schrodinger equation.
+class CIHamiltonian(object):
+    """Configuration interaction Hamiltonian for a Schrodinger equation.
 
     Attributes
     ----------

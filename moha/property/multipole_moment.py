@@ -1,6 +1,6 @@
 import numpy as np
 from moha.io.log import log,timer
-from moha.system.operator import RestrictedMultipoleMomentOperator
+from moha.system.operator import MultipoleMomentOperator
 
 class MultipoleMoment(object):
     """Multipole momnet solver.
@@ -95,7 +95,7 @@ class MultipoleMoment(object):
         mms = []
 
         for lmn in lmns:
-            mm_matrix = RestrictedMultipoleMomentOperator.build(self.basis_set,lmn,coordinate).integral
+            mm_matrix = MultipoleMomentOperator.build(self.basis_set,lmn,coordinate).integral
             mm = np.dot(D,mm_matrix)
             mm = np.trace(mm,axis1=0,axis2=1)
             mms.append(mm)

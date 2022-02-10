@@ -1,5 +1,5 @@
 from moha.system.basis_set.ci_basis_set import CIBasisSet
-from moha.system.hamiltonian.ci_hamiltonian import RestrictedCIHamiltonian
+from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
 from moha.system.wavefunction.ci_wavefunction import CIWaveFunction
 from moha.io.log import log,timer
 import numpy as np
@@ -78,7 +78,7 @@ class CISDSolver(object):
 
 
         ci_basis = copy.deepcopy(CIBasisSet(wfn,[0,1,2]))
-        H = RestrictedCIHamiltonian(ham,wfn,ci_basis)
+        H = CIHamiltonian(ham,wfn,ci_basis)
         ci_matrix = H.generate_matrix(ci_basis)
         e_ci, vec_ci = np.linalg.eigh(ci_matrix)
         E_ci_elec = e_ci[0]
