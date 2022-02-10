@@ -76,10 +76,10 @@ class MP2Solver(object):
         nspatial = ham.nspatial
         occ = wfn.occ
         C = wfn.coefficients
-        eorbitals = hf_results['orbital_energies']
+        eorbitals = wfn.orbital_energies
 
         Emp2 = 0.0
-        if isinstance(ham,RestrictedChemicalHamiltonian):
+        if isinstance(ham,ChemicalHamiltonian):
             ham.operators['electron_repulsion'].basis_transformation(C)
             Eri = ham.operators['electron_repulsion'].integral
             for i in range(occ['alpha']):

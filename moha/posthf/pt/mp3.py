@@ -76,7 +76,7 @@ class MP3Solver(object):
         nspatial = ham.nspatial 
         occ = wfn.occ
         C = wfn.coefficients
-        eorbitals = hf_results['orbital_energies']
+        eorbitals = wfn.orbital_energies
         
         Emp2 = 0.0
         ham.operators['electron_repulsion'].basis_transformation(C)

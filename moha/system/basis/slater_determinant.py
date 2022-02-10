@@ -67,7 +67,7 @@ class SlaterDeterminant(object):
         Parameters
         ----------
         configuration : dict
-            Binary representation of the Slater determinant.
+            Representation of the Slater determinant.
         """
         self.assign_configuration(configuration)
 
@@ -111,7 +111,7 @@ class SlaterDeterminant(object):
             if item==1:
                 occ_beta.append(index)
         return {"alpha":occ_alpha,"beta":occ_beta}
-    
+
     def assign_configuration(self,configuration):
         """Assign configuration to the Slater determinant.
         

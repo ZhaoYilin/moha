@@ -97,7 +97,7 @@ class CCSD_TSolver(object):
         C = wfn.coefficients
         nspin = ham.nspin
         #Transfer Fock integral from spatial to spin basis
-        fs = spinfock(hf_results['orbital_energies'])
+        fs = spinfock(wfn.orbital_energies)
         #Transfer electron repulsion integral from atomic basis
         #to molecular basis
         ham.operators['electron_repulsion'].basis_transformation(C)

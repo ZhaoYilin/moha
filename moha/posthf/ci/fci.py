@@ -1,5 +1,5 @@
 from moha.system.basis_set.ci_basis_set import CIBasisSet
-from moha.system.hamiltonian.ci_hamiltonian import RestrictedCIHamiltonian
+from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
 from moha.io.log import log,timer
 import numpy as np
 import copy
@@ -76,7 +76,7 @@ class FullCISolver(object):
         vir = wfn.nspin - occ        
         excitation_level = list(range(min(occ,vir)+1))
         ci_basis = CIBasisSet(wfn,excitation_level)
-        H = RestrictedCIHamiltonian(ham,wfn,ci_basis)
+        H = CIHamiltonian(ham,wfn,ci_basis)
         ci_matrix = H.generate_matrix(ci_basis)
         e_ci, vec_ci = np.linalg.eigh(ci_matrix)
         E_ci_elec = e_ci[0]
