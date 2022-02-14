@@ -1,3 +1,4 @@
+from moha.symmetry.symmetry import SZ
 from moha.system.operator import *
 from moha.system.hamiltonian.base import BaseHamiltonian
 from moha.io.iofcidump import FCIDUMP
@@ -129,9 +130,15 @@ class ChemicalHamiltonian(BaseHamiltonian):
 
         basis_set : Basis Set instance
             Instance of one electron basis set
-        """
-        nspatial = fcidump.n_sites
-        ham = cls(nspatial)
+        """       
+        self.fcidump = fcidump
+        self.orb_sym = fcidump.orb_sym
+        self.n_syms = max(self.orb_sym) + 1
+        self.nspatial = fcidump.n_sites
+        self.vacuum = SZ(0, 0, 0)
+        self.target = SZ(fcidump.n_elec, fcidump.twos, fcidump.ipg)
+        
+        ham = cls(self.nspatial)
         
         #build operators
         Enuc = NuclearRepulsionOperator(fcidump.const_e,OperatorNames.Enuc)
