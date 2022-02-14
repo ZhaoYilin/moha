@@ -1,3 +1,4 @@
+from moha.system.operator.base import OperatorNames
 from moha.system.basis_set.ci_basis_set import CIBasisSet
 from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
 from moha.system.wavefunction.ci_wavefunction import CIWaveFunction
@@ -84,7 +85,7 @@ class CISDSolver(object):
         E_ci_elec = e_ci[0]
         E_hf_elec = hf_results['electronic_energy']
         E_corr = E_ci_elec - E_hf_elec
-        E_ci_tot = E_ci_elec + ham.operators['nuclear_repulsion'].integral
+        E_ci_tot = E_ci_elec + ham.operators[OperatorNames.Enuc]
         
         #Build the ci wavefunction.
         ci_wfn = CIWaveFunction(nelec,nspatial,{},ci_basis,vec_ci[0])

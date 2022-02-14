@@ -1,5 +1,6 @@
 from moha.hf.auxiliary import *
 from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+from moha.system.operator.base import OperatorNames 
 from moha.io.log import log,timer
 
 import copy
@@ -98,14 +99,14 @@ class PlainSCFSolver(object):
         D_conv = self.D_conv
 
         #Form the core Hamiltonian
-        Hcore = ham.operators['kinetic'].integral + ham.operators['nuclear_attraction'].integral
+        Hcore = ham.operators[OperatorNames.Hcore]
         #Build the orthogonalization matrix
-        X = orthogonalization_matrix(ham.operators['overlap'].integral)
+        X = orthogonalization_matrix(ham.operators[OperatorNames.S])
         #Initial guess of density matrix
         D = np.zeros((Norb,Norb))
 
         #iteration section
-        Enuc = ham.operators['nuclear_repulsion'].integral
+        Enuc = ham.operators[OperatorNames.Enuc]
         RMS = 1.0
         Eold = 0.0
         log.hline()
@@ -113,7 +114,7 @@ class PlainSCFSolver(object):
         log.hline()
         for Iter in range(1,maxiter+1):
             Iter += 1
-            G = G_matrix(D,ham.operators['electron_repulsion'].integral,Norb)
+            G = G_matrix(D,ham.operators[OperatorNames.Eri],Norb)
             F = F_matrix(Hcore,G,Norb)
             Eorbs,C = C_matrix(F,X,Norb)
             OLDD = D

@@ -1,92 +1,79 @@
-from moha.system.operator.base import BaseOperator
+from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
 from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
-
 
 class OneElectronOperator(BaseOperator):
     """One electron operator class.
 
     Attributes
     ----------
-    name : str
-        Name of the operator.
-
-    nspatial : int
-        Number of the spatial orbitals.
-
-    nelectron : int
-        Number of electrons.
-
     integral : np.ndarray
         Integral of the operator.
+    
+    name : OperatorNames
+        Name of the operator.
 
     Property
     --------
+    npatial : int
+        Number of spatial orbitals.
+
     npsin : int
         Number of spin orbitals.
-
-    dtype : float64, complex128
-        Data type of the integrals.
 
     spin_orbital_basis_integral : np.ndarray
         Return integral matrix in spin orbitals basis.
 
     Methods
     -------
-    __init__(self,name,nspatial,nelectron=1,integral=None)
-        Initialize the Operator.
+    __init__(self, integral, name)
+        Initialize the operator
 
     assign_name(self,name)
         Assign name to the operator.
 
-    assign_nspatial(self,nspatial)
-        Assign number of spatial orbitals for the operator.
-
-    assign_nelectron(self,nelectron)
-        Assign number of elctrons involved in the integral.
-
-    assign_integral(self,integral)
-        Assign integral value for the operator.
-
     basis_transformation(self,matrix):
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
-
+        
+        name : OperatorNames
+            Name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
-    @property
-    def dtype(self):
-        """Return the data type of the integrals.
-
+        super().__init__(integral, name)
+    
+    @property        
+    def nspatial(self):
+        """Number of spatial orbitals.
+        
         Returns
         -------
-        dtype : float64, complex128
-            Data type of the integrals.
-
+        nspatial : int
+            Number of spatial orbitals.
         """
-        return self.integral.dtype
-
+        return self.shape[0]
+    
+    @property        
+    def nspin(self):
+        """Number of spin orbitals.
+        
+        Returns
+        -------
+        nspin : int
+            Number of spin orbitals.
+        """
+        return self.shape[0]*2
+    
     @property
     def spin_orbital_basis_integral(self):
-        """Return value matrix in spin orbitals basis.
+        """Return integral in spin orbitals basis.
         
         Returns
         -------
@@ -98,36 +85,65 @@ class OneElectronOperator(BaseOperator):
         for i in range(nspin): 
             for j in range(nspin): 
                 if i%2==j%2:
-                    integral[i,j]  = self.integral[int(i/2),int(j/2)]
+                    integral[i,j]  = self[int(i/2),int(j/2)]
         return integral
-
-    def assign_integral(self,integral):
-        """Assign integral value for the restricted operator.
+    
+    @classmethod
+    def zeros(cls, shape, dtype=float):
+        """generate instance with zeros elements ndarray.
 
         Parameters
         ----------
-        integral :
-            Integral value for the operator.
+        shape : tuple/list
+            Shape of the ndarray.
 
         Raises
         ------
-        TypeError
-            If integrals are not provided as a numpy array of dtype float/complex.
         ValueError
-            If integrals are not given as a (two-dimensional) square matrix.
+            If shape is not two dimension.
         """
-        if integral is None:
-            self.integral = np.zeros((self.nspatial,self.nspatial))
-        if not (
-            isinstance(integral, np.ndarray)
-            and integral.dtype in [float, complex]
-        ):
-            raise TypeError(
-                "Integrals must be given as a numpy array with dtype of float or complex."
-            )
-        if not (integral.ndim == 2 and integral.shape[0] == integral.shape[1]):
-            raise ValueError("One-electron integrals be a (two-dimensional) square matrix.")            
-        self.integral = integral
+        if not len(shape)==2:
+            raise ValueError("Shape of the ndarray must be two dimension")
+        
+        super().zeros(shape, dtype=float)
+
+    @classmethod
+    def ones(cls, shape, dtype=float):
+        """generate instance with ones elements ndarray.
+
+        Parameters
+        ----------
+        shape : tuple/list
+            Shape of the ndarray.
+        
+        Raises
+        ------
+        ValueError
+            If shape is not two dimension.
+        """
+        if not len(shape)==2:
+            raise ValueError("Shape of the ndarray must be two dimension")
+
+        super().ones(shape, dtype=float)
+    
+    @classmethod
+    def random(cls, shape, dtype=float):
+        """generate instance with random elements ndarray.
+
+        Parameters
+        ----------
+        shape : tuple/list
+            Shape of the ndarray.
+        
+        Raises
+        ------
+        ValueError
+            If shape is not two dimension.
+        """
+        if not len(shape)==2:
+            raise ValueError("Shape of the ndarray must be two dimension")
+
+        super().random(shape, dtype=float)
 
     def basis_transformation(self,matrix):
         """Rotate orbitals with a transformation matrix.
@@ -154,13 +170,15 @@ class OneElectronOperator(BaseOperator):
             raise TypeError("Transformation matrix must be given as a numpy array.")
         if matrix.ndim != 2:
             raise ValueError("Transformation matrix must be two-dimensional.")
-        if matrix.shape[0] != self.integral.shape[0]:
+        if matrix.shape[0] != self.shape[0]:
             raise ValueError(
                 "Shape of the transformation matrix must match with the shape of the integrals."
             )
         
-        self.integral = np.einsum("ij,ia->aj", self.integral, matrix)
-        self.integral = np.einsum("aj,jb->ab", self.integral, matrix)
+        integral = np.einsum("ij,ia->aj", self, matrix)
+        integral = np.einsum("aj,jb->ab", integral, matrix)
+        self[:] = integral[:]
+        return self
 
 class OverlapOperator(OneElectronOperator):
     """Overlap operator class.
@@ -192,45 +210,27 @@ class OverlapOperator(OneElectronOperator):
     
     Methods
     -------
-    __init__(self,name,nspatial,nelectron=1,integra=None)
-        Initialize the Operator.
-
-    build(cls,molecule,basis_set)
-        Build the operator instance.
+    __init__(self, integral)
+        Initialize the operator
 
     assign_name(self,name)
         Assign name to the operator.
-
-    assign_nspatial(self,nspatial)
-        Assign number of spatial orbitals for the operator.
-
-    assign_nelectron(self,nelectron)
-        Assign number of elctrons involved in the integral.
-
-    assign_integral(self,integral)
-        Assign integral value for the operator.
     
     basis_transformation(self,matrix):
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.S):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
+        super().__init__(integral, name)
 
     @classmethod
     def build(cls,basis_set):
@@ -256,7 +256,7 @@ class OverlapOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = overlap(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('overlap',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.S)
         return operator
 
 class KineticOperator(OneElectronOperator):
@@ -310,24 +310,18 @@ class KineticOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.T):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
+        super().__init__(integral, name)
 
     @classmethod
     def build(cls,basis_set):
@@ -353,7 +347,7 @@ class KineticOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = kinetic(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('kinetic',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.T)
         return operator
 
 class NuclearAttractionOperator(OneElectronOperator):
@@ -407,25 +401,19 @@ class NuclearAttractionOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.V):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
+        super().__init__(integral, name)
+    
     @classmethod
     def build(cls,molecule,basis_set):
         """Build the nuclear repulsion operator.
@@ -457,7 +445,7 @@ class NuclearAttractionOperator(OneElectronOperator):
                     for atom in molecule.atoms:
                         integral[i][j] += -1*atom.number*nuclear_attraction(oi,oj,atom.coordinate)
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('nuclear_attraction',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.V)
         return operator
 
 class MultipoleMomentOperator(OneElectronOperator):
@@ -511,24 +499,18 @@ class MultipoleMomentOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.MM):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
+        super().__init__(integral, name)
 
     @classmethod
     def build(cls,basis_set,*args):
@@ -557,7 +539,7 @@ class MultipoleMomentOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = multipole_moment(oi,oj,args[0],args[1])
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('multipole_moment',nspatial,1,integral)
+        operator = cls(integral, OperatorNames.MM)
         return operator
 
 class DifferentialOperator(OneElectronOperator):
@@ -611,25 +593,19 @@ class DifferentialOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.Diff):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
+        super().__init__(integral, name)
+    
     @classmethod
     def build(cls,basis_set,*args):
         """Build the nuclear repulsion operator.
@@ -657,7 +633,7 @@ class DifferentialOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = differential(oi,oj,args[0])
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('differential',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.Diff)
         return operator
 
 class LinearMomentumOperator(OneElectronOperator):
@@ -711,25 +687,19 @@ class LinearMomentumOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.LM):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
+        super().__init__(integral, name)
+    
     @classmethod
     def build(cls,basis_set):
         """Build the nuclear repulsion operator.
@@ -755,7 +725,7 @@ class LinearMomentumOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = linear_momentum(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('linear_momentum',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.LM)
         return operator
 
 class AngularMomentumOperator(OneElectronOperator):
@@ -809,25 +779,19 @@ class AngularMomentumOperator(OneElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=1,integral=None):
+    def __init__(self, integral, name=OperatorNames.AM):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
+        super().__init__(integral, name)
+    
     @classmethod
     def build(cls,basis_set):
         """Build the nuclear repulsion operator.
@@ -853,5 +817,5 @@ class AngularMomentumOperator(OneElectronOperator):
                 if i>=j:
                     integral[i][j] = angular_momentum(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
-        operator = cls('angular_momentum',nspatial,1,integral)
+        operator = cls(integral,OperatorNames.AM)
         return operator

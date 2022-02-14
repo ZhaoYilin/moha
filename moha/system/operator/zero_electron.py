@@ -1,4 +1,4 @@
-from moha.system.operator.base import BaseOperator
+from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
 from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
@@ -48,38 +48,27 @@ class NuclearRepulsionOperator(BaseOperator):
     assign_integral(self,integral)
         Assign integral for the operator.
     """
-
-    def __init__(self,name,nspatial,nelectron=0,integral=None):
+    def __init__(self, integral, name=OperatorNames.Enuc):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
-
+        
+        name : OperatorNames
+            name of the operator.
         """
-        super().__init__(name,nspatial,nelectron,integral)
-
+        super().__init__(integral, name)
+    
     @classmethod
-    def build(cls,molecule,basis_set):
+    def build(cls,molecule):
         """Build the nuclear repulsion operator.
 
         Parameters
         ----------
         moleucle : Molecule 
             Molecule instance.
-
-        basis_set : HFBasisSet
-            Hatree Fock basis set instance.
 
         Raises
         ------
@@ -89,49 +78,11 @@ class NuclearRepulsionOperator(BaseOperator):
         """
         if not isinstance(molecule,Molecule):
             raise TypeError("molecule parameter must be a Molecule instance.")        
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance.")        
-        nspatial = basis_set.size
         E = 0.
         for i,A in enumerate(molecule.atoms):
             for j,B in enumerate(molecule.atoms):
                 if j>i:
                     E += (A.number*B.number)/molecule.bond_length(i,j)
-        operator = cls('nuclear_repulsion',nspatial,0,E)
+        operator = cls(E,OperatorNames.Enuc)
 
         return operator
-
-    @property
-    def dtype(self):
-        """Data type of the integrals.
-
-        Returns
-        -------
-        dtype : int,float
-            Data type of the integrals.
-
-        """
-        return self.integral.dtype
-
-    def assign_integral(self,integral):
-        """Assign integral value for the operator.
-
-        Parameters
-        ----------
-        integral : int, float
-            Integral value for the operator.
-
-        Raises
-        ------
-        TypeError
-            If value is not an integer or float number.
-        ValueError
-            If value is not none negative.
-        """
-        if integral is None:
-            self.integral = 0.0
-        if not isinstance(integral, (int,float)):
-            raise TypeError("Integral must be integer or float.")
-        if integral < 0:
-            raise ValueError("Integral must be none negative.")
-        self.integral = integral        

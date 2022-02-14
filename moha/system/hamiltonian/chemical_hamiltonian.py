@@ -1,7 +1,9 @@
-import numpy as np
 from moha.system.operator import *
 from moha.system.hamiltonian.base import BaseHamiltonian
+from moha.io.iofcidump import FCIDUMP
 from moha.io.log import timer
+
+import numpy as np
 
 __all__ = ['ChemicalHamiltonian']
 
@@ -66,28 +68,53 @@ class ChemicalHamiltonian(BaseHamiltonian):
         """
         nspatial = basis_set.size
         ham = cls(nspatial)
-        #build operators
-        nuclear_repulsion = NuclearRepulsionOperator.build(molecule,basis_set)
-        overlap = OverlapOperator.build(basis_set)
-        kinetic = KineticOperator.build(basis_set)
-        nuclear_attraction = NuclearAttractionOperator.build(molecule,basis_set)
-        electron_repulsion = ElectronRepulsionOperator.build(basis_set)
         
-        h1e_integral = kinetic.integral + nuclear_attraction.integral
-        g2e_integral = electron_repulsion.integral
-        h1e = OneElectronOperator('h1e',nspatial,nelectron=1,integral=h1e_integral)
-        g2e = TwoElectronOperator('g2e',nspatial,nelectron=2,integral=g2e_integral)
+        #build operators
+        Enuc = NuclearRepulsionOperator.build(molecule)
+        S = OverlapOperator.build(basis_set)
+        T = KineticOperator.build(basis_set)
+        V = NuclearAttractionOperator.build(molecule,basis_set)
+        Hcore = OneElectronOperator(T+V,OperatorNames.Hcore)
+        Eri = ElectronRepulsionOperator.build(basis_set)
+        
+        #assign operators to chemical hamiltonian
+        ham.assign_operator(Enuc)
+        ham.assign_operator(S)
+        ham.assign_operator(T)
+        ham.assign_operator(V)
+        ham.assign_operator(Hcore)
+        ham.assign_operator(Eri)
+
+        return ham
+    
+    @classmethod
+    @timer.with_section('Integral')
+    def from_numpy(cls,Enuc,S,h1e,g2e):
+        """Build the chemical hamiltonian
+
+        Parmeters
+        ---------
+        molecule : Molecule instance
+            Instance of molecule class
+
+        basis_set : Basis Set instance
+            Instance of one electron basis set
+        """
+        nspatial = h1e.shape[0]
+        ham = cls(nspatial)
+        
+        #build operators
+        Enuc = NuclearRepulsionOperator(Enuc,OperatorNames.Enuc)
+        S = OneElectronOperator(S,OperatorNames.S)
+        Hcore = OneElectronOperator(h1e,OperatorNames.Hcore)
+        Eri= ElectronRepulsionOperator(g2e,OperatorNames.Eri)
 
         #assign operators to chemical hamiltonian
-        ham.assign_operator(nuclear_repulsion)
-        ham.assign_operator(overlap)
-        ham.assign_operator(kinetic)
-        ham.assign_operator(nuclear_attraction)
-        ham.assign_operator(electron_repulsion)
+        ham.assign_operator(Enuc)
+        ham.assign_operator(S)
+        ham.assign_operator(Hcore)
+        ham.assign_operator(Eri)
         
-        ham.assign_operator(h1e)
-        ham.assign_operator(g2e)
-
         return ham
     
     @classmethod
@@ -107,14 +134,14 @@ class ChemicalHamiltonian(BaseHamiltonian):
         ham = cls(nspatial)
         
         #build operators
-        nuclear_repulsion = NuclearRepulsionOperator('nuclear_repulsion',nspatial,nelectron=0,integral=fcidump.const_e)
-        h1e = OneElectronOperator('h1e',nspatial,nelectron=1,integral=fcidump.h1e)
-        g2e = TwoElectronOperator('g2e',nspatial,nelectron=2,integral=fcidump.g2e)
-        
+        Enuc = NuclearRepulsionOperator(fcidump.const_e,OperatorNames.Enuc)
+        Hcore = OneElectronOperator(fcidump.h1e,OperatorNames.Hcore)
+        Eri= ElectronRepulsionOperator(fcidump.g2e,OperatorNames.Eri)
+
         #assign operators to chemical hamiltonian
-        ham.assign_operator(nuclear_repulsion)
-        ham.assign_operator(h1e)
-        ham.assign_operator(g2e)
+        ham.assign_operator(Enuc)
+        ham.assign_operator(Hcore)
+        ham.assign_operator(Eri)
         
         return ham
 

@@ -1,4 +1,5 @@
 from moha.system.hamiltonian.chemical_hamiltonian import *
+from moha.system.operator.base import OperatorNames
 from moha.posthf.pt.auxiliary import *
 from moha.io.log import log, timer
 
@@ -79,8 +80,8 @@ class MP3Solver(object):
         eorbitals = wfn.orbital_energies
         
         Emp2 = 0.0
-        ham.operators['electron_repulsion'].basis_transformation(C)
-        Eri = ham.operators['electron_repulsion'].integral
+        Eri = ham.operators[OperatorNames.Eri]
+        Eri.basis_transformation(C)
         for i in range(occ['alpha']):
             for j in range(occ['alpha']):
                 for a in range(occ['alpha'],nspatial):
@@ -89,7 +90,7 @@ class MP3Solver(object):
                         /(eorbitals[i] + eorbitals[j] -eorbitals[a] - eorbitals[b])
 
         Emp3 = 0.0
-        Eri = ham.operators['electron_repulsion'].double_bar
+        Eri = ham.operators[OperatorNames.Eri].double_bar
         for i in range(occ['alpha']):
             for j in range(occ['alpha']):
                 for k in range(occ['alpha']):

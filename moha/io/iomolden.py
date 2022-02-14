@@ -4,15 +4,15 @@ import sys
 class Molden(object):
     """
     """
-    def __init__(self,filename,mol,orbs,wf):
+    def __init__(self,filename,mol,orbs,wfn):
         """
         """
         self.filename = filename
         self.mol = mol
         self.orbs = orbs
-        self.wf = wf
-
-    def dump_molden(self):
+        self.wfn = wfn
+    
+    def dump(self):
         """write molden input file
         
         **Arguments:**
@@ -54,7 +54,7 @@ class Molden(object):
 
     def write_MO(self,handler):
         handler.write("[MO]\n")
-        for i in range(self.wf.nspatial):
+        for i in range(self.wfn.nspatial):
             self.write_MO_header(handler,i)
             self.write_MO_coefficient(handler,i)
 
@@ -110,13 +110,13 @@ class Molden(object):
             print('error')
 
     def write_MO_header(self,handler,i):
-        occ_alpha = [1]*self.wf.occ['alpha']+[0]*(self.wf.nspatial-self.wf.occ['alpha'])
-        occ_beta = [1]*self.wf.occ['beta']+[0]*(self.wf.nspatial-self.wf.occ['beta'])
+        occ_alpha = [1]*self.wfn.occ['alpha']+[0]*(self.wfn.nspatial-self.wfn.occ['alpha'])
+        occ_beta = [1]*self.wfn.occ['beta']+[0]*(self.wfn.nspatial-self.wfn.occ['beta'])
         handler.write("Sym=%s\n"%('A'))
-        handler.write("Ene=%f\n"%(self.wf.orbital_energies[i]))
+        handler.write("Ene=%f\n"%(self.wfn.orbital_energies[i]))
         handler.write("Spin=%s\n"%('Alpha'))
         handler.write("Occup=%f\n"%(occ_alpha[i]+occ_beta[i]))
 
     def write_MO_coefficient(self,handler,i):
-        for j in range(self.wf.nspatial):
-            handler.write("{} \t {} \n".format(j+1,self.wf.coefficients[j,i]))
+        for j in range(self.wfn.nspatial):
+            handler.write("{} \t {} \n".format(j+1,self.wfn.coefficients[j,i]))

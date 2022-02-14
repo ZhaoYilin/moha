@@ -1,3 +1,4 @@
+from moha.system.operator.base import OperatorNames
 from moha.system.hamiltonian.base import BaseHamiltonian
 from moha.system.basis.slater_determinant import SlaterDeterminant
 from moha.system.basis_set.ci_basis_set import CIBasisSet
@@ -22,7 +23,7 @@ class CIHamiltonian(object):
     h1e : np.ndarray
         One electron integral.
 
-    h2e : np.ndarray
+    g2e : np.ndarray
         Two electron integral.
 
     Property
@@ -120,14 +121,15 @@ class CIHamiltonian(object):
             Hartree Fock wavefunction.
         """
         C = wfn.coefficients
-        ham.operators['kinetic'].basis_transformation(C)
-        ham.operators['nuclear_attraction'].basis_transformation(C)
-        h1e = ham.operators['kinetic'].spin_orbital_basis_integral
-        h1e += ham.operators['nuclear_attraction'].spin_orbital_basis_integral
-        ham.operators['electron_repulsion'].basis_transformation(C)
-        h2e = ham.operators['electron_repulsion'].double_bar
+        
+        Hcore = ham.operators[OperatorNames.Hcore].basis_transformation(C)
+        h1e = Hcore.spin_orbital_basis_integral
+        
+        Eri = ham.operators[OperatorNames.Eri].basis_transformation(C)
+        g2e = Eri.double_bar
+        
         self.h1e = h1e
-        self.h2e = h2e
+        self.g2e = g2e
 
     def integrate_wfn_sd(self, wfn, sd, wfn_deriv=None, ham_deriv=None):
         """Integrate the Hamiltonian with against a wavefunction and Slater determinant.
@@ -232,7 +234,7 @@ class CIHamiltonian(object):
             O1 += self.h1e[i,i]
         for i in occ_mixed_index:
             for j in occ_mixed_index:
-                O2 += self.h2e[i,j,i,j]
+                O2 += self.g2e[i,j,i,j]
         value = O1+0.5*O2
         return value
 
@@ -282,7 +284,7 @@ class CIHamiltonian(object):
 
         O1 += self.h1e[a_list[0],c_list[0]]
         for k in occ_mixed_index:
-            O2 += self.h2e[a_list[0],k,c_list[0],k]
+            O2 += self.g2e[a_list[0],k,c_list[0],k]
         value = O1+O2
         value *=sign
         return value
@@ -320,7 +322,7 @@ class CIHamiltonian(object):
         crea = det1.creation_list(det2)
         a_list = self.mixed_index_transformation(anni)
         c_list = self.mixed_index_transformation(crea)
-        value += self.h2e[a_list[0],a_list[1],c_list[0],c_list[1]]
+        value += self.g2e[a_list[0],a_list[1],c_list[0],c_list[1]]
         value *=sign
         return value
 

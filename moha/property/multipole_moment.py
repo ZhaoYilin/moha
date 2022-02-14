@@ -95,7 +95,7 @@ class MultipoleMoment(object):
         mms = []
 
         for lmn in lmns:
-            mm_matrix = MultipoleMomentOperator.build(self.basis_set,lmn,coordinate).integral
+            mm_matrix = MultipoleMomentOperator.build(self.basis_set,lmn,coordinate)
             mm = np.dot(D,mm_matrix)
             mm = np.trace(mm,axis1=0,axis2=1)
             mms.append(mm)

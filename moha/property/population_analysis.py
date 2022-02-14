@@ -1,4 +1,5 @@
 from moha.io.log import log,timer
+from moha.system.operator.base import OperatorNames
 
 import numpy as np
 
@@ -150,12 +151,9 @@ class PopulationAnalysisMulliken(PopulationAnalysis):
         log('Population Analysis Section'.format())
         log.hline()
 
-        S = self.ham.operators['overlap'].integral
+        S = self.ham.operators[OperatorNames.S]
         D = self.wfn.density_matrix
-        if type(D) is np.ndarray:
-            DS = np.dot(D,S)
-        elif type(D) is dict:
-            DS = np.dot(D['alpha'],S) + np.dot(D['beta'],S)
+        DS = np.dot(D,S)
         
         population = []
 
@@ -229,15 +227,12 @@ class PopulationAnalysisLowdin(PopulationAnalysis):
         log('Population Analysis Section'.format())
         log.hline()
 
-        S = self.ham.operators['overlap'].integral
+        S = self.ham.operators[OperatorNames.S]
         D = self.wfn.density_matrix
         val, vec = np.linalg.eig(S)
         val_minus_half = (np.diag(val**(0.5)))
         X = np.dot(vec,np.dot(val_minus_half,np.transpose(vec)))
-        if type(D) is np.ndarray:
-            XDX = np.dot(X,np.dot(D,X))
-        elif type(D) is dict:
-            XDX = np.dot(X,np.dot(D['alpha'],X))+np.dot(X,np.dot(D['beta'],X))
+        XDX = np.dot(X,np.dot(D,X))
         
         population = []
         

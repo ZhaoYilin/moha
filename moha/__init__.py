@@ -5,6 +5,7 @@ from __future__ import absolute_import
 __version__ = '1.0.0'
 
 from moha.system import *
+from moha.symmetry import *
 from moha.io import *
 from moha.hf import *
 from moha.posthf import *

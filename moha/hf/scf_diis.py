@@ -1,5 +1,6 @@
 from moha.hf.auxiliary import *
 from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+from moha.system.operator.base import OperatorNames
 from moha.io.log import log,timer
 
 import copy
@@ -95,7 +96,7 @@ class DIISSCFSolver(object):
         E_conv = self.E_conv
         D_conv = self.D_conv
         # Overlap Integral
-        S = ham.operators['overlap'].integral
+        S = ham.operators[OperatorNames.S]
 
         # Get occ nbf and ndocc for closed shell molecules
         occ = wfn.occ
@@ -103,25 +104,24 @@ class DIISSCFSolver(object):
         ndocc = wfn.occ['alpha']
 
         # Compute required quantities for SCF
-        V = ham.operators['nuclear_attraction'].integral
-        T = ham.operators['kinetic'].integral
-        I = ham.operators['electron_repulsion'].integral
-        # Build H_core
-        H = T + V
+        #Form the core Hamiltonian
+        Hcore = ham.operators[OperatorNames.Hcore]
+
+        I = ham.operators[OperatorNames.Eri]
 
         # Orthogonalizer A = S^(-1/2)
-        A = np.array(ham.operators['overlap'].integral)
-        A = orthogonalization_matrix(A,type='symmetric')
+        S = ham.operators[OperatorNames.S]
+        A = orthogonalization_matrix(S,type='symmetric')
 
         # Calculate initial core guess: [Szabo:1996] pp. 145
-        Hp = A.dot(H).dot(A)            # Eqn. 3.177
+        Hp = A.dot(Hcore).dot(A)            # Eqn. 3.177
         e, C2 = np.linalg.eigh(Hp)      # Solving Eqn. 1.178
         C = A.dot(C2)                   # Back transform, Eqn. 3.174
         Cocc = C[:, :ndocc]
 
         D = D_matrix(C,nspatial,occ)
         E = 0.0
-        Enuc = ham.operators['nuclear_repulsion'].integral
+        Enuc = ham.operators[OperatorNames.Enuc]
         Eold = 0.0
 
         Fock_list = []
@@ -134,7 +134,7 @@ class DIISSCFSolver(object):
             # Build fock matrix
             J = np.einsum('pqrs,rs->pq', I, D)
             K = np.einsum('prqs,rs->pq', I, D)
-            F = H + J * 2 - K
+            F = Hcore + J * 2 - K
 
             # DIIS error build w/ HF analytic gradient ([Pulay:1969:197])
             diis_e = np.einsum('ij,jk,kl->il', F, D, S) - np.einsum('ij,jk,kl->il', S, D, F)
@@ -144,7 +144,7 @@ class DIISSCFSolver(object):
             dRMS = np.mean(diis_e**2)**0.5
 
             # SCF energy and update: [Szabo:1996], Eqn. 3.184, pp. 150
-            Eelec = np.einsum('pq,pq->', F + H, D)
+            Eelec = np.einsum('pq,pq->', F + Hcore, D)
             log('{0:2d}\t {1:3f}\t {2:4f}\t {3:5f}'.format(Iter, Eelec, Eelec-Eold, dRMS))
             if (abs(Eelec - Eold) < E_conv) and (dRMS < D_conv):
                 break

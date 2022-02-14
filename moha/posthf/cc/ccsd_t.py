@@ -1,3 +1,4 @@
+from moha.system.operator.base import OperatorNames
 from moha.posthf.cc.auxiliary import *
 from moha.io.log import log, timer
 
@@ -100,9 +101,9 @@ class CCSD_TSolver(object):
         fs = spinfock(wfn.orbital_energies)
         #Transfer electron repulsion integral from atomic basis
         #to molecular basis
-        ham.operators['electron_repulsion'].basis_transformation(C)
+        ham.operators[OperatorNames.Eri].basis_transformation(C)
         #build double bar integral <ij||kl>
-        spinints = ham.operators['electron_repulsion'].double_bar
+        spinints = ham.operators[OperatorNames.Eri].double_bar
         ts,td,Dai,Dabij = initialize(fs,spinints,Nelec,nspin)
  
         ECCSD = 0

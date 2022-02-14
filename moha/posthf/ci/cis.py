@@ -1,3 +1,4 @@
+from moha.system.operator.base import OperatorNames
 from moha.system.basis_set.ci_basis_set import CIBasisSet
 from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
 from moha.io.log import log,timer
@@ -79,7 +80,7 @@ class CISSolver(object):
         E_ci_elec = e_ci[0]
         E_hf_elec = hf_results['electronic_energy']
         E_corr = E_ci_elec - E_hf_elec
-        E_ci_tot = E_ci_elec + ham.operators['nuclear_repulsion'].integral
+        E_ci_tot = E_ci_elec + ham.operators[OperatorNames.Enuc]
         
         log.hline()
         log('CIS Section'.format())

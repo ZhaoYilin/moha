@@ -1,8 +1,60 @@
+from enum import Enum, auto
 from abc import abstractmethod,abstractproperty
-from moha.system.operator.abc import ABCOperator
 import numpy as np
 
-class BaseOperator(ABCOperator):
+class OperatorNames(Enum):
+    """Operator Names.
+
+    Members
+    ----------
+    I : enum.auto
+        Identity operator.
+    
+    S : enum.auto
+        Overlap operator.
+    
+    T : enum.auto
+        Kinetic energy operator.
+    
+    V : enum.auto
+        Nuclear attraction operator.
+    
+    Hcore : enum.auto
+        Core Hamiltonian operator.
+    
+    MM : enum.auto
+        Multipole moment operator.
+    
+    Diff : enum.auto
+        Differential operator.
+    
+    LM : enum.auto
+        Linear momentum operator.
+    
+    AM : enum.auto
+        Angular momentum operator.
+    
+    Eri : enum.auto
+        Electron repulsion operator.
+    """
+    I = auto()
+    Enuc = auto()
+    S = auto()
+    T = auto()
+    V = auto()
+    Hcore = auto()
+    MM = auto()
+    Diff = auto()
+    LM = auto()
+    AM = auto()
+    Eri = auto()
+
+    def __repr__(self):
+        return self.name
+
+op_names = list(OperatorNames.__members__.items())
+
+class BaseOperator(np.ndarray):
     """Base operator class.
 
     Attributes
@@ -10,162 +62,127 @@ class BaseOperator(ABCOperator):
     name : str
         Name of the operator.
 
-    nspatial : int
-        Number of the spatial orbitals.
-    
-    nelectron : int
-        Number of electrons.
-
-    integral : int,float,np.ndarray,2-dictionary of np.ndarray
-        Integral of the operator.
-
-    Property
-    --------
-    npsin : int
-        Number of spin orbitals.
-    
-    Abstract Property
-    -----------------
-    dtype
-        Data type of the integrals.
-
     Methods
     -------
-    __init__(self,name,nspatial,nelectron=None,integral=None)
-        Initialize the Operator.        
+    __new__(cls, integral, name)
+        Generate new operator.
+    
+    __init__(self, integral, name)
+        Initialize the operator.
     
     assign_name(self,name)
         Assign name to the operator.
-
-    assign_nspatial(self,nspatial)
-        Assign number of spatial orbitals for the operator.
-    
-    assign_nelectron(self,nelectron)
-        Assign number of elctrons involved in the integral.
-
-    Abstract Methods
-    ----------------
-    assign_integral(self,integral)
-        Assign integral for the operator.
     """
-    def __init__(self,name,nspatial,nelectron=None,integral=None):
-        """Initialize the operator
+    def __new__(cls, integral, name):
+        """Generate new operator.
 
         Parameters
         ----------
+        integral : ndarray
+            Integral value for the operator.
+        
         name : str
             Name of the operator.
+        """
+        obj = np.asarray(integral).view(cls)
+        return obj
 
-        nspatial : int
-            Number of the spatial orbitals for the operator
+    def __init__(self, integral, name):
+        """Initialize the operator.
 
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        Parameters
+        ----------
+        integral : ndarray
             Integral value for the operator.
-
+        
+        name : str
+            Name of the operator.
         """
         self.assign_name(name)
-        self.assign_nspatial(nspatial)
-        self.assign_nelectron(nelectron)
-        self.assign_integral(integral)
-
-    @property        
-    def nspin(self):
-        """Return the number of spin orbitals.
-
-        Returns
-        -------
-        nspin : int
-            Number of spin orbitals.
-        """
-        return self.nspatial*2
-
-    @abstractproperty
-    def dtype(self):
-        """Data type of the integrals.
-
-        Raises
-        ------
-        NotImplementedError
-            If called.
-        """
-        raise NotImplementedError
-
+    
     def assign_name(self,name):
         """Assign name to the operator.
 
         Parameters
         ----------
-        name : str
+        name : OperatorNames
             Name of the operator.
 
         Raises
         ------
         TypeError
-            If name of operator is not str.
+            If name of operator is not OperatorNames.
         """
-        if not isinstance(name, str):
-            raise TypeError("Name of oeprator must be str")
+        if not isinstance(name, OperatorNames):
+            raise TypeError("Name of oeprator must be OperatorNames")
         self.name = name
 
-    def assign_nspatial(self,nspatial):
-        """Assign number of spatial orbitals for the operator.
+    @classmethod
+    def zeros(cls, shape, dtype=float):
+        """generate instance with zeros elements ndarray.
 
         Parameters
         ----------
-        nspatial : int
-            Number of spatial orbitals for the operator.
+        shape : tuple/list
+            Shape of the ndarray.
 
         Raises
         ------
         TypeError
-            If number of spatial orbitals is not an integer.
-
-        ValueError
-            If number of spatial orbitals is not a positive number.
+            If shape is not tuple or list.
         """
-        if not isinstance(nspatial, int):
-            raise TypeError("Number of spatial orbitals must be an integer")
-        if nspatial <= 0:
-            raise ValueError("Number of spatial orbitals must be a positive number")
-        self.nspatial = nspatial
-    
-    def assign_nelectron(self,nelectron):
-        """Assign number of elctrons involved in the integral.
+        if not isinstance(shape, tuple or list):
+            raise TypeError("Shape of the ndarray must be tuple or list")
+        if not len(set(a))==1:
+            raise ValueError("Shape of the ndarray must be square/hypersquare")
+        obj = np.asarray(np.zeros(shape, dtype=dtype)).view(cls)
+        return obj
+
+    @classmethod
+    def ones(cls, shape, dtype=float):
+        """generate instance with ones elements ndarray.
 
         Parameters
         ----------
-        nelec : int
-            Number of elctrons involved in the integral.
+        shape : tuple/list
+            Shape of the ndarray.
 
         Raises
         ------
         TypeError
-            If number of electrons is not an integer.
-
-        ValueError
-            If number of electrons is not a positive number.
+            If shape is not tuple or list.
         """
-        if not isinstance(nelectron, int):
-            raise TypeError("Number of electrons must be an integer")
-        if nelectron < 0:
-            raise ValueError("Number of electrons must be a none negative number")
-        self.nelectron = nelectron
+        if not isinstance(shape, tuple or list):
+            raise TypeError("Shape of the ndarray must be tuple or list")
+        if not len(set(a))==1:
+            raise ValueError("Shape of the ndarray must be square/hypersquare")
+        obj = np.asarray(np.ones(shape, dtype=dtype)).view(cls)
+        return obj
 
-    @abstractmethod
-    def assign_integral(self,integral):
-        """Assign integral for the operator.
+    @classmethod
+    def random(cls, shape, dtype=float):
+        """generate instance with random elements ndarray.
 
         Parameters
         ----------
-        integral
-            Integral for the operator.
+        shape : tuple/list
+            Shape of the ndarray.
 
         Raises
         ------
-        NotImplementedError
-            If called.
+        TypeError
+            If shape is not tuple or list.
         """
-        raise NotImplementedError
+        if not isinstance(shape, tuple or list):
+            raise TypeError("Shape of the ndarray must be tuple or list")
+        if not len(set(a))==1:
+            raise ValueError("Shape of the ndarray must be square/hypersquare")
+        if dtype == float:
+            obj = np.random.random(shape)
+        elif dtype == complex:
+            obj = np.random.random(shape) + np.random.random(shape) * 1j
+        else:
+            return NotImplementedError('dtype %r not supported!' % dtype)
+        obj = np.asarray(obj).view(cls)
+        return obj
+

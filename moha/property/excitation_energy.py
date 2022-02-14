@@ -1,5 +1,6 @@
 from moha.property.auxiliary import *
 from moha.io.log import log, timer
+from moha.system.operator.base import OperatorNames
 
 import numpy as np
 
@@ -155,9 +156,9 @@ class ExcitationEnergyCIS(ExcitationEnergy):
         fs = spinfock(self.wfn.orbital_energies)
         #Transfer electron repulsion integral from atomic basis
         #to molecular basis
-        self.ham.operators['electron_repulsion'].basis_transformation(C)
+        self.ham.operators[OperatorNames.Eri].basis_transformation(C)
         #build double bar integral <ij||kl>
-        spinints = self.ham.operators['electron_repulsion'].double_bar
+        spinints = self.ham.operators[OperatorNames.Eri].double_bar
         
         H = np.zeros((Nov,Nov))
         I = -1
@@ -252,9 +253,9 @@ class ExcitationEnergyTDHF(ExcitationEnergy):
         fs = spinfock(self.wfn.orbital_energies)
         #Transfer electron repulsion integral from atomic basis
         #to molecular basis
-        self.ham.operators['electron_repulsion'].basis_transformation(C)
+        self.ham.operators[OperatorNames.Eri].basis_transformation(C)
         #build double bar integral <ij||kl>
-        spinints = self.ham.operators['electron_repulsion'].double_bar
+        spinints = self.ham.operators[OperatorNames.Eri].double_bar
 
         A = np.zeros((Nov,Nov))
         B = np.zeros((Nov,Nov))

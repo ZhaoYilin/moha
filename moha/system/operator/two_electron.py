@@ -1,4 +1,4 @@
-from moha.system.operator.base import BaseOperator
+from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
 from moha.system.basis_set.hf_basis_set import HFBasisSet
 import numpy as np
@@ -51,41 +51,50 @@ class TwoElectronOperator(BaseOperator):
     basis_transformation(self,matrix):
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=2,integral=None):
+    def __init__(self, integral, name):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
-        """        
-        super().__init__(name,nspatial,nelectron,integral)
-
+        
+        name : OperatorNames
+            Name of the operator.
+        """
+        super().__init__(integral, name)
+    
     @property
-    def dtype(self):
-        """Data type of the integrals.
-
+    def nspatial(self):
+        """Number of spatial orbitals.
+        
         Returns
         -------
-        dtype : float,int
-            Data type of the integrals.
-
+        nspatial : int
+            Number of spatial orbitals.
         """
-        return self.integral.dtype
+        return self.shape[0]
+
+    @property
+    def nspin(self):
+        """Number of spin orbitals.
+        
+        Returns
+        -------
+        nspin : int
+            Number of spin orbitals.
+        """
+        return self.shape[0]*2
 
     @property
     def spin_orbital_basis_integral(self):
-        """Return value matrix in spin orbitals basis.
-        """    
+        """Return integral in spin orbitals basis.
+        
+        Returns
+        -------
+        integral : np.ndarray
+            Integral of the operator in spin orbital basis.
+        """
         nspin = self.nspin
         integral = np.zeros((nspin,nspin,nspin,nspin))
         for i in range(nspin): 
@@ -93,28 +102,65 @@ class TwoElectronOperator(BaseOperator):
                 for k in range(nspin): 
                     for l in range(nspin): 
                         if i%2==k%2 and j%2==l%2:
-                            integral[i,j,k,l]  = self.integral[int(i/2),int(k/2),int(j/2),int(l/2)]
+                            integral[i,j,k,l]  = self[int(i/2),int(k/2),int(j/2),int(l/2)]
         return integral
-
-    def assign_integral(self,integral):
-        """Assign integral value for the restricted operator.
+    
+    @classmethod
+    def zeros(cls, shape, dtype=float):
+        """generate instance with zeros elements ndarray.
 
         Parameters
         ----------
-        integral :
-            Integral value for the operator.
+        shape : tuple/list
+            Shape of the ndarray.
 
         Raises
         ------
-        TypeError
-            If integral is not np.ndarray instance.
+        ValueError
+            If shape is not two dimension.
         """
-        if integral is None:
-            self.integral = integral
-        elif not isinstance(integral, np.ndarray):
-            raise TypeError("Integral must be np.ndarray")
-        else:
-            self.integral = integral
+        if not len(shape)==4:
+            raise ValueError("Shape of the ndarray must be four dimension")
+
+        super().zeros(shape, dtype=float)
+
+    @classmethod
+    def ones(cls, shape, dtype=float):
+        """generate instance with ones elements ndarray.
+
+        Parameters
+        ----------
+        shape : tuple/list
+            Shape of the ndarray.
+        
+        Raises
+        ------
+        ValueError
+            If shape is not two dimension.
+        """
+        if not len(shape)==4:
+            raise ValueError("Shape of the ndarray must be four dimension")
+
+        super().ones(shape, dtype=float)
+    
+    @classmethod
+    def random(cls, shape, dtype=float):
+        """generate instance with random elements ndarray.
+
+        Parameters
+        ----------
+        shape : tuple/list
+            Shape of the ndarray.
+        
+        Raises
+        ------
+        ValueError
+            If shape is not two dimension.
+        """
+        if not len(shape)==4:
+            raise ValueError("Shape of the ndarray must be four dimension")
+
+        super().random(shape, dtype=float)
 
     def basis_transformation(self,matrix):
         """Rotate orbitals with a transformation matrix.
@@ -140,14 +186,18 @@ class TwoElectronOperator(BaseOperator):
             raise TypeError("Transformation matrix must be given as a numpy array.")
         if matrix.ndim != 2:
             raise ValueError("Transformation matrix must be two-dimensional.")
-        if matrix.shape[0] != self.integral.shape[0]:
+        if matrix.shape[0] != self.shape[0]:
             raise ValueError(
                 "Shape of the transformation matrix must match with the shape of the " "integrals."
             )
-        self.integral = np.einsum("ijkl,ia->ajkl", self.integral, matrix)
-        self.integral = np.einsum("ajkl,jb->abkl", self.integral, matrix)
-        self.integral = np.einsum("abkl,kc->abcl", self.integral, matrix)
-        self.integral = np.einsum("abcl,ld->abcd", self.integral, matrix)            
+        integral = np.einsum("ijkl,ia->ajkl", self, matrix)
+        integral = np.einsum("ajkl,jb->abkl", integral, matrix)
+        integral = np.einsum("abkl,kc->abcl", integral, matrix)
+        integral = np.einsum("abcl,ld->abcd", integral, matrix)            
+        
+        self[:] = integral[:]        
+        
+        return self
 
 class ElectronRepulsionOperator(TwoElectronOperator):
     """Electron repulsion operator class.
@@ -194,25 +244,19 @@ class ElectronRepulsionOperator(TwoElectronOperator):
     basis_transformation(self,matrix)
         Rotate orbitals with a transformation matrix.
     """
-    def __init__(self,name,nspatial,nelectron=2,integral=None):
+    def __init__(self, integral, name=OperatorNames.Eri):
         """Initialize the operator
 
         Parameters
         ----------
-        name : str
-            Name of the operator.
-
-        nspatial : int
-            Number of the spatial orbitals for the operator
-
-        nelectron : int
-            Number of elctrons involved in the integral.
-
-        integral
+        integral : ndarray
             Integral value for the operator.
-        """        
-        super().__init__(name,nspatial,nelectron,integral)
-
+        
+        name : OperatorNames
+            name of the operator.
+        """
+        super().__init__(integral, name)
+    
     @classmethod
     def build(cls,basis_set):
         """Build the nuclear repulsion operator.
@@ -247,8 +291,7 @@ class ElectronRepulsionOperator(TwoElectronOperator):
                 for k in range(nspatial):
                     for l in range(nspatial):
                         integral[i,j,k,l] = integral_list[eint(i,j,k,l)]
- 
-        operator = cls('electron_repulsion',nspatial,2,integral)
+        operator = cls(integral,OperatorNames.Eri)
         return operator
 
     @property
@@ -264,7 +307,7 @@ class ElectronRepulsionOperator(TwoElectronOperator):
         integral = np.zeros((nspatial,nspatial))
         for i in range(nspatial):
             for j in range(nspatial):
-                integral[i,j] = self.integral[i,i,j,j]
+                integral[i,j] = self[i,i,j,j]
         return integral
 
     @property
@@ -280,7 +323,7 @@ class ElectronRepulsionOperator(TwoElectronOperator):
         integral = np.zeros((nspatial,nspatial))
         for i in range(nspatial):
             for j in range(nspatial):
-                integral[i,j] = self.integral[i,j,i,j]
+                integral[i,j] = self[i,j,i,j]
         return integral
 
     @property
