@@ -1,6 +1,6 @@
 from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set.hf_basis_set import HFBasisSet
+
 import numpy as np
 
 class NuclearRepulsionOperator(BaseOperator):
@@ -74,7 +74,6 @@ class NuclearRepulsionOperator(BaseOperator):
         ------
         TypeError
             If molecule parameter is not a Molecule instance.
-            If basis_set parameter is not a HFBasisSet instance.
         """
         if not isinstance(molecule,Molecule):
             raise TypeError("molecule parameter must be a Molecule instance.")        

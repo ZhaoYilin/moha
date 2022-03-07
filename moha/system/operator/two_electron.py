@@ -1,6 +1,6 @@
 from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set.hf_basis_set import HFBasisSet
+from moha.system.basis.basis_set import BasisSet
 import numpy as np
 
 class TwoElectronOperator(BaseOperator):
@@ -263,25 +263,25 @@ class ElectronRepulsionOperator(TwoElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """        
         from moha.system.integral.electron_repulsion import electron_repulsion
         from moha.system.auxiliary import eint
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")       
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")       
+        nspatial = len(basis_set)
         integral_list = []     
         integral = np.zeros((nspatial,nspatial,nspatial,nspatial))
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases[0:i+1]):
-                for k,ok in enumerate(basis_set.bases[0:i+1]):
-                    for l,ol in enumerate(basis_set.bases[0:k+1]):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set[0:i+1]):
+                for k,ok in enumerate(basis_set[0:i+1]):
+                    for l,ol in enumerate(basis_set[0:k+1]):
                         ij = i*(i+1)*0.5+j
                         kl = k*(k+1)*0.5+l
                         if ij>=kl:

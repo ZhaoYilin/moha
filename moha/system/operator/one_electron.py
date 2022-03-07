@@ -1,6 +1,6 @@
 from moha.system.operator.base import OperatorNames, BaseOperator
 from moha.system.molecule import Molecule
-from moha.system.basis_set.hf_basis_set import HFBasisSet
+from moha.system.basis.basis_set import BasisSet
 import numpy as np
 
 class OneElectronOperator(BaseOperator):
@@ -238,21 +238,21 @@ class OverlapOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.overlap import overlap
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))     
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = overlap(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
@@ -329,21 +329,21 @@ class KineticOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.kinetic import kinetic
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))     
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = kinetic(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
@@ -423,24 +423,24 @@ class NuclearAttractionOperator(OneElectronOperator):
         moleucle : Molecule
             Molecule instance.
 
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
             If molecule parameter is not a Molecule instance.
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.nuclear_attraction import nuclear_attraction
-        if not isinstance(molecule,Molecule):
+        if not isinstance(molecule, Molecule):
             raise TypeError("molecule parameter must be a Molecule instance")
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))     
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     for atom in molecule.atoms:
                         integral[i][j] += -1*atom.number*nuclear_attraction(oi,oj,atom.coordinate)
@@ -518,7 +518,7 @@ class MultipoleMomentOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         *args
@@ -527,15 +527,15 @@ class MultipoleMomentOperator(OneElectronOperator):
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.multipole_moment import multipole_moment
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))     
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = multipole_moment(oi,oj,args[0],args[1])
         integral = integral + integral.T - np.diag(integral.diagonal())
@@ -612,7 +612,7 @@ class DifferentialOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         *args
@@ -621,15 +621,15 @@ class DifferentialOperator(OneElectronOperator):
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.differential import differential
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = differential(oi,oj,args[0])
         integral = integral + integral.T - np.diag(integral.diagonal())
@@ -706,22 +706,22 @@ class LinearMomentumOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.linear_momentum import linear_momentum
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))
         integral = integral.astype(np.complex)
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = linear_momentum(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())
@@ -798,22 +798,22 @@ class AngularMomentumOperator(OneElectronOperator):
 
         Parameters
         ----------
-        basis_set : HFBasisSet
+        basis_set : BasisSet
             Hatree Fock basis set instance.
 
         Raises
         ------
         TypeError
-            If basis_set parameter is not a HFBasisSet instance.
+            If basis_set parameter is not a BasisSet instance.
         """
         from moha.system.integral.angular_momentum import angular_momentum
-        if not isinstance(basis_set,HFBasisSet):
-            raise TypeError("basis_set parameter must be a HFBasisSet instance")    
-        nspatial = basis_set.size
+        if not isinstance(basis_set, BasisSet):
+            raise TypeError("basis_set parameter must be a BasisSet instance")    
+        nspatial = len(basis_set)
         integral = np.zeros((nspatial,nspatial))
         integral = integral.astype(np.complex)
-        for i,oi in enumerate(basis_set.bases):
-            for j,oj in enumerate(basis_set.bases):
+        for i,oi in enumerate(basis_set):
+            for j,oj in enumerate(basis_set):
                 if i>=j:
                     integral[i][j] = angular_momentum(oi,oj)
         integral = integral + integral.T - np.diag(integral.diagonal())

@@ -1,4 +1,5 @@
 from moha.system.wavefunction.base import BaseWaveFunction
+
 import numpy as np 
 
 class HFWaveFunction(BaseWaveFunction):

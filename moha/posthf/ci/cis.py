@@ -1,7 +1,10 @@
 from moha.system.operator.base import OperatorNames
-from moha.system.basis_set.ci_basis_set import CIBasisSet
-from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
+from moha.posthf.ci.slater import SlaterDeterminant
+from moha.posthf.ci.ci_basis_set import CIBasisSet
+from moha.posthf.ci.ci_hamiltonian import CIHamiltonian
+from moha.posthf.ci.ci_wavefunction import CIWaveFunction
 from moha.io.log import log,timer
+
 import numpy as np
 import copy
 
@@ -73,27 +76,43 @@ class CISSolver(object):
         wfn = copy.deepcopy(self.wfn)
         hf_results = self.hf_results
 
-        ci_basis = CIBasisSet(wfn,[0,1])
-        H = CIHamiltonian(ham,wfn,ci_basis)
-        ci_matrix = H.generate_matrix(ci_basis)
+        nelec = wfn.nelec
+        nspatial = wfn.nspatial
+        nspin = wfn.nspin
+
+        reference = SlaterDeterminant.ground(nelec,nspin)
+        cibs = CIBasisSet.build(reference,1)
+
+        C = wfn.coefficients
+        Hcore = ham.operators[OperatorNames.Hcore].basis_transformation(C)
+        h1e = Hcore.spin_orbital_basis_integral
+        Eri = ham.operators[OperatorNames.Eri].basis_transformation(C)
+        g2e = Eri.double_bar
+
+        ci_matrix = CIHamiltonian.build(h1e, g2e, cibs)
+
         e_ci, vec_ci = np.linalg.eigh(ci_matrix)
         E_ci_elec = e_ci[0]
         E_hf_elec = hf_results['electronic_energy']
         E_corr = E_ci_elec - E_hf_elec
         E_ci_tot = E_ci_elec + ham.operators[OperatorNames.Enuc]
+
+        #Build the ci wavefunction.
+        ci_wfn = CIWaveFunction(nelec,nspatial,{},cibs,vec_ci[0])
         
         log.hline()
-        log('CIS Section'.format())
+        log('CIS Results')
         log.hline()
         log('CIS Correlation energy = {}'.format(E_corr))
         log('Total energy = {}'.format(E_ci_tot))
         log.hline()
-        
+
         results = {
         "total_energy":E_ci_tot
         }
-        return results
 
+        return results,ci_wfn
+        
     def assign_hamiltonian(self,ham):
         """Assign the chemical Hamiltonian to the solver.
 

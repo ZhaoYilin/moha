@@ -1,4 +1,5 @@
-from moha.system.auxiliary import fact2
+from scipy.special import factorial2 as fact2
+
 import numpy as np
 import copy
 

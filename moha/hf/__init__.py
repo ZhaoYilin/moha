@@ -3,3 +3,4 @@ from __future__ import absolute_import
 
 from moha.hf.scf import *
 from moha.hf.scf_diis import *
+from moha.hf.hf_wavefunction import *

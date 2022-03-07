@@ -1,8 +1,10 @@
 from moha.system.operator.base import OperatorNames
-from moha.system.basis_set.ci_basis_set import CIBasisSet
-from moha.system.hamiltonian.ci_hamiltonian import CIHamiltonian
-from moha.system.wavefunction.ci_wavefunction import CIWaveFunction
+from moha.posthf.ci.slater import SlaterDeterminant
+from moha.posthf.ci.ci_basis_set import CIBasisSet
+from moha.posthf.ci.ci_hamiltonian import CIHamiltonian
+from moha.posthf.ci.ci_wavefunction import CIWaveFunction
 from moha.io.log import log,timer
+
 import numpy as np
 import copy
 
@@ -76,11 +78,19 @@ class CISDSolver(object):
         
         nelec = wfn.nelec
         nspatial = wfn.nspatial
+        nspin = wfn.nspin
 
+        reference = SlaterDeterminant.ground(nelec,nspin)
+        cibs = CIBasisSet.build(reference,2)
+        
+        C = wfn.coefficients
+        Hcore = ham.operators[OperatorNames.Hcore].basis_transformation(C)
+        h1e = Hcore.spin_orbital_basis_integral
+        Eri = ham.operators[OperatorNames.Eri].basis_transformation(C)
+        g2e = Eri.double_bar
+        
+        ci_matrix = CIHamiltonian.build(h1e, g2e, cibs)
 
-        ci_basis = copy.deepcopy(CIBasisSet(wfn,[0,1,2]))
-        H = CIHamiltonian(ham,wfn,ci_basis)
-        ci_matrix = H.generate_matrix(ci_basis)
         e_ci, vec_ci = np.linalg.eigh(ci_matrix)
         E_ci_elec = e_ci[0]
         E_hf_elec = hf_results['electronic_energy']
@@ -88,7 +98,7 @@ class CISDSolver(object):
         E_ci_tot = E_ci_elec + ham.operators[OperatorNames.Enuc]
         
         #Build the ci wavefunction.
-        ci_wfn = CIWaveFunction(nelec,nspatial,{},ci_basis,vec_ci[0])
+        ci_wfn = CIWaveFunction(nelec,nspatial,{},cibs,vec_ci[0])
         
         log.hline()
         log('CISD Results')

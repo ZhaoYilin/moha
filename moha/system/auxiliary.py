@@ -1,26 +1,6 @@
 import numpy as np
 import scipy.special as sc
 
-def fact2(n):
-    """Double factorial function.
-
-    Parameters
-    ----------
-    n : int
-        Input number of double factorial function
-
-    Raises
-    ------
-    TypeError
-        If input parameter is not an integer.
-    """
-    if not isinstance(n, int):
-        raise TypeError("Input parameter must be an integer")
-    if n <= 0:
-        return 1
-    else:
-        return n * fact2(n-2)
-
 def boys(n,t):
     """Boys function for the calculation of coulombic integrals.
 

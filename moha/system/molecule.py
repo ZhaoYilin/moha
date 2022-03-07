@@ -1,3 +1,6 @@
+from moha.system.periodic import load_periodic
+from moha.system.atom import Atom
+
 import numpy as np
 
 __all__ = ['Molecule']
@@ -50,7 +53,41 @@ class Molecule(object):
         """Calculate the center of mass for molecular.
         """
         pass
+    
+    @classmethod
+    def from_file(cls,filename):
+        """Generate N electron basis set.
 
+        Parameters
+        ----------
+        truncation : list
+            A list of truncation degree.
+
+        Raises
+        ------
+        TypeError 
+            If truncation is not a list.
+        """
+        periodic = load_periodic()
+        #read molecule
+        with open(filename) as f:
+            size = int(next(f))
+            title = next(f).strip()
+            molecule = cls(title,size)
+            for _ in range(size):
+                row = next(f).split()
+                tag = row[0]
+                element = periodic[tag]
+                coordinate = []
+                for j in range(3):
+                    coordinate.append(float(row[j+1]))
+                atom = Atom(element,coordinate)
+
+                molecule.atoms.append(atom)
+            f.close()
+
+        return molecule
+        
     def bond_length(self,i,j):
         """Calculate the the distances between atom i and j.
 

@@ -1,5 +1,5 @@
 from enum import Enum, auto
-from abc import abstractmethod,abstractproperty
+
 import numpy as np
 
 class OperatorNames(Enum):
@@ -36,6 +36,11 @@ class OperatorNames(Enum):
     
     Eri : enum.auto
         Electron repulsion operator.
+    
+    Methods
+    -------
+    __repr__(cls)
+        Self defined output.
     """
     I = auto()
     Enuc = auto()
@@ -50,6 +55,8 @@ class OperatorNames(Enum):
     Eri = auto()
 
     def __repr__(self):
+        """Self defined output.
+        """
         return self.name
 
 op_names = list(OperatorNames.__members__.items())
@@ -59,7 +66,7 @@ class BaseOperator(np.ndarray):
 
     Attributes
     ----------
-    name : str
+    name : OperatorNames
         Name of the operator.
 
     Methods
@@ -81,7 +88,7 @@ class BaseOperator(np.ndarray):
         integral : ndarray
             Integral value for the operator.
         
-        name : str
+        name : OperatorNames
             Name of the operator.
         """
         obj = np.asarray(integral).view(cls)
@@ -95,7 +102,7 @@ class BaseOperator(np.ndarray):
         integral : ndarray
             Integral value for the operator.
         
-        name : str
+        name : OperatorNames
             Name of the operator.
         """
         self.assign_name(name)
@@ -125,6 +132,9 @@ class BaseOperator(np.ndarray):
         ----------
         shape : tuple/list
             Shape of the ndarray.
+        
+        dtype : float
+            Data type of the ndarray.
 
         Raises
         ------
@@ -146,6 +156,9 @@ class BaseOperator(np.ndarray):
         ----------
         shape : tuple/list
             Shape of the ndarray.
+        
+        dtype : float
+            Data type of the ndarray.
 
         Raises
         ------
@@ -167,6 +180,9 @@ class BaseOperator(np.ndarray):
         ----------
         shape : tuple/list
             Shape of the ndarray.
+        
+        dtype : float/complex
+            Data type of the ndarray.
 
         Raises
         ------

@@ -1,7 +1,8 @@
+from moha.system.basis.gaussian_orbital import GaussianOrbital
+from moha.system.basis.basis_set import BasisSet
+
 import os
 import numpy as np
-from moha.system.basis.gaussian_orbital import GaussianOrbital
-from moha.system.basis_set.hf_basis_set import HFBasisSet
 
 def isDigit(x):
     try:
@@ -23,7 +24,7 @@ def load_nwchem(symbols,coordinates,filename):
     """
     read basis set
     """
-    basis_set = HFBasisSet()
+    basis_set = BasisSet()
     #read the file and store them as list
     path = os.path.dirname(__file__) 
     with open(path + "/basis_database/"+filename) as f:
@@ -63,6 +64,6 @@ def load_nwchem(symbols,coordinates,filename):
                         exps.append(float(words[0]))
                         coefs.append(float(words[k+1]))
                     orb = GaussianOrbital.spatial(i,coordinates[i],n_number,shell,exps,coefs)
-                    basis_set.append_basis(orb)
+                    basis_set.append(orb)
 
     return basis_set

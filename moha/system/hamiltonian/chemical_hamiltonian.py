@@ -67,7 +67,7 @@ class ChemicalHamiltonian(BaseHamiltonian):
         basis_set : Basis Set instance
             Instance of one electron basis set
         """
-        nspatial = basis_set.size
+        nspatial = len(basis_set)
         ham = cls(nspatial)
         
         #build operators

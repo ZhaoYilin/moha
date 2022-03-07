@@ -4,7 +4,7 @@ from moha.system.atom import Atom
 from moha.system.molecule import Molecule
 
 def load_xyz(filename):
-    '''Load a molecular geometry from a .xyz file.
+    """Load a molecular geometry from a .xyz file.
 
        **Argument:**
 
@@ -12,7 +12,7 @@ def load_xyz(filename):
             The file to load the geometry from
 
        **Returns:** dictionary with ``title`, ``coordinates`` and ``numbers``.
-    '''
+    """
     periodic = load_periodic()
     #read molecule
     with open(filename) as f:

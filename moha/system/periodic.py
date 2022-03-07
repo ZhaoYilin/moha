@@ -335,5 +335,6 @@ def load_periodic():
     elements.append(Lv)
     elements.append(Ts)
     elements.append(Og)
+    
     return Periodic(elements)
 

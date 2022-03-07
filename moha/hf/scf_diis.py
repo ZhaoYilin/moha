@@ -1,5 +1,5 @@
 from moha.hf.auxiliary import *
-from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+from moha.hf.hf_wavefunction import HFWaveFunction
 from moha.system.operator.base import OperatorNames
 from moha.io.log import log,timer
 
