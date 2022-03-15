@@ -1,58 +1,47 @@
 from moha.posthf.ci.slater import SlaterDeterminant, SlaterCondon
 from moha.posthf.ci.ci_basis_set import CIBasisSet
+from moha.system.operator.base import OperatorNames, BaseOperator
 
 import numpy as np
 import copy
-import itertools
 
-__all__ = ['CIHamiltonian']
+__all__ = ['CIOperator']
 
-class CIHamiltonian(np.ndarray):
-    """Configuration interaction Hamiltonian.
+class CIOperator(BaseOperator):
+    """Configuration interaction Operator.
 
     Methods
     -------
     __new__(self, integral)
-        Generate new CI Hamiltonian.
+        Generate new CI Operator.
     
     __init__(self, integral)
-        Initialize the CI Hamiltonian.
+        Initialize the CI Operator.
 
     Class Methods
     -------------
     build(cls, h1e, g2e, basis_set)
-        Build the configuration interaction Hamiltonian.
+        Build the CI Operator.
     
     """
-    def __new__(cls, integral):
-        """Generate new CI Hamiltonian.
+    def __init__(cls, integral, name):
+        """Generate new CI Operator.
 
         Parameters
         ----------
         integral : ndarray
-            Integral value for the CI Hamiltonian.
+            Integral value for the CI Operator.
         
         Returns
         -------
-        ham : CIHamiltonian
-            Instance of CIHamiltonian.
+        ham : CIOperator
+            Instance of CIOperator.
         """
-        obj = np.asarray(integral).view(cls)
-        return obj
+        super().__init__(integral, name)
 
-    def __init__(self, integral):
-        """Initialize the CI Hamiltonian.
-
-        Parameters
-        ----------
-        integral : ndarray
-            Integral value for the CI Hamiltonian.
-        """
-        pass
-    
     @classmethod
     def build(cls, h1e, g2e, basis_set):
-        """Build the configuration interaction Hamiltonian.
+        """Build the configuration interaction Operator.
     
         Parameters
         ----------
@@ -73,8 +62,8 @@ class CIHamiltonian(np.ndarray):
         
         Returns
         -------
-        ham : CIHamiltonian
-            Instance of CIHamiltonian.
+        ham : CIOperator
+            Instance of CIOperator.
         """
         #Check the input parameters
         if not isinstance(h1e,np.ndarray):
@@ -86,13 +75,13 @@ class CIHamiltonian(np.ndarray):
         
         #Calculate the ci matrix
         sc = SlaterCondon(h1e,g2e)
-        matrix = np.zeros((basis_set.size,basis_set.size))
+        integral = np.zeros((basis_set.size,basis_set.size))
         for i in range(basis_set.size):
             for j in range(i+1):
-                matrix[i,j] = sc.calculate_matrix_element(basis_set[i],basis_set[j])
-                matrix[j,i] = matrix[i,j]
+                integral[i,j] = sc.calculate_matrix_element(basis_set[i],basis_set[j])
+                integral[j,i] = integral[i,j]
         
-        #Inital the CIHamiltonian instance
-        ham = cls(matrix)
-        return ham
+        #Inital the CIOperator instance
+        operator = cls(integral, OperatorNames.CI)
+        return operator
 

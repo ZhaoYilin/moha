@@ -37,6 +37,9 @@ class OperatorNames(Enum):
     Eri : enum.auto
         Electron repulsion operator.
     
+    CI : enum.auto
+        Configuration interaction operator.
+    
     Methods
     -------
     __repr__(cls)
@@ -53,6 +56,7 @@ class OperatorNames(Enum):
     LM = auto()
     AM = auto()
     Eri = auto()
+    CI = auto()
 
     def __repr__(self):
         """Self defined output.

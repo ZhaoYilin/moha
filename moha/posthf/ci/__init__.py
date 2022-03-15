@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from moha.posthf.ci.slater import *
 from moha.posthf.ci.ci_basis_set import *
-from moha.posthf.ci.ci_hamiltonian import *
+from moha.posthf.ci.ci_operator import *
 from moha.posthf.ci.ci_wavefunction import *
 from moha.posthf.ci.cis import *
 from moha.posthf.ci.cisd import *

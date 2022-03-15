@@ -1,7 +1,7 @@
 from moha.system.operator.base import OperatorNames
 from moha.posthf.ci.slater import SlaterDeterminant
 from moha.posthf.ci.ci_basis_set import CIBasisSet
-from moha.posthf.ci.ci_hamiltonian import CIHamiltonian
+from moha.posthf.ci.ci_operator import CIOperator
 from moha.posthf.ci.ci_wavefunction import CIWaveFunction
 from moha.io.log import log,timer
 
@@ -89,7 +89,7 @@ class CISSolver(object):
         Eri = ham.operators[OperatorNames.Eri].basis_transformation(C)
         g2e = Eri.double_bar
 
-        ci_matrix = CIHamiltonian.build(h1e, g2e, cibs)
+        ci_matrix = CIOperator.build(h1e, g2e, cibs)
 
         e_ci, vec_ci = np.linalg.eigh(ci_matrix)
         E_ci_elec = e_ci[0]
