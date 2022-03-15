@@ -442,7 +442,7 @@ class NuclearAttractionOperator(OneElectronOperator):
         for i,oi in enumerate(basis_set):
             for j,oj in enumerate(basis_set):
                 if i>=j:
-                    for atom in molecule.atoms:
+                    for atom in molecule:
                         integral[i][j] += -1*atom.number*nuclear_attraction(oi,oj,atom.coordinate)
         integral = integral + integral.T - np.diag(integral.diagonal())
         operator = cls(integral,OperatorNames.V)

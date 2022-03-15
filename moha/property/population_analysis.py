@@ -157,9 +157,9 @@ class PopulationAnalysisMulliken(PopulationAnalysis):
         
         population = []
 
-        for i,atom in enumerate(self.mol.atoms):
+        for i,atom in enumerate(self.mol):
             charge = 0.
-            for j,basis in enumerate(self.basis_set.bases):
+            for j,basis in enumerate(self.basis_set):
                 if basis.atom_index==i:
                     charge += DS[j,j]
             charge = atom.number - charge
@@ -236,9 +236,9 @@ class PopulationAnalysisLowdin(PopulationAnalysis):
         
         population = []
         
-        for i,atom in enumerate(self.mol.atoms):
+        for i,atom in enumerate(self.mol):
             charge = 0.
-            for j,basis in enumerate(self.basis_set.bases):
+            for j,basis in enumerate(self.basis_set):
                 if basis.atom_index==i:
                     charge += XDX[j,j]
             charge = atom.number - charge

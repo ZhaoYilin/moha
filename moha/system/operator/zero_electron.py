@@ -78,8 +78,8 @@ class NuclearRepulsionOperator(BaseOperator):
         if not isinstance(molecule,Molecule):
             raise TypeError("molecule parameter must be a Molecule instance.")        
         E = 0.
-        for i,A in enumerate(molecule.atoms):
-            for j,B in enumerate(molecule.atoms):
+        for i,A in enumerate(molecule):
+            for j,B in enumerate(molecule):
                 if j>i:
                     E += (A.number*B.number)/molecule.bond_length(i,j)
         operator = cls(E,OperatorNames.Enuc)

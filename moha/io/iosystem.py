@@ -1,6 +1,7 @@
 class IOSystem(object):
     def __init__(self):
         pass
+    
     @classmethod
     def from_file(cls,geofile,basisfile):
         if geofile.endswith('.xyz'):
@@ -12,7 +13,7 @@ class IOSystem(object):
             
         symbols = []
         coordinates = []
-        for atom in molecule.atoms:
+        for atom in molecule:
             symbols.append(atom.symbol)
             coordinates.append(atom.coordinate)
 

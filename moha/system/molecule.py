@@ -5,7 +5,7 @@ import numpy as np
 
 __all__ = ['Molecule']
 
-class Molecule(object):
+class Molecule(list):
     """Molecular Class.
 
     Attributes
@@ -29,7 +29,14 @@ class Molecule(object):
     bond_length(self,i,j)
         
     """
-    def __init__(self,title,size,atoms=[],symmetry='C1'):
+    def __new__(cls, title, size, symmetry='C1'):
+        """Generate new molecule object.
+        """
+        obj = list().__new__(cls)
+
+        return obj
+
+    def __init__(self, title, size, symmetry='C1'):
         """Initialize the instance.
 
         Parameters
@@ -45,7 +52,6 @@ class Molecule(object):
         """
         self.title = title
         self.size = size
-        self.atoms = atoms
         self.symmetry = symmetry
 
     @property
@@ -83,8 +89,8 @@ class Molecule(object):
                     coordinate.append(float(row[j+1]))
                 atom = Atom(element,coordinate)
 
-                molecule.atoms.append(atom)
-            f.close()
+                molecule.append(atom)
+        f.close()
 
         return molecule
         
@@ -114,8 +120,8 @@ class Molecule(object):
                 raise ValueError("Index of atom must be none negative number")
             if item >= self.size:
                 raise ValueError("Index of atom must be smaller than number of atoms")
-        A = np.array(self.atoms[i].coordinate)
-        B = np.array(self.atoms[j].coordinate)
+        A = np.array(self[i].coordinate)
+        B = np.array(self[j].coordinate)
         return np.linalg.norm(A-B)
 
     def bond_angle(self,i,j,k):
@@ -148,9 +154,9 @@ class Molecule(object):
                 raise ValueError("Index of atom must be none negative number")
             if item >= self.size:
                 raise ValueError("Index of atom must be smaller than number of atoms")
-        A = np.array(self.atoms[i].coordinate)
-        B = np.array(self.atoms[j].coordinate)
-        C = np.array(self.atoms[k].coordinate)
+        A = np.array(self[i].coordinate)
+        B = np.array(self[j].coordinate)
+        C = np.array(self[k].coordinate)
         return np.linalg.norm(A-B)
 
     def out_of_plane_angle(self,i,j,k,l):
@@ -186,10 +192,10 @@ class Molecule(object):
                 raise ValueError("Index of atom must be none negative number")
             if item >= self.size:
                 raise ValueError("Index of atom must be smaller than number of atoms")
-        A = np.array(self.atoms[i].coordinate)
-        B = np.array(self.atoms[j].coordinate)
-        C = np.array(self.atoms[k].coordinate)
-        D = np.array(self.atoms[l].coordinate)
+        A = np.array(self[i].coordinate)
+        B = np.array(self[j].coordinate)
+        C = np.array(self[k].coordinate)
+        D = np.array(self[l].coordinate)
 
     def dihedral_angle(self,A,B,C,D):
         """Calculate dihedral angle for atom connectivit A,B,C,D.
@@ -223,8 +229,8 @@ class Molecule(object):
                 raise ValueError("Index of atom must be none negative number")
             if item >= self.size:
                 raise ValueError("Index of atom must be smaller than number of atoms")
-        A = np.array(self.atoms[i].coordinate)
-        B = np.array(self.atoms[j].coordinate)
-        C = np.array(self.atoms[k].coordinate)
-        D = np.array(self.atoms[l].coordinate)
+        A = np.array(self[i].coordinate)
+        B = np.array(self[j].coordinate)
+        C = np.array(self[k].coordinate)
+        D = np.array(self[l].coordinate)
 

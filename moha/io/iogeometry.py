@@ -28,8 +28,9 @@ def load_xyz(filename):
                 coordinate.append(float(row[j+1]))
             atom = Atom(element,coordinate)
 
-            molecule.atoms.append(atom)
+            molecule.append(atom)
         f.close()
+    
     return molecule
 
 
