@@ -1,10 +1,11 @@
 from moha import *
 
 mol,orbs = IOSystem.from_file('../data/water.xyz','sto-3g.nwchem')
-ham = Hamiltonian.build(mol,orbs)
+ham = ChemicalHamiltonian.build(mol,orbs)
+wfn = HFWaveFunction(10,7,{'alpha':5,'beta':5})
 
-scfsolver = SCF_Solver()
-hfw = scfsolver(ham,occ = {'alpha':5,'beta':5})
+scfsolver = PlainSCFSolver(ham,wfn)
+hf_results = scfsolver.kernel()
 
-solver = CCSD_T_Solver()
-solver(hfw,ham)
+ccsolver = CCSD_TSolver(ham,wfn,hf_results)
+cc_results = ccsolver.kernel()

@@ -8,4 +8,3 @@ hf_solver = PlainSCFSolver(ham,wfn)
 hf_results = hf_solver.kernel()
 
 ee_cis_results = ExcitationEnergyCIS(ham,wfn).kernel()
-ee_tdhf_results = ExcitationEnergyTDHF(ham,wfn).kernel()

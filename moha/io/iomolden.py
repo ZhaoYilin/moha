@@ -34,7 +34,7 @@ class Molden(object):
 
     def write_atoms(self,handler):
         handler.write("[Atoms] AU\n")
-        for i,atom in enumerate(self.mol.atoms):
+        for i,atom in enumerate(self.mol):
             handler.write("%s \t %d \t  %d \t %f \t %f \t %f\n" 
             % (atom.symbol,i+1,atom.number,atom.coordinate[0],atom.coordinate[1],atom.coordinate[2]))
 
@@ -48,9 +48,9 @@ class Molden(object):
                 handler.write("\n")
             if index in atom_set_index:
                 handler.write("%d \t 0\n"%(atom_set_index.index(index)+1))
-            self.write_atom_orbital_header(handler,self.orbs.bases[index])
-            for j in range(len(self.orbs.bases[index].exps)):
-                handler.write("\t\t\t %f \t %f \n"%(self.orbs.bases[index].exps[j],self.orbs.bases[index].coefs[j]))
+            self.write_atom_orbital_header(handler,self.orbs[index])
+            for j in range(len(self.orbs[index].exps)):
+                handler.write("\t\t\t %f \t %f \n"%(self.orbs[index].exps[j],self.orbs[index].coefs[j]))
 
     def write_MO(self,handler):
         handler.write("[MO]\n")
@@ -63,7 +63,7 @@ class Molden(object):
         """filte the orbital
         """
         list = []
-        for i,basis in enumerate(self.orbs.bases):
+        for i,basis in enumerate(self.orbs):
             list.append(basis.atom_index)
 
         inds, unq = [],[]
@@ -79,7 +79,7 @@ class Molden(object):
         """filte the orbital
         """
         list = []
-        for i,basis in enumerate(self.orbs.bases):
+        for i,basis in enumerate(self.orbs):
             tmp = []
             tmp.append(basis.atom_index)
             tmp.append(basis.n_number)
