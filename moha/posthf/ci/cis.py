@@ -108,6 +108,8 @@ class CISSolver(object):
         log.hline()
 
         results = {
+        "success":True,
+        "CI_energy":E_ci_elec,
         "total_energy":E_ci_tot
         }
 

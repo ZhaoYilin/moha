@@ -112,8 +112,11 @@ class FullCISolver(object):
         log.hline()
         
         results = {
+        "success":True,
+        "CI_energy":E_ci_elec,
         "total_energy":E_ci_tot
         }
+
         return results, ci_wfn
 
     def assign_hamiltonian(self,ham):

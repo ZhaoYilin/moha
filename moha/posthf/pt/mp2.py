@@ -100,7 +100,7 @@ class MP2Solver(object):
         
         results = {
         "success": True,
-        "MP2_energy":Emp2,
+        "mp2_energy":Emp2,
         "total_energy":hf_results['total_energy']+Emp2
         }
 

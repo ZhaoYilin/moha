@@ -4,7 +4,7 @@ from moha.system.operator.base import OperatorNames
 
 import numpy as np
 
-__all__ = ['ExcitationEnergyCIS','ExcitationEnergyTDHF']
+__all__ = ['ExcitationEnergyCIS']
 
 class ExcitationEnergy(object):
     """Excitation energy solver class.
@@ -184,103 +184,3 @@ class ExcitationEnergyCIS(ExcitationEnergy):
         "excitation_energies": ECIS
         }
         return results
-
-class ExcitationEnergyTDHF(ExcitationEnergy):
-    """Excitation energy solver using time dependent Hartree Fock method.
-
-    Attributes
-    ----------
-    ham
-        Chemical Hamiltonian.
-
-    wfn
-        Hartree Fock wavefunction.
-    
-    level : {None, int, list}
-        Excitation energy level.
-
-    Methods
-    -------
-    __init__(self,ham,wfn)
-        Initialize the solver.
-
-    kernel(self,level=None)
-        Kernel of the solver.
-
-    assign_hamiltonian(self,ham)
-        Assign the chemical Hamiltonian to the solver.
-
-    assign_wavefunction(self,wfn)
-        Assign the Hartree Fock wavefunction to the solver.
-    
-    assign_level(self,level)
-        Assign the excitation energy level to the solver.
-    """
-    def __init__(self,ham,wfn):
-        """Initialize the solver.
-
-        Attributes
-        ----------
-        ham
-            Chemical Hamiltonian.
-
-        wfn
-            Hartree Fock wavefunction.
-        """
-        super().__init__(ham,wfn)
-
-    @timer.with_section('Excitation')
-    def kernel(self,level=None):
-        """Kernel of the solver.
-
-        Returns
-        -------
-        results : dict
-            Excitation energy calculation results.
-        """    
-        
-
-        log.hline()
-        log('Excitation Energy Calculation Section'.format())
-        log.hline()
-
-        occ = self.wfn.occ
-        Nelec = occ['alpha'] + occ['beta']
-        dim = self.ham.nspatial
-        C = self.wfn.coefficients
-        Nov = Nelec*(2*dim - Nelec)
-        #Transfer Fock integral from spatial to spin basis
-        fs = spinfock(self.wfn.orbital_energies)
-        #Transfer electron repulsion integral from atomic basis
-        #to molecular basis
-        self.ham.operators[OperatorNames.Eri].basis_transformation(C)
-        #build double bar integral <ij||kl>
-        spinints = self.ham.operators[OperatorNames.Eri].double_bar
-
-        A = np.zeros((Nov,Nov))
-        B = np.zeros((Nov,Nov))
-        I = -1
-        for i in range(0,Nelec):
-            for a in range(Nelec,dim*2):
-                I += 1
-                J = -1
-                for j in range(0,Nelec):
-                    for b in range(Nelec,dim*2):
-                        J += 1
-                        A[I,J] = (fs[a,a] - fs[i,i])*(i==j)*(a==b)+spinints[a,j,i,b]
-                        B[I,J] = spinints[a,b,i,j]
-        M = np.bmat([[A,B],[-B,-A]])
-        ETD,CTD = np.linalg.eig(M)
-        ETD = np.sort(ETD)[level].flatten()
-        
-        log.hline()
-        log('Excitaiton Energy by TDHF'.format())
-        log('{}'.format(ETD))
-        log.hline()
-
-        results = {
-        "success": True,
-        "excitation_energies": ETD
-        }
-        return results
-

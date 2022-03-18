@@ -152,3 +152,4 @@ class ChemicalHamiltonian(BaseHamiltonian):
         
         return ham
 
+

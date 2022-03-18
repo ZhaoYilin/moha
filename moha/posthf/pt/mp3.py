@@ -130,8 +130,8 @@ class MP3Solver(object):
 
         results = {
         "success": True,
-        "MP2_energy":Emp2,
-        "MP3_energy":Emp3,
+        "mp2_energy":Emp2,
+        "mp3_energy":Emp3,
         "total_energy":hf_results['total_energy']+Emp2+Emp3
         }
 
