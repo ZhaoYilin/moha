@@ -1,7 +1,11 @@
-moha.property.population\_analysis
+﻿moha.property.population\_analysis
 ==================================
 
 .. automodule:: moha.property.population_analysis
+
+   
+   
+   
 
    
    
@@ -14,9 +18,14 @@ moha.property.population\_analysis
    .. autosummary::
    
       PopulationAnalysis
+      PopulationAnalysisLowdin
+      PopulationAnalysisMulliken
    
    
 
    
    
    
+
+
+

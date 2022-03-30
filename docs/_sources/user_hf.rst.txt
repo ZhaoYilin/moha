@@ -161,18 +161,16 @@ Starting from the basics, we'll run a simple calculation for a water molecule wi
 bond angle of :math:`104.0^{\circ}` with an STO-3G basis set. 
 
 Restricted Hartree-Fock
-    .. literalinclude:: ../data/examples/scf/rhf_water_sto3g.py
+    .. literalinclude:: ../data/examples/hf/scf.py
             :lines: 1-20
-            :caption: /data/examples/scf/rhf_water_sto3g.py
-
-Unrestricted Hartree-Fock
-    .. literalinclude:: ../data/examples/scf/uhf_water_sto3g.py
-            :lines: 1-20
-            :caption: /data/examples/scf/uhf_water_sto3g.py
+            :caption: /data/examples/hf/scf.py
 
 .. figure:: ./pictures/h2.png
         :scale: 100%
         :align: center
+
+More examples can be found in data/examples/hf/.
+
 
 DIIS Solver
 ============
@@ -220,3 +218,7 @@ Finally the new F’ is constructed as:
 
     F^{\prime}=\sum_i c_iF_i
 
+DIIS Hartree-Fock solver
+    .. literalinclude:: ../data/examples/hf/scf_diis.py
+            :lines: 1-20
+            :caption: /data/examples/hf/scf_diis.py
