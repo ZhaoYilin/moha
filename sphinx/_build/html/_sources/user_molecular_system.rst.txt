@@ -42,7 +42,7 @@ load the molecular geometry from .xyz file.
 
 .. code-block:: python
 
-    mol = IOSystem.from_file('water.xyz')
+    mol = IOSystem.from_file('h2o.xyz')
 
 .. figure:: ./pictures/water.png
     :scale: 40 %
@@ -86,6 +86,10 @@ STO-3G EMSL basis set of hydrogen and oxygen:
         1.1695961              0.39951283             0.60768372       
         0.3803890              0.70011547             0.39195739       
     END
+
+.. code-block:: python
+
+    mol,orb = IOSystem.from_file('h2o.xyz','sto-3g.nwchem')
 
 Hamiltonian
 ==========

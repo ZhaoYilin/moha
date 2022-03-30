@@ -182,7 +182,7 @@ class SlaterDeterminant(list):
         spatial_format : list
             Representation of the Slater determinants in spatial orbitals.
         """
-        return list(map(add, self.alpha, 2*self.beta))
+        return list(np.array(self.alpha)+ 2*np.array(self.beta))
     
     @classmethod
     def ground(cls, nocc, nspins):

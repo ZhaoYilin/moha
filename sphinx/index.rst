@@ -19,8 +19,7 @@ Contents
    :numbered:
    :caption: INSTALL:
 
-   install_linux.rst
-   install_mac.rst
+   install.rst
 
 .. toctree::
    :maxdepth: 2

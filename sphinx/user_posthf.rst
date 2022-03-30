@@ -72,18 +72,6 @@ However, since in the truncated CI higher excitations are forbidden, hence the m
 Also in large systems, high--order disconnected excitations dominate. Truncated CI therefore works best for
 small systems, and important for small multi--configurational systems.
 
-CID
----
-.. math::
-
-	|\Psi_{TCI}\rangle = c_0 | \Phi_0\rangle 
-	+ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}|\Phi_{ij}^{ab}\rangle 
-
-Configuration Interaction Double
-    .. literalinclude:: ../data/examples/posthf/cisd.py
-            :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
-
 CISD
 ----
 .. math::
@@ -92,17 +80,10 @@ CISD
 	+ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a|\Phi_i^a\rangle
 	+ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}|\Phi_{ij}^{ab}\rangle 
 
-Configuration Interaction Double
-    .. literalinclude:: ../data/examples/posthf/cisd.py
+Configuration interaction singles and doubles
+    .. literalinclude:: ../data/examples/ci/cisd.py
             :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
-
-CISD(T)
--------
-Configuration Interaction Double
-    .. literalinclude:: ../data/examples/posthf/cisd.py
-            :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
+            :caption: /data/examples/ci/cisd.py
 
 Full CI
 -------
@@ -113,22 +94,18 @@ Full CI
 	+ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}|\Phi_{ij}^{ab}\rangle 
 	+ \dots						
 
-Configuration Interaction Double
-    .. literalinclude:: ../data/examples/posthf/cisd.py
+Full configuration interaction
+    .. literalinclude:: ../data/examples/ci/fci.py
             :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
+            :caption: /data/examples/ci/fci.py
 
 Coupled-Cluster
 ===============
 Coupled cluster methods are among the most accurate electronic structure methods 
 available today. Its wave--function ansatz is usually written in exponential form:
 
-.. math::
 
-	|\mathbf{\Psi_{CC}}\rangle &= e^{\hat{T}} |\mathbf{\Psi_{HF}} \rangle
-
-the cluster operator :math:`\hat{T}` is defined as sum of :math:`\hat{T}_{i}` generate all possible determinants having i 
-excitations from the reference.
+the cluster operator :math:`\hat{T}` is defined as sum of :math:`\hat{T}_{i}` generate all possible determinants having i excitations from the reference.
 
 .. math::
 
@@ -211,9 +188,9 @@ reached, you're done; if not, return to third step and continue.
 
 To run a CCSD calculation in MoHa, the example is below:
 
-.. literalinclude:: ../data/examples/posthf/ccsd.py
+.. literalinclude:: ../data/examples/cc/ccsd.py
         :lines: 1-20
-        :caption: /data/examples/posthf/ccsd.py
+        :caption: /data/examples/cc/ccsd.py
 
 CCSD(T)
 -------
@@ -221,9 +198,9 @@ To find the perturbative triples correction, the disconnected and connected T3 h
 The disconnected is found as:
 
 Perturbative Triples Correction
-    .. literalinclude:: ../data/examples/posthf/cisd.py
+    .. literalinclude:: ../data/examples/cc/ccsd_t.py
             :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
+            :caption: /data/examples/cc/ccsd_t.py
 
 Perturbation Theory
 ===================
@@ -325,13 +302,13 @@ from atomic orbtial to molecular orbital basis.
 
 To run a MP2 calculation in MoHa, the example is below:
 
-.. literalinclude:: ../data/examples/posthf/mp2.py
+.. literalinclude:: ../data/examples/pt/mp2.py
         :lines: 1-20
-        :caption: /data/examples/posthf/mp2.py
+        :caption: /data/examples/pt/mp2.py
 
 MP3
 ---
 Configuration Interaction Double
-    .. literalinclude:: ../data/examples/posthf/cisd.py
+    .. literalinclude:: ../data/examples/pt/mp3.py
             :lines: 1-20
-            :caption: /data/examples/posthf/cisd.py
+            :caption: /data/examples/pt/mp3.py

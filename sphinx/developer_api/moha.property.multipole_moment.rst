@@ -1,7 +1,11 @@
-moha.property.multipole\_moment
+﻿moha.property.multipole\_moment
 ===============================
 
 .. automodule:: moha.property.multipole_moment
+
+   
+   
+   
 
    
    
@@ -13,10 +17,13 @@ moha.property.multipole\_moment
 
    .. autosummary::
    
-      OneElectronProperty
+      MultipoleMoment
    
    
 
    
    
    
+
+
+
