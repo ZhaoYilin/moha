@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Quickstart &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Molecular System" href="user_molecular_system.html" />
+    <link rel="prev" title="1. Installation For Linux" href="user_install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#molecular-system">1.1. Molecular System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hartree-fock">1.2. Hartree-Fock</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plain-solver">1.2.1. Plain Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diis-solver">1.2.2. DIIS Solver</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#post-hartree-fock">1.3. Post-Hartree-Fock</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-interaction">1.3.1. Configuration Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coupled-cluster">1.3.2. Coupled-Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#perturbation-theory">1.3.3. Perturbation Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#property">1.4. Property</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#population-analyasis">1.4.1. Population Analyasis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipole-moment">1.4.2. Multipole Moment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#excitation-energy">1.4.3. Excitation Energy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">5. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">2. API Doucmentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">1. </span>Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_quickstart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="quickstart">
+<h1><span class="section-number">1. </span>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline"></a></h1>
+<p>This chapter provides an introduction to the basic use of MoHa calculation, you can find those examples in the <code class="file docutils literal notranslate"><span class="pre">moha/data/examples</span></code> directory. Additional details on the various modules are presented in the accompanying user guide.</p>
+<div class="section" id="molecular-system">
+<h2><span class="section-number">1.1. </span>Molecular System<a class="headerlink" href="#molecular-system" title="Permalink to this headline"></a></h2>
+<p>To begin a calculation with MoHa, the first step is to build the Hamiltonian of a system, in terms of second quantization operators, a general Hamiltonian can be written as</p>
+<div class="math notranslate nohighlight">
+\[H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
+V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
+<p>The construction of the molecular Hamiltonian is usually set up in three steps.</p>
+<ul class="simple">
+<li><p>Construct a molecular geometry.</p></li>
+<li><p>Generate a basis set for the molecular.</p></li>
+<li><p>Generate all kinds of operator terms with molecule and basis set to define a Hamiltonian.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">moha</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;molecular_file&#39;</span><span class="p">,</span><span class="s1">&#39;basis_set&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hartree-fock">
+<h2><span class="section-number">1.2. </span>Hartree-Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline"></a></h2>
+<p>The Hartree-Fock method provides the fundamental approximation of wave function theory. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
+<p>The Hartree-Fock method assumes that the ground state wave function is the direct product state of a series of single electron wave functions. The Hartree-Fock wave function ansatz can be written as</p>
+<div class="math notranslate nohighlight">
+\[\vert {\kappa}\rangle = exp(-\hat{\kappa})\vert 0 \rangle\]</div>
+<div class="section" id="plain-solver">
+<h3><span class="section-number">1.2.1. </span>Plain Solver<a class="headerlink" href="#plain-solver" title="Permalink to this headline"></a></h3>
+<p>A basic Hartree-Fock calculation with a plain solver can be performed by:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/hf/scf.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">moha</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">moha</span><span class="o">.</span><span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="diis-solver">
+<h3><span class="section-number">1.2.2. </span>DIIS Solver<a class="headerlink" href="#diis-solver" title="Permalink to this headline"></a></h3>
+<p>The convergence of the plain Hartree-Fock solver is rather slow, One of the most effective methods for speeding up such iterative sequences is the “Direct Inversion in the Iterative Subspace(DIIS)” approach, which was presented by Pulay in the 1980s.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/hf/scf_diis.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">DIISSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="post-hartree-fock">
+<h2><span class="section-number">1.3. </span>Post-Hartree-Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h2>
+<p>Quantum chemistry is mature enough to have canonical approaches followed by Hartree-Fock method. Their behavior, successes, and most importantly their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are known as:</p>
+<ul class="simple">
+<li><p>Configuration Interaction(CI)</p></li>
+<li><p>Coupled-Cluster(CC)</p></li>
+<li><p>Perturbation Theory(PT)</p></li>
+</ul>
+<div class="section" id="configuration-interaction">
+<h3><span class="section-number">1.3.1. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h3>
+<p>The configuration interaction method is a commonly used quantum chemistry method, which is used to correct electron correlation based on the Hartree-Fock method. This method writes the wave function as a linear combination of configuration state functions.</p>
+<div class="math notranslate nohighlight">
+\[\vert \Psi_{CI} \rangle = \sum_{\lbrace i \rbrace} c_i \vert i \rangle\]</div>
+<ul class="simple">
+<li><p>Full CI</p></li>
+</ul>
+<p>The full CI method assumes that all electrons of a given system are correlated among all orbitals. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation.</p>
+<div class="math notranslate nohighlight">
+\[\vert \Psi_{FCI} \rangle = c_0 \vert \Phi_0\rangle
++ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a \vert\Phi_i^a\rangle
++ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab} \vert\Phi_{ij}^{ab}\rangle
++ \dots\]</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">/data/examples/ci/fci.py</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">cisolver</span> <span class="o">=</span> <span class="n">FullCISolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">ci_results</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CISD</p></li>
+</ul>
+<p>In practice, we truncated the CI space by excitation order to save computational time. Configuration interaction with singly and doubly excited determinants methods(CISD) are implemented in many standard packages.</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi_{CISD}\rangle = c_0 \vert\Phi_0\rangle
++ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a \vert\Phi_i^a\rangle
++ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab} \vert\Phi_{ij}^{ab}\rangle\]</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/data/examples/ci/cisd.py</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">cisolver</span> <span class="o">=</span> <span class="n">CISDSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">ci_results</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="coupled-cluster">
+<h3><span class="section-number">1.3.2. </span>Coupled-Cluster<a class="headerlink" href="#coupled-cluster" title="Permalink to this headline"></a></h3>
+<p>Coupled cluster methods are among the most accurate electronic structure methods available today. Its wave function ansatz is usually written in exponential form:</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi\rangle = e^{\hat{T}} \vert\Phi_0\rangle\]</div>
+<p>Where the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> is defined as the sum of <span class="math notranslate nohighlight">\(\hat{T}_{i}\)</span> generates all possible determinants having the i-th excitations from the reference.</p>
+<div class="math notranslate nohighlight">
+\[\hat{T} = \sum_{1}^{N} \hat{T}_{i}\]</div>
+<ul class="simple">
+<li><p>CCSD</p></li>
+</ul>
+<p>In practice, we only keep the first two cluster operators <span class="math notranslate nohighlight">\(\hat{T}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{T}_2\)</span> to reach the balance between accuracy and computational time.</p>
+<p>To run a CCSD calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd.py</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ccsolver</span> <span class="o">=</span> <span class="n">CCSDSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">cc_results</span> <span class="o">=</span> <span class="n">ccsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CCSD(T)</p></li>
+</ul>
+<p>The CCSD(T) method is often called the “gold standard” of computational chemistry because it is one of the most accurate methods applicable to reasonably large molecules. To find the perturbative triples correction, the disconnected and connected T3 have to be calculated.</p>
+<p>To run a CCSD(T) calculation, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd_t.py</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ccsolver</span> <span class="o">=</span> <span class="n">CCSD_TSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">cc_results</span> <span class="o">=</span> <span class="n">ccsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="perturbation-theory">
+<h3><span class="section-number">1.3.3. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h3>
+<p>Perturbation theory offers a set of powerful methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a special case of perturbation theory, where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span> is added:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H} = \hat{H}_0 + \lambda\hat{V}\]</div>
+<p>Here, λ is an arbitrary real parameter that controls the size of the perturbation.</p>
+<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is defined as the shifted Fock operator,</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}_0 = \hat{F} + \langle \Psi_{0} \vert (\hat{H} - \hat{F})\vert \Psi_{0} \rangle\]</div>
+<p>where the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
+<ul class="simple">
+<li><p>MP2</p></li>
+</ul>
+<p>Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem, the second-order energy is the first meaningful correction that appears in Moller-Plesset Perturbation theory.</p>
+<p>To run a Moller-Plesset perturbation theory(MP2) calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp2.py</span><a class="headerlink" href="#id7" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ptsolver</span> <span class="o">=</span> <span class="n">MP2Solver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">pt_results</span> <span class="o">=</span> <span class="n">ptsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>MP3</p></li>
+</ul>
+<p>After the second-order energy, the involvement of third-order correction still offers an improvement on the Hartree-Fock method with cheap costs.</p>
+<p>To run a MP3 calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp3.py</span><a class="headerlink" href="#id8" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ptsolver</span> <span class="o">=</span> <span class="n">MP3Solver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">pt_results</span> <span class="o">=</span> <span class="n">ptsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="property">
+<h2><span class="section-number">1.4. </span>Property<a class="headerlink" href="#property" title="Permalink to this headline"></a></h2>
+<p>This section containts information about atomic and molecular properties that can be calculated.</p>
+<div class="section" id="population-analyasis">
+<h3><span class="section-number">1.4.1. </span>Population Analyasis<a class="headerlink" href="#population-analyasis" title="Permalink to this headline"></a></h3>
+<p>Population analysis is the study of charge distribution in molecules, it requires the overlap integrals and the electron density, in addition to information about the number of basis functions centered on each atom. The charge on atom A may be computed as:</p>
+<div class="math notranslate nohighlight">
+\[q_A = Z_A - 2 \sum_{\mu \in A} ({\mathbf D S})_{\mu\mu},\]</div>
+<p>where the summation is limited to only those basis functions centered on atom A.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">/data/examples/population_analysis.py</span><a class="headerlink" href="#id9" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">hf_solver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">hf_solver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">pa_m_results</span> <span class="o">=</span> <span class="n">PopulationAnalysisMulliken</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">,</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+<span class="n">pa_l_results</span> <span class="o">=</span> <span class="n">PopulationAnalysisLowdin</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">,</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="multipole-moment">
+<h3><span class="section-number">1.4.2. </span>Multipole Moment<a class="headerlink" href="#multipole-moment" title="Permalink to this headline"></a></h3>
+<p>The calculation of one-electron properties requires density a matrix and the relevant property integrals. The electronic contribution to the electric multipole moment may be computed using:</p>
+<div class="math notranslate nohighlight">
+\[{\mu}^{klm}=-\sum_{i}\langle \Psi_0|x_i^ky_i^lz_i^m|\Psi_0 \rangle+\sum_A Z_Ax_A^ky_A^lz_A^m\]</div>
+<p>where L = k+l+m is the angular moment</p>
+<p>To compute the total multipole moment, you must include the nuclear contribution, which requires the atomic numbers and Cartesian coordinates of the nuclei.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">/data/examples/multipole_moment.py</span><a class="headerlink" href="#id10" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">hf_solver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">hf_solver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">mm_results</span> <span class="o">=</span> <span class="n">MultipoleMoment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="excitation-energy">
+<h3><span class="section-number">1.4.3. </span>Excitation Energy<a class="headerlink" href="#excitation-energy" title="Permalink to this headline"></a></h3>
+<p>The excitation energies can be calculated by using the Configuration Interaction Singles(CIS) method. The fundamental idea behind CIS is the representation of the excited-state wave functions as linear combinations of singly excited determinants relative to the Hartree-Fock reference wave function.</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi_{CIS}\rangle = c_0 \vert\Phi_0\rangle
++ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a \vert\Phi_i^a\rangle\]</div>
+<p>To run an excitation energies calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">/data/examples/excitation_energy.py</span><a class="headerlink" href="#id11" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">hf_solver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">hf_solver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ee_cis_results</span> <span class="o">=</span> <span class="n">ExcitationEnergyCIS</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_install.html" class="btn btn-neutral float-left" title="1. Installation For Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_molecular_system.html" class="btn btn-neutral float-right" title="2. Molecular System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Post Hartree-Fock &mdash; moha 1.0.0 documentation</title>
+  <title>4. Post Hartree-Fock &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,8 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Property" href="user_property.html" />
-    <link rel="prev" title="2. Hartree-Fock" href="user_hf.html" /> 
+    <link rel="next" title="5. Property" href="user_property.html" />
+    <link rel="prev" title="3. Hartree-Fock" href="user_hf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
             <img src="_static/moha.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.0.0
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,35 +43,37 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">1. Installation For Linux and macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Post Hartree-Fock</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-interaction">3.1. Configuration Interaction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cisd">3.1.1. CISD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#full-ci">3.1.2. Full CI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Post Hartree-Fock</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-interaction">4.1. Configuration Interaction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cisd">4.1.1. CISD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-ci">4.1.2. Full CI</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#coupled-cluster">3.2. Coupled-Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ccsd">3.2.1. CCSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ccsd-t">3.2.2. CCSD(T)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coupled-cluster">4.2. Coupled-Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ccsd">4.2.1. CCSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ccsd-t">4.2.2. CCSD(T)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#perturbation-theory">3.3. Perturbation Theory</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mp2">3.3.1. MP2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mp3">3.3.2. MP3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#perturbation-theory">4.3. Perturbation Theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mp2">4.3.1. MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mp3">4.3.2. MP3</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">5. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. API Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">2. API Doucmentation</a></li>
 </ul>
 
         </div>
@@ -88,7 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">3. </span>Post Hartree-Fock</li>
+      <li><span class="section-number">4. </span>Post Hartree-Fock</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/user_posthf.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -99,7 +101,7 @@
            <div itemprop="articleBody">
              
   <div class="section" id="post-hartree-fock">
-<h1><span class="section-number">3. </span>Post Hartree-Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h1>
+<h1><span class="section-number">4. </span>Post Hartree-Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h1>
 <p>Quantum chemistry is mature enough to have a canonical approaches followed by
 Hartree-Fock method. Their behaviour, successes, and most importantly their
 failures are widely known and accepted. With a couple of exceptions which we
@@ -110,7 +112,7 @@ will not mention, they are known as:</p>
 <li><p>Perturbation Theory(PT)</p></li>
 </ul>
 <div class="section" id="configuration-interaction">
-<h2><span class="section-number">3.1. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">4.1. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h2>
 <p>The configuration interaction method is a commonly used quantum chemistry method, which is used to correct
 electron correlation based on the Hartree–-Fock method. This method writes the wave function as linear
 combination of configuration state functions.</p>
@@ -149,7 +151,7 @@ doubly excited determinants methods(CISD) are implemented in many standard packa
 Also in large systems, high–order disconnected excitations dominate. Truncated CI therefore works best for
 small systems, and important for small multi–configurational systems.</p>
 <div class="section" id="cisd">
-<h3><span class="section-number">3.1.1. </span>CISD<a class="headerlink" href="#cisd" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.1.1. </span>CISD<a class="headerlink" href="#cisd" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[|\Psi_{TCI}\rangle = c_0 | \Phi_0\rangle
 + \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a|\Phi_i^a\rangle
@@ -175,7 +177,7 @@ small systems, and important for small multi–configurational systems.</p>
 </dl>
 </div>
 <div class="section" id="full-ci">
-<h3><span class="section-number">3.1.2. </span>Full CI<a class="headerlink" href="#full-ci" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.1.2. </span>Full CI<a class="headerlink" href="#full-ci" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[|\Psi_{TCI}\rangle = c_0 | \Phi_0\rangle
 + \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a|\Phi_i^a\rangle
@@ -203,7 +205,7 @@ small systems, and important for small multi–configurational systems.</p>
 </div>
 </div>
 <div class="section" id="coupled-cluster">
-<h2><span class="section-number">3.2. </span>Coupled-Cluster<a class="headerlink" href="#coupled-cluster" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">4.2. </span>Coupled-Cluster<a class="headerlink" href="#coupled-cluster" title="Permalink to this headline"></a></h2>
 <p>Coupled cluster methods are among the most accurate electronic structure methods
 available today. Its wave–function ansatz is usually written in exponential form:</p>
 <p>the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> is defined as sum of <span class="math notranslate nohighlight">\(\hat{T}_{i}\)</span> generate all possible determinants having i excitations from the reference.</p>
@@ -238,7 +240,7 @@ methods are the gold standard of quantum chemistry for its high accuracy and rel
 multi–configurational reference states is difficult. Therefore CC method is hard for system with
 strong correlation.</p>
 <div class="section" id="ccsd">
-<h3><span class="section-number">3.2.1. </span>CCSD<a class="headerlink" href="#ccsd" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.2.1. </span>CCSD<a class="headerlink" href="#ccsd" title="Permalink to this headline"></a></h3>
 <p>To implement the  CCSD method, we should follow the procedure:</p>
 <ul class="simple">
 <li><p>Preparing the Spin-Orbital Basis Integrals</p></li>
@@ -290,7 +292,7 @@ reached, you’re done; if not, return to third step and continue.</p>
 </div>
 </div>
 <div class="section" id="ccsd-t">
-<h3><span class="section-number">3.2.2. </span>CCSD(T)<a class="headerlink" href="#ccsd-t" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.2.2. </span>CCSD(T)<a class="headerlink" href="#ccsd-t" title="Permalink to this headline"></a></h3>
 <p>To find the perturbative triples correction, the disconnected and connected T3 have to be calculated.
 The disconnected is found as:</p>
 <dl>
@@ -315,7 +317,7 @@ The disconnected is found as:</p>
 </div>
 </div>
 <div class="section" id="perturbation-theory">
-<h2><span class="section-number">3.3. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">4.3. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h2>
 <p>For perturbation theory, we divide the Hamiltonian into zero–order operator <span class="math notranslate nohighlight">\(\hat{H}_0 and perturbaing
 operator :math:\)</span>lambdahat{V}`. Specifically in M{o}ller–Plesset theory, we use the Fock operator as
 the zero–order operator and the Hartree–Fock state as the zero–order state:</p>
@@ -365,7 +367,7 @@ successful approximation at a fraction of the cost compare with other post–Har
 <p>Unfortunately in a sufficiently large system, the M{o}ller–Plesset method often diverges. Higher-order
 corrections may be calculated, but convergence is often poor.</p>
 <div class="section" id="mp2">
-<h3><span class="section-number">3.3.1. </span>MP2<a class="headerlink" href="#mp2" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.3.1. </span>MP2<a class="headerlink" href="#mp2" title="Permalink to this headline"></a></h3>
 <p>Moller-Plesset Second Order Perturbation theory (MP2) is a non-iterative
 way to calculate electron correlation energy The expression for it’s energy
 contribution can be written as:</p>
@@ -397,7 +399,7 @@ C_\lambda^r \left[ \sum_\sigma C_\sigma^s (\mu \nu|\lambda \sigma) \right]
 </div>
 </div>
 <div class="section" id="mp3">
-<h3><span class="section-number">3.3.2. </span>MP3<a class="headerlink" href="#mp3" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">4.3.2. </span>MP3<a class="headerlink" href="#mp3" title="Permalink to this headline"></a></h3>
 <dl>
 <dt>Configuration Interaction Double</dt><dd><div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp3.py</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
@@ -425,8 +427,8 @@ C_\lambda^r \left[ \sum_\sigma C_\sigma^s (\mu \nu|\lambda \sigma) \right]
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="user_hf.html" class="btn btn-neutral float-left" title="2. Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="user_property.html" class="btn btn-neutral float-right" title="4. Property" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="user_hf.html" class="btn btn-neutral float-left" title="3. Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_property.html" class="btn btn-neutral float-right" title="5. Property" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

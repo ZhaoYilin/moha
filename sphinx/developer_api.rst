@@ -40,4 +40,3 @@ Property
     moha.property.multipole_moment
     moha.property.multipole_polarizability
     moha.property.excitation_energy
-

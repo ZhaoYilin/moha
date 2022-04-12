@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4. Property &mdash; moha 1.0.0 documentation</title>
+  <title>5. Property &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,8 +18,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. API Doucmentation" href="developer_api.html" />
-    <link rel="prev" title="3. Post Hartree-Fock" href="user_posthf.html" /> 
+    <link rel="next" title="1. Sphinx" href="developer_sphinx.html" />
+    <link rel="prev" title="4. Post Hartree-Fock" href="user_posthf.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +31,7 @@
             <img src="_static/moha.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.0.0
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -43,26 +43,28 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">1. Installation For Linux and macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Property</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#population-analysis-atomic-charges">4.1. Population Analysis/Atomic Charges</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mulliken-population-analyasis">4.1.1. Mulliken Population Analyasis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Property</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#population-analysis-atomic-charges">5.1. Population Analysis/Atomic Charges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mulliken-population-analyasis">5.1.1. Mulliken Population Analyasis</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#multipole-moment">4.2. Multipole Moment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#excitation-energy">4.3. Excitation energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multipole-moment">5.2. Multipole Moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#excitation-energy">5.3. Excitation energy</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="developer_api.html">1. API Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api.html">2. API Doucmentation</a></li>
 </ul>
 
         </div>
@@ -79,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">4. </span>Property</li>
+      <li><span class="section-number">5. </span>Property</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/user_property.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,13 +92,13 @@
            <div itemprop="articleBody">
              
   <div class="section" id="property">
-<h1><span class="section-number">4. </span>Property<a class="headerlink" href="#property" title="Permalink to this headline"></a></h1>
+<h1><span class="section-number">5. </span>Property<a class="headerlink" href="#property" title="Permalink to this headline"></a></h1>
 <p>This section containts information about atomic and molecular properties that can be calculated.</p>
 <div class="section" id="population-analysis-atomic-charges">
-<h2><span class="section-number">4.1. </span>Population Analysis/Atomic Charges<a class="headerlink" href="#population-analysis-atomic-charges" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">5.1. </span>Population Analysis/Atomic Charges<a class="headerlink" href="#population-analysis-atomic-charges" title="Permalink to this headline"></a></h2>
 <p>Population analysis is the study of charge distribution in molecules, it requires the overlap integrals and the electron density, in addition to information about the number of basis functions centered on each atom. The charge on atom A may be computed as:</p>
 <div class="section" id="mulliken-population-analyasis">
-<h3><span class="section-number">4.1.1. </span>Mulliken Population Analyasis<a class="headerlink" href="#mulliken-population-analyasis" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">5.1.1. </span>Mulliken Population Analyasis<a class="headerlink" href="#mulliken-population-analyasis" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[q_A = Z_A - 2 \sum_{\mu \in A} ({\mathbf D S})_{\mu\mu},\]</div>
 <p>where the summation is limited to only those basis functions centered on atom A.</p>
@@ -119,7 +121,7 @@
 </div>
 </div>
 <div class="section" id="multipole-moment">
-<h2><span class="section-number">4.2. </span>Multipole Moment<a class="headerlink" href="#multipole-moment" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">5.2. </span>Multipole Moment<a class="headerlink" href="#multipole-moment" title="Permalink to this headline"></a></h2>
 <p>The calculation of one-electron properties requires density matrix and the
 relevant property integrals. The electronic contribution to the
 electric-miltipole moment may be computed using:</p>
@@ -146,7 +148,7 @@ the nuclei.</p>
 </div>
 </div>
 <div class="section" id="excitation-energy">
-<h2><span class="section-number">4.3. </span>Excitation energy<a class="headerlink" href="#excitation-energy" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">5.3. </span>Excitation energy<a class="headerlink" href="#excitation-energy" title="Permalink to this headline"></a></h2>
 <p>The fundamental idea behind CIS is the representation of the excited-state wave functions as linear combinations of singly excited determinants relative to the Hartree-Fock reference wave function, viz.</p>
 <div class="math notranslate nohighlight">
 \[|\Psi(m)\rangle = \sum_{jb} c_j^b(m) \{ a^+_b a_j \} |\Phi_0\rangle =
@@ -179,8 +181,8 @@ the nuclei.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="user_posthf.html" class="btn btn-neutral float-left" title="3. Post Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="developer_api.html" class="btn btn-neutral float-right" title="1. API Doucmentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="user_posthf.html" class="btn btn-neutral float-left" title="4. Post Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer_sphinx.html" class="btn btn-neutral float-right" title="1. Sphinx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

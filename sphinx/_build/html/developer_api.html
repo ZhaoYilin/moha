@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. API Doucmentation &mdash; moha 1.0.0 documentation</title>
+  <title>2. API Doucmentation &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -17,8 +17,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.1.1. moha.system.molecule" href="developer_api/moha.system.molecule.html" />
-    <link rel="prev" title="4. Property" href="user_property.html" /> 
+    <link rel="next" title="2.1.1. moha.system.molecule" href="developer_api/moha.system.molecule.html" />
+    <link rel="prev" title="1. Sphinx" href="developer_sphinx.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +30,7 @@
             <img src="_static/moha.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.0.0
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -42,38 +42,39 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="install_linux.html">1. Installation For Linux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install_mac.html">2. Installation For macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">1. Molecular System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">5. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">1. API Doucmentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#molecule-system">1.1. Molecule System</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.molecule.html">1.1.1. moha.system.molecule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.basis.html">1.1.2. moha.system.basis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.operator.html">1.1.3. moha.system.operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. API Doucmentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#molecule-system">2.1. Molecule System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.molecule.html">2.1.1. moha.system.molecule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.basis.html">2.1.2. moha.system.basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.system.operator.html">2.1.3. moha.system.operator</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#hartree-fock">1.2. Hartree Fock</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.hf.scf.html">1.2.1. moha.hf.scf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hartree-fock">2.2. Hartree Fock</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.hf.scf.html">2.2.1. moha.hf.scf</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#post-hartree-fock">1.3. Post Hartree Fock</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.posthf.ci.cisd.html">1.3.1. moha.posthf.ci.cisd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.posthf.cc.ccsd.html">1.3.2. moha.posthf.cc.ccsd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#post-hartree-fock">2.3. Post Hartree Fock</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.posthf.ci.cisd.html">2.3.1. moha.posthf.ci.cisd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.posthf.cc.ccsd.html">2.3.2. moha.posthf.cc.ccsd</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#property">1.4. Property</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.population_analysis.html">1.4.1. moha.property.population_analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.multipole_moment.html">1.4.2. moha.property.multipole_moment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.excitation_energy.html">1.4.3. moha.property.excitation_energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#property">2.4. Property</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.population_analysis.html">2.4.1. moha.property.population_analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.multipole_moment.html">2.4.2. moha.property.multipole_moment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_api/moha.property.excitation_energy.html">2.4.3. moha.property.excitation_energy</a></li>
 </ul>
 </li>
 </ul>
@@ -94,7 +95,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">1. </span>API Doucmentation</li>
+      <li><span class="section-number">2. </span>API Doucmentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/developer_api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -105,11 +106,11 @@
            <div itemprop="articleBody">
              
   <div class="section" id="api-doucmentation">
-<h1><span class="section-number">1. </span>API Doucmentation<a class="headerlink" href="#api-doucmentation" title="Permalink to this headline"></a></h1>
+<h1><span class="section-number">2. </span>API Doucmentation<a class="headerlink" href="#api-doucmentation" title="Permalink to this headline"></a></h1>
 <p>This detailed reference lists all the classes and functions contained in the package. If you are just looking to get started, read the <span class="xref std std-doc">/tutorial/index</span> first.</p>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code> describes the unit cell of a crystal, while the <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> is used to build up a larger system by translating the unit cell to fill a certain shape or symmetry. The model builds the Hamiltonian matrix by applying fields and other modifier parameters.</p>
 <div class="section" id="molecule-system">
-<h2><span class="section-number">1.1. </span>Molecule System<a class="headerlink" href="#molecule-system" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">2.1. </span>Molecule System<a class="headerlink" href="#molecule-system" title="Permalink to this headline"></a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -129,7 +130,7 @@
 </table>
 </div>
 <div class="section" id="hartree-fock">
-<h2><span class="section-number">1.2. </span>Hartree Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">2.2. </span>Hartree Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline"></a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -143,7 +144,7 @@
 </table>
 </div>
 <div class="section" id="post-hartree-fock">
-<h2><span class="section-number">1.3. </span>Post Hartree Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">2.3. </span>Post Hartree Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -160,7 +161,7 @@
 </table>
 </div>
 <div class="section" id="property">
-<h2><span class="section-number">1.4. </span>Property<a class="headerlink" href="#property" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">2.4. </span>Property<a class="headerlink" href="#property" title="Permalink to this headline"></a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -185,8 +186,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="user_property.html" class="btn btn-neutral float-left" title="4. Property" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="developer_api/moha.system.molecule.html" class="btn btn-neutral float-right" title="1.1.1. moha.system.molecule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="developer_sphinx.html" class="btn btn-neutral float-left" title="1. Sphinx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer_api/moha.system.molecule.html" class="btn btn-neutral float-right" title="2.1.1. moha.system.molecule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
