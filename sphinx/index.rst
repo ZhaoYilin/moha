@@ -13,17 +13,17 @@ Contents
 .. toctree::
    :maxdepth: 2
    :numbered:
-   :caption: INSTALL:
+   :caption: QUICK START:
 
-   user_install.rst
+   quickstart_installation.rst
+   quickstart_examples.rst
 
 .. toctree::
    :maxdepth: 2
    :numbered:
    :caption: USER DOCUMENTATION:
 
-   user_quickstart.rst
-   user_molecular_system.rst
+   user_system.rst
    user_hf.rst
    user_posthf.rst
    user_property.rst
@@ -34,7 +34,7 @@ Contents
    :caption: DEVELOPER DOCUMENTATION:
 
    developer_sphinx.rst
-   developer_api.rst
+   developer_api/modules.rst
 
 Indices and tables
 ==================

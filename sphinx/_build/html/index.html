@@ -6,6 +6,7 @@
   <title>MoHa 0.1.0 &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/moha.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,7 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Installation For Linux" href="user_install.html" /> 
+    <link rel="next" title="1. Installation" href="quickstart_installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,22 +40,22 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user_quickstart.html">1. Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_property.html">5. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developer_api.html">2. API Doucmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api/modules.html">2. API</a></li>
 </ul>
 
         </div>
@@ -87,11 +88,17 @@
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
+<p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user_install.html">1. Installation For Linux</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_install.html#compiling-from-source-code">1.1. Compiling from source code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_install.html#installation-with-pip">1.2. Installation with pip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_installation.html">1. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart_installation.html#compiling-from-source-code">1.1. Compiling from source code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart_installation.html#installation-with-pip">1.2. Installation with pip</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart_examples.html#hartree-fock">2.1. Hartree-Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart_examples.html#post-hartree-fock">2.2. Post-Hartree-Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart_examples.html#property">2.3. Property</a></li>
 </ul>
 </li>
 </ul>
@@ -99,34 +106,27 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user_quickstart.html">1. Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_quickstart.html#molecular-system">1.1. Molecular System</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_quickstart.html#hartree-fock">1.2. Hartree-Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_quickstart.html#post-hartree-fock">1.3. Post-Hartree-Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_quickstart.html#property">1.4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_system.html#molecular-geometry">1.1. Molecular Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_system.html#basis-set">1.2. Basis Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_system.html#hamiltonian">1.3. Hamiltonian</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_molecular_system.html">2. Molecular System</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_molecular_system.html#molecular-geometry">2.1. Molecular Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_molecular_system.html#basis-set">2.2. Basis Set</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_molecular_system.html#hamiltonian">2.3. Hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_hf.html#plain-solver">2.1. Plain Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_hf.html#diis-solver">2.2. DIIS Solver</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_hf.html">3. Hartree-Fock</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_hf.html#plain-solver">3.1. Plain Solver</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_hf.html#diis-solver">3.2. DIIS Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#configuration-interaction">3.1. Configuration Interaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#coupled-cluster">3.2. Coupled-Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#perturbation-theory">3.3. Perturbation Theory</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">4. Post Hartree-Fock</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#configuration-interaction">4.1. Configuration Interaction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#coupled-cluster">4.2. Coupled-Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_posthf.html#perturbation-theory">4.3. Perturbation Theory</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="user_property.html">5. Property</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_property.html#population-analysis-atomic-charges">5.1. Population Analysis/Atomic Charges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_property.html#multipole-moment">5.2. Multipole Moment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_property.html#excitation-energy">5.3. Excitation energy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_property.html#population-analysis-atomic-charges">4.1. Population Analysis/Atomic Charges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_property.html#multipole-moment">4.2. Multipole Moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_property.html#excitation-energy">4.3. Excitation energy</a></li>
 </ul>
 </li>
 </ul>
@@ -135,11 +135,14 @@
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developer_api.html">2. API Doucmentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#molecule-system">2.1. Molecule System</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#hartree-fock">2.2. Hartree Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#post-hartree-fock">2.3. Post Hartree Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer_api.html#property">2.4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api/modules.html">2. API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html">2.1. System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_api/moha.html#module-moha">2.7. Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -158,7 +161,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="user_install.html" class="btn btn-neutral float-right" title="1. Installation For Linux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quickstart_installation.html" class="btn btn-neutral float-right" title="1. Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

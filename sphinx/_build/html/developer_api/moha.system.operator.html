@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.1.3. moha.system.operator &mdash; moha 0.1.0 documentation</title>
+  <title>2.1.1.1.4. moha.system.operator package &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,11 +15,12 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2.1. moha.hf.scf" href="moha.hf.scf.html" />
-    <link rel="prev" title="2.1.2. moha.system.basis" href="moha.system.basis.html" /> 
+    <link rel="next" title="2.1.1.1.5. moha.system.wavefunction package" href="moha.system.wavefunction.html" />
+    <link rel="prev" title="2.1.1.1.3. moha.system.integral package" href="moha.system.integral.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,12 +44,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user_install.html">1. Installation For Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">1. Installation For Linux</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user_quickstart.html">1. Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user_molecular_system.html">2. Molecular System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">2. System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_hf.html">3. Hartree-Fock</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">4. Post Hartree-Fock</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_property.html">5. Property</a></li>
@@ -55,16 +57,26 @@
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../developer_api.html">2. API Doucmentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../developer_api.html#molecule-system">2.1. Molecule System</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="moha.system.molecule.html">2.1.1. moha.system.molecule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="moha.system.basis.html">2.1.2. moha.system.basis</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">2.1.3. moha.system.operator</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html">2.1. System</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.system.html">2.1.1. moha.system package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.system.html#subpackages">2.1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#submodules">2.1.1.2. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.atom">2.1.1.3. moha.system.atom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.auxiliary">2.1.1.4. moha.system.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.molecule">2.1.1.5. moha.system.molecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.periodic">2.1.1.6. moha.system.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system">2.1.1.7. Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../developer_api.html#hartree-fock">2.2. Hartree Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../developer_api.html#post-hartree-fock">2.3. Post Hartree Fock</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../developer_api.html#property">2.4. Property</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -83,8 +95,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../developer_api.html"><span class="section-number">2. </span>API Doucmentation</a> &raquo;</li>
-      <li><span class="section-number">2.1.3. </span>moha.system.operator</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.system.html"><span class="section-number">2.1.1. </span>moha.system package</a> &raquo;</li>
+      <li><span class="section-number">2.1.1.1.4. </span>moha.system.operator package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/developer_api/moha.system.operator.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -94,16 +108,976 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-moha.system.operator">
-<span id="moha-system-operator"></span><h1><span class="section-number">2.1.3. </span>moha.system.operator<a class="headerlink" href="#module-moha.system.operator" title="Permalink to this headline"></a></h1>
+  <div class="section" id="moha-system-operator-package">
+<h1><span class="section-number">2.1.1.1.4. </span>moha.system.operator package<a class="headerlink" href="#moha-system-operator-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.1.1.1.4.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.system.operator.base">
+<span id="moha-system-operator-base-module"></span><h2><span class="section-number">2.1.1.1.4.2. </span>moha.system.operator.base module<a class="headerlink" href="#module-moha.system.operator.base" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.base.BaseOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.base.</span></span><span class="sig-name descname"><span class="pre">BaseOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#BaseOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.BaseOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<p>Base operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">OperatorNames</span></dt><dd><p>Name of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__new__(cls, integral, name)</dt><dd><p>Generate new operator.</p>
+</dd>
+<dt>__init__(self, integral, name)</dt><dd><p>Initialize the operator.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.base.BaseOperator.assign_name">
+<span class="sig-name descname"><span class="pre">assign_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#BaseOperator.assign_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.BaseOperator.assign_name" title="Permalink to this definition"></a></dt>
+<dd><p>Assign name to the operator.</p>
+<dl class="simple">
+<dt>name<span class="classifier">OperatorNames</span></dt><dd><p>Name of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If name of operator is not OperatorNames.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.base.BaseOperator.ones">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#BaseOperator.ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.BaseOperator.ones" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with ones elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+<dt>dtype<span class="classifier">float</span></dt><dd><p>Data type of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If shape is not tuple or list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.base.BaseOperator.random">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#BaseOperator.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.BaseOperator.random" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with random elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+<dt>dtype<span class="classifier">float/complex</span></dt><dd><p>Data type of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If shape is not tuple or list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.base.BaseOperator.zeros">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#BaseOperator.zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.BaseOperator.zeros" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with zeros elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+<dt>dtype<span class="classifier">float</span></dt><dd><p>Data type of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If shape is not tuple or list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.base.</span></span><span class="sig-name descname"><span class="pre">OperatorNames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/base.html#OperatorNames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.base.OperatorNames" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Operator Names.</p>
+<dl class="simple">
+<dt>I<span class="classifier">enum.auto</span></dt><dd><p>Identity operator.</p>
+</dd>
+<dt>S<span class="classifier">enum.auto</span></dt><dd><p>Overlap operator.</p>
+</dd>
+<dt>T<span class="classifier">enum.auto</span></dt><dd><p>Kinetic energy operator.</p>
+</dd>
+<dt>V<span class="classifier">enum.auto</span></dt><dd><p>Nuclear attraction operator.</p>
+</dd>
+<dt>Hcore<span class="classifier">enum.auto</span></dt><dd><p>Core Hamiltonian operator.</p>
+</dd>
+<dt>MM<span class="classifier">enum.auto</span></dt><dd><p>Multipole moment operator.</p>
+</dd>
+<dt>Diff<span class="classifier">enum.auto</span></dt><dd><p>Differential operator.</p>
+</dd>
+<dt>LM<span class="classifier">enum.auto</span></dt><dd><p>Linear momentum operator.</p>
+</dd>
+<dt>AM<span class="classifier">enum.auto</span></dt><dd><p>Angular momentum operator.</p>
+</dd>
+<dt>Eri<span class="classifier">enum.auto</span></dt><dd><p>Electron repulsion operator.</p>
+</dd>
+<dt>CI<span class="classifier">enum.auto</span></dt><dd><p>Configuration interaction operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__repr__(cls)</dt><dd><p>Self defined output.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.AM">
+<span class="sig-name descname"><span class="pre">AM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.AM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.CI">
+<span class="sig-name descname"><span class="pre">CI</span></span><em class="property"> <span class="pre">=</span> <span class="pre">12</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.CI" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.Diff">
+<span class="sig-name descname"><span class="pre">Diff</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.Diff" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.Enuc">
+<span class="sig-name descname"><span class="pre">Enuc</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.Enuc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.Eri">
+<span class="sig-name descname"><span class="pre">Eri</span></span><em class="property"> <span class="pre">=</span> <span class="pre">11</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.Eri" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.Hcore">
+<span class="sig-name descname"><span class="pre">Hcore</span></span><em class="property"> <span class="pre">=</span> <span class="pre">6</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.Hcore" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.I">
+<span class="sig-name descname"><span class="pre">I</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.I" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.LM">
+<span class="sig-name descname"><span class="pre">LM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">9</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.LM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.MM">
+<span class="sig-name descname"><span class="pre">MM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">7</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.MM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.S">
+<span class="sig-name descname"><span class="pre">S</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.S" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.T">
+<span class="sig-name descname"><span class="pre">T</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.T" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="moha.system.operator.base.OperatorNames.V">
+<span class="sig-name descname"><span class="pre">V</span></span><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#moha.system.operator.base.OperatorNames.V" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.operator.one_electron">
+<span id="moha-system-operator-one-electron-module"></span><h2><span class="section-number">2.1.1.1.4.3. </span>moha.system.operator.one_electron module<a class="headerlink" href="#module-moha.system.operator.one_electron" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.AngularMomentumOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">AngularMomentumOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#AngularMomentumOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.AngularMomentumOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Angular momentum operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,basis_set,*args)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.AngularMomentumOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#AngularMomentumOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.AngularMomentumOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.DifferentialOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">DifferentialOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#DifferentialOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.DifferentialOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Differential operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,basis_set,*args)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.DifferentialOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#DifferentialOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.DifferentialOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">*</span></a>args</dt><dd><p>Arguments for multipole moment.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.KineticOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">KineticOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#KineticOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.KineticOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Kinetic operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,molecule,basis_set)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.KineticOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#KineticOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.KineticOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.LinearMomentumOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">LinearMomentumOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#LinearMomentumOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.LinearMomentumOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Linear momentum operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,basis_set,*args)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.LinearMomentumOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#LinearMomentumOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.LinearMomentumOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.MultipoleMomentOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">MultipoleMomentOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#MultipoleMomentOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.MultipoleMomentOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Multipole moment operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,basis_set,*args)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.MultipoleMomentOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#MultipoleMomentOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.MultipoleMomentOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+<dt><a href="#id3"><span class="problematic" id="id4">*</span></a>args</dt><dd><p>Arguments for multipole moment</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.NuclearAttractionOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">NuclearAttractionOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#NuclearAttractionOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.NuclearAttractionOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Nuclear attraction operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron=1,integra=None)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,molecule,basis_set)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.NuclearAttractionOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#NuclearAttractionOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.NuclearAttractionOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>moleucle<span class="classifier">Molecule</span></dt><dd><p>Molecule instance.</p>
+</dd>
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If molecule parameter is not a Molecule instance.
+If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">OneElectronOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OneElectronOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.base.BaseOperator" title="moha.system.operator.base.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.base.BaseOperator</span></code></a></p>
+<p>One electron operator class.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+<dt>name<span class="classifier">OperatorNames</span></dt><dd><p>Name of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, integral, name)</dt><dd><p>Initialize the operator</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix):</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.basis_transformation">
+<span class="sig-name descname"><span class="pre">basis_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OneElectronOperator.basis_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.basis_transformation" title="Permalink to this definition"></a></dt>
+<dd><p>Rotate orbitals with a transformation matrix.</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{h}_{ab} &amp;= \sum_{ij} C^\dagger_{ai} h_{ij} C_{jb}\
+\widetilde{g}_{abcd} &amp;= \sum_{ijkl} C^\dagger_{ai} C^\dagger_{bj} g_{ijkl} C_{kc} C_{ld}\]</div>
+<dl class="simple">
+<dt>matrix<span class="classifier">np.ndarray(K, L)</span></dt><dd><p>Transformation matrix.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If matrix is not a numpy array.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If shape of matrix does not match up with the shape of the integrals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.ones">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OneElectronOperator.ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.ones" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with ones elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.random">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OneElectronOperator.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.random" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with random elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.zeros">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OneElectronOperator.zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.zeros" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with zeros elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.nspatial">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspatial</span></span><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.nspin">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spin orbitals.</p>
+<dl class="simple">
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OneElectronOperator.spin_orbital_basis_integral">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spin_orbital_basis_integral</span></span><a class="headerlink" href="#moha.system.operator.one_electron.OneElectronOperator.spin_orbital_basis_integral" title="Permalink to this definition"></a></dt>
+<dd><p>Return integral in spin orbitals basis.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator in spin orbital basis.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OverlapOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.one_electron.</span></span><span class="sig-name descname"><span class="pre">OverlapOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OverlapOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OverlapOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.one_electron.OneElectronOperator" title="moha.system.operator.one_electron.OneElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.one_electron.OneElectronOperator</span></code></a></p>
+<p>Overlap operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">float64, complex128</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral<span class="classifier">np.ndarray</span></dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, integral)</dt><dd><p>Initialize the operator</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix):</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.one_electron.OverlapOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/one_electron.html#OverlapOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.one_electron.OverlapOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.operator.two_electron">
+<span id="moha-system-operator-two-electron-module"></span><h2><span class="section-number">2.1.1.1.4.4. </span>moha.system.operator.two_electron module<a class="headerlink" href="#module-moha.system.operator.two_electron" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.ElectronRepulsionOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.two_electron.</span></span><span class="sig-name descname"><span class="pre">ElectronRepulsionOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#ElectronRepulsionOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.ElectronRepulsionOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.two_electron.TwoElectronOperator" title="moha.system.operator.two_electron.TwoElectronOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.two_electron.TwoElectronOperator</span></code></a></p>
+<p>Electron repulsion operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>spin_orbital_basis_integral(self)</dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,integral)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix)</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.ElectronRepulsionOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#ElectronRepulsionOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.ElectronRepulsionOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>basis_set<span class="classifier">BasisSet</span></dt><dd><p>Hatree Fock basis set instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set parameter is not a BasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.ElectronRepulsionOperator.coulomb">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">coulomb</span></span><a class="headerlink" href="#moha.system.operator.two_electron.ElectronRepulsionOperator.coulomb" title="Permalink to this definition"></a></dt>
+<dd><p>Coulomb integral.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Coulomb integral.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.ElectronRepulsionOperator.double_bar">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">double_bar</span></span><a class="headerlink" href="#moha.system.operator.two_electron.ElectronRepulsionOperator.double_bar" title="Permalink to this definition"></a></dt>
+<dd><p>Antisymmetrized two electron integral.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Antisymmetrized two electron integral.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.ElectronRepulsionOperator.exchange">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">exchange</span></span><a class="headerlink" href="#moha.system.operator.two_electron.ElectronRepulsionOperator.exchange" title="Permalink to this definition"></a></dt>
+<dd><p>Exchange integral.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Exchange integral.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.two_electron.</span></span><span class="sig-name descname"><span class="pre">TwoElectronOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#TwoElectronOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.base.BaseOperator" title="moha.system.operator.base.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.base.BaseOperator</span></code></a></p>
+<p>Two electron operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier"></span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+<dt>spin_orbital_basis_integral </dt><dd><p>Return integral matrix in spin orbitals basis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,integral)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral value for the operator.</p>
+</dd>
+<dt>basis_transformation(self,matrix):</dt><dd><p>Rotate orbitals with a transformation matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.basis_transformation">
+<span class="sig-name descname"><span class="pre">basis_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#TwoElectronOperator.basis_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.basis_transformation" title="Permalink to this definition"></a></dt>
+<dd><p>Rotate orbitals with a transformation matrix.</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{h}_{ab} &amp;= \sum_{ij} C^\dagger_{ai} h_{ij} C_{jb}\
+\widetilde{g}_{abcd} &amp;= \sum_{ijkl} C^\dagger_{ai} C^\dagger_{bj} g_{ijkl} C_{kc} C_{ld}\]</div>
+<dl class="simple">
+<dt>matrix<span class="classifier">np.ndarray(K, L)</span></dt><dd><p>Transformation matrix.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If matrix is not a numpy array.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If shape of matrix does not match up with the shape of the integrals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.ones">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#TwoElectronOperator.ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.ones" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with ones elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.random">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#TwoElectronOperator.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.random" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with random elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.zeros">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/two_electron.html#TwoElectronOperator.zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.zeros" title="Permalink to this definition"></a></dt>
+<dd><p>generate instance with zeros elements ndarray.</p>
+<dl class="simple">
+<dt>shape<span class="classifier">tuple/list</span></dt><dd><p>Shape of the ndarray.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If shape is not two dimension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.nspatial">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspatial</span></span><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.nspin">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spin orbitals.</p>
+<dl class="simple">
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.operator.two_electron.TwoElectronOperator.spin_orbital_basis_integral">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spin_orbital_basis_integral</span></span><a class="headerlink" href="#moha.system.operator.two_electron.TwoElectronOperator.spin_orbital_basis_integral" title="Permalink to this definition"></a></dt>
+<dd><p>Return integral in spin orbitals basis.</p>
+<dl class="simple">
+<dt>integral<span class="classifier">np.ndarray</span></dt><dd><p>Integral of the operator in spin orbital basis.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.operator.zero_electron">
+<span id="moha-system-operator-zero-electron-module"></span><h2><span class="section-number">2.1.1.1.4.5. </span>moha.system.operator.zero_electron module<a class="headerlink" href="#module-moha.system.operator.zero_electron" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.operator.zero_electron.NuclearRepulsionOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.operator.zero_electron.</span></span><span class="sig-name descname"><span class="pre">NuclearRepulsionOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/zero_electron.html#NuclearRepulsionOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.zero_electron.NuclearRepulsionOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.operator.base.BaseOperator" title="moha.system.operator.base.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.base.BaseOperator</span></code></a></p>
+<p>Nuclear repulsion operator class.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the operator.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of the spatial orbitals.</p>
+</dd>
+<dt>nelectron<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>integral<span class="classifier">int,float</span></dt><dd><p>Integral of the operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>dtype<span class="classifier">int,float</span></dt><dd><p>Data type of the integrals.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,name,nspatial,nelectron,integral)</dt><dd><p>Initialize the Operator.</p>
+</dd>
+<dt>build(cls,molecule,basis_set)</dt><dd><p>Build the operator instance.</p>
+</dd>
+<dt>assign_name(self,name)</dt><dd><p>Assign name to the operator.</p>
+</dd>
+<dt>assign_nspatial(self,nspatial)</dt><dd><p>Assign number of spatial orbitals for the operator.</p>
+</dd>
+<dt>assign_nelectron(self,nelectron)</dt><dd><p>Assign number of elctrons involved in the integral.</p>
+</dd>
+<dt>assign_integral(self,integral)</dt><dd><p>Assign integral for the operator.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.operator.zero_electron.NuclearRepulsionOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/operator/zero_electron.html#NuclearRepulsionOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.operator.zero_electron.NuclearRepulsionOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the nuclear repulsion operator.</p>
+<dl class="simple">
+<dt>moleucle<span class="classifier">Molecule </span></dt><dd><p>Molecule instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If molecule parameter is not a Molecule instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.operator">
+<span id="module-contents"></span><h2><span class="section-number">2.1.1.1.4.6. </span>Module contents<a class="headerlink" href="#module-moha.system.operator" title="Permalink to this headline"></a></h2>
+</div>
 </div>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="moha.system.basis.html" class="btn btn-neutral float-left" title="2.1.2. moha.system.basis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="moha.hf.scf.html" class="btn btn-neutral float-right" title="2.2.1. moha.hf.scf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="moha.system.integral.html" class="btn btn-neutral float-left" title="2.1.1.1.3. moha.system.integral package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.system.wavefunction.html" class="btn btn-neutral float-right" title="2.1.1.1.5. moha.system.wavefunction package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

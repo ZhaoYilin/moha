@@ -1,27 +1,24 @@
 Hartree-Fock
 ############
-Hartree Fock method provides the fundamental approximation of wave--function theory. Although Hartree Fock 
-theory is only qualitatively correct, it forms the basis for more accurate models and become the cornerstone of 
-ab initio quantum chemistry.
+Hartree Fock method provides the fundamental approximation of wave--function theory. Although Hartree Fock theory is only qualitatively correct, it forms the basis for more accurate models and become the cornerstone of ab initio quantum chemistry.
 
-Hartree--Fock method assumes that the ground state wave function is the direct product state of a series of 
-single electron wave--functions. The Hartree--Fock wave--function ansatz can be written as
+Hartree--Fock method assumes that the ground state wave function is the direct product state of a series of single electron wave--functions. The Hartree--Fock wave--function ansatz can be written as
 
 .. math::
 
-    |{\kappa}\rangle = exp(-\hat{\kappa})|0\rangle
+    \vert \kappa \rangle = exp(-\hat{\kappa})\vert 0\rangle
 
 where the anti--Hermitian operator :math:`\hat{\kappa}` in general form is 
 
 .. math::
 
-	\hat{\kappa} = \sum_{pq} \kappa_{PQ} a_P^{\dagger}a_Q
+    \hat{\kappa} = \sum_{pq} \kappa_{PQ} a_P^{\dagger}a_Q
 
 The Hartree--Fock wave--function is optimized with respect of variations of spin orbitals.
 
 .. math::
 
-    E_{HF} = min \langle {\kappa} |\hat{H}| {\kappa} \rangle
+    E_{HF} = min \langle {\kappa} \vert \hat{H} \vert {\kappa} \rangle
 
 a new set of spin orbitals can be update by unitary transformation
 
@@ -33,40 +30,29 @@ the unitary matrix can be written as
 
 .. math::
 
-	{U} = exp(-{\kappa})
+    {U} = exp(-{\kappa})
 
-the spin orbitals is determined by solving a set of effective one--electron Schr\"{o}dinger equations, where the 
-effective Hamiltonian associated is Fock operator. The eigenvalues of the Fock operator are the spin energies 
-and eigenvectors the spin orbitals.
+the spin orbitals is determined by solving a set of effective one--electron Schr\"{o}dinger equations, where the effective Hamiltonian associated is Fock operator. The eigenvalues of the Fock operator are the spin energies and eigenvectors the spin orbitals.
 
 .. math::
 
-	\hat{f} = \hat{h} + \hat{V}
+    \hat{f} = \hat{h} + \hat{V}
 
-:math:`\hat{h}` is the one--body term in chemical Hamiltonian, the two--body potential terms in original 
-Hamiltonian is replaced by the effective one electron Fock potential :math:`\hat{V}`.
-
-.. math::
-
-	\hat{V} = \sum_{pq} \sum_{i} (2g_{pqii}-g_{piiq})E_{pq}
-
-since Fock matrix is define by its own eigenvectors, an iterative procedure, self--consistent--field(SCF) 
-method is applied.
-
-Optimized by variational theorem, Hartree--Fock energy is an upper bound to the exact energy. It typical gives 
-errors of :math:`0.5\%` in the energy, :math:`1\%`  in molecular geometry and :math:`5-10\%` in other properties.
-The difference between the Hartree--Fock limit energy and the exact non--relativistic energy of a system is defined as 
-correlation energy.
+:math:`\hat{h}` is the one--body term in chemical Hamiltonian, the two--body potential terms in original Hamiltonian is replaced by the effective one electron Fock potential :math:`\hat{V}`.
 
 .. math::
 
-	E_{corr} = \mathcal{E}_0 - E_{HF}
+    \hat{V} = \sum_{pq} \sum_{i} (2g_{pqii}-g_{piiq})E_{pq}
+
+since Fock matrix is define by its own eigenvectors, an iterative procedure, self--consistent--field(SCF) method is applied. Optimized by variational theorem, Hartree--Fock energy is an upper bound to the exact energy. It typical gives errors of :math:`0.5\%` in the energy, :math:`1\%`  in molecular geometry and :math:`5-10\%` in other properties. The difference between the Hartree--Fock limit energy and the exact non--relativistic energy of a system is defined as correlation energy.
+
+.. math::
+
+    E_{corr} = \mathcal{E}_0 - E_{HF}
 
 
 Plain Solver
 ============
-* Restriced Hartree-Fock
-
 For the Roothan-Hartee-Fock equations an orthogonal basis is needed, first the first orthogonalization matrix is constructed from the overlap matrix. First by a diagonalization:
 
 .. math::
@@ -130,47 +116,9 @@ of the density matrix can be found as:
     \Delta E_n &= E_{n,elec}−E_{n−1,elec}\\
     RMSD_n     &= \sqrt{\sum_{ij} D_{n,ij}−D_{n−1,ij}}
 
-
-
-
-* Unrestriced Hartrr-Fock
-
-The unrestricted Hartee-Fock method uses the same SCF procedure as as the restricted Hartree-Fock,
-but with the Fock matrix coupling the alpha and beta spins:
-
-.. math::
-
-    F_{n,α,ij}= H^{core}_{ij}
-                +\sum_{kl}^{AO} D_{n−1,α,kl}((ij||kl)−(ik||jl))
-                +\sum_{kl}^{AO} D_{n−1,β,kl}(ij||kl)
-
-In unrestricted Hartree-Fock for a closed shell system the spin-symmetry needs to be broken else
-restricted Hartree-Fock is restored. This is done by the following method, after the first MO
-coefficients have been made:
-
-.. math::
-
-    C^{new}_{i,HOMO} &= \frac{1}{\sqrt{1+k^2}} 
-                        (C^{old}_{i,HOMO}+kC^{old}_{i,LUMO})\\
-    C^{new}_{i,LUMO} &= \frac{1}{\sqrt{1+k^2}} 
-                        (−kC^{old}_{i,HOMO}+C^{old}_{i,LUMO})
-
-
-* Example
-Starting from the basics, we'll run a simple calculation for a water molecule with a bond-length of 1.1 Å and a
-bond angle of :math:`104.0^{\circ}` with an STO-3G basis set. 
-
-Restricted Hartree-Fock
+Plain Hartree-Fock solver
     .. literalinclude:: ../data/examples/hf/scf.py
-            :lines: 1-20
-            :caption: /data/examples/hf/scf.py
-
-.. figure:: ./pictures/h2.png
-        :scale: 100%
-        :align: center
-
-More examples can be found in data/examples/hf/.
-
+        :caption: /data/examples/hf/scf.py
 
 DIIS Solver
 ============
@@ -220,5 +168,4 @@ Finally the new F’ is constructed as:
 
 DIIS Hartree-Fock solver
     .. literalinclude:: ../data/examples/hf/scf_diis.py
-            :lines: 1-20
-            :caption: /data/examples/hf/scf_diis.py
+        :caption: /data/examples/hf/scf_diis.py

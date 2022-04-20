@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>moha.posthf.pt &mdash; moha 1.0.0 documentation</title>
+  <title>2.3.1.1.3. moha.posthf.pt package &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,7 +17,9 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.4.1. moha.property package" href="moha.property.html" />
+    <link rel="prev" title="2.3.1.1.2. moha.posthf.ci package" href="moha.posthf.ci.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -28,7 +31,7 @@
             <img src="../_static/moha.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                1.0.0
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -40,19 +43,36 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">INSTALL:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install_linux.html">1. Installation For Linux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install_mac.html">2. Installation For macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">1. Installation For Linux</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user_molecular_system.html">1. Molecular System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">1. Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">2. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">3. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">4. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">5. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../developer_api.html">1. API Doucmentation</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="moha.html">2.1. System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.posthf.html">2.3.1. moha.posthf package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.posthf.html#subpackages">2.3.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.posthf.html#module-moha.posthf">2.3.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -69,7 +89,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>moha.posthf.pt</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.posthf.html"><span class="section-number">2.3.1. </span>moha.posthf package</a> &raquo;</li>
+      <li><span class="section-number">2.3.1.1.3. </span>moha.posthf.pt package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/developer_api/moha.posthf.pt.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -79,14 +102,179 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-moha.posthf.pt">
-<span id="moha-posthf-pt"></span><h1>moha.posthf.pt<a class="headerlink" href="#module-moha.posthf.pt" title="Permalink to this headline"></a></h1>
+  <div class="section" id="moha-posthf-pt-package">
+<h1><span class="section-number">2.3.1.1.3. </span>moha.posthf.pt package<a class="headerlink" href="#moha-posthf-pt-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.3.1.1.3.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.posthf.pt.auxiliary">
+<span id="moha-posthf-pt-auxiliary-module"></span><h2><span class="section-number">2.3.1.1.3.2. </span>moha.posthf.pt.auxiliary module<a class="headerlink" href="#module-moha.posthf.pt.auxiliary" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.posthf.pt.auxiliary.spinfock">
+<span class="sig-prename descclassname"><span class="pre">moha.posthf.pt.auxiliary.</span></span><span class="sig-name descname"><span class="pre">spinfock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eorbitals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/auxiliary.html#spinfock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.auxiliary.spinfock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.pt.mp2">
+<span id="moha-posthf-pt-mp2-module"></span><h2><span class="section-number">2.3.1.1.3.3. </span>moha.posthf.pt.mp2 module<a class="headerlink" href="#module-moha.posthf.pt.mp2" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp2.MP2Solver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.pt.mp2.</span></span><span class="sig-name descname"><span class="pre">MP2Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp2.html#MP2Solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp2.MP2Solver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Second-order Moller-Plesset perturbation solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,hf_results)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_hartree_fock_results(self,hf_results)</dt><dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp2.MP2Solver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp2.html#MP2Solver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp2.MP2Solver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp2.MP2Solver.assign_hartree_fock_results">
+<span class="sig-name descname"><span class="pre">assign_hartree_fock_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp2.html#MP2Solver.assign_hartree_fock_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp2.MP2Solver.assign_hartree_fock_results" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+<dl class="simple">
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Hartree Fock calculation results is not a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp2.MP2Solver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp2.html#MP2Solver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp2.MP2Solver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp2.MP2Solver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp2.html#MP2Solver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp2.MP2Solver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>MP2 calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.pt.mp3">
+<span id="moha-posthf-pt-mp3-module"></span><h2><span class="section-number">2.3.1.1.3.4. </span>moha.posthf.pt.mp3 module<a class="headerlink" href="#module-moha.posthf.pt.mp3" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp3.MP3Solver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.pt.mp3.</span></span><span class="sig-name descname"><span class="pre">MP3Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp3.html#MP3Solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp3.MP3Solver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Third-order Moller-Plesset perturbation solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,hf_results)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_hartree_fock_results(self,hf_results)</dt><dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp3.MP3Solver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp3.html#MP3Solver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp3.MP3Solver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp3.MP3Solver.assign_hartree_fock_results">
+<span class="sig-name descname"><span class="pre">assign_hartree_fock_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp3.html#MP3Solver.assign_hartree_fock_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp3.MP3Solver.assign_hartree_fock_results" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+<dl class="simple">
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Hartree Fock calculation results is not a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp3.MP3Solver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp3.html#MP3Solver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp3.MP3Solver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.pt.mp3.MP3Solver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/pt/mp3.html#MP3Solver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.pt.mp3.MP3Solver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>MP3 calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.pt">
+<span id="module-contents"></span><h2><span class="section-number">2.3.1.1.3.5. </span>Module contents<a class="headerlink" href="#module-moha.posthf.pt" title="Permalink to this headline"></a></h2>
+</div>
 </div>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.posthf.ci.html" class="btn btn-neutral float-left" title="2.3.1.1.2. moha.posthf.ci package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.property.html" class="btn btn-neutral float-right" title="2.4.1. moha.property package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
