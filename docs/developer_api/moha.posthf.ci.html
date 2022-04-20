@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.3.1.1.2. moha.posthf.ci package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.3.1.1.3. moha.posthf.pt package" href="moha.posthf.pt.html" />
+    <link rel="prev" title="2.3.1.1.1. moha.posthf.cc package" href="moha.posthf.cc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="moha.html">2.1. System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.posthf.html">2.3.1. moha.posthf package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.posthf.html#subpackages">2.3.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.posthf.html#module-moha.posthf">2.3.1.2. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.posthf.html"><span class="section-number">2.3.1. </span>moha.posthf package</a> &raquo;</li>
+      <li><span class="section-number">2.3.1.1.2. </span>moha.posthf.ci package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.posthf.ci.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-posthf-ci-package">
+<h1><span class="section-number">2.3.1.1.2. </span>moha.posthf.ci package<a class="headerlink" href="#moha-posthf-ci-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.3.1.1.2.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.posthf.ci.ci_basis_set">
+<span id="moha-posthf-ci-ci-basis-set-module"></span><h2><span class="section-number">2.3.1.1.2.2. </span>moha.posthf.ci.ci_basis_set module<a class="headerlink" href="#module-moha.posthf.ci.ci_basis_set" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.ci_basis_set.</span></span><span class="sig-name descname"><span class="pre">CIBasisSet</span></span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+<p>Configuration interaction basis set.</p>
+<dl class="simple">
+<dt>reference</dt><dd><p>Reference Slater Determinant.</p>
+</dd>
+<dt>truncation<span class="classifier">int</span></dt><dd><p>Maxium excitation level.</p>
+</dd>
+</dl>
+<blockquote>
+<div><dl class="simple">
+<dt>__init__(self)</dt><dd><p>Initialize the instance.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>append(self,basis)</dt><dd><p>Append one basis to the basis set.</p>
+</dd>
+<dt>assign_truncation(self,truncation)</dt><dd><p>Assign truncation.</p>
+</dd>
+<dt>generate_basis_set(self,truncation)</dt><dd><p>Generate N electron basis set.</p>
+</dd>
+<dt>generate_annihilation_creation(self,degree)</dt><dd><p>Generate a list of annihilation and creation.</p>
+</dd>
+<dt>apply_annihilation_creation(self,ac_list)</dt><dd><p>Apply annihilation and creation to the self Slater determinant.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.add_excitation">
+<span class="sig-name descname"><span class="pre">add_excitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nexc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet.add_excitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.add_excitation" title="Permalink to this definition"></a></dt>
+<dd><p>Add excitation state.</p>
+<dl class="simple">
+<dt>reference<span class="classifier">SlaterDeterminant</span></dt><dd><p>Reference configuration.</p>
+</dd>
+<dt>nexc<span class="classifier">int</span></dt><dd><p>Number of excitation electrons.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If reference is not a SlaterDeterminant instance.</p>
+</dd>
+<dt>TypeError </dt><dd><p>If nexc is not int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.append" title="Permalink to this definition"></a></dt>
+<dd><p>Add one basis to the basis set.</p>
+<dl class="simple">
+<dt>basis</dt><dd><p>Basis instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If orb is not a SlaterDeterminant instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.apply_annihilation_creation">
+<span class="sig-name descname"><span class="pre">apply_annihilation_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet.apply_annihilation_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.apply_annihilation_creation" title="Permalink to this definition"></a></dt>
+<dd><p>Apply annihilation and creation to the self Slater determinant.</p>
+<dl class="simple">
+<dt>ac<span class="classifier">dict</span></dt><dd><p>A dictionary of annihilation and creation.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If ac is not a dictionary.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>configuraiton<span class="classifier">dict</span></dt><dd><p>New configuration for the self Slater determinant.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.build" title="Permalink to this definition"></a></dt>
+<dd><p>Generate CI basis set.</p>
+<dl class="simple">
+<dt>truncation<span class="classifier">int</span></dt><dd><p>Truncation number.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError </dt><dd><p>If truncation is not a list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.generate_annihilation_creation">
+<span class="sig-name descname"><span class="pre">generate_annihilation_creation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reference</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_basis_set.html#CIBasisSet.generate_annihilation_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.generate_annihilation_creation" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a list of annihilation and creation.</p>
+<dl class="simple">
+<dt>degree<span class="classifier">int</span></dt><dd><p>Truncation level.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If parameter degree is not an int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If parameter degree is not a none negative number.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ac_list<span class="classifier">list</span></dt><dd><p>A list of annihilation and creation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_basis_set.CIBasisSet.size">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#moha.posthf.ci.ci_basis_set.CIBasisSet.size" title="Permalink to this definition"></a></dt>
+<dd><p>Size of the CI basis set.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.ci_operator">
+<span id="moha-posthf-ci-ci-operator-module"></span><h2><span class="section-number">2.3.1.1.2.3. </span>moha.posthf.ci.ci_operator module<a class="headerlink" href="#module-moha.posthf.ci.ci_operator" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_operator.CIOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.ci_operator.</span></span><span class="sig-name descname"><span class="pre">CIOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_operator.html#CIOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_operator.CIOperator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="moha.system.operator.html#moha.system.operator.base.BaseOperator" title="moha.system.operator.base.BaseOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.operator.base.BaseOperator</span></code></a></p>
+<p>Configuration interaction Operator.</p>
+<dl class="simple">
+<dt>__new__(self, integral)</dt><dd><p>Generate new CI Operator.</p>
+</dd>
+<dt>__init__(self, integral)</dt><dd><p>Initialize the CI Operator.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>build(cls, h1e, g2e, basis_set)</dt><dd><p>Build the CI Operator.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_operator.CIOperator.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h1e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_operator.html#CIOperator.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_operator.CIOperator.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the configuration interaction Operator.</p>
+<dl class="simple">
+<dt>h1e<span class="classifier">np.ndarray</span></dt><dd><p>One electron integral.</p>
+</dd>
+<dt>g2e<span class="classifier">np.ndarray</span></dt><dd><p>Two electron integral.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Configuration interaction basis set.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis_set is not a CIBasisSet instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ham<span class="classifier">CIOperator</span></dt><dd><p>Instance of CIOperator.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.ci_wavefunction">
+<span id="moha-posthf-ci-ci-wavefunction-module"></span><h2><span class="section-number">2.3.1.1.2.4. </span>moha.posthf.ci.ci_wavefunction module<a class="headerlink" href="#module-moha.posthf.ci.ci_wavefunction" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.ci_wavefunction.</span></span><span class="sig-name descname"><span class="pre">CIWaveFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_wavefunction.html#CIWaveFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="moha.system.wavefunction.html#moha.system.wavefunction.base.BaseWaveFunction" title="moha.system.wavefunction.base.BaseWaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.wavefunction.base.BaseWaveFunction</span></code></a></p>
+<p>Configuration interaction wavefunction class.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>basis_set<span class="classifier">Basis</span></dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+<dt>coefficients<span class="classifier">np.ndarray</span></dt><dd><p>Coefficientss of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbital</p>
+</dd>
+<dt>spin<span class="classifier">int</span></dt><dd><p>Spin of the wavefunction</p>
+</dd>
+<dt>seniority: int</dt><dd><p>Seniority of the wavefunction</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nelec, nspatial, basis_set=None, coefficients=None)</dt><dd><p>Initialize the wavefunction.</p>
+</dd>
+<dt>assign_nelec(self, nelec)</dt><dd><p>Assign the number of electrons.</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assign the number of spatial orbitals.</p>
+</dd>
+<dt>assign_occ(self, occ)</dt><dd><p>Assign the occupation number of the wavefunction.</p>
+</dd>
+<dt>assign_basis_set(self, basis_set)</dt><dd><p>Assign basis set of the wavefunction.</p>
+</dd>
+<dt>assign_coefficients(self, coefficients)</dt><dd><p>Assign coefficients of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction.assign_basis_set">
+<span class="sig-name descname"><span class="pre">assign_basis_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_wavefunction.html#CIWaveFunction.assign_basis_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction.assign_basis_set" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the basis_set of the wavefunction.</p>
+<dl class="simple">
+<dt>basis_set </dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If basis set is not a CIBasisSet instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction.assign_coefficients">
+<span class="sig-name descname"><span class="pre">assign_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/ci_wavefunction.html#CIWaveFunction.assign_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction.assign_coefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the coefficients of the wavefunction.</p>
+<dl class="simple">
+<dt>coefficients</dt><dd><p>Parameters of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If coefficients is not a np.ndarray.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction.configuration">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">configuration</span></span><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction.configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Return the cofiguration of the wavefunction.</p>
+<dl class="simple">
+<dt>c<span class="classifier">dict</span></dt><dd><p>Configuration of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction.ncoefficients">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ncoefficients</span></span><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction.ncoefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of wavefunction coefficients.</p>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If coefficients is not a np.ndarray instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.ci_wavefunction.CIWaveFunction.seniority">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">seniority</span></span><a class="headerlink" href="#moha.posthf.ci.ci_wavefunction.CIWaveFunction.seniority" title="Permalink to this definition"></a></dt>
+<dd><p>Return the seniority of the wavefunction.</p>
+<p>Seniority of a Slater determinant is its number of unpaired electrons. The seniority of the
+wavefunction is the expected number of unpaired electrons.</p>
+<dl class="simple">
+<dt>seniority<span class="classifier">int</span></dt><dd><p>Seniority of the wavefunction.</p>
+</dd>
+</dl>
+<p><cite>None</cite> means that all possible seniority are allowed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.cis">
+<span id="moha-posthf-ci-cis-module"></span><h2><span class="section-number">2.3.1.1.2.5. </span>moha.posthf.ci.cis module<a class="headerlink" href="#module-moha.posthf.ci.cis" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.cis.CISSolver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.cis.</span></span><span class="sig-name descname"><span class="pre">CISSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cis.html#CISSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cis.CISSolver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="simple">
+<dt>Configuration Interaction Singles Wavefunction.</dt><dd><p>CI with HF Ground state and all single and double excitations</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,hf_results)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_hartree_fock_results(self,hf_results)</dt><dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cis.CISSolver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cis.html#CISSolver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cis.CISSolver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cis.CISSolver.assign_hartree_fock_results">
+<span class="sig-name descname"><span class="pre">assign_hartree_fock_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cis.html#CISSolver.assign_hartree_fock_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cis.CISSolver.assign_hartree_fock_results" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+<dl class="simple">
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Hartree Fock calculation results is not a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cis.CISSolver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cis.html#CISSolver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cis.CISSolver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cis.CISSolver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cis.html#CISSolver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cis.CISSolver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>CIS calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.cisd">
+<span id="moha-posthf-ci-cisd-module"></span><h2><span class="section-number">2.3.1.1.2.6. </span>moha.posthf.ci.cisd module<a class="headerlink" href="#module-moha.posthf.ci.cisd" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.cisd.CISDSolver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.cisd.</span></span><span class="sig-name descname"><span class="pre">CISDSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cisd.html#CISDSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cisd.CISDSolver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="simple">
+<dt>Configuration Interaction Singles and Doubles Wavefunction.</dt><dd><p>CI with HF Ground state and all single and double excitations</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,hf_results)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_hartree_fock_results(self,hf_results)</dt><dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cisd.CISDSolver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cisd.html#CISDSolver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cisd.CISDSolver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cisd.CISDSolver.assign_hartree_fock_results">
+<span class="sig-name descname"><span class="pre">assign_hartree_fock_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cisd.html#CISDSolver.assign_hartree_fock_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cisd.CISDSolver.assign_hartree_fock_results" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+<dl class="simple">
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Hartree Fock calculation results is not a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cisd.CISDSolver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cisd.html#CISDSolver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cisd.CISDSolver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.cisd.CISDSolver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/cisd.html#CISDSolver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.cisd.CISDSolver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>CISD calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.fci">
+<span id="moha-posthf-ci-fci-module"></span><h2><span class="section-number">2.3.1.1.2.7. </span>moha.posthf.ci.fci module<a class="headerlink" href="#module-moha.posthf.ci.fci" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.fci.FullCISolver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.fci.</span></span><span class="sig-name descname"><span class="pre">FullCISolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/fci.html#FullCISolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.fci.FullCISolver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="simple">
+<dt>Full Configuration Interaction Wavefunction.</dt><dd><p>CI with HF Ground state and all single and double excitations</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,hf_results)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_hartree_fock_results(self,hf_results)</dt><dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.fci.FullCISolver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/fci.html#FullCISolver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.fci.FullCISolver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.fci.FullCISolver.assign_hartree_fock_results">
+<span class="sig-name descname"><span class="pre">assign_hartree_fock_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf_results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/fci.html#FullCISolver.assign_hartree_fock_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.fci.FullCISolver.assign_hartree_fock_results" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock calculation results to the solver.</p>
+<dl class="simple">
+<dt>hf_results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Hartree Fock calculation results is not a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.fci.FullCISolver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/fci.html#FullCISolver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.fci.FullCISolver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.fci.FullCISolver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/fci.html#FullCISolver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.fci.FullCISolver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Full CI calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci.slater">
+<span id="moha-posthf-ci-slater-module"></span><h2><span class="section-number">2.3.1.1.2.8. </span>moha.posthf.ci.slater module<a class="headerlink" href="#module-moha.posthf.ci.slater" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterCondon">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.slater.</span></span><span class="sig-name descname"><span class="pre">SlaterCondon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h1e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterCondon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterCondon" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The rules which allow us to express matrix elements Hij in terms of one and two
+electron integrals.</p>
+<dl class="simple">
+<dt>h1e<span class="classifier">np.ndarray</span></dt><dd><p>One electron integral.</p>
+</dd>
+<dt>g2e<span class="classifier">np.ndarray</span></dt><dd><p>Two electron integral.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, h1e, g2e)</dt><dd><p>Initialize the instance.</p>
+</dd>
+<dt>calculate_matrix_element(self,det1,det2)</dt><dd><p>Calculate matrix element between two determinants.</p>
+</dd>
+<dt>identical(self,det)</dt><dd><p>Calculate matrix element whose configurations are identical.</p>
+</dd>
+<dt>differ_by1(self,det1,det2):</dt><dd><p>Calculate matrix element whose configuration differ by 1 spin orbitals.</p>
+</dd>
+<dt>difer_byf2(self,det1,det2):</dt><dd><p>Calculate matrix element whose configuration differ by 2 spin orbitals.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterCondon.calculate_matrix_element">
+<span class="sig-name descname"><span class="pre">calculate_matrix_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sd1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterCondon.calculate_matrix_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterCondon.calculate_matrix_element" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate matrix element between two determinants.</p>
+<dl class="simple">
+<dt>sd1<span class="classifier">SlaterDeterminant</span></dt><dd><p>The first SlaterDeterminant instance.</p>
+</dd>
+<dt>sd2<span class="classifier">SlaterDeterminant</span></dt><dd><p>The second SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If sd1 is not SlaterDeterminant instance.
+If sd2 is not SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>value<span class="classifier">float</span></dt><dd><p>The integral value of CI Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterCondon.differ_by1">
+<span class="sig-name descname"><span class="pre">differ_by1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sd1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterCondon.differ_by1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterCondon.differ_by1" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate matrix element whose configuration differ by 1 spin orbitals.</p>
+<dl class="simple">
+<dt>sd1</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+<dt>sd2</dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If sd1 is not SlaterDeterminant instance.
+If sd2 is not SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>value<span class="classifier">float</span></dt><dd><p>The integral value of CI Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterCondon.differ_by2">
+<span class="sig-name descname"><span class="pre">differ_by2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sd1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sd2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterCondon.differ_by2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterCondon.differ_by2" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate matrix element whose configuration differ by 2 spin orbitals.</p>
+<dl class="simple">
+<dt>sd1</dt><dd><p>First SlaterDeterminant instance.</p>
+</dd>
+<dt>sd2</dt><dd><p>Second SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If sd1 is not SlaterDeterminant instance.
+If sd2 is not SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>value<span class="classifier">float</span></dt><dd><p>The integral value of CI Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterCondon.identical">
+<span class="sig-name descname"><span class="pre">identical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterCondon.identical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterCondon.identical" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate matrix element whose configurations are identical.</p>
+<dl class="simple">
+<dt>sd<span class="classifier">SlaterDeterminant</span></dt><dd><p>A SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If sd is not SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>value<span class="classifier">float</span></dt><dd><p>The integral value of CI Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.posthf.ci.slater.</span></span><span class="sig-name descname"><span class="pre">SlaterDeterminant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+<p>Slater Determinant Basis.</p>
+<dl class="simple">
+<dt>self<span class="classifier">list</span></dt><dd><p>Binary representation of the determinant in spin orbitals.
+odd indices for alpha spin orbitals.
+even indices for beta spin orbitals.
+0 for unoccupied spin orbital.
+1 for occupied spin orbital.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>nspatials<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>nspins<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+<dt>nalphas<span class="classifier">int</span></dt><dd><p>Number of alpha spin electrons.</p>
+</dd>
+<dt>nbetas<span class="classifier">int</span></dt><dd><p>Number of beta spin electrons.</p>
+</dd>
+<dt>nelectrons :</dt><dd><p>Number of total electrons.</p>
+</dd>
+<dt>alpha<span class="classifier">list</span></dt><dd><p>Configuraiton of alpha spin orbitals.</p>
+</dd>
+<dt>beta<span class="classifier">list</span></dt><dd><p>Configuraiton of beta spin orbitals.</p>
+</dd>
+<dt>occ_indices<span class="classifier">list</span></dt><dd><p>Occupation indices of the spin orbitals.</p>
+</dd>
+<dt>spatial_format<span class="classifier">list</span></dt><dd><p>Representation of the Slater determinants in spatial orbitals.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,configuration)</dt><dd><p>Initialize the instance.</p>
+</dd>
+<dt>assign_configuration(self,configuration)</dt><dd><p>Assign configuration to the Slater determinant.</p>
+</dd>
+<dt>degree_of_excitation(self,other)</dt><dd><p>Compute the degree of excitation between D1 and D2.</p>
+</dd>
+<dt>annihilation_list(self,other)</dt><dd><p>Identifying the annihilated spin orbitals.</p>
+</dd>
+<dt>creation_list(self,other)</dt><dd><p>Identifying the created spin orbitals.</p>
+</dd>
+<dt>phase(self,other)</dt><dd><p>The phase is calculated as −1^{Nperm}.This number is equal
+to the number of occupied spin-orbitals between these two positions.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.annihilation_list">
+<span class="sig-name descname"><span class="pre">annihilation_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.annihilation_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.annihilation_list" title="Permalink to this definition"></a></dt>
+<dd><p>Identifying the annihilated alpha spin orbitals.</p>
+<dl class="simple">
+<dt>det<span class="classifier">SlaterDeterminant</span></dt><dd><p>The second Slater determinant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If det is not a SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>index<span class="classifier">dict</span></dt><dd><p>Index of annihilation alpha spin.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.assign_configuration">
+<span class="sig-name descname"><span class="pre">assign_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.assign_configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.assign_configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Assign configuration to the Slater determinant.</p>
+<dl class="simple">
+<dt>configuration<span class="classifier">list</span></dt><dd><p>Binary representation of the Slater determinant.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If configuration is not list.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If configuration is not list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.creation_list">
+<span class="sig-name descname"><span class="pre">creation_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.creation_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.creation_list" title="Permalink to this definition"></a></dt>
+<dd><p>Identifying the created alpha spin orbitals.</p>
+<dl class="simple">
+<dt>det<span class="classifier">SlaterDeterminant</span></dt><dd><p>The second Slater determinant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If det is not a SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>index<span class="classifier">dict</span></dt><dd><p>Index of creation alpha spin.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.degree_of_excitation">
+<span class="sig-name descname"><span class="pre">degree_of_excitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.degree_of_excitation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.degree_of_excitation" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the degree of excitation between D1 and D2 for alpha spin.</p>
+<dl class="simple">
+<dt>det<span class="classifier">SlaterDeterminant</span></dt><dd><p>The second Slater determinant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If det is not a SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>degree<span class="classifier">int</span></dt><dd><p>Degree of alpha spin excitation between two Slater determinant.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.ground">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">ground</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nocc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.ground"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.ground" title="Permalink to this definition"></a></dt>
+<dd><p>Create a ground state Slater determinant.
+If the number of electrons is odd, then the last electron is put into an alpha orbital.</p>
+<dl class="simple">
+<dt>nocc<span class="classifier">int</span></dt><dd><p>Number of occupied spin orbitals.</p>
+</dd>
+<dt>norbs<span class="classifier">int</span></dt><dd><p>Total number of spin orbitals.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ground_sd<span class="classifier">gmpy2.mpz</span></dt><dd><p>Integer that describes the occupation of a Slater determinant as a bitstring.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If <cite>nocc &gt; nspins</cite>.</p>
+</dd>
+</dl>
+<p>Assumes that the spin-orbitals are ordered by energy from lowest to greatest. The occupation is
+assumed to have the alpha block frist, then the beta block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.phase">
+<span class="sig-name descname"><span class="pre">phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/posthf/ci/slater.html#SlaterDeterminant.phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.phase" title="Permalink to this definition"></a></dt>
+<dd><p>The phase is calculated as −1^{Nperm}.This number is equal
+to the number of occupied spin-orbitals between these two positions.</p>
+<dl class="simple">
+<dt>other<span class="classifier">SlaterDeterminant</span></dt><dd><p>The second Slater determinant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If det is not a SlaterDeterminant instance.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>sign<span class="classifier">int</span></dt><dd><p>Phase for the evaluation between two Slater determinant.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.alpha">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">alpha</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.alpha" title="Permalink to this definition"></a></dt>
+<dd><p>Configuraiton of alpha spin orbitals.</p>
+<dl class="simple">
+<dt>alpha<span class="classifier">list</span></dt><dd><p>Configuraiton of alpha spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.beta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">beta</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.beta" title="Permalink to this definition"></a></dt>
+<dd><p>Configuraiton of beta spin orbitals.</p>
+<dl class="simple">
+<dt>beta<span class="classifier">list</span></dt><dd><p>Configuraiton of beta spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.nalphas">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nalphas</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.nalphas" title="Permalink to this definition"></a></dt>
+<dd><p>Number of alpha spin electrons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.nbetas">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nbetas</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.nbetas" title="Permalink to this definition"></a></dt>
+<dd><p>Number of beta spin electrons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.nelectrons">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nelectrons</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.nelectrons" title="Permalink to this definition"></a></dt>
+<dd><p>Number of total electrons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.nspatials">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspatials</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.nspatials" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spatial orbitals.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.nspins">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspins</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.nspins" title="Permalink to this definition"></a></dt>
+<dd><p>Number of spin orbitals.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.occ_indices">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">occ_indices</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.occ_indices" title="Permalink to this definition"></a></dt>
+<dd><p>Indices of occupied spin orbitals.</p>
+<dl class="simple">
+<dt>indices<span class="classifier">list</span></dt><dd><p>Indices of occupied spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.spatial_format">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spatial_format</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.spatial_format" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Representation of the Slater determinants in spatial orbitals.</dt><dd><p>[0,0,0,2,1,3,3,3]
+0 for unoccupied orbital
+1 for occupied alpha spin orbital
+2 for occupied beta spin orbital
+3 for doubly occupied orbital</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>spatial_format<span class="classifier">list</span></dt><dd><p>Representation of the Slater determinants in spatial orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.spin_format">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spin_format</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.spin_format" title="Permalink to this definition"></a></dt>
+<dd><p>Representation of the Slater determinants in spin orbitals.</p>
+<dl class="simple">
+<dt>spin_format<span class="classifier">list</span></dt><dd><p>Representation of the Slater determinants in spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.posthf.ci.slater.SlaterDeterminant.vir_indices">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">vir_indices</span></span><a class="headerlink" href="#moha.posthf.ci.slater.SlaterDeterminant.vir_indices" title="Permalink to this definition"></a></dt>
+<dd><p>Indices of virtual spin orbitals.</p>
+<dl class="simple">
+<dt>vir_indices<span class="classifier">list</span></dt><dd><p>Indices of virtual spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.posthf.ci">
+<span id="module-contents"></span><h2><span class="section-number">2.3.1.1.2.9. </span>Module contents<a class="headerlink" href="#module-moha.posthf.ci" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.posthf.cc.html" class="btn btn-neutral float-left" title="2.3.1.1.1. moha.posthf.cc package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.posthf.pt.html" class="btn btn-neutral float-right" title="2.3.1.1.3. moha.posthf.pt package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

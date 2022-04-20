@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1.1.1.5. moha.system.wavefunction package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.2.1. moha.hf package" href="moha.hf.html" />
+    <link rel="prev" title="2.1.1.1.4. moha.system.operator package" href="moha.system.operator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html">2.1. System</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.system.html">2.1.1. moha.system package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.system.html#subpackages">2.1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#submodules">2.1.1.2. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.atom">2.1.1.3. moha.system.atom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.auxiliary">2.1.1.4. moha.system.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.molecule">2.1.1.5. moha.system.molecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.periodic">2.1.1.6. moha.system.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system">2.1.1.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.system.html"><span class="section-number">2.1.1. </span>moha.system package</a> &raquo;</li>
+      <li><span class="section-number">2.1.1.1.5. </span>moha.system.wavefunction package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.system.wavefunction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-system-wavefunction-package">
+<h1><span class="section-number">2.1.1.1.5. </span>moha.system.wavefunction package<a class="headerlink" href="#moha-system-wavefunction-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.1.1.1.5.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.system.wavefunction.abc">
+<span id="moha-system-wavefunction-abc-module"></span><h2><span class="section-number">2.1.1.1.5.2. </span>moha.system.wavefunction.abc module<a class="headerlink" href="#module-moha.system.wavefunction.abc" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.wavefunction.abc.</span></span><span class="sig-name descname"><span class="pre">ABCWaveFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Abstract wavefunction abstrct class.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+<dt>coefficients<span class="classifier">np.ndarray</span></dt><dd><p>Coefficientss of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbital.</p>
+</dd>
+<dt>spin<span class="classifier">int</span></dt><dd><p>Spin of the wavefunction.</p>
+</dd>
+<dt>seniority: int</dt><dd><p>Seniority of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nelec, nspatial, basis_set=None, coefficients=None)</dt><dd><p>Initialize the wavefunction.</p>
+</dd>
+<dt>assign_nelec(self, nelec)</dt><dd><p>Assign the number of electrons.</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assign the number of spatial orbitals.</p>
+</dd>
+<dt>assign_occ(self, occ)</dt><dd><p>Assign the occupation number of the wavefunction.</p>
+</dd>
+<dt>assign_basis_set(self, basis_set)</dt><dd><p>Assign basis set of the wavefunction.</p>
+</dd>
+<dt>assign_coefficients(self, coefficients)</dt><dd><p>Assign coefficients of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.assign_basis_set">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_basis_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction.assign_basis_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.assign_basis_set" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the basis_set of the wavefunction.</p>
+<dl class="simple">
+<dt>basis_set</dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.assign_coefficients">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction.assign_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.assign_coefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the coefficients of the wavefunction.</p>
+<dl class="simple">
+<dt>coefficients</dt><dd><p>Parameters of the wavefunction.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.assign_nelec">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_nelec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction.assign_nelec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.assign_nelec" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of electrons.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.assign_nspatial">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_nspatial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction.assign_nspatial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.assign_nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.assign_occ">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_occ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/abc.html#ABCWaveFunction.assign_occ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.assign_occ" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the occupation number of the wavefunction.</p>
+<dl class="simple">
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.ncoefficients">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ncoefficients</span></span><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.ncoefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of wavefunction coefficients.</p>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.nspin">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of spin orbitals.</p>
+<dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.seniority">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">seniority</span></span><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.seniority" title="Permalink to this definition"></a></dt>
+<dd><p>Return the seniority of the wavefunction.</p>
+<p>Seniority of a Slater determinant is its number of unpaired electrons. The seniority of the
+wavefunction is the expected number of unpaired electrons.</p>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.abc.ABCWaveFunction.spin">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spin</span></span><a class="headerlink" href="#moha.system.wavefunction.abc.ABCWaveFunction.spin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the spin of the wavefunction.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\]</div>
+</div></blockquote>
+<p>rac{1}{2}(N_lpha - N_eta)</p>
+<blockquote>
+<div><p>NotImplementedError</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.wavefunction.base">
+<span id="moha-system-wavefunction-base-module"></span><h2><span class="section-number">2.1.1.1.5.3. </span>moha.system.wavefunction.base module<a class="headerlink" href="#module-moha.system.wavefunction.base" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.wavefunction.base.</span></span><span class="sig-name descname"><span class="pre">BaseWaveFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.wavefunction.abc.ABCWaveFunction" title="moha.system.wavefunction.abc.ABCWaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.wavefunction.abc.ABCWaveFunction</span></code></a></p>
+<p>Base wavefunction abstrct class.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+<dt>coefficients<span class="classifier">np.ndarray</span></dt><dd><p>Coefficientss of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbital.</p>
+</dd>
+<dt>spin<span class="classifier">int</span></dt><dd><p>Spin of the wavefunction.</p>
+</dd>
+<dt>seniority: int</dt><dd><p>Seniority of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nelec, nspatial, basis_set=None, coefficients=None)</dt><dd><p>Initialize the wavefunction.</p>
+</dd>
+<dt>assign_nelec(self, nelec)</dt><dd><p>Assign the number of electrons.</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assign the number of spatial orbitals.</p>
+</dd>
+<dt>assign_occ(self, occ)</dt><dd><p>Assign the occupation number of the wavefunction.</p>
+</dd>
+<dt>assign_basis_set(self, basis_set)</dt><dd><p>Assign basis set of the wavefunction.</p>
+</dd>
+<dt>assign_coefficients(self, coefficients)</dt><dd><p>Assign coefficients of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.assign_basis_set">
+<span class="sig-name descname"><span class="pre">assign_basis_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction.assign_basis_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.assign_basis_set" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the basis_set of the wavefunction.</p>
+<dl class="simple">
+<dt>basis_set</dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.assign_coefficients">
+<span class="sig-name descname"><span class="pre">assign_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction.assign_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.assign_coefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the coefficients of the wavefunction.</p>
+<dl class="simple">
+<dt>coefficients</dt><dd><p>Parameters of the wavefunction.</p>
+</dd>
+</dl>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.assign_nelec">
+<span class="sig-name descname"><span class="pre">assign_nelec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction.assign_nelec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.assign_nelec" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of electrons.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If number of electrons is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If number of electrons is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.assign_nspatial">
+<span class="sig-name descname"><span class="pre">assign_nspatial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction.assign_nspatial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.assign_nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If number of electrons is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If number of electrons is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.assign_occ">
+<span class="sig-name descname"><span class="pre">assign_occ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/wavefunction/base.html#BaseWaveFunction.assign_occ"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.assign_occ" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the occupation number of the wavefunction.</p>
+<dl class="simple">
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If number of electrons is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If number of electrons is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.ncoefficients">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ncoefficients</span></span><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.ncoefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of wavefunction coefficients.</p>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.nspin">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of spin orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.seniority">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">seniority</span></span><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.seniority" title="Permalink to this definition"></a></dt>
+<dd><p>Return the seniority of the wavefunction.</p>
+<p>Seniority of a Slater determinant is its number of unpaired electrons. The seniority of the
+wavefunction is the expected number of unpaired electrons.</p>
+<p>NotImplementedError</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.wavefunction.base.BaseWaveFunction.spin">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">spin</span></span><a class="headerlink" href="#moha.system.wavefunction.base.BaseWaveFunction.spin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the spin of the wavefunction.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\]</div>
+</div></blockquote>
+<p>rac{1}{2}(N_lpha - N_eta)</p>
+<blockquote>
+<div><dl class="simple">
+<dt>spin<span class="classifier">float</span></dt><dd><p>Spin of the wavefunction.</p>
+</dd>
+</dl>
+<p><cite>None</cite> means that all possible spins are allowed.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.wavefunction">
+<span id="module-contents"></span><h2><span class="section-number">2.1.1.1.5.4. </span>Module contents<a class="headerlink" href="#module-moha.system.wavefunction" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.system.operator.html" class="btn btn-neutral float-left" title="2.1.1.1.4. moha.system.operator package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.hf.html" class="btn btn-neutral float-right" title="2.2.1. moha.hf package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

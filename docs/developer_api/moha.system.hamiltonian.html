@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1.1.1.2. moha.system.hamiltonian package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1.1.1.3. moha.system.integral package" href="moha.system.integral.html" />
+    <link rel="prev" title="2.1.1.1.1. moha.system.basis package" href="moha.system.basis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html">2.1. System</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.system.html">2.1.1. moha.system package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.system.html#subpackages">2.1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#submodules">2.1.1.2. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.atom">2.1.1.3. moha.system.atom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.auxiliary">2.1.1.4. moha.system.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.molecule">2.1.1.5. moha.system.molecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.periodic">2.1.1.6. moha.system.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system">2.1.1.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.system.html"><span class="section-number">2.1.1. </span>moha.system package</a> &raquo;</li>
+      <li><span class="section-number">2.1.1.1.2. </span>moha.system.hamiltonian package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.system.hamiltonian.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-system-hamiltonian-package">
+<h1><span class="section-number">2.1.1.1.2. </span>moha.system.hamiltonian package<a class="headerlink" href="#moha-system-hamiltonian-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.1.1.1.2.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.system.hamiltonian.abc">
+<span id="moha-system-hamiltonian-abc-module"></span><h2><span class="section-number">2.1.1.1.2.2. </span>moha.system.hamiltonian.abc module<a class="headerlink" href="#module-moha.system.hamiltonian.abc" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.abc.ABCHamiltonian">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.hamiltonian.abc.</span></span><span class="sig-name descname"><span class="pre">ABCHamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/abc.html#ABCHamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.abc.ABCHamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Abstract Hamiltonian for a Schrodinger equation.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>operators<span class="classifier">dict</span></dt><dd><p>Dictionary of operators for the Hamiltonian</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nspatial,operators={})</dt><dd><p>Initialize the Hamiltonian.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assigns number of spatial orbitals to the Hamiltonian.</p>
+</dd>
+<dt>assign_operators(self, operator)</dt><dd><p>Assigns operator integral to the Hamiltonian.</p>
+</dd>
+<dt>basis_transformation(self,U)</dt><dd><p>Transform the basis set for all the operator integral</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.abc.ABCHamiltonian.assign_nspatial">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_nspatial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/abc.html#ABCHamiltonian.assign_nspatial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.abc.ABCHamiltonian.assign_nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbital.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.abc.ABCHamiltonian.assign_operator">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">assign_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/abc.html#ABCHamiltonian.assign_operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.abc.ABCHamiltonian.assign_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Assign operator.</p>
+<dl class="simple">
+<dt>operator<span class="classifier">Operator instance</span></dt><dd><p>Operator for the Hamiltonain</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.abc.ABCHamiltonian.basis_transformation">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">basis_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/abc.html#ABCHamiltonian.basis_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.abc.ABCHamiltonian.basis_transformation" title="Permalink to this definition"></a></dt>
+<dd><p>Transform the basis set for all the operator integral</p>
+<dl class="simple">
+<dt>U<span class="classifier">np.ndarray(K, K)</span></dt><dd><p>Transformation matrix</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.abc.ABCHamiltonian.nspin">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.hamiltonian.abc.ABCHamiltonian.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of spin orbitals.</p>
+<dl class="simple">
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>NotImplementedError</dt><dd><p>If called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.hamiltonian.base">
+<span id="moha-system-hamiltonian-base-module"></span><h2><span class="section-number">2.1.1.1.2.3. </span>moha.system.hamiltonian.base module<a class="headerlink" href="#module-moha.system.hamiltonian.base" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.base.BaseHamiltonian">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.hamiltonian.base.</span></span><span class="sig-name descname"><span class="pre">BaseHamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/base.html#BaseHamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.base.BaseHamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.hamiltonian.abc.ABCHamiltonian" title="moha.system.hamiltonian.abc.ABCHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.hamiltonian.abc.ABCHamiltonian</span></code></a></p>
+<p>Base Hamiltonian for a Schrodinger equation.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>operators<span class="classifier">dict</span></dt><dd><p>Dictionary of operators for the Hamiltonian</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nspatial,operators={})</dt><dd><p>Initialize the Hamiltonian.</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assigns number of spatial orbitals to the Hamiltonian.</p>
+</dd>
+<dt>assign_operators(self, operator)</dt><dd><p>Assigns operator integral to the Hamiltonian.</p>
+</dd>
+<dt>basis_transformation(self,U)</dt><dd><p>Transform the basis set for all the operator integral</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.base.BaseHamiltonian.assign_nspatial">
+<span class="sig-name descname"><span class="pre">assign_nspatial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/base.html#BaseHamiltonian.assign_nspatial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.base.BaseHamiltonian.assign_nspatial" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the number of spatial orbitals.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbital.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If number of electrons is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If number of electrons is negative number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.base.BaseHamiltonian.assign_operator">
+<span class="sig-name descname"><span class="pre">assign_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/base.html#BaseHamiltonian.assign_operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.base.BaseHamiltonian.assign_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Assign operator.</p>
+<dl class="simple">
+<dt>operator<span class="classifier">Operator instance</span></dt><dd><p>Operator for the Hamiltonain</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If number of electrons is not an integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.base.BaseHamiltonian.basis_transformation">
+<span class="sig-name descname"><span class="pre">basis_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/base.html#BaseHamiltonian.basis_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.base.BaseHamiltonian.basis_transformation" title="Permalink to this definition"></a></dt>
+<dd><p>Transform the basis set for all the operator integral</p>
+<dl class="simple">
+<dt>matrix<span class="classifier">np.ndarray(K, K)</span></dt><dd><p>Transformation matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.base.BaseHamiltonian.nspin">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">nspin</span></span><a class="headerlink" href="#moha.system.hamiltonian.base.BaseHamiltonian.nspin" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of spin orbitals.</p>
+<dl class="simple">
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.hamiltonian.chemical_hamiltonian">
+<span id="moha-system-hamiltonian-chemical-hamiltonian-module"></span><h2><span class="section-number">2.1.1.1.2.4. </span>moha.system.hamiltonian.chemical_hamiltonian module<a class="headerlink" href="#module-moha.system.hamiltonian.chemical_hamiltonian" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.hamiltonian.chemical_hamiltonian.</span></span><span class="sig-name descname"><span class="pre">ChemicalHamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/chemical_hamiltonian.html#ChemicalHamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#moha.system.hamiltonian.base.BaseHamiltonian" title="moha.system.hamiltonian.base.BaseHamiltonian"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.hamiltonian.base.BaseHamiltonian</span></code></a></p>
+<p>Chemical Hamiltonian for a Schrodinger equation.</p>
+<dl class="simple">
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>operators<span class="classifier">dict</span></dt><dd><p>Dictionary of operators for the Hamiltonian</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>npsin<span class="classifier">int</span></dt><dd><p>Number of spin orbitals</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nspatial,operators={})</dt><dd><p>Initialize the Hamiltonian.</p>
+</dd>
+<dt>build(cls,molecule,basis_set)</dt><dd><p>Build the Chemical Hamiltonian</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assigns number of spatial orbitals to the Hamiltonian.</p>
+</dd>
+<dt>assign_operators(self, operator)</dt><dd><p>Assigns operator integral to the Hamiltonian.</p>
+</dd>
+<dt>basis_transformation(self,U)</dt><dd><p>Transform the basis set for all the operator integral</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.build">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molecule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/chemical_hamiltonian.html#ChemicalHamiltonian.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.build" title="Permalink to this definition"></a></dt>
+<dd><p>Build the chemical hamiltonian</p>
+<dl class="simple">
+<dt>molecule<span class="classifier">Molecule instance</span></dt><dd><p>Instance of molecule class</p>
+</dd>
+<dt>basis_set<span class="classifier">Basis Set instance</span></dt><dd><p>Instance of one electron basis set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.from_fcidump">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_fcidump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcidump</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/chemical_hamiltonian.html#ChemicalHamiltonian.from_fcidump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.from_fcidump" title="Permalink to this definition"></a></dt>
+<dd><p>Build the chemical hamiltonian</p>
+<dl class="simple">
+<dt>molecule<span class="classifier">Molecule instance</span></dt><dd><p>Instance of molecule class</p>
+</dd>
+<dt>basis_set<span class="classifier">Basis Set instance</span></dt><dd><p>Instance of one electron basis set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.from_numpy">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Enuc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/hamiltonian/chemical_hamiltonian.html#ChemicalHamiltonian.from_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.hamiltonian.chemical_hamiltonian.ChemicalHamiltonian.from_numpy" title="Permalink to this definition"></a></dt>
+<dd><p>Build the chemical hamiltonian</p>
+<dl class="simple">
+<dt>molecule<span class="classifier">Molecule instance</span></dt><dd><p>Instance of molecule class</p>
+</dd>
+<dt>basis_set<span class="classifier">Basis Set instance</span></dt><dd><p>Instance of one electron basis set</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.hamiltonian">
+<span id="module-contents"></span><h2><span class="section-number">2.1.1.1.2.5. </span>Module contents<a class="headerlink" href="#module-moha.system.hamiltonian" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.system.basis.html" class="btn btn-neutral float-left" title="2.1.1.1.1. moha.system.basis package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.system.integral.html" class="btn btn-neutral float-right" title="2.1.1.1.3. moha.system.integral package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

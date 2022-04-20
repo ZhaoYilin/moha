@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moha.system.operator.two_electron &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html">
+            <img src="../../../../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>moha.system.operator.two_electron</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for moha.system.operator.two_electron</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">moha.system.operator.base</span> <span class="kn">import</span> <span class="n">OperatorNames</span><span class="p">,</span> <span class="n">BaseOperator</span>
+<span class="kn">from</span> <span class="nn">moha.system.molecule</span> <span class="kn">import</span> <span class="n">Molecule</span>
+<span class="kn">from</span> <span class="nn">moha.system.basis.basis_set</span> <span class="kn">import</span> <span class="n">BasisSet</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="TwoElectronOperator"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.TwoElectronOperator">[docs]</a><span class="k">class</span> <span class="nc">TwoElectronOperator</span><span class="p">(</span><span class="n">BaseOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Two electron operator class.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the operator.</span>
+
+<span class="sd">    nspatial : int</span>
+<span class="sd">        Number of the spatial orbitals.</span>
+
+<span class="sd">    nelectron : int</span>
+<span class="sd">        Number of electrons.</span>
+
+<span class="sd">    integral : np.ndarray</span>
+<span class="sd">        Integral of the operator.</span>
+
+<span class="sd">    Property</span>
+<span class="sd">    --------</span>
+<span class="sd">    npsin : int</span>
+<span class="sd">        Number of spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    dtype : </span>
+<span class="sd">        Data type of the integrals.</span>
+
+<span class="sd">    spin_orbital_basis_integral </span>
+<span class="sd">        Return integral matrix in spin orbitals basis.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __init__(self,name,nspatial,integral)</span>
+<span class="sd">        Initialize the Operator.</span>
+
+<span class="sd">    assign_name(self,name)</span>
+<span class="sd">        Assign name to the operator.</span>
+
+<span class="sd">    assign_nspatial(self,nspatial)</span>
+<span class="sd">        Assign number of spatial orbitals for the operator.</span>
+
+<span class="sd">    assign_nelectron(self,nelectron)</span>
+<span class="sd">        Assign number of elctrons involved in the integral.</span>
+
+<span class="sd">    assign_integral(self,integral)</span>
+<span class="sd">        Assign integral value for the operator.</span>
+
+<span class="sd">    basis_transformation(self,matrix):</span>
+<span class="sd">        Rotate orbitals with a transformation matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the operator</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        integral : ndarray</span>
+<span class="sd">            Integral value for the operator.</span>
+<span class="sd">        </span>
+<span class="sd">        name : OperatorNames</span>
+<span class="sd">            Name of the operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nspatial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of spatial orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        nspatial : int</span>
+<span class="sd">            Number of spatial orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nspin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        nspin : int</span>
+<span class="sd">            Number of spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spin_orbital_basis_integral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return integral in spin orbitals basis.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        integral : np.ndarray</span>
+<span class="sd">            Integral of the operator in spin orbital basis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nspin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nspin</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                        <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">k</span><span class="o">%</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">j</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="n">l</span><span class="o">%</span><span class="mi">2</span><span class="p">:</span>
+                            <span class="n">integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>  <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">integral</span>
+    
+<div class="viewcode-block" id="TwoElectronOperator.zeros"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.TwoElectronOperator.zeros">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">zeros</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with zeros elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If shape is not two dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be four dimension&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoElectronOperator.ones"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.TwoElectronOperator.ones">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">ones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with ones elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If shape is not two dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be four dimension&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="TwoElectronOperator.random"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.TwoElectronOperator.random">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with random elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If shape is not two dimension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be four dimension&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TwoElectronOperator.basis_transformation"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.TwoElectronOperator.basis_transformation">[docs]</a>    <span class="k">def</span> <span class="nf">basis_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">matrix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Rotate orbitals with a transformation matrix.</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \widetilde{h}_{ab} &amp;= \sum_{ij} C^\dagger_{ai} h_{ij} C_{jb}\\</span>
+<span class="sd">            \widetilde{g}_{abcd} &amp;= \sum_{ijkl} C^\dagger_{ai} C^\dagger_{bj} g_{ijkl} C_{kc} C_{ld}</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        matrix : np.ndarray(K, L)</span>
+<span class="sd">            Transformation matrix.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If matrix is not a numpy array.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If shape of matrix does not match up with the shape of the integrals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Transformation matrix must be given as a numpy array.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">matrix</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Transformation matrix must be two-dimensional.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Shape of the transformation matrix must match with the shape of the &quot;</span> <span class="s2">&quot;integrals.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ijkl,ia-&gt;ajkl&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ajkl,jb-&gt;abkl&quot;</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;abkl,kc-&gt;abcl&quot;</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;abcl,ld-&gt;abcd&quot;</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>            
+        
+        <span class="bp">self</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">integral</span><span class="p">[:]</span>        
+        
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+
+<div class="viewcode-block" id="ElectronRepulsionOperator"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.ElectronRepulsionOperator">[docs]</a><span class="k">class</span> <span class="nc">ElectronRepulsionOperator</span><span class="p">(</span><span class="n">TwoElectronOperator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Electron repulsion operator class.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the operator.</span>
+
+<span class="sd">    nspatial : int</span>
+<span class="sd">        Number of the spatial orbitals.</span>
+
+<span class="sd">    nelectron : int</span>
+<span class="sd">        Number of electrons.</span>
+
+<span class="sd">    integral : np.ndarray</span>
+<span class="sd">        Integral of the operator.</span>
+
+<span class="sd">    Property</span>
+<span class="sd">    --------</span>
+<span class="sd">    npsin : int</span>
+<span class="sd">        Number of spin orbitals.</span>
+
+<span class="sd">    spin_orbital_basis_integral(self)</span>
+<span class="sd">        Return integral matrix in spin orbitals basis.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __init__(self,name,nspatial,integral)</span>
+<span class="sd">        Initialize the Operator.</span>
+
+<span class="sd">    assign_name(self,name)</span>
+<span class="sd">        Assign name to the operator.</span>
+
+<span class="sd">    assign_nspatial(self,nspatial)</span>
+<span class="sd">        Assign number of spatial orbitals for the operator.</span>
+
+<span class="sd">    assign_nelectron(self,nelectron)</span>
+<span class="sd">        Assign number of elctrons involved in the integral.</span>
+
+<span class="sd">    assign_integral(self,integral)</span>
+<span class="sd">        Assign integral value for the operator.</span>
+<span class="sd">    </span>
+<span class="sd">    basis_transformation(self,matrix)</span>
+<span class="sd">        Rotate orbitals with a transformation matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">OperatorNames</span><span class="o">.</span><span class="n">Eri</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the operator</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        integral : ndarray</span>
+<span class="sd">            Integral value for the operator.</span>
+<span class="sd">        </span>
+<span class="sd">        name : OperatorNames</span>
+<span class="sd">            name of the operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="ElectronRepulsionOperator.build"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.two_electron.ElectronRepulsionOperator.build">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span><span class="n">basis_set</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build the nuclear repulsion operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        basis_set : BasisSet</span>
+<span class="sd">            Hatree Fock basis set instance.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If basis_set parameter is not a BasisSet instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="kn">from</span> <span class="nn">moha.system.integral.electron_repulsion</span> <span class="kn">import</span> <span class="n">electron_repulsion</span>
+        <span class="kn">from</span> <span class="nn">moha.system.auxiliary</span> <span class="kn">import</span> <span class="n">eint</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">basis_set</span><span class="p">,</span> <span class="n">BasisSet</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;basis_set parameter must be a BasisSet instance&quot;</span><span class="p">)</span>       
+        <span class="n">nspatial</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis_set</span><span class="p">)</span>
+        <span class="n">integral_list</span> <span class="o">=</span> <span class="p">[]</span>     
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nspatial</span><span class="p">,</span><span class="n">nspatial</span><span class="p">,</span><span class="n">nspatial</span><span class="p">,</span><span class="n">nspatial</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">oi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">oj</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">ok</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">ol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis_set</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">ij</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">j</span>
+                        <span class="n">kl</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="n">l</span>
+                        <span class="k">if</span> <span class="n">ij</span><span class="o">&gt;=</span><span class="n">kl</span><span class="p">:</span>
+                            <span class="n">integral_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">electron_repulsion</span><span class="p">(</span><span class="n">oi</span><span class="p">,</span><span class="n">oj</span><span class="p">,</span><span class="n">ok</span><span class="p">,</span><span class="n">ol</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+                        <span class="n">integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">integral_list</span><span class="p">[</span><span class="n">eint</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)]</span>
+        <span class="n">operator</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">integral</span><span class="p">,</span><span class="n">OperatorNames</span><span class="o">.</span><span class="n">Eri</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">operator</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">coulomb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Coulomb integral.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        integral : np.ndarray</span>
+<span class="sd">            Coulomb integral.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nspatial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nspatial</span><span class="p">,</span><span class="n">nspatial</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+                <span class="n">integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">integral</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exchange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Exchange integral.        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        integral : np.ndarray</span>
+<span class="sd">            Exchange integral.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nspatial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nspatial</span><span class="p">,</span><span class="n">nspatial</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspatial</span><span class="p">):</span>
+                <span class="n">integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">integral</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">double_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Antisymmetrized two electron integral.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        integral : np.ndarray</span>
+<span class="sd">            Antisymmetrized two electron integral.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nspin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nspin</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">,</span><span class="n">nspin</span><span class="p">))</span>
+        <span class="n">spin_integral</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spin_orbital_basis_integral</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspin</span><span class="p">):</span> 
+                        <span class="n">integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span>  <span class="o">=</span> <span class="n">spin_integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">]</span> <span class="o">-</span> <span class="n">spin_integral</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">integral</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

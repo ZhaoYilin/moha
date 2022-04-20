@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.2.1. moha.hf package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.3.1. moha.posthf package" href="moha.posthf.html" />
+    <link rel="prev" title="2.1.1.1.5. moha.system.wavefunction package" href="moha.system.wavefunction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="moha.html">2.1. System</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.2.1. moha.hf package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">2.2.1.1. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.hf.auxiliary">2.2.1.2. moha.hf.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.hf.hf_wavefunction">2.2.1.3. moha.hf.hf_wavefunction module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.hf.scf">2.2.1.4. moha.hf.scf module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.hf.scf_diis">2.2.1.5. moha.hf.scf_diis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.hf">2.2.1.6. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+      <li><span class="section-number">2.2.1. </span>moha.hf package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.hf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-hf-package">
+<h1><span class="section-number">2.2.1. </span>moha.hf package<a class="headerlink" href="#moha-hf-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.2.1.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.hf.auxiliary">
+<span id="moha-hf-auxiliary-module"></span><h2><span class="section-number">2.2.1.2. </span>moha.hf.auxiliary module<a class="headerlink" href="#module-moha.hf.auxiliary" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.C_matrix">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">C_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#C_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.C_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>orbital energies and Coefficients matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.D_matrix">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">D_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#D_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.D_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Density matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.F_matrix">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">F_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Hcore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#F_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.F_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Fock matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.F_transform">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">F_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#F_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.F_transform" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.G_matrix">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">G_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#G_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.G_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>G matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.deltap">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">deltap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OLDD</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#deltap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.deltap" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.eint">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">eint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#eint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.eint" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.energy">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hcore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Norb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.energy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.hf.auxiliary.orthogonalization_matrix">
+<span class="sig-prename descclassname"><span class="pre">moha.hf.auxiliary.</span></span><span class="sig-name descname"><span class="pre">orthogonalization_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'symmetric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/auxiliary.html#orthogonalization_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.auxiliary.orthogonalization_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Diagonlize the overlap matrix
+Schmidt
+symmetric
+canonical</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.hf.hf_wavefunction">
+<span id="moha-hf-hf-wavefunction-module"></span><h2><span class="section-number">2.2.1.3. </span>moha.hf.hf_wavefunction module<a class="headerlink" href="#module-moha.hf.hf_wavefunction" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.hf.hf_wavefunction.</span></span><span class="sig-name descname"><span class="pre">HFWaveFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nelec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nspatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coefficients</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital_energies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/hf_wavefunction.html#HFWaveFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="moha.system.wavefunction.html#moha.system.wavefunction.base.BaseWaveFunction" title="moha.system.wavefunction.base.BaseWaveFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">moha.system.wavefunction.base.BaseWaveFunction</span></code></a></p>
+<p>Hatree Fock wavefunction class.</p>
+<dl class="simple">
+<dt>nelec<span class="classifier">int</span></dt><dd><p>Number of electrons.</p>
+</dd>
+<dt>occ<span class="classifier">dict</span></dt><dd><p>Occupation number of the wavefunction.</p>
+</dd>
+<dt>nspatial<span class="classifier">int</span></dt><dd><p>Number of spatial orbitals.</p>
+</dd>
+<dt>basis_set<span class="classifier">Basis</span></dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+<dt>coefficients<span class="classifier">np.ndarray</span></dt><dd><p>Coefficients of the wavefunction.</p>
+</dd>
+<dt>density_matrix<span class="classifier">np.ndarray</span></dt><dd><p>Density matrix of the wavefunction.</p>
+</dd>
+<dt>orbital_energies<span class="classifier">np.ndarray</span></dt><dd><p>Orbital energies of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+<dt>nspin<span class="classifier">int</span></dt><dd><p>Number of spin orbital</p>
+</dd>
+<dt>spin<span class="classifier">int</span></dt><dd><p>Spin of the wavefunction</p>
+</dd>
+<dt>seniority<span class="classifier">int</span></dt><dd><p>Seniority of the wavefunction</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self, nelec, nspatial, basis_set=None, coefficients=None)</dt><dd><p>Initialize the wavefunction.</p>
+</dd>
+<dt>assign_nelec(self, nelec)</dt><dd><p>Assign the number of electrons.</p>
+</dd>
+<dt>assign_nspatial(self, nspatial)</dt><dd><p>Assign the number of spatial orbitals.</p>
+</dd>
+<dt>assign_occ(self, occ)</dt><dd><p>Assign the occupation number of the wavefunction.</p>
+</dd>
+<dt>assign_basis_set(self, basis_set)</dt><dd><p>Assign basis set of the wavefunction.</p>
+</dd>
+<dt>assign_coefficients(self, coefficients)</dt><dd><p>Assign coefficients of the wavefunction.</p>
+</dd>
+<dt>assign_density_matrix(self, density_matrix)</dt><dd><p>Assign density matrix of the wavefunction.</p>
+</dd>
+<dt>assign_orbital_energies(self, orbital_energies)</dt><dd><p>Assign orbital energies of the wavefunction.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.assign_basis_set">
+<span class="sig-name descname"><span class="pre">assign_basis_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/hf_wavefunction.html#HFWaveFunction.assign_basis_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.assign_basis_set" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the basis_set of the wavefunction.</p>
+<dl class="simple">
+<dt>basis_set</dt><dd><p>Basis set of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.assign_coefficients">
+<span class="sig-name descname"><span class="pre">assign_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coefficients</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/hf_wavefunction.html#HFWaveFunction.assign_coefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.assign_coefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the coefficients of the wavefunction.</p>
+<dl class="simple">
+<dt>coefficients<span class="classifier">np.ndarray</span></dt><dd><p>Parameters of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.assign_density_matrix">
+<span class="sig-name descname"><span class="pre">assign_density_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">density_matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/hf_wavefunction.html#HFWaveFunction.assign_density_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.assign_density_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Assign density matrix of the wavefunction.</p>
+<dl class="simple">
+<dt>density_matrix<span class="classifier">np.ndarray</span></dt><dd><p>Density matrix of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.assign_orbital_energies">
+<span class="sig-name descname"><span class="pre">assign_orbital_energies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orbital_energies</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/hf_wavefunction.html#HFWaveFunction.assign_orbital_energies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.assign_orbital_energies" title="Permalink to this definition"></a></dt>
+<dd><p>Assign orbital energies of the wavefunction.</p>
+<dl class="simple">
+<dt>orbital_energies<span class="classifier">np.ndarray</span></dt><dd><p>Orbital energies of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.configuration">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">configuration</span></span><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.configuration" title="Permalink to this definition"></a></dt>
+<dd><p>Return the cofiguration of the wavefunction.</p>
+<dl class="simple">
+<dt>c<span class="classifier">dict</span></dt><dd><p>Configuration of the wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.ncoefficients">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ncoefficients</span></span><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.ncoefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Return the number of wavefunction coefficients.</p>
+<dl class="simple">
+<dt>ncoefficients<span class="classifier">int</span></dt><dd><p>Number of coefficients.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If coefficients is not a np.ndarray instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.hf.hf_wavefunction.HFWaveFunction.seniority">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">seniority</span></span><a class="headerlink" href="#moha.hf.hf_wavefunction.HFWaveFunction.seniority" title="Permalink to this definition"></a></dt>
+<dd><p>Return the seniority of the wavefunction.</p>
+<p>Seniority of a Slater determinant is its number of unpaired electrons. The seniority of the
+wavefunction is the expected number of unpaired electrons.</p>
+<dl class="simple">
+<dt>seniority<span class="classifier">int</span></dt><dd><p>Seniority of the wavefunction.</p>
+</dd>
+</dl>
+<p><cite>None</cite> means that all possible seniority are allowed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.hf.scf">
+<span id="moha-hf-scf-module"></span><h2><span class="section-number">2.2.1.4. </span>moha.hf.scf module<a class="headerlink" href="#module-moha.hf.scf" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.hf.scf.</span></span><span class="sig-name descname"><span class="pre">PlainSCFSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_conv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_conv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Plain self-consistent mean field method solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>maxiter<span class="classifier">int</span></dt><dd><p>Maximum numer of iteration.</p>
+</dd>
+<dt>E_conv<span class="classifier">float</span></dt><dd><p>Energy for convergence.</p>
+</dd>
+<dt>D_conv<span class="classifier">float</span></dt><dd><p>Density for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,maxiter=50,E_conv=1.0E-8,D_conv=1.0E-3)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_maximum_iteration(self,maxiter)</dt><dd><p>Assign the maximum number of iteration to the solver.</p>
+</dd>
+<dt>assign_energy_convergence(self,E_conv)</dt><dd><p>Assign the energy for convergence to the solver.</p>
+</dd>
+<dt>assign_dentsity_convergence(self,D_conv)</dt><dd><p>Assign the density for convergence to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.assign_density_convergence">
+<span class="sig-name descname"><span class="pre">assign_density_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D_conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.assign_density_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.assign_density_convergence" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the density for convergence to the solver.</p>
+<dl class="simple">
+<dt>D_conv<span class="classifier">float</span></dt><dd><p>Density for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Density for convergence is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If Density for convergence is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.assign_energy_convergence">
+<span class="sig-name descname"><span class="pre">assign_energy_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.assign_energy_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.assign_energy_convergence" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the energy for convergence to the solver.</p>
+<dl class="simple">
+<dt>E_conv<span class="classifier">float</span></dt><dd><p>Energy for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Energy for convergence is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If Energy for convergence is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.assign_maximum_iteration">
+<span class="sig-name descname"><span class="pre">assign_maximum_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxiter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.assign_maximum_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.assign_maximum_iteration" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the maximum number of iteration to the solver.</p>
+<dl class="simple">
+<dt>maxiter<span class="classifier">int</span></dt><dd><p>Maximum numer of iteration.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If maximum number of iteration is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If maximum number of iteration is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf.PlainSCFSolver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf.html#PlainSCFSolver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf.PlainSCFSolver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.hf.scf_diis">
+<span id="moha-hf-scf-diis-module"></span><h2><span class="section-number">2.2.1.5. </span>moha.hf.scf_diis module<a class="headerlink" href="#module-moha.hf.scf_diis" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.hf.scf_diis.</span></span><span class="sig-name descname"><span class="pre">DIISSCFSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_conv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_conv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Direct Inversion in the Iterative Subspace (DIIS)” approach 
+self-consistent mean field method solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>maxiter<span class="classifier">int</span></dt><dd><p>Maximum numer of iteration.</p>
+</dd>
+<dt>E_conv<span class="classifier">float</span></dt><dd><p>Energy for convergence.</p>
+</dd>
+<dt>D_conv<span class="classifier">float</span></dt><dd><p>Density for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn,maxiter=50,E_conv=1.0E-8,D_conv=1.0E-3)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_maximum_iteration(self,maxiter)</dt><dd><p>Assign the maximum number of iteration to the solver.</p>
+</dd>
+<dt>assign_energy_convergence(self,E_conv)</dt><dd><p>Assign the energy for convergence to the solver.</p>
+</dd>
+<dt>assign_dentsity_convergence(self,D_conv)</dt><dd><p>Assign the density for convergence to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.assign_density_convergence">
+<span class="sig-name descname"><span class="pre">assign_density_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D_conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.assign_density_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.assign_density_convergence" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the density for convergence to the solver.</p>
+<dl class="simple">
+<dt>D_conv<span class="classifier">float</span></dt><dd><p>Density for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Density for convergence is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If Density for convergence is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.assign_energy_convergence">
+<span class="sig-name descname"><span class="pre">assign_energy_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">E_conv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.assign_energy_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.assign_energy_convergence" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the energy for convergence to the solver.</p>
+<dl class="simple">
+<dt>E_conv<span class="classifier">float</span></dt><dd><p>Energy for convergence.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If Energy for convergence is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If Energy for convergence is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.assign_hamiltonian">
+<span class="sig-name descname"><span class="pre">assign_hamiltonian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.assign_hamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.assign_hamiltonian" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the chemical Hamiltonian to the solver.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.assign_maximum_iteration">
+<span class="sig-name descname"><span class="pre">assign_maximum_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxiter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.assign_maximum_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.assign_maximum_iteration" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the maximum number of iteration to the solver.</p>
+<dl class="simple">
+<dt>maxiter<span class="classifier">int</span></dt><dd><p>Maximum numer of iteration.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If maximum number of iteration is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If maximum number of iteration is not a positive number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.hf.scf_diis.DIISSCFSolver.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/hf/scf_diis.html#DIISSCFSolver.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.hf.scf_diis.DIISSCFSolver.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Hartree Fock calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.hf">
+<span id="module-contents"></span><h2><span class="section-number">2.2.1.6. </span>Module contents<a class="headerlink" href="#module-moha.hf" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.system.wavefunction.html" class="btn btn-neutral float-left" title="2.1.1.1.5. moha.system.wavefunction package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.posthf.html" class="btn btn-neutral float-right" title="2.3.1. moha.posthf package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
