@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moha.system.operator.base &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html">
+            <img src="../../../../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>moha.system.operator.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for moha.system.operator.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="OperatorNames"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.OperatorNames">[docs]</a><span class="k">class</span> <span class="nc">OperatorNames</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Operator Names.</span>
+
+<span class="sd">    Members</span>
+<span class="sd">    ----------</span>
+<span class="sd">    I : enum.auto</span>
+<span class="sd">        Identity operator.</span>
+<span class="sd">    </span>
+<span class="sd">    S : enum.auto</span>
+<span class="sd">        Overlap operator.</span>
+<span class="sd">    </span>
+<span class="sd">    T : enum.auto</span>
+<span class="sd">        Kinetic energy operator.</span>
+<span class="sd">    </span>
+<span class="sd">    V : enum.auto</span>
+<span class="sd">        Nuclear attraction operator.</span>
+<span class="sd">    </span>
+<span class="sd">    Hcore : enum.auto</span>
+<span class="sd">        Core Hamiltonian operator.</span>
+<span class="sd">    </span>
+<span class="sd">    MM : enum.auto</span>
+<span class="sd">        Multipole moment operator.</span>
+<span class="sd">    </span>
+<span class="sd">    Diff : enum.auto</span>
+<span class="sd">        Differential operator.</span>
+<span class="sd">    </span>
+<span class="sd">    LM : enum.auto</span>
+<span class="sd">        Linear momentum operator.</span>
+<span class="sd">    </span>
+<span class="sd">    AM : enum.auto</span>
+<span class="sd">        Angular momentum operator.</span>
+<span class="sd">    </span>
+<span class="sd">    Eri : enum.auto</span>
+<span class="sd">        Electron repulsion operator.</span>
+<span class="sd">    </span>
+<span class="sd">    CI : enum.auto</span>
+<span class="sd">        Configuration interaction operator.</span>
+<span class="sd">    </span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __repr__(cls)</span>
+<span class="sd">        Self defined output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Enuc</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Hcore</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">MM</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Diff</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">LM</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">AM</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Eri</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">CI</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Self defined output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+<span class="n">op_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">OperatorNames</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+<div class="viewcode-block" id="BaseOperator"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.BaseOperator">[docs]</a><span class="k">class</span> <span class="nc">BaseOperator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base operator class.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : OperatorNames</span>
+<span class="sd">        Name of the operator.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __new__(cls, integral, name)</span>
+<span class="sd">        Generate new operator.</span>
+<span class="sd">    </span>
+<span class="sd">    __init__(self, integral, name)</span>
+<span class="sd">        Initialize the operator.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_name(self,name)</span>
+<span class="sd">        Assign name to the operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate new operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        integral : ndarray</span>
+<span class="sd">            Integral value for the operator.</span>
+<span class="sd">        </span>
+<span class="sd">        name : OperatorNames</span>
+<span class="sd">            Name of the operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">integral</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        integral : ndarray</span>
+<span class="sd">            Integral value for the operator.</span>
+<span class="sd">        </span>
+<span class="sd">        name : OperatorNames</span>
+<span class="sd">            Name of the operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="BaseOperator.assign_name"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.BaseOperator.assign_name">[docs]</a>    <span class="k">def</span> <span class="nf">assign_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assign name to the operator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : OperatorNames</span>
+<span class="sd">            Name of the operator.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If name of operator is not OperatorNames.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">OperatorNames</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Name of oeprator must be OperatorNames&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="BaseOperator.zeros"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.BaseOperator.zeros">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">zeros</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with zeros elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+<span class="sd">        </span>
+<span class="sd">        dtype : float</span>
+<span class="sd">            Data type of the ndarray.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If shape is not tuple or list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="nb">tuple</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be tuple or list&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be square/hypersquare&quot;</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="BaseOperator.ones"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.BaseOperator.ones">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">ones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with ones elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+<span class="sd">        </span>
+<span class="sd">        dtype : float</span>
+<span class="sd">            Data type of the ndarray.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If shape is not tuple or list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="nb">tuple</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be tuple or list&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be square/hypersquare&quot;</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="BaseOperator.random"><a class="viewcode-back" href="../../../../developer_api/moha.system.operator.html#moha.system.operator.base.BaseOperator.random">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate instance with random elements ndarray.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        shape : tuple/list</span>
+<span class="sd">            Shape of the ndarray.</span>
+<span class="sd">        </span>
+<span class="sd">        dtype : float/complex</span>
+<span class="sd">            Data type of the ndarray.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If shape is not tuple or list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="nb">tuple</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be tuple or list&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shape of the ndarray must be square/hypersquare&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dtype</span> <span class="o">==</span> <span class="nb">complex</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;dtype </span><span class="si">%r</span><span class="s1"> not supported!&#39;</span> <span class="o">%</span> <span class="n">dtype</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

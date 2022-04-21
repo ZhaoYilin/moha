@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moha.posthf.ci.ci_basis_set &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html">
+            <img src="../../../../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>moha.posthf.ci.ci_basis_set</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for moha.posthf.ci.ci_basis_set</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">moha.posthf.ci.slater</span> <span class="kn">import</span> <span class="n">SlaterDeterminant</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<div class="viewcode-block" id="CIBasisSet"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet">[docs]</a><span class="k">class</span> <span class="nc">CIBasisSet</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configuration interaction basis set.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    reference</span>
+<span class="sd">        Reference Slater Determinant.</span>
+<span class="sd">        </span>
+<span class="sd">    truncation : int</span>
+<span class="sd">        Maxium excitation level.</span>
+<span class="sd">    </span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">     __init__(self)</span>
+<span class="sd">        Initialize the instance.</span>
+<span class="sd">    </span>
+<span class="sd">    append(self,basis)</span>
+<span class="sd">        Append one basis to the basis set.    </span>
+<span class="sd">    </span>
+<span class="sd">    assign_truncation(self,truncation)</span>
+<span class="sd">        Assign truncation.</span>
+<span class="sd">    </span>
+<span class="sd">    generate_basis_set(self,truncation)</span>
+<span class="sd">        Generate N electron basis set.</span>
+<span class="sd">    </span>
+<span class="sd">    generate_annihilation_creation(self,degree)</span>
+<span class="sd">        Generate a list of annihilation and creation.</span>
+<span class="sd">    </span>
+<span class="sd">    apply_annihilation_creation(self,ac_list)</span>
+<span class="sd">        Apply annihilation and creation to the self Slater determinant.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate new basis set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">obj</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the CI basis set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reference : SlaterDeterminant</span>
+<span class="sd">            Reference configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Size of the CI basis set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="CIBasisSet.build"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet.build">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">truncation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate CI basis set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        truncation : int</span>
+<span class="sd">            Truncation number.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError </span>
+<span class="sd">            If truncation is not a list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">basis_set</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">truncation</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter truncation must be int.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nexc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">truncation</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">basis_set</span><span class="o">.</span><span class="n">add_excitation</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span><span class="n">nexc</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">basis_set</span></div>
+
+<div class="viewcode-block" id="CIBasisSet.append"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">basis</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add one basis to the basis set.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        basis</span>
+<span class="sd">            Basis instance.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If orb is not a SlaterDeterminant instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Basis must be a SlaterDeterminant instance&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>  </div>
+    
+<div class="viewcode-block" id="CIBasisSet.add_excitation"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet.add_excitation">[docs]</a>    <span class="k">def</span> <span class="nf">add_excitation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">reference</span><span class="p">,</span><span class="n">nexc</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add excitation state.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reference : SlaterDeterminant</span>
+<span class="sd">            Reference configuration.</span>
+<span class="sd">        </span>
+<span class="sd">        nexc : int</span>
+<span class="sd">            Number of excitation electrons.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If reference is not a SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        TypeError </span>
+<span class="sd">            If nexc is not int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Reference must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nexc</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Number of excitation electron must be int.&quot;</span><span class="p">)</span>
+        
+        <span class="n">ac_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_annihilation_creation</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">nexc</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">ac_list</span><span class="p">:</span>
+            <span class="n">confi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_annihilation_creation</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">slater</span> <span class="o">=</span> <span class="n">SlaterDeterminant</span><span class="p">(</span><span class="n">confi</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slater</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="CIBasisSet.generate_annihilation_creation"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet.generate_annihilation_creation">[docs]</a>    <span class="k">def</span> <span class="nf">generate_annihilation_creation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a list of annihilation and creation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        degree : int</span>
+<span class="sd">            Truncation level.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If parameter degree is not an int.</span>
+
+<span class="sd">        ValueError</span>
+<span class="sd">            If parameter degree is not a none negative number.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ac_list : list</span>
+<span class="sd">            A list of annihilation and creation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter degree must be an int.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">degree</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Parameter degree must be a none negative number.&quot;</span><span class="p">)</span>
+        
+        <span class="n">ac_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nspatials</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">nspatials</span>
+        <span class="n">occ_indices</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">occ_indices</span>
+        <span class="n">vir_indices</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">vir_indices</span>
+
+        <span class="k">for</span> <span class="n">alpha_degree</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">degree</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">beta_degree</span> <span class="o">=</span> <span class="n">degree</span> <span class="o">-</span> <span class="n">alpha_degree</span>
+            <span class="n">annihilation_index_alpha</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">occ_indices</span><span class="p">[:</span><span class="n">nspatials</span><span class="p">],</span><span class="n">alpha_degree</span><span class="p">))</span>
+            <span class="n">annihilation_index_beta</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">occ_indices</span><span class="p">[</span><span class="n">nspatials</span><span class="p">:],</span><span class="n">beta_degree</span><span class="p">))</span>
+            <span class="n">creation_index_alpha</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">vir_indices</span><span class="p">[:</span><span class="n">nspatials</span><span class="p">],</span><span class="n">alpha_degree</span><span class="p">))</span>
+            <span class="n">creation_index_beta</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">vir_indices</span><span class="p">[</span><span class="n">nspatials</span><span class="p">:],</span><span class="n">beta_degree</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">annihilation_index_alpha</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">annihilation_index_beta</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">creation_index_alpha</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">creation_index_beta</span><span class="p">:</span>
+                            <span class="n">ac_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">l</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">ac_list</span></div>
+
+
+<div class="viewcode-block" id="CIBasisSet.apply_annihilation_creation"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.ci_basis_set.CIBasisSet.apply_annihilation_creation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_annihilation_creation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">ac</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply annihilation and creation to the self Slater determinant.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ac : dict</span>
+<span class="sd">            A dictionary of annihilation and creation.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ac is not a dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        configuraiton : dict</span>
+<span class="sd">            New configuration for the self Slater determinant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ac</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter ac must be list.&quot;</span><span class="p">)</span>
+        <span class="n">configuration</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ac</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span> 
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ac</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> 
+        <span class="k">return</span> <span class="n">configuration</span></div></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

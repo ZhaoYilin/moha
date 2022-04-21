@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1.1. moha.system package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1.1.1.1. moha.system.basis package" href="moha.system.basis.html" />
+    <link rel="prev" title="2.1. System" href="moha.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html">2.1. System</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.1.1. moha.system package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">2.1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">2.1.1.2. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.system.atom">2.1.1.3. moha.system.atom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.system.auxiliary">2.1.1.4. moha.system.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.system.molecule">2.1.1.5. moha.system.molecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.system.periodic">2.1.1.6. moha.system.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.system">2.1.1.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+      <li><span class="section-number">2.1.1. </span>moha.system package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.system.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-system-package">
+<h1><span class="section-number">2.1.1. </span>moha.system package<a class="headerlink" href="#moha-system-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="subpackages">
+<h2><span class="section-number">2.1.1.1. </span>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="moha.system.basis.html">2.1.1.1.1. moha.system.basis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.basis.html#submodules">2.1.1.1.1.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.basis.html#module-moha.system.basis.basis_set">2.1.1.1.1.2. moha.system.basis.basis_set module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.basis.html#module-moha.system.basis.gaussian_orbital">2.1.1.1.1.3. moha.system.basis.gaussian_orbital module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.basis.html#module-moha.system.basis">2.1.1.1.1.4. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moha.system.hamiltonian.html">2.1.1.1.2. moha.system.hamiltonian package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.hamiltonian.html#submodules">2.1.1.1.2.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.hamiltonian.html#module-moha.system.hamiltonian.abc">2.1.1.1.2.2. moha.system.hamiltonian.abc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.hamiltonian.html#module-moha.system.hamiltonian.base">2.1.1.1.2.3. moha.system.hamiltonian.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.hamiltonian.html#module-moha.system.hamiltonian.chemical_hamiltonian">2.1.1.1.2.4. moha.system.hamiltonian.chemical_hamiltonian module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.hamiltonian.html#module-moha.system.hamiltonian">2.1.1.1.2.5. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moha.system.integral.html">2.1.1.1.3. moha.system.integral package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#submodules">2.1.1.1.3.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.angular_momentum">2.1.1.1.3.2. moha.system.integral.angular_momentum module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.differential">2.1.1.1.3.3. moha.system.integral.differential module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.electron_repulsion">2.1.1.1.3.4. moha.system.integral.electron_repulsion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.kinetic">2.1.1.1.3.5. moha.system.integral.kinetic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.linear_momentum">2.1.1.1.3.6. moha.system.integral.linear_momentum module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.multipole_moment">2.1.1.1.3.7. moha.system.integral.multipole_moment module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.nuclear_attraction">2.1.1.1.3.8. moha.system.integral.nuclear_attraction module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral.overlap">2.1.1.1.3.9. moha.system.integral.overlap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.integral.html#module-moha.system.integral">2.1.1.1.3.10. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moha.system.operator.html">2.1.1.1.4. moha.system.operator package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#submodules">2.1.1.1.4.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#module-moha.system.operator.base">2.1.1.1.4.2. moha.system.operator.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#module-moha.system.operator.one_electron">2.1.1.1.4.3. moha.system.operator.one_electron module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#module-moha.system.operator.two_electron">2.1.1.1.4.4. moha.system.operator.two_electron module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#module-moha.system.operator.zero_electron">2.1.1.1.4.5. moha.system.operator.zero_electron module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.operator.html#module-moha.system.operator">2.1.1.1.4.6. Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="moha.system.wavefunction.html">2.1.1.1.5. moha.system.wavefunction package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.wavefunction.html#submodules">2.1.1.1.5.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.wavefunction.html#module-moha.system.wavefunction.abc">2.1.1.1.5.2. moha.system.wavefunction.abc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.wavefunction.html#module-moha.system.wavefunction.base">2.1.1.1.5.3. moha.system.wavefunction.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.system.wavefunction.html#module-moha.system.wavefunction">2.1.1.1.5.4. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.1.1.2. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.system.atom">
+<span id="moha-system-atom-module"></span><h2><span class="section-number">2.1.1.3. </span>moha.system.atom module<a class="headerlink" href="#module-moha.system.atom" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.atom.Atom">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.atom.</span></span><span class="sig-name descname"><span class="pre">Atom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/atom.html#Atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.atom.Atom" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class for atom.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Name of the atom.</p>
+</dd>
+<dt>value<span class="classifier">int</span></dt><dd><p>Atomic number of the atom</p>
+</dd>
+<dt>coordinate<span class="classifier">3-list</span></dt><dd><p>Coordinate of the atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,element,coordinate)</dt><dd><p>Initialize the instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.auxiliary">
+<span id="moha-system-auxiliary-module"></span><h2><span class="section-number">2.1.1.4. </span>moha.system.auxiliary module<a class="headerlink" href="#module-moha.system.auxiliary" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.auxiliary.boys">
+<span class="sig-prename descclassname"><span class="pre">moha.system.auxiliary.</span></span><span class="sig-name descname"><span class="pre">boys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/auxiliary.html#boys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.auxiliary.boys" title="Permalink to this definition"></a></dt>
+<dd><p>Boys function for the calculation of coulombic integrals.</p>
+<dl class="simple">
+<dt>n<span class="classifier">int</span></dt><dd><p>Order of boys function</p>
+</dd>
+<dt>t<span class="classifier">float</span></dt><dd><p>Varible for boys function.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If boys function order is not an integer.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If boys function order n is not a none negative number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.auxiliary.eint">
+<span class="sig-prename descclassname"><span class="pre">moha.system.auxiliary.</span></span><span class="sig-name descname"><span class="pre">eint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/auxiliary.html#eint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.auxiliary.eint" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.auxiliary.gaussian_product_center">
+<span class="sig-prename descclassname"><span class="pre">moha.system.auxiliary.</span></span><span class="sig-name descname"><span class="pre">gaussian_product_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/auxiliary.html#gaussian_product_center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.auxiliary.gaussian_product_center" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.molecule">
+<span id="moha-system-molecule-module"></span><h2><span class="section-number">2.1.1.5. </span>moha.system.molecule module<a class="headerlink" href="#module-moha.system.molecule" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.molecule.</span></span><span class="sig-name descname"><span class="pre">Molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+<p>Molecular Class.</p>
+<dl class="simple">
+<dt>title<span class="classifier">str</span></dt><dd><p>Title of the system.</p>
+</dd>
+<dt>size<span class="classifier">int</span></dt><dd><p>Number of atoms.</p>
+</dd>
+<dt>symmetry<span class="classifier">str</span></dt><dd><p>Point group of the molecule.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>center_of_mass(self)</dt><dd><p>Calculate the center of mass for molecular.</p>
+</dd>
+</dl>
+<p>bond_length(self,i,j)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.bond_angle">
+<span class="sig-name descname"><span class="pre">bond_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.bond_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule.bond_angle" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Calculate the bond angle between atoms i,j,k.</dt><dd><p>Where atom j is the central atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.bond_length">
+<span class="sig-name descname"><span class="pre">bond_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.bond_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule.bond_length" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the the distances between atom i and j.</p>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.dihedral_angle">
+<span class="sig-name descname"><span class="pre">dihedral_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.dihedral_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule.dihedral_angle" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate dihedral angle for atom connectivit A,B,C,D.</p>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+<dt>l<span class="classifier">int</span></dt><dd><p>Index of fourth atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.from_file">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule.from_file" title="Permalink to this definition"></a></dt>
+<dd><p>Generate N electron basis set.</p>
+<dl class="simple">
+<dt>truncation<span class="classifier">list</span></dt><dd><p>A list of truncation degree.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError </dt><dd><p>If truncation is not a list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.out_of_plane_angle">
+<span class="sig-name descname"><span class="pre">out_of_plane_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/molecule.html#Molecule.out_of_plane_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.molecule.Molecule.out_of_plane_angle" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Calculate out of plane angle, which is for atom A</dt><dd><p>out of the plane consist by atoms B C D</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>i<span class="classifier">int</span></dt><dd><p>Index of first atom.</p>
+</dd>
+<dt>j<span class="classifier">int</span></dt><dd><p>Index of second atom.</p>
+</dd>
+<dt>k<span class="classifier">int</span></dt><dd><p>Index of third atom.</p>
+</dd>
+<dt>l<span class="classifier">int</span></dt><dd><p>Index of fourth atom.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If index of atom is not int.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If index of atom is not zero or positive number.            
+If index of atom is not samller than number of atoms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="moha.system.molecule.Molecule.center_of_mass">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">center_of_mass</span></span><a class="headerlink" href="#moha.system.molecule.Molecule.center_of_mass" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the center of mass for molecular.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.periodic">
+<span id="moha-system-periodic-module"></span><h2><span class="section-number">2.1.1.6. </span>moha.system.periodic module<a class="headerlink" href="#module-moha.system.periodic" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.periodic.Element">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.periodic.</span></span><span class="sig-name descname"><span class="pre">Element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/periodic.html#Element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.periodic.Element" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represents an element from the periodic table.</p>
+<dl class="simple">
+<dt>number<span class="classifier">int</span></dt><dd><p>The atomic number.</p>
+</dd>
+<dt>symbol<span class="classifier">str</span></dt><dd><p>A string with the symbol of the element.</p>
+</dd>
+<dt>name<span class="classifier">str</span></dt><dd><p>The full element name.</p>
+</dd>
+<dt>group<span class="classifier">int</span></dt><dd><p>The group of the element (not for actinides and lanthanides).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.system.periodic.Periodic">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.system.periodic.</span></span><span class="sig-name descname"><span class="pre">Periodic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/periodic.html#Periodic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.periodic.Periodic" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A periodic table data structure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.periodic.load_periodic">
+<span class="sig-prename descclassname"><span class="pre">moha.system.periodic.</span></span><span class="sig-name descname"><span class="pre">load_periodic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/periodic.html#load_periodic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.periodic.load_periodic" title="Permalink to this definition"></a></dt>
+<dd><p>Load the periodic table data.</p>
+<p>radius_calculated: pm</p>
+<dl class="simple">
+<dt>periodic_table:</dt><dd><p>An instance of <a class="reference internal" href="#moha.system.periodic.Periodic" title="moha.system.periodic.Periodic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Periodic</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system">
+<span id="module-contents"></span><h2><span class="section-number">2.1.1.7. </span>Module contents<a class="headerlink" href="#module-moha.system" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.html" class="btn btn-neutral float-left" title="2.1. System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.system.basis.html" class="btn btn-neutral float-right" title="2.1.1.1.1. moha.system.basis package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

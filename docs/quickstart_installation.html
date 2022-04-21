@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Installation &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Examples" href="quickstart_examples.html" />
+    <link rel="prev" title="MoHa 0.1.0" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-from-source-code">1.1. Compiling from source code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">1.1.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile">1.1.2. Compile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-test">1.1.3. Unit test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-with-pip">1.2. Installation with pip</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">1. </span>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quickstart_installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="installation">
+<span id="id1"></span><h1><span class="section-number">1. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
+<div class="section" id="compiling-from-source-code">
+<h2><span class="section-number">1.1. </span>Compiling from source code<a class="headerlink" href="#compiling-from-source-code" title="Permalink to this headline"></a></h2>
+<p>This the the recommended way to install moha. One can find the source code on Github <a class="reference external" href="https://github.com/ZhaoYilin/moha">https://github.com/ZhaoYilin/moha</a>.</p>
+<div class="section" id="prerequisites">
+<h3><span class="section-number">1.1.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"></a></h3>
+<p>To manual install the package, make sure you have the following dependencies:</p>
+<ul class="simple">
+<li><p>Python &gt;=3.5</p></li>
+<li><p>numpy &gt;=1.13.1</p></li>
+<li><p>scipy &gt;=0.19.1</p></li>
+<li><p>pytest &gt;=6.2.5</p></li>
+</ul>
+<p>These prerequistied modules can be installed with conda or pip:</p>
+<ul>
+<li><p>Conda</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install numpy scipy pytest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Pip</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install numpy scipy pytest
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="compile">
+<h3><span class="section-number">1.1.2. </span>Compile<a class="headerlink" href="#compile" title="Permalink to this headline"></a></h3>
+<p>The moha package can be downloaded on Github by:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gh repo clone ZhaoYilin/moha
+</pre></div>
+</div>
+</div></blockquote>
+<p>To install the moha package, move to the moha folder and run:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install -e .
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="unit-test">
+<h3><span class="section-number">1.1.3. </span>Unit test<a class="headerlink" href="#unit-test" title="Permalink to this headline"></a></h3>
+<p>To ensure that the installation was successful, you can run an unit test with pytest module. Inside the moha folder and run:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="installation-with-pip">
+<h2><span class="section-number">1.2. </span>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline"></a></h2>
+<p>The pip package provides a precompiled moha code (python wheel) which works on almost all Linux systems, and most of Mac OS X systems. you can install moha with:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install moha
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you already have installed moha via pip, you can upgrade it to the new version with:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --upgrade moha
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MoHa 0.1.0" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quickstart_examples.html" class="btn btn-neutral float-right" title="2. Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

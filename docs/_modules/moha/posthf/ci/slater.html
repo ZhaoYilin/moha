@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moha.posthf.ci.slater &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html">
+            <img src="../../../../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>moha.posthf.ci.slater</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for moha.posthf.ci.slater</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<div class="viewcode-block" id="SlaterDeterminant"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant">[docs]</a><span class="k">class</span> <span class="nc">SlaterDeterminant</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Slater Determinant Basis.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    self : list</span>
+<span class="sd">        Binary representation of the determinant in spin orbitals.</span>
+<span class="sd">        odd indices for alpha spin orbitals.</span>
+<span class="sd">        even indices for beta spin orbitals.</span>
+<span class="sd">        0 for unoccupied spin orbital.</span>
+<span class="sd">        1 for occupied spin orbital.</span>
+
+<span class="sd">    Properties</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nspatials : int</span>
+<span class="sd">        Number of spatial orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    nspins : int</span>
+<span class="sd">        Number of spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    nalphas : int</span>
+<span class="sd">        Number of alpha spin electrons.</span>
+<span class="sd">    </span>
+<span class="sd">    nbetas : int</span>
+<span class="sd">        Number of beta spin electrons.</span>
+<span class="sd">    </span>
+<span class="sd">    nelectrons :</span>
+<span class="sd">        Number of total electrons.</span>
+<span class="sd">    </span>
+<span class="sd">    alpha : list</span>
+<span class="sd">        Configuraiton of alpha spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    beta : list</span>
+<span class="sd">        Configuraiton of beta spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    occ_indices : list</span>
+<span class="sd">        Occupation indices of the spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    spatial_format : list</span>
+<span class="sd">        Representation of the Slater determinants in spatial orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __init__(self,configuration)</span>
+<span class="sd">        Initialize the instance.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_configuration(self,configuration)</span>
+<span class="sd">        Assign configuration to the Slater determinant.</span>
+<span class="sd">    </span>
+<span class="sd">    degree_of_excitation(self,other)</span>
+<span class="sd">        Compute the degree of excitation between D1 and D2.</span>
+<span class="sd">    </span>
+<span class="sd">    annihilation_list(self,other)</span>
+<span class="sd">        Identifying the annihilated spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    creation_list(self,other)</span>
+<span class="sd">        Identifying the created spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    phase(self,other)</span>
+<span class="sd">        The phase is calculated as −1^{Nperm}.This number is equal</span>
+<span class="sd">        to the number of occupied spin-orbitals between these two positions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">configuration</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the instance.</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        configuration : list</span>
+<span class="sd">            Representation of the Slater determinant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_configuration</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>        
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="k">return</span> <span class="s1">&#39;alpha: </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> beta: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nspatials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of spatial orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nspins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nalphas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of alpha spin electrons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nbetas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of beta spin electrons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nelectrons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Number of total electrons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configuraiton of alpha spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        alpha : list</span>
+<span class="sd">            Configuraiton of alpha spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configuraiton of beta spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        beta : list</span>
+<span class="sd">            Configuraiton of beta spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">occ_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indices of occupied spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        indices : list</span>
+<span class="sd">            Indices of occupied spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">indices</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">vir_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indices of virtual spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vir_indices : list</span>
+<span class="sd">            Indices of virtual spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">indices</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spin_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Representation of the Slater determinants in spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        spin_format : list</span>
+<span class="sd">            Representation of the Slater determinants in spin orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spatial_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Representation of the Slater determinants in spatial orbitals.</span>
+<span class="sd">            [0,0,0,2,1,3,3,3]</span>
+<span class="sd">            0 for unoccupied orbital</span>
+<span class="sd">            1 for occupied alpha spin orbital</span>
+<span class="sd">            2 for occupied beta spin orbital</span>
+<span class="sd">            3 for doubly occupied orbital</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        spatial_format : list</span>
+<span class="sd">            Representation of the Slater determinants in spatial orbitals.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span><span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="SlaterDeterminant.ground"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.ground">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">ground</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">nocc</span><span class="p">,</span> <span class="n">nspins</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a ground state Slater determinant.</span>
+<span class="sd">        If the number of electrons is odd, then the last electron is put into an alpha orbital.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nocc : int</span>
+<span class="sd">            Number of occupied spin orbitals.</span>
+<span class="sd">        norbs : int</span>
+<span class="sd">            Total number of spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ground_sd : gmpy2.mpz</span>
+<span class="sd">            Integer that describes the occupation of a Slater determinant as a bitstring.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `nocc &gt; nspins`.</span>
+<span class="sd">        </span>
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Assumes that the spin-orbitals are ordered by energy from lowest to greatest. The occupation is</span>
+<span class="sd">        assumed to have the alpha block frist, then the beta block.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span> <span class="n">ceil</span>
+        <span class="n">nspatials</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nspins</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">ceil</span><span class="p">(</span><span class="n">nocc</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">nspatials</span><span class="o">-</span><span class="n">ceil</span><span class="p">(</span><span class="n">nocc</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">floor</span><span class="p">(</span><span class="n">nocc</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">nspatials</span><span class="o">-</span><span class="n">floor</span><span class="p">(</span><span class="n">nocc</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">configuration</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+            <span class="n">configuration</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">configuration</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="SlaterDeterminant.assign_configuration"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.assign_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">assign_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">configuration</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assign configuration to the Slater determinant.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        configuration : list</span>
+<span class="sd">            Binary representation of the Slater determinant.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If configuration is not list.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If configuration is not list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Configuration must be list.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Length of the configuration in spin orbitals must be even.&quot;</span><span class="p">)</span>
+        <span class="nb">list</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">configuration</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SlaterDeterminant.degree_of_excitation"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.degree_of_excitation">[docs]</a>    <span class="k">def</span> <span class="nf">degree_of_excitation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the degree of excitation between D1 and D2 for alpha spin.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        det : SlaterDeterminant</span>
+<span class="sd">            The second Slater determinant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If det is not a SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        degree : int</span>
+<span class="sd">            Degree of alpha spin excitation between two Slater determinant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter other must be a SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span><span class="n">diff</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">degree</span></div>
+
+<div class="viewcode-block" id="SlaterDeterminant.annihilation_list"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.annihilation_list">[docs]</a>    <span class="k">def</span> <span class="nf">annihilation_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Identifying the annihilated alpha spin orbitals.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        det : SlaterDeterminant</span>
+<span class="sd">            The second Slater determinant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If det is not a SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        index : dict</span>
+<span class="sd">            Index of annihilation alpha spin.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter other must be a SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diff</span><span class="o">==-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">indices</span></div>
+
+<div class="viewcode-block" id="SlaterDeterminant.creation_list"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.creation_list">[docs]</a>    <span class="k">def</span> <span class="nf">creation_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Identifying the created alpha spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        det : SlaterDeterminant</span>
+<span class="sd">            The second Slater determinant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If det is not a SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        index : dict</span>
+<span class="sd">            Index of creation alpha spin.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter other must be a SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diff</span><span class="o">==</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">indices</span></div>
+
+<div class="viewcode-block" id="SlaterDeterminant.phase"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterDeterminant.phase">[docs]</a>    <span class="k">def</span> <span class="nf">phase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The phase is calculated as −1^{Nperm}.This number is equal</span>
+<span class="sd">        to the number of occupied spin-orbitals between these two positions.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        other : SlaterDeterminant</span>
+<span class="sd">            The second Slater determinant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If det is not a SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        sign : int</span>
+<span class="sd">            Phase for the evaluation between two Slater determinant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameter other must be a SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">tmp_configuration</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">anni_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annihilation_list</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">crea_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">creation_list</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">anni_list</span><span class="p">,</span><span class="n">crea_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span><span class="n">j</span><span class="p">:</span>
+                <span class="n">N_permutation</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tmp_configuration</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">j</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>    
+                <span class="n">N_permutation</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tmp_configuration</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">sign</span> <span class="o">*=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">N_permutation</span><span class="p">)</span>
+            <span class="n">tmp_configuration</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-=</span><span class="mi">1</span>
+            <span class="n">tmp_configuration</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">sign</span></div></div>
+
+<div class="viewcode-block" id="SlaterCondon"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterCondon">[docs]</a><span class="k">class</span> <span class="nc">SlaterCondon</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The rules which allow us to express matrix elements Hij in terms of one and two</span>
+<span class="sd">    electron integrals.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    h1e : np.ndarray</span>
+<span class="sd">        One electron integral.</span>
+
+<span class="sd">    g2e : np.ndarray</span>
+<span class="sd">        Two electron integral.</span>
+<span class="sd">    </span>
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __init__(self, h1e, g2e)</span>
+<span class="sd">        Initialize the instance.</span>
+
+<span class="sd">    calculate_matrix_element(self,det1,det2)</span>
+<span class="sd">        Calculate matrix element between two determinants.</span>
+<span class="sd">    </span>
+<span class="sd">    identical(self,det)</span>
+<span class="sd">        Calculate matrix element whose configurations are identical.</span>
+<span class="sd">    </span>
+<span class="sd">    differ_by1(self,det1,det2):</span>
+<span class="sd">        Calculate matrix element whose configuration differ by 1 spin orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    difer_byf2(self,det1,det2):</span>
+<span class="sd">        Calculate matrix element whose configuration differ by 2 spin orbitals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h1e</span><span class="p">,</span> <span class="n">g2e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        h1e : np.ndarray</span>
+<span class="sd">            One electron integral.</span>
+
+<span class="sd">        g2e : np.ndarray</span>
+<span class="sd">            Two electron integral.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h1e</span> <span class="o">=</span> <span class="n">h1e</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g2e</span> <span class="o">=</span> <span class="n">g2e</span>
+    
+<div class="viewcode-block" id="SlaterCondon.calculate_matrix_element"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterCondon.calculate_matrix_element">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_matrix_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sd1</span><span class="p">,</span><span class="n">sd2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate matrix element between two determinants.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sd1 : SlaterDeterminant</span>
+<span class="sd">            The first SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        sd2 : SlaterDeterminant</span>
+<span class="sd">            The second SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If sd1 is not SlaterDeterminant instance.</span>
+<span class="sd">            If sd2 is not SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            The integral value of CI Hamiltonian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd1</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters det1 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd2</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters det2 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">degree_of_excitation</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identical</span><span class="p">(</span><span class="n">sd1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">degree</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">differ_by1</span><span class="p">(</span><span class="n">sd1</span><span class="p">,</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">degree</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">differ_by2</span><span class="p">(</span><span class="n">sd1</span><span class="p">,</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+    
+<div class="viewcode-block" id="SlaterCondon.identical"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterCondon.identical">[docs]</a>    <span class="k">def</span> <span class="nf">identical</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sd</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate matrix element whose configurations are identical.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sd : SlaterDeterminant</span>
+<span class="sd">            A SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If sd is not SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            The integral value of CI Hamiltonian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd</span><span class="p">,</span> <span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters sd must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">O1</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">O2</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sd</span><span class="o">.</span><span class="n">occ_indices</span><span class="p">:</span>
+            <span class="n">O1</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h1e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sd</span><span class="o">.</span><span class="n">occ_indices</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">sd</span><span class="o">.</span><span class="n">occ_indices</span><span class="p">:</span>
+                <span class="n">O2</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g2e</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">O1</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">O2</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+    
+<div class="viewcode-block" id="SlaterCondon.differ_by1"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterCondon.differ_by1">[docs]</a>    <span class="k">def</span> <span class="nf">differ_by1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sd1</span><span class="p">,</span><span class="n">sd2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate matrix element whose configuration differ by 1 spin orbitals.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sd1</span>
+<span class="sd">            A SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        sd2</span>
+<span class="sd">            A SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If sd1 is not SlaterDeterminant instance.</span>
+<span class="sd">            If sd2 is not SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            The integral value of CI Hamiltonian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd1</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters sd1 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd2</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters sd2 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">O1</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">O2</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">sign</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="n">occ_indices</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sd1</span><span class="o">.</span><span class="n">occ_indices</span><span class="p">)</span>
+        <span class="n">a_list</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">annihilation_list</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="n">c_list</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">creation_list</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">occ_indices</span><span class="p">:</span>
+                <span class="n">occ_indices</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">c_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">occ_indices</span><span class="p">:</span>
+                <span class="n">occ_indices</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">O1</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h1e</span><span class="p">[</span><span class="n">a_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">c_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">occ_indices</span><span class="p">:</span>
+            <span class="n">O2</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g2e</span><span class="p">[</span><span class="n">a_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">k</span><span class="p">,</span><span class="n">c_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">O1</span><span class="o">+</span><span class="n">O2</span>
+        <span class="n">value</span> <span class="o">*=</span><span class="n">sign</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="SlaterCondon.differ_by2"><a class="viewcode-back" href="../../../../developer_api/moha.posthf.ci.html#moha.posthf.ci.slater.SlaterCondon.differ_by2">[docs]</a>    <span class="k">def</span> <span class="nf">differ_by2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sd1</span><span class="p">,</span><span class="n">sd2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate matrix element whose configuration differ by 2 spin orbitals.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sd1</span>
+<span class="sd">            First SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        sd2</span>
+<span class="sd">            Second SlaterDeterminant instance.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If sd1 is not SlaterDeterminant instance.</span>
+<span class="sd">            If sd2 is not SlaterDeterminant instance.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            The integral value of CI Hamiltonian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd1</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters sd1 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sd2</span><span class="p">,</span><span class="n">SlaterDeterminant</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Parameters sd2 must be SlaterDeterminant instance.&quot;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">sign</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="n">a_list</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">annihilation_list</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="n">c_list</span> <span class="o">=</span> <span class="n">sd1</span><span class="o">.</span><span class="n">creation_list</span><span class="p">(</span><span class="n">sd2</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g2e</span><span class="p">[</span><span class="n">a_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">a_list</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">c_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">value</span> <span class="o">*=</span><span class="n">sign</span>
+        <span class="k">return</span> <span class="n">value</span></div></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

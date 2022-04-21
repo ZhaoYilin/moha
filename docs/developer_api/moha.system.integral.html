@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.1.1.1.3. moha.system.integral package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.1.1.1.4. moha.system.operator package" href="moha.system.operator.html" />
+    <link rel="prev" title="2.1.1.1.2. moha.system.hamiltonian package" href="moha.system.hamiltonian.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html">2.1. System</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="moha.system.html">2.1.1. moha.system package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="moha.system.html#subpackages">2.1.1.1. Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#submodules">2.1.1.2. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.atom">2.1.1.3. moha.system.atom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.auxiliary">2.1.1.4. moha.system.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.molecule">2.1.1.5. moha.system.molecule module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system.periodic">2.1.1.6. moha.system.periodic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="moha.system.html#module-moha.system">2.1.1.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#property">2.4. Property</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+          <li><a href="moha.system.html"><span class="section-number">2.1.1. </span>moha.system package</a> &raquo;</li>
+      <li><span class="section-number">2.1.1.1.3. </span>moha.system.integral package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.system.integral.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-system-integral-package">
+<h1><span class="section-number">2.1.1.1.3. </span>moha.system.integral package<a class="headerlink" href="#moha-system-integral-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.1.1.1.3.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.system.integral.angular_momentum">
+<span id="moha-system-integral-angular-momentum-module"></span><h2><span class="section-number">2.1.1.1.3.2. </span>moha.system.integral.angular_momentum module<a class="headerlink" href="#module-moha.system.integral.angular_momentum" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.angular_momentum.Lxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.angular_momentum.</span></span><span class="sig-name descname"><span class="pre">Lxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/angular_momentum.html#Lxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.angular_momentum.Lxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.angular_momentum.angular_momentum">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.angular_momentum.</span></span><span class="sig-name descname"><span class="pre">angular_momentum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/angular_momentum.html#angular_momentum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.angular_momentum.angular_momentum" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.differential">
+<span id="moha-system-integral-differential-module"></span><h2><span class="section-number">2.1.1.1.3.3. </span>moha.system.integral.differential module<a class="headerlink" href="#module-moha.system.integral.differential" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.differential.D">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.differential.</span></span><span class="sig-name descname"><span class="pre">D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/differential.html#D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.differential.D" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive definition of Hermite Gaussian coefficients.
+Returns a float.
+a: orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b: orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+i,j: orbital angular momentum number on Gaussian ‘a’ and ‘b’
+t: number nodes in Hermite (depends on type of integral,</p>
+<blockquote>
+<div><p>e.g. always zero for overlap integrals)</p>
+</div></blockquote>
+<p>Qx: distance between origins of Gaussian ‘a’ and ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.differential.Dxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.differential.</span></span><span class="sig-name descname"><span class="pre">Dxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">es</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/differential.html#Dxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.differential.Dxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.differential.differential">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.differential.</span></span><span class="sig-name descname"><span class="pre">differential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">es</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/differential.html#differential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.differential.differential" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.electron_repulsion">
+<span id="moha-system-integral-electron-repulsion-module"></span><h2><span class="section-number">2.1.1.1.3.4. </span>moha.system.integral.electron_repulsion module<a class="headerlink" href="#module-moha.system.integral.electron_repulsion" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.electron_repulsion.electron_repulsion">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.electron_repulsion.</span></span><span class="sig-name descname"><span class="pre">electron_repulsion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/electron_repulsion.html#electron_repulsion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.electron_repulsion.electron_repulsion" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object
+c: contracted Gaussian ‘b’, BasisFunction object
+d: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.electron_repulsion.gxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.electron_repulsion.</span></span><span class="sig-name descname"><span class="pre">gxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/electron_repulsion.html#gxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.electron_repulsion.gxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy integral between two Gaussians
+Returns a float.
+a,b,c,d:   orbital exponent on Gaussian ‘a’,’b’,’c’,’d’
+lmn1,lmn2
+lmn3,lmn4: int tuple containing orbital angular momentum</p>
+<blockquote>
+<div><p>for Gaussian ‘a’,’b’,’c’,’d’, respectively</p>
+</div></blockquote>
+<p>A,B,C,D:   list containing origin of Gaussian ‘a’,’b’,’c’,’d’</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.kinetic">
+<span id="moha-system-integral-kinetic-module"></span><h2><span class="section-number">2.1.1.1.3.5. </span>moha.system.integral.kinetic module<a class="headerlink" href="#module-moha.system.integral.kinetic" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.kinetic.T">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.kinetic.</span></span><span class="sig-name descname"><span class="pre">T</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/kinetic.html#T"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.kinetic.T" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive definition of Hermite Gaussian coefficients.
+Returns a float.
+a: orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b: orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+i,j: orbital angular momentum number on Gaussian ‘a’ and ‘b’
+t: number nodes in Hermite (depends on type of integral,</p>
+<blockquote>
+<div><p>e.g. always zero for overlap integrals)</p>
+</div></blockquote>
+<p>Qx: distance between origins of Gaussian ‘a’ and ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.kinetic.Txyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.kinetic.</span></span><span class="sig-name descname"><span class="pre">Txyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/kinetic.html#Txyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.kinetic.Txyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.kinetic.kinetic">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.kinetic.</span></span><span class="sig-name descname"><span class="pre">kinetic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/kinetic.html#kinetic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.kinetic.kinetic" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.linear_momentum">
+<span id="moha-system-integral-linear-momentum-module"></span><h2><span class="section-number">2.1.1.1.3.6. </span>moha.system.integral.linear_momentum module<a class="headerlink" href="#module-moha.system.integral.linear_momentum" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.linear_momentum.Pxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.linear_momentum.</span></span><span class="sig-name descname"><span class="pre">Pxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/linear_momentum.html#Pxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.linear_momentum.Pxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.linear_momentum.linear_momentum">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.linear_momentum.</span></span><span class="sig-name descname"><span class="pre">linear_momentum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/linear_momentum.html#linear_momentum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.linear_momentum.linear_momentum" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.multipole_moment">
+<span id="moha-system-integral-multipole-moment-module"></span><h2><span class="section-number">2.1.1.1.3.7. </span>moha.system.integral.multipole_moment module<a class="headerlink" href="#module-moha.system.integral.multipole_moment" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.multipole_moment.MM">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.multipole_moment.</span></span><span class="sig-name descname"><span class="pre">MM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/multipole_moment.html#MM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.multipole_moment.MM" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive definition of Hermite Gaussian coefficients.
+Returns a float.
+a: orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b: orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+i,j: orbital angular momentum number on Gaussian ‘a’ and ‘b’
+t: number nodes in Hermite (depends on type of integral,</p>
+<blockquote>
+<div><p>e.g. always zero for overlap integrals)</p>
+</div></blockquote>
+<p>Qx: distance between origins of Gaussian ‘a’ and ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.multipole_moment.MMxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.multipole_moment.</span></span><span class="sig-name descname"><span class="pre">MMxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/multipole_moment.html#MMxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.multipole_moment.MMxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.multipole_moment.multipole_moment">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.multipole_moment.</span></span><span class="sig-name descname"><span class="pre">multipole_moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/multipole_moment.html#multipole_moment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.multipole_moment.multipole_moment" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.nuclear_attraction">
+<span id="moha-system-integral-nuclear-attraction-module"></span><h2><span class="section-number">2.1.1.1.3.8. </span>moha.system.integral.nuclear_attraction module<a class="headerlink" href="#module-moha.system.integral.nuclear_attraction" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.nuclear_attraction.E">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.nuclear_attraction.</span></span><span class="sig-name descname"><span class="pre">E</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/nuclear_attraction.html#E"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.nuclear_attraction.E" title="Permalink to this definition"></a></dt>
+<dd><p>Recursive definition of Hermite Gaussian coefficients.
+Returns a float.
+a: orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b: orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+i,j: orbital angular momentum number on Gaussian ‘a’ and ‘b’
+t: number nodes in Hermite (depends on type of integral,</p>
+<blockquote>
+<div><p>e.g. always zero for overlap integrals)</p>
+</div></blockquote>
+<p>Qx: distance between origins of Gaussian ‘a’ and ‘b’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.nuclear_attraction.R">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.nuclear_attraction.</span></span><span class="sig-name descname"><span class="pre">R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PCx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PCy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PCz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RPC</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/nuclear_attraction.html#R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.nuclear_attraction.R" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the Coulomb auxiliary Hermite integrals
+Returns a float.
+Arguments:
+t,u,v:   order of Coulomb Hermite derivative in x,y,z</p>
+<blockquote>
+<div><p>(see defs in Helgaker and Taylor)</p>
+</div></blockquote>
+<p>n:       order of Boys function
+PCx,y,z: Cartesian vector distance between Gaussian</p>
+<blockquote>
+<div><p>composite center P and nuclear center C</p>
+</div></blockquote>
+<p>RPC:     Distance between P and C</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.nuclear_attraction.Vxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.nuclear_attraction.</span></span><span class="sig-name descname"><span class="pre">Vxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/nuclear_attraction.html#Vxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.nuclear_attraction.Vxyz" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates kinetic energy integral between two Gaussians
+Returns a float.
+a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’
+C:    list containing origin of nuclear center ‘C’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.nuclear_attraction.nuclear_attraction">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.nuclear_attraction.</span></span><span class="sig-name descname"><span class="pre">nuclear_attraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/nuclear_attraction.html#nuclear_attraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.nuclear_attraction.nuclear_attraction" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object
+C: center of nucleus</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral.overlap">
+<span id="moha-system-integral-overlap-module"></span><h2><span class="section-number">2.1.1.1.3.9. </span>moha.system.integral.overlap module<a class="headerlink" href="#module-moha.system.integral.overlap" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.overlap.S">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.overlap.</span></span><span class="sig-name descname"><span class="pre">S</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/overlap.html#S"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.overlap.S" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Recursive definition of Hermite Gaussian coefficients.</dt><dd><p>Returns a float.</p>
+</dd>
+</dl>
+<dl>
+<dt>a<span class="classifier"></span></dt><dd><p>orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)</p>
+</dd>
+<dt>b<span class="classifier"></span></dt><dd><p>orbital exponent on Gaussian ‘b’ (e.g. beta in the text)</p>
+</dd>
+<dt>i,j: </dt><dd><p>orbital angular momentum number on Gaussian ‘a’ and ‘b’</p>
+</dd>
+<dt>t: </dt><dd><dl class="simple">
+<dt>number nodes in Hermite (depends on type of integral,</dt><dd><p>e.g. always zero for overlap integrals)</p>
+</dd>
+</dl>
+<p>Qx: distance between origins of Gaussian ‘a’ and ‘b’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.overlap.Sxyz">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.overlap.</span></span><span class="sig-name descname"><span class="pre">Sxyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lmn2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/overlap.html#Sxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.overlap.Sxyz" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Evaluates overlap integral between two Gaussians</dt><dd><p>Returns a float.</p>
+</dd>
+</dl>
+<blockquote>
+<div><p>a:    orbital exponent on Gaussian ‘a’ (e.g. alpha in the text)
+b:    orbital exponent on Gaussian ‘b’ (e.g. beta in the text)
+lmn1: int tuple containing orbital angular momentum (e.g. (1,0,0))</p>
+<blockquote>
+<div><p>for Gaussian ‘a’</p>
+</div></blockquote>
+<p>lmn2: int tuple containing orbital angular momentum for Gaussian ‘b’
+A:    list containing origin of Gaussian ‘a’, e.g. [1.0, 2.0, 0.0]
+B:    list containing origin of Gaussian ‘b’</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.system.integral.overlap.overlap">
+<span class="sig-prename descclassname"><span class="pre">moha.system.integral.overlap.</span></span><span class="sig-name descname"><span class="pre">overlap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/system/integral/overlap.html#overlap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.system.integral.overlap.overlap" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluates overlap between two contracted Gaussians
+Returns float.
+Arguments:
+a: contracted Gaussian ‘a’, BasisFunction object
+b: contracted Gaussian ‘b’, BasisFunction object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.system.integral">
+<span id="module-contents"></span><h2><span class="section-number">2.1.1.1.3.10. </span>Module contents<a class="headerlink" href="#module-moha.system.integral" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.system.hamiltonian.html" class="btn btn-neutral float-left" title="2.1.1.1.2. moha.system.hamiltonian package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.system.operator.html" class="btn btn-neutral float-right" title="2.1.1.1.4. moha.system.operator package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

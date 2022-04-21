@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moha.hf.hf_wavefunction &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>moha.hf.hf_wavefunction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for moha.hf.hf_wavefunction</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">moha.system.wavefunction.base</span> <span class="kn">import</span> <span class="n">BaseWaveFunction</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+
+<div class="viewcode-block" id="HFWaveFunction"><a class="viewcode-back" href="../../../developer_api/moha.hf.html#moha.hf.hf_wavefunction.HFWaveFunction">[docs]</a><span class="k">class</span> <span class="nc">HFWaveFunction</span><span class="p">(</span><span class="n">BaseWaveFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Hatree Fock wavefunction class.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nelec : int</span>
+<span class="sd">        Number of electrons.</span>
+
+<span class="sd">    occ : dict</span>
+<span class="sd">        Occupation number of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    nspatial : int</span>
+<span class="sd">        Number of spatial orbitals.</span>
+<span class="sd">    </span>
+<span class="sd">    basis_set : Basis</span>
+<span class="sd">        Basis set of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    coefficients : np.ndarray</span>
+<span class="sd">        Coefficients of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    density_matrix : np.ndarray</span>
+<span class="sd">        Density matrix of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    orbital_energies : np.ndarray</span>
+<span class="sd">        Orbital energies of the wavefunction.</span>
+
+<span class="sd">    Properties</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ncoefficients : int</span>
+<span class="sd">        Number of coefficients.</span>
+<span class="sd">    </span>
+<span class="sd">    nspin : int</span>
+<span class="sd">        Number of spin orbital</span>
+<span class="sd">    </span>
+<span class="sd">    spin : int</span>
+<span class="sd">        Spin of the wavefunction</span>
+<span class="sd">    </span>
+<span class="sd">    seniority : int</span>
+<span class="sd">        Seniority of the wavefunction</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __init__(self, nelec, nspatial, basis_set=None, coefficients=None)</span>
+<span class="sd">        Initialize the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_nelec(self, nelec)</span>
+<span class="sd">        Assign the number of electrons.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_nspatial(self, nspatial)</span>
+<span class="sd">        Assign the number of spatial orbitals.</span>
+
+<span class="sd">    assign_occ(self, occ)</span>
+<span class="sd">        Assign the occupation number of the wavefunction.    </span>
+<span class="sd">    </span>
+<span class="sd">    assign_basis_set(self, basis_set)</span>
+<span class="sd">        Assign basis set of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_coefficients(self, coefficients)</span>
+<span class="sd">        Assign coefficients of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_density_matrix(self, density_matrix)</span>
+<span class="sd">        Assign density matrix of the wavefunction.</span>
+<span class="sd">    </span>
+<span class="sd">    assign_orbital_energies(self, orbital_energies)</span>
+<span class="sd">        Assign orbital energies of the wavefunction.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nelec</span><span class="p">,</span><span class="n">nspatial</span><span class="p">,</span><span class="n">occ</span><span class="o">=</span><span class="p">{},</span><span class="n">basis_set</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coefficients</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">density_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">orbital_energies</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the wavefunction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nelec : int</span>
+<span class="sd">            Number of electrons.</span>
+<span class="sd">        </span>
+<span class="sd">        nspin : int</span>
+<span class="sd">            Number of spin orbitals.</span>
+<span class="sd">        </span>
+<span class="sd">        occ : dict</span>
+<span class="sd">            Occupation number of the wavefunction.</span>
+
+<span class="sd">        basis_set</span>
+<span class="sd">            Basis set of the wavefunction.</span>
+
+<span class="sd">        coefficients : np.ndarray</span>
+<span class="sd">            Parameters of the wavefunction.</span>
+<span class="sd">        </span>
+<span class="sd">        density_matrix : np.ndarray</span>
+<span class="sd">            Density matrix of the wavefunction.</span>
+<span class="sd">        </span>
+<span class="sd">        orbital_energies : np.ndarray</span>
+<span class="sd">            Orbital energies of the wavefunction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nelec</span><span class="p">,</span><span class="n">nspatial</span><span class="p">,</span><span class="n">occ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_basis_set</span><span class="p">(</span><span class="n">basis_set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_coefficients</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assign_orbital_energies</span><span class="p">(</span><span class="n">orbital_energies</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the cofiguration of the wavefunction.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        c : dict</span>
+<span class="sd">            Configuration of the wavefunction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">spin</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">occ</span><span class="p">[</span><span class="n">spin</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ</span><span class="p">[</span><span class="n">spin</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">c</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ncoefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of wavefunction coefficients.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ncoefficients : int</span>
+<span class="sd">            Number of coefficients.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If coefficients is not a np.ndarray instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefficients</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Coefficients is not a np.ndarray instance.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefficients</span><span class="o">.</span><span class="n">size</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">seniority</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the seniority of the wavefunction.</span>
+
+<span class="sd">        Seniority of a Slater determinant is its number of unpaired electrons. The seniority of the</span>
+<span class="sd">        wavefunction is the expected number of unpaired electrons.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seniority : int</span>
+<span class="sd">            Seniority of the wavefunction.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        `None` means that all possible seniority are allowed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">occ</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">s</span>
+    
+<div class="viewcode-block" id="HFWaveFunction.assign_basis_set"><a class="viewcode-back" href="../../../developer_api/moha.hf.html#moha.hf.hf_wavefunction.HFWaveFunction.assign_basis_set">[docs]</a>    <span class="k">def</span> <span class="nf">assign_basis_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis_set</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assign the basis_set of the wavefunction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        basis_set</span>
+<span class="sd">            Basis set of the wavefunction.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basis_set</span> <span class="o">=</span> <span class="n">basis_set</span></div>
+
+<div class="viewcode-block" id="HFWaveFunction.assign_coefficients"><a class="viewcode-back" href="../../../developer_api/moha.hf.html#moha.hf.hf_wavefunction.HFWaveFunction.assign_coefficients">[docs]</a>    <span class="k">def</span> <span class="nf">assign_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assign the coefficients of the wavefunction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        coefficients : np.ndarray</span>
+<span class="sd">            Parameters of the wavefunction.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">coefficients</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coefficients</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Coefficients is not a np.ndarray instance.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coefficients</span> <span class="o">=</span> <span class="n">coefficients</span></div>
+    
+<div class="viewcode-block" id="HFWaveFunction.assign_density_matrix"><a class="viewcode-back" href="../../../developer_api/moha.hf.html#moha.hf.hf_wavefunction.HFWaveFunction.assign_density_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">assign_density_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">density_matrix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Assign density matrix of the wavefunction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        density_matrix : np.ndarray</span>
+<span class="sd">            Density matrix of the wavefunction.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#if density_matrix is None:</span>
+        <span class="c1">#    density_matrix = np.zeros((self.nspatial,self.nspatial))</span>
+        <span class="c1">#elif not isinstance(density_matrix,np.ndarray):</span>
+        <span class="c1">#    raise TypeError(&quot;Density matrix is not a np.ndarray instance.&quot;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">density_matrix</span> <span class="o">=</span> <span class="n">density_matrix</span></div>
+    
+<div class="viewcode-block" id="HFWaveFunction.assign_orbital_energies"><a class="viewcode-back" href="../../../developer_api/moha.hf.html#moha.hf.hf_wavefunction.HFWaveFunction.assign_orbital_energies">[docs]</a>    <span class="k">def</span> <span class="nf">assign_orbital_energies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orbital_energies</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Assign orbital energies of the wavefunction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        orbital_energies : np.ndarray</span>
+<span class="sd">            Orbital energies of the wavefunction.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">orbital_energies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">orbital_energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nspatial</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orbital_energies</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Orbital energies is not a np.ndarray instance.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orbital_energies</span> <span class="o">=</span> <span class="n">orbital_energies</span></div></div>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

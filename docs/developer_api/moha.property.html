@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.4.1. moha.property package &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2.5.1. moha.io package" href="moha.io.html" />
+    <link rel="prev" title="2.3.1.1.3. moha.posthf.pt package" href="moha.posthf.pt.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_property.html">4. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">2. API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="moha.html">2.1. System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#hartree-fock">2.2. Hartree–Fock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#post-hartree-fock">2.3. Post–Hartree–Fock</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="moha.html#property">2.4. Property</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">2.4.1. moha.property package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">2.4.1.1. Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.property.auxiliary">2.4.1.2. moha.property.auxiliary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.property.excitation_energy">2.4.1.3. moha.property.excitation_energy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.property.multipole_moment">2.4.1.4. moha.property.multipole_moment module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.property.population_analysis">2.4.1.5. moha.property.population_analysis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-moha.property">2.4.1.6. Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#io">2.5. IO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#symmetry">2.6. Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moha.html#module-moha">2.7. Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html"><span class="section-number">2. </span>API</a> &raquo;</li>
+          <li><a href="moha.html"><span class="section-number">2.1. </span>System</a> &raquo;</li>
+      <li><span class="section-number">2.4.1. </span>moha.property package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer_api/moha.property.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="moha-property-package">
+<h1><span class="section-number">2.4.1. </span>moha.property package<a class="headerlink" href="#moha-property-package" title="Permalink to this headline"></a></h1>
+<div class="section" id="submodules">
+<h2><span class="section-number">2.4.1.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</div>
+<div class="section" id="module-moha.property.auxiliary">
+<span id="moha-property-auxiliary-module"></span><h2><span class="section-number">2.4.1.2. </span>moha.property.auxiliary module<a class="headerlink" href="#module-moha.property.auxiliary" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="moha.property.auxiliary.spinfock">
+<span class="sig-prename descclassname"><span class="pre">moha.property.auxiliary.</span></span><span class="sig-name descname"><span class="pre">spinfock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eorbitals</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/auxiliary.html#spinfock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.auxiliary.spinfock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-moha.property.excitation_energy">
+<span id="moha-property-excitation-energy-module"></span><h2><span class="section-number">2.4.1.3. </span>moha.property.excitation_energy module<a class="headerlink" href="#module-moha.property.excitation_energy" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.property.excitation_energy.ExcitationEnergyCIS">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.property.excitation_energy.</span></span><span class="sig-name descname"><span class="pre">ExcitationEnergyCIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/excitation_energy.html#ExcitationEnergyCIS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.excitation_energy.ExcitationEnergyCIS" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">moha.property.excitation_energy.ExcitationEnergy</span></code></p>
+<p>Excitation energy solver using configuration interaction single method.</p>
+<dl class="simple">
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+<dt>level<span class="classifier">{None, int, list}</span></dt><dd><p>Excitation energy level.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,ham,wfn)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>kernel(self,level=None)</dt><dd><p>Kernel of the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign the chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign the Hartree Fock wavefunction to the solver.</p>
+</dd>
+<dt>assign_level(self,level)</dt><dd><p>Assign the excitation energy level to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.excitation_energy.ExcitationEnergyCIS.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/excitation_energy.html#ExcitationEnergyCIS.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.excitation_energy.ExcitationEnergyCIS.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Excitation energy calculation results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.property.multipole_moment">
+<span id="moha-property-multipole-moment-module"></span><h2><span class="section-number">2.4.1.4. </span>moha.property.multipole_moment module<a class="headerlink" href="#module-moha.property.multipole_moment" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.property.multipole_moment.MultipoleMoment">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.property.multipole_moment.</span></span><span class="sig-name descname"><span class="pre">MultipoleMoment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/multipole_moment.html#MultipoleMoment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.multipole_moment.MultipoleMoment" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Multipole momnet solver.</p>
+<dl class="simple">
+<dt>mol</dt><dd><p>Chemical molecule.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Basis set of the molecule</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,mol,basis_set,ham,wfn)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>assign_molecule(self,mol)</dt><dd><p>Assign chemical molecule to the solver.</p>
+</dd>
+<dt>assign_basis_set(self,basis_set)</dt><dd><p>Assign basis set to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign Hartree Fock wavefunction to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.multipole_moment.MultipoleMoment.assign_basis_set">
+<span class="sig-name descname"><span class="pre">assign_basis_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/multipole_moment.html#MultipoleMoment.assign_basis_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.multipole_moment.MultipoleMoment.assign_basis_set" title="Permalink to this definition"></a></dt>
+<dd><p>Assign basis set to the solver.</p>
+<dl class="simple">
+<dt>basis_set</dt><dd><p>Basis set of the molecule.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.multipole_moment.MultipoleMoment.assign_molecule">
+<span class="sig-name descname"><span class="pre">assign_molecule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/multipole_moment.html#MultipoleMoment.assign_molecule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.multipole_moment.MultipoleMoment.assign_molecule" title="Permalink to this definition"></a></dt>
+<dd><p>Assign chemical molecule to the solver.</p>
+<dl class="simple">
+<dt>mol</dt><dd><p>Chemical molecule.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.multipole_moment.MultipoleMoment.assign_wavefunction">
+<span class="sig-name descname"><span class="pre">assign_wavefunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/multipole_moment.html#MultipoleMoment.assign_wavefunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.multipole_moment.MultipoleMoment.assign_wavefunction" title="Permalink to this definition"></a></dt>
+<dd><p>Assign Hartree Fock wavefunction to the solver.</p>
+<dl class="simple">
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.multipole_moment.MultipoleMoment.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lmns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coordinate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/multipole_moment.html#MultipoleMoment.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.multipole_moment.MultipoleMoment.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Multipole moment results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.property.population_analysis">
+<span id="moha-property-population-analysis-module"></span><h2><span class="section-number">2.4.1.5. </span>moha.property.population_analysis module<a class="headerlink" href="#module-moha.property.population_analysis" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.property.population_analysis.PopulationAnalysisLowdin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.property.population_analysis.</span></span><span class="sig-name descname"><span class="pre">PopulationAnalysisLowdin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/population_analysis.html#PopulationAnalysisLowdin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.population_analysis.PopulationAnalysisLowdin" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">moha.property.population_analysis.PopulationAnalysis</span></code></p>
+<p>Lowdin population analysis.</p>
+<dl class="simple">
+<dt>mol</dt><dd><p>Chemical molecule.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Basis set of the molecule</p>
+</dd>
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,mol,basis_set,ham,wfn)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>assign_molecule(self,mol)</dt><dd><p>Assign chemical molecule to the solver.</p>
+</dd>
+<dt>assign_basis_set(self,basis_set)</dt><dd><p>Assign basis set to the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign Hartree Fock wavefunction to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.population_analysis.PopulationAnalysisLowdin.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/population_analysis.html#PopulationAnalysisLowdin.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.population_analysis.PopulationAnalysisLowdin.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Mulliken population analysis results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="moha.property.population_analysis.PopulationAnalysisMulliken">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">moha.property.population_analysis.</span></span><span class="sig-name descname"><span class="pre">PopulationAnalysisMulliken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ham</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/population_analysis.html#PopulationAnalysisMulliken"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.population_analysis.PopulationAnalysisMulliken" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">moha.property.population_analysis.PopulationAnalysis</span></code></p>
+<p>Mulliken population analysis.</p>
+<dl class="simple">
+<dt>mol</dt><dd><p>Chemical molecule.</p>
+</dd>
+<dt>basis_set</dt><dd><p>Basis set of the molecule</p>
+</dd>
+<dt>ham</dt><dd><p>Chemical Hamiltonian.</p>
+</dd>
+<dt>wfn</dt><dd><p>Hartree Fock wavefunction.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>__init__(self,mol,basis_set,ham,wfn)</dt><dd><p>Initialize the solver.</p>
+</dd>
+<dt>assign_molecule(self,mol)</dt><dd><p>Assign chemical molecule to the solver.</p>
+</dd>
+<dt>assign_basis_set(self,basis_set)</dt><dd><p>Assign basis set to the solver.</p>
+</dd>
+<dt>assign_hamiltonian(self,ham)</dt><dd><p>Assign chemical Hamiltonian to the solver.</p>
+</dd>
+<dt>assign_wavefunction(self,wfn)</dt><dd><p>Assign Hartree Fock wavefunction to the solver.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="moha.property.population_analysis.PopulationAnalysisMulliken.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/moha/property/population_analysis.html#PopulationAnalysisMulliken.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#moha.property.population_analysis.PopulationAnalysisMulliken.kernel" title="Permalink to this definition"></a></dt>
+<dd><p>Kernel of the solver.</p>
+<dl class="simple">
+<dt>results<span class="classifier">dict</span></dt><dd><p>Mulliken population analysis results.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-moha.property">
+<span id="module-contents"></span><h2><span class="section-number">2.4.1.6. </span>Module contents<a class="headerlink" href="#module-moha.property" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="moha.posthf.pt.html" class="btn btn-neutral float-left" title="2.3.1.1.3. moha.posthf.pt package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="moha.io.html" class="btn btn-neutral float-right" title="2.5.1. moha.io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
