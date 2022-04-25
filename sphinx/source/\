@@ -15,30 +15,13 @@ The construction of the molecular Hamiltonian is set in three steps.
  
 Molecular Geometry
 ==================
-A molecule is a system consisting of a nucleus and electrons. For quantum chemistry calculation in MoHa, we will always use the Born-Oppenheimer approximation, which assumes that the motion of atomic nuclei and electrons in a molecule can be separated.
+A molecule is a system consisting of a nucleus and electrons. For quantum chemistry calculation in MoHa, we will always use the Born-Oppenheimer approximation, which assumes that the motion of atomic nuclei and electrons in a molecule can be separated
 
 .. math::
 
     \Psi_{molecule} = \psi_{electronic} \otimes \psi_{nuclear}
 
-The class :class:`Molecule` in MoHa only contains information about the nuclear. Therefore, to build a water molecule with MoHa, we can specify the molecular object by loading the molecular geometry from xyz file.    
-
-The XYZ file format is a chemical file format. There is no formal standard and several variations exist, but a typical XYZ format specifies the molecule geometry by giving the number of atoms with Cartesian coordinates that will be read on the first line, a comment on the second, and the lines of atomic coordinates in the following lines.
-
-* Format
-
-The formatting of xyz is:
-
-.. code-block:: text
-
-    <number of atoms>
-    comment line
-    <element>   <X>    <Y>    <Z>
-    \dots
-
-* Example
-
-The water molecule in the xyz format:
+The Molecule in MoHa only contains information about the nuclear. Therefore, to build a water molecule with MoHa, we can specify the molecular object by loading the molecular geometry from xyz file.    
 
 .. code-block:: text
 

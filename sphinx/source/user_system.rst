@@ -1,12 +1,13 @@
+======
 System
-######
-The ``system`` module is the core of MoHa, almost every MoHa calculation start from this module. To begin a MoHa calculation, the first step is to build the Hamiltonian of a system, in terms of second quantization operators, a general Hamiltonian can be written as
+======
+The ``system`` module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives
 
 .. math::
         H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
         V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}
 
-The construction of the molecular Hamiltonian is usually set up in three steps.
+The construction of the molecular Hamiltonian is set in three steps.
 
 - Construct a molecular geometry.
 - Generate a basis set for the molecular.
@@ -14,13 +15,30 @@ The construction of the molecular Hamiltonian is usually set up in three steps.
  
 Molecular Geometry
 ==================
-Molecule is a system consist with nucleus and electrons. For quantum chemistry calculation in MoHa, we will always used the Born-Oppenheimer approximation, which assume that the motion of atomic nuclei and electrons in a molecule can be separated
+A molecule is a system consisting of a nucleus and electrons. For quantum chemistry calculation in MoHa, we will always use the Born-Oppenheimer approximation, which assumes that the motion of atomic nuclei and electrons in a molecule can be separated.
 
 .. math::
 
     \Psi_{molecule} = \psi_{electronic} \otimes \psi_{nuclear}
 
-The :class:`Molecule` in MoHa actually only contains imformation of the nuclear. To build a water molecule with MoHa, we can specify the molecular object by load the molecular geometry from xyz file.
+The class :class:`Molecule` in MoHa only contains information about the nuclear. Therefore, to build a water molecule with MoHa, we can specify the molecular object by loading the molecular geometry from xyz file.    
+
+The XYZ file format is a chemical file format. There is no formal standard and several variations exist, but a typical XYZ format specifies the molecule geometry by giving the number of atoms with Cartesian coordinates that will be read on the first line, a comment on the second, and the lines of atomic coordinates in the following lines.
+
+* Format
+
+The formatting of xyz is:
+
+.. code-block:: text
+
+    <number of atoms>
+    comment line
+    <element>   <X>    <Y>    <Z>
+    \dots
+
+* Example
+
+The water molecule in the xyz format:
 
 .. code-block:: text
 

@@ -96,17 +96,17 @@
 <span id="id1"></span><h1><span class="section-number">1. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <div class="section" id="compiling-from-source-code">
 <h2><span class="section-number">1.1. </span>Compiling from source code<a class="headerlink" href="#compiling-from-source-code" title="Permalink to this headline"></a></h2>
-<p>This the the recommended way to install moha. One can find the source code on Github <a class="reference external" href="https://github.com/ZhaoYilin/moha">https://github.com/ZhaoYilin/moha</a>.</p>
+<p>This section gives the recommended way to install MoHa. One can find the source code on Github <a class="reference external" href="https://github.com/ZhaoYilin/moha">https://github.com/ZhaoYilin/moha</a>.</p>
 <div class="section" id="prerequisites">
 <h3><span class="section-number">1.1.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"></a></h3>
-<p>To manual install the package, make sure you have the following dependencies:</p>
+<p>To manually install the package, make sure to have the following dependencies:</p>
 <ul class="simple">
 <li><p>Python &gt;=3.5</p></li>
 <li><p>numpy &gt;=1.13.1</p></li>
 <li><p>scipy &gt;=0.19.1</p></li>
 <li><p>pytest &gt;=6.2.5</p></li>
 </ul>
-<p>These prerequistied modules can be installed with conda or pip:</p>
+<p>To install the prerequisite modules, use the conda or pip command:</p>
 <ul>
 <li><p>Conda</p>
 <blockquote>
@@ -126,13 +126,13 @@
 </div>
 <div class="section" id="compile">
 <h3><span class="section-number">1.1.2. </span>Compile<a class="headerlink" href="#compile" title="Permalink to this headline"></a></h3>
-<p>The moha package can be downloaded on Github by:</p>
+<p>To compile MoHa from the source code, download the package from Github:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gh repo clone ZhaoYilin/moha
 </pre></div>
 </div>
 </div></blockquote>
-<p>To install the moha package, move to the moha folder and run:</p>
+<p>Next, move to the <code class="file docutils literal notranslate"><span class="pre">moha</span></code> folder and run:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m pip install -e .
 </pre></div>
@@ -141,7 +141,7 @@
 </div>
 <div class="section" id="unit-test">
 <h3><span class="section-number">1.1.3. </span>Unit test<a class="headerlink" href="#unit-test" title="Permalink to this headline"></a></h3>
-<p>To ensure that the installation was successful, you can run an unit test with pytest module. Inside the moha folder and run:</p>
+<p>To ensure that the installation was successful, run a unit test with the pytest module. Inside the <code class="file docutils literal notranslate"><span class="pre">/moha</span></code> folder and run:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
 </pre></div>
@@ -151,13 +151,13 @@
 </div>
 <div class="section" id="installation-with-pip">
 <h2><span class="section-number">1.2. </span>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline"></a></h2>
-<p>The pip package provides a precompiled moha code (python wheel) which works on almost all Linux systems, and most of Mac OS X systems. you can install moha with:</p>
+<p>The pip package provides a precompiled MoHa code (python wheel) which works on almost all Linux systems and most Mac OS X systems. You can install moha with:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install moha
 </pre></div>
 </div>
 </div></blockquote>
-<p>If you already have installed moha via pip, you can upgrade it to the new version with:</p>
+<p>If you already have installed MoHa via pip, you can upgrade it to the new version with:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --upgrade moha
 </pre></div>

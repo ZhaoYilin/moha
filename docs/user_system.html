@@ -91,11 +91,11 @@
              
   <div class="section" id="system">
 <h1><span class="section-number">1. </span>System<a class="headerlink" href="#system" title="Permalink to this headline"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">system</span></code> module is the core of MoHa, almost every MoHa calculation start from this module. To begin a MoHa calculation, the first step is to build the Hamiltonian of a system, in terms of second quantization operators, a general Hamiltonian can be written as</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">system</span></code> module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives</p>
 <div class="math notranslate nohighlight">
 \[H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
 V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
-<p>The construction of the molecular Hamiltonian is usually set up in three steps.</p>
+<p>The construction of the molecular Hamiltonian is set in three steps.</p>
 <ul class="simple">
 <li><p>Construct a molecular geometry.</p></li>
 <li><p>Generate a basis set for the molecular.</p></li>
@@ -103,10 +103,25 @@ V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
 </ul>
 <div class="section" id="molecular-geometry">
 <h2><span class="section-number">1.1. </span>Molecular Geometry<a class="headerlink" href="#molecular-geometry" title="Permalink to this headline"></a></h2>
-<p>Molecule is a system consist with nucleus and electrons. For quantum chemistry calculation in MoHa, we will always used the Born-Oppenheimer approximation, which assume that the motion of atomic nuclei and electrons in a molecule can be separated</p>
+<p>A molecule is a system consisting of a nucleus and electrons. For quantum chemistry calculation in MoHa, we will always use the Born-Oppenheimer approximation, which assumes that the motion of atomic nuclei and electrons in a molecule can be separated.</p>
 <div class="math notranslate nohighlight">
 \[\Psi_{molecule} = \psi_{electronic} \otimes \psi_{nuclear}\]</div>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code> in MoHa actually only contains imformation of the nuclear. To build a water molecule with MoHa, we can specify the molecular object by load the molecular geometry from xyz file.</p>
+<p>The class <code class="xref py py-class docutils literal notranslate"><span class="pre">Molecule</span></code> in MoHa only contains information about the nuclear. Therefore, to build a water molecule with MoHa, we can specify the molecular object by loading the molecular geometry from xyz file.</p>
+<p>The XYZ file format is a chemical file format. There is no formal standard and several variations exist, but a typical XYZ format specifies the molecule geometry by giving the number of atoms with Cartesian coordinates that will be read on the first line, a comment on the second, and the lines of atomic coordinates in the following lines.</p>
+<ul class="simple">
+<li><p>Format</p></li>
+</ul>
+<p>The formatting of xyz is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;number of atoms&gt;
+comment line
+&lt;element&gt;   &lt;X&gt;    &lt;Y&gt;    &lt;Z&gt;
+\dots
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Example</p></li>
+</ul>
+<p>The water molecule in the xyz format:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
 water
 8   0.0000000000    -0.143225816552         0.0000000

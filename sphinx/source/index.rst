@@ -5,7 +5,7 @@
 
 MoHa |version|
 ##############
-MoHa is the abbreviation of Molecular Hamiltonian. It is a general-purpose electronic structure program written in python that emphasizes code simplicity and facilitates new method development. The package provides the standard module including custom Hamiltonians, using mean-field and post-mean-field methods with standard Gaussian basis functions, post process for varieties properties.
+MoHa is the abbreviation of Molecular Hamiltonian. It is a general-purpose electronic structure program written in python that emphasizes code simplicity and facilitates new method development. The package provides the standard module including custom Hamiltonians, using mean-field and post-mean-field methods with standard Gaussian basis functions, post-process for varieties properties.
 
 Contents
 ========
