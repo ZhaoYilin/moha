@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Post Hartree-Fock" href="user_posthf.html" />
+    <link rel="next" title="3. Post Hartree–Fock" href="user_posthf.html" />
     <link rel="prev" title="1. System" href="user_system.html" /> 
 </head>
 
@@ -55,7 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#diis-solver">2.2. DIIS Solver</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree–Fock</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
@@ -90,66 +90,123 @@
              
   <div class="section" id="hartree-fock">
 <h1><span class="section-number">2. </span>Hartree-Fock<a class="headerlink" href="#hartree-fock" title="Permalink to this headline"></a></h1>
-<p>Hartree Fock method provides the fundamental approximation of wave–function theory. Although Hartree Fock theory is only qualitatively correct, it forms the basis for more accurate models and become the cornerstone of ab initio quantum chemistry.</p>
-<p>Hartree–Fock method assumes that the ground state wave function is the direct product state of a series of single electron wave–functions. The Hartree–Fock wave–function ansatz can be written as</p>
+<p>The Hartree–Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree–Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
+<p>Hartree–Fock method assumes that the ground state wave function <span class="math notranslate nohighlight">\(\vert\Phi_0\rangle\)</span> is an antisymmetrized product state with a single–electron orbital basis <span class="math notranslate nohighlight">\(\{\phi_i\}\)</span>. It is often represented by a single Slater determinant:</p>
 <div class="math notranslate nohighlight">
-\[\vert \kappa \rangle = exp(-\hat{\kappa})\vert 0\rangle\]</div>
-<p>where the anti–Hermitian operator <span class="math notranslate nohighlight">\(\hat{\kappa}\)</span> in general form is</p>
+\[\begin{split}\Phi_0(x_1,x_2,\dots,x_N) = \frac{1}{(\sqrt{N!})}
+\begin{vmatrix}
+     \phi_1(x_1) &amp; \phi_2(x_1) &amp; \dots &amp; \phi_N(x_1) \\
+     \phi_1(x_2) &amp; \phi_2(x_2) &amp; \dots &amp; \phi_N(x_2) \\
+     \vdots      &amp; \vdots      &amp; \dots &amp; \vdots \\
+     \phi_1(x_N) &amp; \phi_2(x_N) &amp; \dots &amp; \phi_N(x_N) \\
+\end{vmatrix}\end{split}\]</div>
+<p>To optimize the Hartree–Fock wave function, we invoke the variation principle to minimize the expectation value of the energy:</p>
 <div class="math notranslate nohighlight">
-\[\hat{\kappa} = \sum_{pq} \kappa_{PQ} a_P^{\dagger}a_Q\]</div>
-<p>The Hartree–Fock wave–function is optimized with respect of variations of spin orbitals.</p>
+\[E_{HF} = \mathop{min}\limits_{\{\phi_i\}}^{} \langle\Phi_0\vert\hat{H}\vert\Phi_0\rangle\]</div>
+<p>The minimization of the expected energy with a given basis set leads to the Roothan–Hartree–Fock equation:</p>
 <div class="math notranslate nohighlight">
-\[E_{HF} = min \langle {\kappa} \vert \hat{H} \vert {\kappa} \rangle\]</div>
-<p>a new set of spin orbitals can be update by unitary transformation</p>
+\[\mathbf{F(C)C} = \mathbf{SC\epsilon}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> is the overlap matrix with atomic basis set, <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> is the matrix of molecular orbital coefficients, <span class="math notranslate nohighlight">\(\mathbf{\epsilon}\)</span> is a diagonal matrix whose elements represent the eigenenergies, and the <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is the Fock matrix, which depends on the coefficients matrix <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>.</p>
+<p>The Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> is:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{\phi}_P = \sum_{Q} \phi_Q U_{QP}\]</div>
-<p>the unitary matrix can be written as</p>
+\[\mathbf{F(C)} = \mathbf{H} + \mathbf{G(C)}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is the core–Hamiltonian matrix, and it is the sum of kinetic energy integral <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> and electron–nuclear attraction integral <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>. Both are one–electron integral and invariance during the self–consistent field optimization.</p>
 <div class="math notranslate nohighlight">
-\[{U} = exp(-{\kappa})\]</div>
-<p>the spin orbitals is determined by solving a set of effective one–electron Schr&quot;{o}dinger equations, where the effective Hamiltonian associated is Fock operator. The eigenvalues of the Fock operator are the spin energies and eigenvectors the spin orbitals.</p>
+\[\mathbf{H} = \mathbf{T} + \mathbf{V}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is Hartree–Fock potential matrix, and it is the sum of coulomb matrix <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> and the exchange matrix <span class="math notranslate nohighlight">\(\mathbf{K}\)</span>. Both of them are two–electron integral matrix and is a function of <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\hat{f} = \hat{h} + \hat{V}\]</div>
-<p><span class="math notranslate nohighlight">\(\hat{h}\)</span> is the one–body term in chemical Hamiltonian, the two–body potential terms in original Hamiltonian is replaced by the effective one electron Fock potential <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
+\[\mathbf{G(C)} = \mathbf{J(C)} + \mathbf{K(C)}\]</div>
+<p>Hartree–Fock energy is an upper bound to the exact energy using the variational theorem. It typically gives errors of <span class="math notranslate nohighlight">\(0.5\%\)</span> in the energy, <span class="math notranslate nohighlight">\(1\%\)</span> in molecular geometry, and <span class="math notranslate nohighlight">\(5−10\%\)</span> in other properties. The correlation energy is the difference between the Hartree–Fock limit energy and a system’s exact non–relativistic energy.</p>
 <div class="math notranslate nohighlight">
-\[\hat{V} = \sum_{pq} \sum_{i} (2g_{pqii}-g_{piiq})E_{pq}\]</div>
-<p>since Fock matrix is define by its own eigenvectors, an iterative procedure, self–consistent–field(SCF) method is applied. Optimized by variational theorem, Hartree–Fock energy is an upper bound to the exact energy. It typical gives errors of <span class="math notranslate nohighlight">\(0.5\%\)</span> in the energy, <span class="math notranslate nohighlight">\(1\%\)</span>  in molecular geometry and <span class="math notranslate nohighlight">\(5-10\%\)</span> in other properties. The difference between the Hartree–Fock limit energy and the exact non–relativistic energy of a system is defined as correlation energy.</p>
-<div class="math notranslate nohighlight">
-\[E_{corr} = \mathcal{E}_0 - E_{HF}\]</div>
+\[\begin{split}E_{HF} &amp;\geq E_{exact}\\
+E_{corr} &amp;= E_{exact} - E_{HF}\end{split}\]</div>
 <div class="section" id="plain-solver">
 <h2><span class="section-number">2.1. </span>Plain Solver<a class="headerlink" href="#plain-solver" title="Permalink to this headline"></a></h2>
-<p>For the Roothan-Hartee-Fock equations an orthogonal basis is needed, first the first orthogonalization matrix is constructed from the overlap matrix. First by a diagonalization:</p>
+<p>Since the Hartree–Fock–Roothaan equations are nonlinear, we will solve them with an iterative procedure. Such a procedure is often referred to as a self–consistent field (SCF) algorithm, and here we introduce the most naive one.</p>
+<ul class="simple">
+<li><p><strong>Step 1: Build The Integral</strong></p></li>
+</ul>
+<p>The pre–computed quantities for the SCF algorithm include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The nuclear repulsion energy <span class="math notranslate nohighlight">\(E_{nuc}\)</span>.</p></li>
+<li><p>One–electron integrals overlap <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>, kinetic energy <span class="math notranslate nohighlight">\(\mathbf{T}\)</span>, and nuclear attraction <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>.</p></li>
+<li><p>Two–electron integral, the electron repulsion <span class="math notranslate nohighlight">\((\mu\nu\vert\lambda\sigma)\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<p>Please check out the <a class="reference internal" href="user_system.html#hamiltonian"><span class="std std-ref">Hamiltonian</span></a> section for further information to learn more about the pre–computed quantities.</p>
+<ul class="simple">
+<li><p><strong>Step 2: Build the Orthogonalization Matrix</strong></p></li>
+</ul>
+<p>Hartree–Fock algorithm must be optimized with the constraint that the orbitals are orthonormal, ensuring that the Hartree–Fock wave function is normalized.</p>
 <div class="math notranslate nohighlight">
-\[SL_S=L_S\Lambda_S\]</div>
-<p>and then the orthogonalization matrix is constructed:</p>
+\[\langle \phi_i \vert \phi_j \rangle = \delta_{ij}\]</div>
+<p>The atomic orbitals are, in general, not orthonormal. Hence we bring the orthogonalization matrix into the algorithm to make,</p>
 <div class="math notranslate nohighlight">
-\[S_{ortho}=L_S\Lambda^{−1/2}_SL^T_S\]</div>
-<p>The SCF iterations requires an initial Fock matrix given as:</p>
+\[\mathbf{X^{\dagger}SX} = \mathbf{I}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is the orthogonalization matrix, and <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the density matrix.</p>
+<p>The orthogonalization matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> can be constructed from the overlap matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span> by diagonalization:</p>
 <div class="math notranslate nohighlight">
-\[F_0=H^{core}\]</div>
-<p>The SCF procedure is calulated as the following equations. First the fock matrix is constructed:</p>
+\[\mathbf{s} = \mathbf{USU}^{\dagger}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> are eigenvalues of the overlap matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>, further <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> is a matrix of the eigenvector of the overlap matrix <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>.</p>
+<p>The construction of orthogonalization matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is not unitary, and there are two ways of orthogonalization are most frequently used.</p>
+<p>The first one, called symmetric orthogonalization:</p>
 <div class="math notranslate nohighlight">
-\[F_{n,ij}∣_{n≠0} = H^{core}_{ij}
-                +\sum_{kl}^{AO} D_{n−1,kl} (2(ij||kl)−(ik||jl))\]</div>
-<p>Then the Fock matrix is brought into the orthogonal basis:</p>
+\[\mathbf{X} = \mathbf{S}^{-1/2} = \mathbf{Us}^{-1/2}\mathbf{U}^{\dagger}\]</div>
+<p>The second way is canonical orthogonalization:</p>
 <div class="math notranslate nohighlight">
-\[F^{\prime}_n=S^T_{ortho} H_{core}S_{ortho}\]</div>
-<p>The F’ is then diagonalized:</p>
+\[\mathbf{X} = \mathbf{Us}^{-1/2}\]</div>
+<ul class="simple">
+<li><p><strong>Step 3: Set the Initial Guess</strong></p></li>
+</ul>
+<p>The SCF iterations require an initial guess of the coefficients matrix. As the naive solver, we give zero matrices as the initial guess by default,</p>
 <div class="math notranslate nohighlight">
-\[F^{\prime}_nC^{\prime}_n=C^{\prime}_n \epsilon_n\]</div>
-<p>The coefficients are transformed back:</p>
+\[\mathbf{C}_0 = \mathbf{0}\]</div>
+<p>The naive initial guess of coeffiences matrix <span class="math notranslate nohighlight">\(\mathbf{C}_0\)</span> results in zero matrix as <span class="math notranslate nohighlight">\(\mathbf{D}_0\)</span> and core–Hamiltonian as initial Fock matrix:</p>
 <div class="math notranslate nohighlight">
-\[C_n=S_{ortho}C^{\prime}_n\]</div>
-<p>A density matrix can be made from the coefficients:</p>
+\[\mathbf{D}_0 = \mathbf{0}\]</div>
 <div class="math notranslate nohighlight">
-\[D_{n,ij}=\sum_k^{occ} C_{n,ki}C_{n,kj}\]</div>
+\[\mathbf{F}_0 = \mathbf{H}_{core} + \mathbf{G}(\mathbf{0}) = \mathbf{H}_{core}\]</div>
+<ul class="simple">
+<li><p><strong>Step 4: Calculate density matrix from Fock matrix</strong></p></li>
+</ul>
+<p>To calculate the new density matrix <span class="math notranslate nohighlight">\(\mathbf{D}_i\)</span> (i denotes the current iteration number), first bring the Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}_{i-1}\)</span> into the orthogonal basis, and we get the transformed Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}^{\prime}_{i-1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}^{\prime}_{i-1} = \mathbf{X}^T \mathbf{F}_{i-1} \mathbf{X}\]</div>
+<p>The transformed Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}^{\prime}_{i-1}\)</span> is then diagonalized:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}^{\prime}_{i-1} \mathbf{C}^{\prime}_{i} = \mathbf{C}^{\prime}_{i} \mathbf{\epsilon}_i\]</div>
+<p>Back-transform:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{C}_i = \mathbf{X}\mathbf{C}^{\prime}_i\]</div>
+<p>Calculate the density matrix:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{D}_i = \mathbf{C}_{i} \mathbf{n} \mathbf{C}^{\dagger}_{i}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{n}\)</span> is the electron occupation matrix.</p>
+<ul class="simple">
+<li><p><strong>Step 5: Calculate Fock matrix from density matrix</strong></p></li>
+</ul>
+<p>With the new density matrix <span class="math notranslate nohighlight">\(\mathbf{D}_i\)</span>, we can compute the current iteration Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}_i\)</span> by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F}_{i,\mu\nu} = \mathbf{h}_{\mu\nu}
++ \sum_{\sigma,\tau} (2\langle\mu\sigma\vert\vert\nu\tau\rangle−\langle\mu\sigma\vert\vert\nu\tau\rangle)\mathbf{D}_{i,\sigma\tau}\]</div>
+<ul class="simple">
+<li><p><strong>Step 6: Self-consistency check converagence</strong></p></li>
+</ul>
+<p>Repeat steps 4 and 5, compares the change of electronic energy and-or the root-mean-squared difference (RMSD) of the density matrix between two iterations. Furthermore, the above SCF procedure will stop at certain thresholds.</p>
+<p>The change in the electronic energy and RMSD of the density matrix can be found as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Delta E_{i,elec} &amp;= E_{i,elec} - E_{i-1,elec} \leqslant \sigma_1\\
+RMSD_i &amp;= \sqrt{\sum_{\mu\nu} D_{i,\mu\nu}−D_{i−1,\mu\nu}} \leqslant \sigma_2\end{split}\]</div>
+<ul class="simple">
+<li><p><strong>Step 7: Calculate energy</strong></p></li>
+</ul>
 <p>The electronic energy of system can be found as:</p>
 <div class="math notranslate nohighlight">
-\[E_{n,elec}= \sum_{ij}^{AO} D_{0,ij}(H^{core}_{ij}+F_{n,ij})\]</div>
-<p>The above SCF procedure will is stopped at certain tresholds. The change in energy and the RMSD
-of the density matrix can be found as:</p>
+\[E_{elec}= \sum_{\mu\nu}^{AO} D_{\mu\nu}(h_{\mu\nu}+F_{\mu\nu})\]</div>
+<p>The total energy is the sum of electronic energy and the nuclear repulsion energy:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\Delta E_n &amp;= E_{n,elec}−E_{n−1,elec}\\
-RMSD_n     &amp;= \sqrt{\sum_{ij} D_{n,ij}−D_{n−1,ij}}\end{split}\]</div>
+\[E_{tot}= E_{elec} + E_{nuc}\]</div>
 <dl>
 <dt>Plain Hartree-Fock solver</dt><dd><div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/data/examples/hf/scf.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
@@ -168,13 +225,22 @@ RMSD_n     &amp;= \sqrt{\sum_{ij} D_{n,ij}−D_{n−1,ij}}\end{split}\]</div>
 </div>
 <div class="section" id="diis-solver">
 <h2><span class="section-number">2.2. </span>DIIS Solver<a class="headerlink" href="#diis-solver" title="Permalink to this headline"></a></h2>
-<p>Direct Inversion in the Iterative Subspace (DIIS). Makes new <span class="math notranslate nohighlight">\(F^{\prime}\)</span> guesses bassed on previous guesses.</p>
+<p>The plain Hartree–Fock solver updates orbitals from the Fock operator in last iteration. It may fail to converge or converge slowly. The Direct Inversion in the Iterative Subspace (DIIS) solver shares the same algorithm with the plain solver but generates orbitals from an averaged Fock operator of preceding iterations hence converging fast.</p>
+<ul class="simple">
+<li><p><strong>Stpe 1: Claculate the Error Matrix in Each Iteration</strong></p></li>
+</ul>
 <p>The error vector in DIIS is given as:</p>
 <div class="math notranslate nohighlight">
 \[e_i=F_iD_iS−SD_iF_i\]</div>
 <p>It is wanted that the sum of error vectors is zero:</p>
 <div class="math notranslate nohighlight">
 \[e^{\prime}=\sum_i c_ie_i=0\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_i\)</span> is coefficient of the normalize constraint</p>
+<div class="math notranslate nohighlight">
+\[\sum_i c_i = 1\]</div>
+<ul class="simple">
+<li><p><strong>Stpe 2: Build the B matrix and Solve the Linear Equations</strong></p></li>
+</ul>
 <p>And now with the requirement that the sum of all c is zero, the following matrix eqution is solwed:</p>
 <div class="math notranslate nohighlight">
 \[B_{i,j}c_i=b_0\]</div>
@@ -189,7 +255,10 @@ RMSD_n     &amp;= \sqrt{\sum_{ij} D_{n,ij}−D_{n−1,ij}}\end{split}\]</div>
        \vdots\\
        -1
        \end{pmatrix}\end{split}\]</div>
-<p>Finally the new F’ is constructed as:</p>
+<ul class="simple">
+<li><p><strong>Stpe 3: Compute the New Fock Matrix</strong></p></li>
+</ul>
+<p>With a set of Fock matrices <span class="math notranslate nohighlight">\(\{\mathbf{F}_i\}\)</span>, the new Fock matrix <span class="math notranslate nohighlight">\(\mathbf{F}^{\prime}\)</span> is constructed as:</p>
 <div class="math notranslate nohighlight">
 \[F^{\prime}=\sum_i c_iF_i\]</div>
 <dl>
@@ -214,7 +283,7 @@ RMSD_n     &amp;= \sqrt{\sum_{ij} D_{n,ij}−D_{n−1,ij}}\end{split}\]</div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="user_system.html" class="btn btn-neutral float-left" title="1. System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="user_posthf.html" class="btn btn-neutral float-right" title="3. Post Hartree-Fock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="user_posthf.html" class="btn btn-neutral float-right" title="3. Post Hartree–Fock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

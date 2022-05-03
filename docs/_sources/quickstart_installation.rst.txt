@@ -31,6 +31,12 @@ To install the prerequisite modules, use the conda or pip command:
 
         pip install numpy scipy pytest
 
+    or
+
+    .. code-block:: bash
+
+        pip install -r requirement.txt
+
 Compile
 -------
 To compile MoHa from the source code, download the package from Github:

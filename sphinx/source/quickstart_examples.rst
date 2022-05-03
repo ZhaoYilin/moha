@@ -23,7 +23,7 @@ The convergence of the plain Hartree-Fock solver is relatively slow. One of the 
 
 Post-Hartree-Fock
 =================
-Quantum chemistry is mature enough to have canonical approaches followed by the Hartree-Fock method. Their behavior, successes, and most importantly, their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are known as:
+Quantum chemistry is mature enough to have canonical approaches followed by the Hartree-Fock method. Their behavior, successes, and most importantly, their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are:
 
 - Configuration Interaction(CI)
 - Coupled-Cluster(CC)

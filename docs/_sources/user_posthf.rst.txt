@@ -1,6 +1,7 @@
-Post Hartree-Fock
-#################
-Quantum chemistry is mature enough to have a canonical approaches followed by Hartree-Fock method. Their behaviour, successes, and most importantly their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are known as:
+==================
+Post Hartree--Fock
+==================
+Quantum chemistry is mature enough to have canonical approaches followed by the Hartree--Fock method. Their behavior, successes, and most importantly, their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are:
 
 - Configuration Interaction(CI)
 - Coupled-Cluster(CC)
@@ -8,7 +9,7 @@ Quantum chemistry is mature enough to have a canonical approaches followed by Ha
 
 Configuration Interaction
 =========================
-The configuration interaction method is a commonly used quantum chemistry method, which is used to correct electron correlation based on the Hartree-Fock method. This method writes the wave function as linear combination of configuration state functions.
+Configuration interaction approximates wave function by a linear expansion of N--electron basis functions made of a given one--electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix--eigenvalue equation.
 
 .. math::
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Post Hartree-Fock &mdash; moha 0.1.0 documentation</title>
+  <title>3. Post Hartree–Fock &mdash; moha 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="_static/moha.ico"/>
@@ -51,7 +51,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Post Hartree-Fock</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Post Hartree–Fock</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#configuration-interaction">3.1. Configuration Interaction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cisd">3.1.1. CISD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#full-ci">3.1.2. Full CI</a></li>
@@ -91,7 +91,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">3. </span>Post Hartree-Fock</li>
+      <li><span class="section-number">3. </span>Post Hartree–Fock</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/user_posthf.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -102,8 +102,8 @@
            <div itemprop="articleBody">
              
   <div class="section" id="post-hartree-fock">
-<h1><span class="section-number">3. </span>Post Hartree-Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h1>
-<p>Quantum chemistry is mature enough to have a canonical approaches followed by Hartree-Fock method. Their behaviour, successes, and most importantly their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are known as:</p>
+<h1><span class="section-number">3. </span>Post Hartree–Fock<a class="headerlink" href="#post-hartree-fock" title="Permalink to this headline"></a></h1>
+<p>Quantum chemistry is mature enough to have canonical approaches followed by the Hartree–Fock method. Their behavior, successes, and most importantly, their failures are widely known and accepted. With a couple of exceptions which we will not mention, they are:</p>
 <ul class="simple">
 <li><p>Configuration Interaction(CI)</p></li>
 <li><p>Coupled-Cluster(CC)</p></li>
@@ -111,7 +111,7 @@
 </ul>
 <div class="section" id="configuration-interaction">
 <h2><span class="section-number">3.1. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h2>
-<p>The configuration interaction method is a commonly used quantum chemistry method, which is used to correct electron correlation based on the Hartree-Fock method. This method writes the wave function as linear combination of configuration state functions.</p>
+<p>Configuration interaction approximates wave function by a linear expansion of N–electron basis functions made of a given one–electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix–eigenvalue equation.</p>
 <div class="math notranslate nohighlight">
 \[\vert \Psi_{CI}\rangle = \sum_{\lbrace i \rbrace}c_i \vert i\rangle\]</div>
 <p>the coefficients <span class="math notranslate nohighlight">\(c_i\)</span> for the configuration state function can be determined by variational principle</p>

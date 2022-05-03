@@ -1,7 +1,7 @@
 ======
 System
 ======
-The ``system`` module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives
+The ``system`` module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives:
 
 .. math::
         H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
@@ -108,14 +108,11 @@ STO-3G EMSL basis set of hydrogen and oxygen:
 
     mol,orb = IOSystem.from_file('h2o.xyz','sto-3g.nwchem')
 
+.. _Hamiltonian:
+    
 Hamiltonian
 ===========
-The core mechanical quantities of a chemistry system is the Hamiltonian. Hamiltonian operator
-should include the kinetic energy and potential energy terms of all atomic nuclei and all
-electrons. It is generally assumed that the molecule is in a vacuum and adiabatic state
-in isolation. At this time, the interaction potential energy between the nucleus and the
-electron in the molecule is only related to distance from each other and time independent. 
-Its expression is:
+The core mechanical quantities of a chemistry system is the Hamiltonian. Hamiltonian operator should include the kinetic energy and potential energy terms of all atomic nuclei and all electrons. It is generally assumed that the molecule is in a vacuum and adiabatic state in isolation. At this time, the interaction potential energy between the nucleus and the electron in the molecule is only related to distance from each other and time independent. Its expression is:
 
 .. math::
     \hat{H}= &-\sum^N_{i=1}\frac{\hbar^2}{2m_i}{\nabla}_i^2
@@ -125,34 +122,32 @@ Its expression is:
 
 The formula contains four terms:
 
-Kinetic energy of electrons.
+* Kinetic energy of electrons.
 
 .. math::
 
     \hat{T}_e = -\sum^N_{i=1}\frac{\hbar^2}{2m_i}\boldsymbol{\nabla}_i^2
 
-Nuclear attraction.
+* Nuclear attraction.
 
 .. math::
   		
     \hat{V}_{en} = -\sum^N_{i=1}\sum^M_{\alpha=1} \frac{Z_\alpha e^2}{\textbf{r}_{i\alpha}}  
 
-Repulsive between electrons.
+* Repulsive between electrons.
 
 .. math::
   		
     \hat{V}_{ee} = \sum^N_{i=1}\sum^N_{j>i} \frac{e^2}{\textbf{r}_{ij}}
 
-Repulsive between nuclei.
+* Repulsive between nuclei.
 
 .. math::
   		
     \hat{V}_{nn} = \sum^N_{\alpha=1}\sum^M_{\beta=1} \frac{Z_\alpha Z_\beta e^2}{\textbf{R}_{\alpha\beta}} 
 
 
-:math:`m_i` is the mass of electron. :math:`M_\alpha` and :math:`Z_\alpha` refer to the mass and charge of atomic nucleus. 
-:math:`R_{\alpha\beta}`, :math:`r_{i\alpha}` and :math:`r_{ij}` is the distance between two nucleus, atomic nuclei 
-and electron and two electrons respectively. The explicit representation of Laplacian operator is:
+:math:`m_i` is the mass of electron. :math:`M_\alpha` and :math:`Z_\alpha` refer to the mass and charge of atomic nucleus. :math:`R_{\alpha\beta}`, :math:`r_{i\alpha}` and :math:`r_{ij}` is the distance between two nucleus, atomic nuclei and electron and two electrons respectively. The explicit representation of Laplacian operator is:
 
 .. math::
 	\boldsymbol{\nabla}^2 = \frac{\partial^2}{\partial x^2} +\frac{\partial^2}{\partial y^2} 
@@ -169,9 +164,7 @@ To build a Hamiltonian object, MoHa need both molecular geometry and basis objec
     mol,orbs = IOSystem.from_file('h2o.xyz','sto-3g.nwchem')
     ham = ChemicalHamiltonian.build(mol,orbs)
 
-Hamiltonian object has attributes of different operators use the following
-conventions for variable names. The following are defined by setting up the
-Hamiltonian by default:
+Hamiltonian object has attributes of different operators use the following conventions for variable names. The following are defined by setting up the Hamiltonian by default:
 
 .. code-block:: python
     

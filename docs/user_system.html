@@ -91,7 +91,7 @@
              
   <div class="section" id="system">
 <h1><span class="section-number">1. </span>System<a class="headerlink" href="#system" title="Permalink to this headline"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">system</span></code> module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">system</span></code> module is the core of MoHa, and almost every MoHa calculation starts from this module. To begin a MoHa calculation, first build the Hamiltonian of a system. In terms of second quantization operators, a time-independent non-relativistic Hamiltonian gives:</p>
 <div class="math notranslate nohighlight">
 \[H = - \sum_{ij} t_{ij}\hat{c}^{\dagger}_{i}\hat{c}_{j} + \frac{1}{2} \sum_{ijkl}
 V_{ijkl}\hat{c}^{\dagger}_{i}\hat{c}^{\dagger}_{k}\hat{c}_{l}\hat{c}_{j}\]</div>
@@ -182,34 +182,35 @@ END
 </div>
 </div>
 <div class="section" id="hamiltonian">
-<h2><span class="section-number">1.3. </span>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Permalink to this headline"></a></h2>
-<p>The core mechanical quantities of a chemistry system is the Hamiltonian. Hamiltonian operator
-should include the kinetic energy and potential energy terms of all atomic nuclei and all
-electrons. It is generally assumed that the molecule is in a vacuum and adiabatic state
-in isolation. At this time, the interaction potential energy between the nucleus and the
-electron in the molecule is only related to distance from each other and time independent.
-Its expression is:</p>
+<span id="id1"></span><h2><span class="section-number">1.3. </span>Hamiltonian<a class="headerlink" href="#hamiltonian" title="Permalink to this headline"></a></h2>
+<p>The core mechanical quantities of a chemistry system is the Hamiltonian. Hamiltonian operator should include the kinetic energy and potential energy terms of all atomic nuclei and all electrons. It is generally assumed that the molecule is in a vacuum and adiabatic state in isolation. At this time, the interaction potential energy between the nucleus and the electron in the molecule is only related to distance from each other and time independent. Its expression is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\hat{H}= &amp;-\sum^N_{i=1}\frac{\hbar^2}{2m_i}{\nabla}_i^2
 - \sum^N_{i=1}\sum^M_{\alpha=1} \frac{Z_\alpha e^2}{\textbf{r}_{i\alpha}}\\
 &amp;+\sum^N_{i=1}\sum^N_{j&gt;i} \frac{e^2}{\textbf{r}_{ij}}
 +\sum^N_{\alpha=1}\sum^M_{\beta=1} \frac{Z_\alpha Z_\beta e^2}{\textbf{R}_{\alpha\beta}}\end{split}\]</div>
 <p>The formula contains four terms:</p>
-<p>Kinetic energy of electrons.</p>
+<ul class="simple">
+<li><p>Kinetic energy of electrons.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\hat{T}_e = -\sum^N_{i=1}\frac{\hbar^2}{2m_i}\boldsymbol{\nabla}_i^2\]</div>
-<p>Nuclear attraction.</p>
+<ul class="simple">
+<li><p>Nuclear attraction.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\hat{V}_{en} = -\sum^N_{i=1}\sum^M_{\alpha=1} \frac{Z_\alpha e^2}{\textbf{r}_{i\alpha}}\]</div>
-<p>Repulsive between electrons.</p>
+<ul class="simple">
+<li><p>Repulsive between electrons.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\hat{V}_{ee} = \sum^N_{i=1}\sum^N_{j&gt;i} \frac{e^2}{\textbf{r}_{ij}}\]</div>
-<p>Repulsive between nuclei.</p>
+<ul class="simple">
+<li><p>Repulsive between nuclei.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\hat{V}_{nn} = \sum^N_{\alpha=1}\sum^M_{\beta=1} \frac{Z_\alpha Z_\beta e^2}{\textbf{R}_{\alpha\beta}}\]</div>
-<p><span class="math notranslate nohighlight">\(m_i\)</span> is the mass of electron. <span class="math notranslate nohighlight">\(M_\alpha\)</span> and <span class="math notranslate nohighlight">\(Z_\alpha\)</span> refer to the mass and charge of atomic nucleus.
-<span class="math notranslate nohighlight">\(R_{\alpha\beta}\)</span>, <span class="math notranslate nohighlight">\(r_{i\alpha}\)</span> and <span class="math notranslate nohighlight">\(r_{ij}\)</span> is the distance between two nucleus, atomic nuclei
-and electron and two electrons respectively. The explicit representation of Laplacian operator is:</p>
+<p><span class="math notranslate nohighlight">\(m_i\)</span> is the mass of electron. <span class="math notranslate nohighlight">\(M_\alpha\)</span> and <span class="math notranslate nohighlight">\(Z_\alpha\)</span> refer to the mass and charge of atomic nucleus. <span class="math notranslate nohighlight">\(R_{\alpha\beta}\)</span>, <span class="math notranslate nohighlight">\(r_{i\alpha}\)</span> and <span class="math notranslate nohighlight">\(r_{ij}\)</span> is the distance between two nucleus, atomic nuclei and electron and two electrons respectively. The explicit representation of Laplacian operator is:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{\nabla}^2 = \frac{\partial^2}{\partial x^2} +\frac{\partial^2}{\partial y^2}
 + \frac{\partial^2}{\partial z^2}\]</div>
@@ -221,9 +222,7 @@ and electron and two electrons respectively. The explicit representation of Lapl
 <span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Hamiltonian object has attributes of different operators use the following
-conventions for variable names. The following are defined by setting up the
-Hamiltonian by default:</p>
+<p>Hamiltonian object has attributes of different operators use the following conventions for variable names. The following are defined by setting up the Hamiltonian by default:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha.io.iosystem</span> <span class="kn">import</span> <span class="n">IOSystem</span>
 <span class="kn">from</span> <span class="nn">moha.system.hamiltonian.chemical_hamiltonian</span> <span class="kn">import</span> <span class="n">ChemicalHamiltonian</span>
 <span class="kn">from</span> <span class="nn">moha.system.operator.base</span> <span class="kn">import</span> <span class="n">OperatorNames</span>
