@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Post Hartree–Fock" href="user_posthf.html" />
+    <link rel="next" title="3. Configuration Interaction" href="user_ci.html" />
     <link rel="prev" title="1. System" href="user_system.html" /> 
 </head>
 
@@ -55,8 +55,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#diis-solver">2.2. DIIS Solver</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user_posthf.html">3. Post Hartree–Fock</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_property.html">4. Property</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_ci.html">3. Configuration Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_cc.html">4. Coupled-Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_pt.html">5. Perturbation Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
 <ul>
@@ -138,7 +140,7 @@ E_{corr} &amp;= E_{exact} - E_{HF}\end{split}\]</div>
 <ul class="simple">
 <li><p><strong>Step 2: Build the Orthogonalization Matrix</strong></p></li>
 </ul>
-<p>Hartree–Fock algorithm must be optimized with the constraint that the orbitals are orthonormal, ensuring that the Hartree–Fock wave function is normalized.</p>
+<p>Hartree–Fock algorithm must be optimized with the constraint that the orbitals are orthonormal,</p>
 <div class="math notranslate nohighlight">
 \[\langle \phi_i \vert \phi_j \rangle = \delta_{ij}\]</div>
 <p>The atomic orbitals are, in general, not orthonormal. Hence we bring the orthogonalization matrix into the algorithm to make,</p>
@@ -283,7 +285,7 @@ RMSD_i &amp;= \sqrt{\sum_{\mu\nu} D_{i,\mu\nu}−D_{i−1,\mu\nu}} \leqslant \si
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="user_system.html" class="btn btn-neutral float-left" title="1. System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="user_posthf.html" class="btn btn-neutral float-right" title="3. Post Hartree–Fock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="user_ci.html" class="btn btn-neutral float-right" title="3. Configuration Interaction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

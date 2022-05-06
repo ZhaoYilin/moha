@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Configuration Interaction &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Coupled-Cluster" href="user_cc.html" />
+    <link rel="prev" title="2. Hartree-Fock" href="user_hf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Configuration Interaction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ci-algorithm">3.1. CI algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">3.2. Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#full-ci">3.2.1. Full CI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cisd">3.2.2. CISD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_cc.html">4. Coupled-Cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_pt.html">5. Perturbation Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">3. </span>Configuration Interaction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_ci.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="configuration-interaction">
+<h1><span class="section-number">3. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h1>
+<p>Configuration interaction approximates wave function by a linear expansion of N–electron basis functions with a given one–electron basis.</p>
+<div class="math notranslate nohighlight">
+\[\vert \Psi_{CI}\rangle = \sum_{\lbrace i \rbrace}c_i \vert \Phi_i\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi_i\)</span> is the i–th configuration, and <span class="math notranslate nohighlight">\(c_i\)</span> is the corresponding coefficient.
+With CI wave function ansatz and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
+<div class="section" id="ci-algorithm">
+<h2><span class="section-number">3.1. </span>CI algorithm<a class="headerlink" href="#ci-algorithm" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Step 1: Build The Integral</strong></p></li>
+</ul>
+<p>The pre–computed quantities for the SCF algorithm include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The nuclear repulsion energy <span class="math notranslate nohighlight">\(E_{nuc}\)</span>.</p></li>
+<li><p>One–electron integrals overlap <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>, kinetic energy <span class="math notranslate nohighlight">\(\mathbf{T}\)</span>, and nuclear attraction <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>.</p></li>
+<li><p>Two–electron integral, the electron repulsion <span class="math notranslate nohighlight">\((\mu\nu\vert\lambda\sigma)\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<p>Please check out the <a class="reference internal" href="user_system.html#hamiltonian"><span class="std std-ref">Hamiltonian</span></a> section for further information to learn more about the pre–computed quantities.</p>
+<ul class="simple">
+<li><p><strong>Step 2: Optimized the molecular orbital coefficients by SCF Calculation</strong></p></li>
+</ul>
+<p>The Hartree-Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
+<p>Please check out the <a class="reference internal" href="user_hf.html"><span class="doc">Hartree-Fock</span></a> section for further information.</p>
+<ul class="simple">
+<li><p><strong>Step 3: Transformation of atomic orbital to molecular orbital</strong></p></li>
+</ul>
+<p>With the optimized LCAO_MO coefficients, we can transform the operators from the atomic orbital basis to the molecular orbital basis.</p>
+<p>For the one electron operators:</p>
+<div class="math notranslate nohighlight">
+\[h_{ij} = \sum_{\mu\nu}C_{\mu}^jC_{\nu}^i \langle\phi_{\mu}\vert\hat{h}\vert\phi_{\nu}\rangle
+= \sum_{\mu\nu} C_{\mu}^j C_{\nu}^i F_{\mu\nu}\]</div>
+<p>For the two electron operators:</p>
+<div class="math notranslate nohighlight">
+\[\langle pq \vert rs\rangle = \sum_{\mu} C_{\mu}^p \left[
+\sum_{\nu} C_{\nu}^q \left[
+\sum_{\lambda} C_{\lambda}^r \left[
+\sum_{\sigma} C_{\sigma}^s
+\langle\mu\nu\vert\lambda\sigma\rangle\right]\right]\right]\]</div>
+<ul class="simple">
+<li><p><strong>Step 4: Construction of N–electron basis set</strong></p></li>
+</ul>
+<p>Configuration interaction method need an N–electron basis set <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span>, here denotes explicitly a set of orthonormal Slater determinants made of a set of molecular spin orbitals <span class="math notranslate nohighlight">\(\{\chi_i\}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\langle \Phi_i \vert \Phi_j \rangle = \delta_{ij}\]</div>
+<p>For an N electron and K spatial orbitals system, the maximum N–electron basis set contains all Slater determinants generated by distributing N electrons among 2K spin orbitals. The number of Slater determinants gives:</p>
+<div class="math notranslate nohighlight">
+\[N_{det} = \sum_{n=0}^{min(N,2K-N)}\binom{N}{n}\binom{2K-N}{n}\]</div>
+<p>Without constraints, the number of Slater determinants is enormous. Therefore, to control the size of the N–electron basis set, a reasonable approach starts from a reference configuration. Usually, it is the ground state <span class="math notranslate nohighlight">\(\vert\Phi_0\rangle\)</span>, which is formed by the N lowest energy spin orbitals, which results in Hartree–Fock calculation.</p>
+<p>Then we append the other configuration by excitation level relative to the reference state. Thus, we build an N–electron basis set <span class="math notranslate nohighlight">\(\{ \vert\Phi_0\rangle, \vert S\rangle,\vert D\rangle,\dots\}\)</span> with the desired size.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vert S\rangle &amp;= \vert\Phi_i^a\rangle\\
+\vert D\rangle &amp;= \vert\Phi_{ij}^{ab}\rangle\\
+&amp;\vdots\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert S\rangle\)</span> represents the single excitations terms, <span class="math notranslate nohighlight">\(\vert D\rangle\)</span> represents the double excitations terms, and so on.</p>
+<ul class="simple">
+<li><p><strong>Step 5: Calculation and storage of the Hamiltonian matrix elements</strong></p></li>
+</ul>
+<p>To optimize the configuration interaction wave function and minimize the energy,  with the normalized constrain <span class="math notranslate nohighlight">\(\langle \Psi \vert \Psi \rangle = 1\)</span>. By varying the coefficients <span class="math notranslate nohighlight">\(c_i\)</span> with the variational principle,</p>
+<div class="math notranslate nohighlight">
+\[\mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)\]</div>
+<p>it results in the Schrödinger equation becoming a matrix–eigenvalue equation:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is the Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> in matrix form, with the Slater–Condon rules, we can express its elements <span class="math notranslate nohighlight">\(H_{ij} = \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle\)</span> in terms of one and two electron molecular integrals.</p>
+<ul class="simple">
+<li><p>Evaluate the number of sphin orbitals substution between two determinants.</p></li>
+</ul>
+<p>Good news about the evaluteing the configuration interaction Hamiltonian elements is that all the determinants that differ by more than two spin orbitals are zero. This save us a lot of times, and we can only focus on elements that differ by zero- one- and two sphin orbitals.</p>
+<ul class="simple">
+<li><p>Then by the number of sphin-orbitals substitution,  case</p></li>
+</ul>
+<p>Identical Determinants:</p>
+<div class="math notranslate nohighlight">
+\[\langle\Phi_i \vert\hat{H}\vert \Phi_i\rangle =
+\sum_m^N \langle m \vert\hat{h}\vert m \rangle +
+\sum_{m&gt;n}^N \langle mn \vert\vert mn \rangle\]</div>
+<p>Determinants that Differ by One Spin Orbitals:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vert \Phi_i \rangle &amp;= \vert \dots mn \dots \rangle\\
+\vert \Phi_j \rangle &amp;= \vert \dots pn \dots \rangle\\
+\langle\Phi_i \vert\hat{H}\vert \Phi_j\rangle &amp;=
+\langle m \vert\hat{h}\vert p \rangle +
+\sum_{n}^N \langle mn \vert\vert pn \rangle\end{split}\]</div>
+<p>Determinants that Differ by Two Spin Orbitals:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vert \Phi_i \rangle &amp;= \vert \dots mn \dots \rangle\\
+\vert \Phi_j \rangle &amp;= \vert \dots pq \dots \rangle\\
+\langle\Phi_i \vert\hat{H}\vert \Phi_j\rangle &amp;=
+\langle mn \vert\vert pq \rangle\end{split}\]</div>
+<ul class="simple">
+<li><p>Finally we need compute the phase when evaluting the value of two determinants,</p></li>
+</ul>
+<p>The phase is calculated as <span class="math notranslate nohighlight">\(-1^{N_{perm}}\)</span>, where <span class="math notranslate nohighlight">\(N_{perm}\)</span> is the number permutations necessary to bring the spin-orbitals on which the holes are made to the positions of the praticles. This number is equal to the number of occupied spin-orbitals between these two positions.</p>
+<ul class="simple">
+<li><p><strong>Step 6: Solution of the Matrix eigenvalue problem for the desired state</strong></p></li>
+</ul>
+<p>The optimaztion using variational principle results in the Schrödinger equation becomes a matrix–eigenvalue equation:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
+<p>Thus, the only numerical problem in their solution is the calculation of the eigenvalues and eigenvectors of a mymmetric matrix. This is a problem which occurs in many branches of science, particularly those involving optimisation of some kind and has ,consequently, received much attention.</p>
+</div>
+<div class="section" id="examples">
+<h2><span class="section-number">3.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<div class="section" id="full-ci">
+<h3><span class="section-number">3.2.1. </span>Full CI<a class="headerlink" href="#full-ci" title="Permalink to this headline"></a></h3>
+<p>The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation. Therefore, the Full CI method is not applicable in large systems, usually used for benchmarking minimal systems to develop new methods.</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi_{FCI}\rangle = c_0 \vert\Phi_0\rangle
++ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
++ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle
++ \dots\]</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/ci/fci.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">cisolver</span> <span class="o">=</span> <span class="n">FullCISolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">ci_results</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cisd">
+<h3><span class="section-number">3.2.2. </span>CISD<a class="headerlink" href="#cisd" title="Permalink to this headline"></a></h3>
+<p>FCI method is exact in a given atomic orbital basis but prohibitively expensive. Therefore, to balance accuracy and computational time, we truncate the CI space by excitation level relative to the reference state. The most common truncation of the CI space expansion is CI singles and doubles (CISD).</p>
+<p>However, since in the truncated CI, higher excitations are forbidden, hence the model is not size-extensive. Also, in large systems, high–order disconnected excitations dominate. Truncated CI, therefore, works best for small systems and is important for small multi–configurational systems.</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi_{CISD}\rangle = c_0 \vert\Phi_0\rangle
++ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
++ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle\]</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/ci/cisd.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">cisolver</span> <span class="o">=</span> <span class="n">CISDSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">ci_results</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_hf.html" class="btn btn-neutral float-left" title="2. Hartree-Fock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_cc.html" class="btn btn-neutral float-right" title="4. Coupled-Cluster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

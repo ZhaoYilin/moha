@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Coupled-Cluster &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Perturbation Theory" href="user_pt.html" />
+    <link rel="prev" title="3. Configuration Interaction" href="user_ci.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_ci.html">3. Configuration Interaction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Coupled-Cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ccsd">4.1. CCSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ccsd-t">4.2. CCSD(T)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">4.3. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_pt.html">5. Perturbation Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">4. </span>Coupled-Cluster</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_cc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="coupled-cluster">
+<h1><span class="section-number">4. </span>Coupled-Cluster<a class="headerlink" href="#coupled-cluster" title="Permalink to this headline"></a></h1>
+<p>Coupled cluster methods are among the most accurate electronic structure methods available today. Its wave function ansatz is usually written in exponential form:</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi\rangle = e^{\hat{T}} \vert\Phi_0\rangle\]</div>
+<p>Where the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> is defined as the sum of <span class="math notranslate nohighlight">\(\hat{T}_{i}\)</span> generates all possible determinants having the i-th excitations from the reference.</p>
+<div class="math notranslate nohighlight">
+\[\hat{T} = \sum_{i=1}^{N} \hat{T}_{i}\]</div>
+<p>the first few component of cluster operator are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{T}_1 &amp;= \mathop{\sum_{i\in occ}}_{\alpha \in virt} t_i^{\alpha} a_{\alpha}^{\dagger} a_{i}\\
+\hat{T}_2 &amp;= \frac{1}{(2!)^2}\mathop{\sum_{ij\in occ}}_{\alpha \beta \in virt}
+t_{ij}^{\alpha\beta}a_{\alpha}^{\dagger} a_{\beta}^{\dagger} a_{j}a_{i}\end{split}\]</div>
+<p>apply a similarity-transformation, multiplying the CC Schrödinger equation in the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{H} e^{\hat{T}} \vert\Phi_{0} \rangle &amp;= E e^{\hat{T}} \vert\Phi_{0} \rangle \\
+e^{\hat{-T}}\hat{H} e^{\hat{T}} \vert\Phi_{0} \rangle &amp;= e^{\hat{-T}}E e^{\hat{T}} \vert\Phi_{0} \rangle \\
+e^{\hat{-T}}\hat{H} e^{\hat{T}} \vert\Phi_{0} \rangle &amp;= E \vert\Phi_{0} \rangle \\\end{split}\]</div>
+<p>the amplitudes should be optimized to determine the CC wave function. Unlike Hartree–Fock or CI wave function is optimized by variational principle, CC wave function is optimized by projecting.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\langle \Phi_0 \vert\hat{H} e^{\hat{T}} \vert\Phi_{0} \rangle &amp;= E\\
+\langle \Phi_{ij\dots}^{ab\dots}\vert e^{\hat{-T}}\hat{H} e^{\hat{T}} \vert\Psi_{0} \rangle &amp;= 0 \\\end{split}\]</div>
+<p>by solving the nonlinear equations, the CC energy and amplitudes are determined.</p>
+<p>The CC hierarchy represents the most successful wave–function quantum chemistry. It is reasonable to assume that lower-order excitations are more important than higher-order ones. The CCSD wave function contains contributions from all FullCI determinants, generated by connected and disconnected excitations, hence CCSD method is also size–extensive. CCSD and its triples correction CCSD(T) methods are the gold standard of quantum chemistry for its high accuracy and reliability.</p>
+<p>Although CC are among the most successful quantum chemistry methods, generalizing CC ansatz to multi–configurational reference states is difficult. Therefore CC method is hard for system with strong correlation.</p>
+<div class="section" id="ccsd">
+<h2><span class="section-number">4.1. </span>CCSD<a class="headerlink" href="#ccsd" title="Permalink to this headline"></a></h2>
+<p>To implement the  CCSD method, we should follow the procedure:</p>
+<ul class="simple">
+<li><p>Preparing the Spin-Orbital Basis Integrals</p></li>
+<li><p>Build the Initial-Guess Cluster Amplitudes</p></li>
+</ul>
+<p>For Hartree-Fock reference determinants, the most common initial guess for the cluster amplitudes are the Moller-Plesset first-order perturbed wave function:</p>
+<div class="math notranslate nohighlight">
+\[t_i^a = 0\]</div>
+<div class="math notranslate nohighlight">
+\[t_{ij}^{ab} = \frac{\langle ij \vert\vert ab \rangle}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}\]</div>
+<ul class="simple">
+<li><p>Calculate the CC Intermediates</p></li>
+</ul>
+<p>Use the spin-orbital Eqs. 3-13 from Stanton’s paper to build the two-index (F)
+and four-index (W) intermediates, as well as the effective doubles (labelled
+with the Greek letter tau).</p>
+<ul class="simple">
+<li><p>Compute the Updated Cluster Amplitudes</p></li>
+</ul>
+<p>Use Eqs. 1 and 2 from Stanton’s paper to compute the updated T1 and T2 cluster amplitudes.</p>
+<ul class="simple">
+<li><p>Check for Convergence and Iterate Calculate the current CC correlation energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E_{\rm CC} = \sum_{ia} f_{ia} t_i^a + \frac{1}{4} \sum_{ijab} \langle
+ij||ab\rangle t_{ij}^{ab} + \frac{1}{2} \sum_{ijab} \langle ij||ab\rangle t_i^a
+t_j^b\]</div>
+<p>Compare energies and cluster amplitudes between iterations to check for convergence to some specified cutoff. If convergence is reached, you’re done; if not, return to third step and continue.</p>
+<p>To run a CCSD calculation in MoHa, the example is below:</p>
+</div>
+<div class="section" id="ccsd-t">
+<h2><span class="section-number">4.2. </span>CCSD(T)<a class="headerlink" href="#ccsd-t" title="Permalink to this headline"></a></h2>
+<p>To find the perturbative triples correction, the disconnected and connected T3 have to be calculated. The disconnected is found as:</p>
+<div class="math notranslate nohighlight">
+\[D^{abc}_{ijk}t^{abc}_{ijk,disconnected}=P(i/jk)P(a/bc)t^{a}_{i}\langle jk \vert\vert bc\rangle\]</div>
+<p>And the connected is found as:</p>
+<div class="math notranslate nohighlight">
+\[D_{ijk}^{abc}t_{ijk,\mathrm{connected}}^{abc}=P\left(i/jk\right)P\left(a/bc\right)\left[\sum_{e}^{virt}t_{jk}^{ae}\left\langle ei\left|\right|bc\right\rangle -\sum_{m}^{occ}t_{im}^{bc}\left\langle ma\left|\right|jk\right\rangle \right]\]</div>
+<p>In the above equations the following definitions is used:</p>
+<div class="math notranslate nohighlight">
+\[D_{ijk}^{abc}=f_{ii}+f_{jj}+f_{kk}-f_{aa}-f_{bb}-f_{cc}\]</div>
+<div class="math notranslate nohighlight">
+\[P\left(i/jk\right)f\left(i,j,k\right)=f\left(i,j,k\right)-f\left(j,i,k\right)-f\left(k,j,i\right)\]</div>
+<p>The energy correction can now be found as:</p>
+<div class="math notranslate nohighlight">
+\[E_{\mathrm{\left(T\right)}}=\frac{1}{36}\sum_{i,j,k,a,b,c}^{occ,occ,occ,virt,virt,virt}t_{ijk,\mathrm{connected}}^{abc}D_{ijk}^{abc}\left(t_{ijk,\mathrm{connected}}^{abc}+t_{ijk,\mathrm{disconnected}}^{abc}\right)\]</div>
+</div>
+<div class="section" id="examples">
+<h2><span class="section-number">4.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>CCSD</p></li>
+</ul>
+<p>Truncating the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> at doubles leads to the coupled cluster singles and doubles method(CCSD). By keep only <span class="math notranslate nohighlight">\(\hat{T}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{T}_2\)</span>, we reach the balance between accuracy and computational time.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ccsolver</span> <span class="o">=</span> <span class="n">CCSDSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">cc_results</span> <span class="o">=</span> <span class="n">ccsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<ul class="simple">
+<li><p>CCSD(T)</p></li>
+</ul>
+<p>Based on CCSD, the addition of perturbative triple correction gives CCSD(T) method the reputation of being the “gold standard” in computational chemistry. It is now one of the most accurate methods applicable to reasonably large molecules.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd_t.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ccsolver</span> <span class="o">=</span> <span class="n">CCSD_TSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">cc_results</span> <span class="o">=</span> <span class="n">ccsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_ci.html" class="btn btn-neutral float-left" title="3. Configuration Interaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_pt.html" class="btn btn-neutral float-right" title="5. Perturbation Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

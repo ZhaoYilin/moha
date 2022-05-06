@@ -25,7 +25,9 @@ Contents
 
    user_system.rst
    user_hf.rst
-   user_posthf.rst
+   user_ci.rst
+   user_cc.rst
+   user_pt.rst
    user_property.rst
 
 .. toctree::

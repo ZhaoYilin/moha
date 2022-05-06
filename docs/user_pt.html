@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Perturbation Theory &mdash; moha 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/moha.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Property" href="user_property.html" />
+    <link rel="prev" title="4. Coupled-Cluster" href="user_cc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html">
+            <img src="_static/moha.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">QUICK START:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart_examples.html">2. Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">USER DOCUMENTATION:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_ci.html">3. Configuration Interaction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_cc.html">4. Coupled-Cluster</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Perturbation Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">5.1. Algorithm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mp2">5.1.1. MP2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mp3">5.1.2. MP3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPER DOCUMENTATION:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="developer_sphinx.html">1. Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_api/modules.html">2. API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">moha</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">5. </span>Perturbation Theory</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/user_pt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="perturbation-theory">
+<h1><span class="section-number">5. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h1>
+<p>Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which we add a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
+<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
+<p>For perturbation theory, we divide the Hamiltonian into zero–order operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> and perturbaing operator <span class="math notranslate nohighlight">\(\lambda\hat{V}\)</span>. Specifically in M{o}ller–Plesset theory, we use the Fock operator as the zero–order operator and the Hartree–Fock state as the zero–order state:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}_0 = \hat{F};
+\quad \hat{V} = \hat{H} - \hat{F}\]</div>
+<p>the unperturbed Schr&quot;{o}dinger equation:</p>
+<div class="math notranslate nohighlight">
+\[\quad \hat{F}|\Psi_{HF}\rangle = \sum_{i}\varepsilon_i \vert\Psi_{HF}\rangle;\]</div>
+<p>the time-independent related Schr&quot;{o}dinger equation:</p>
+<div class="math notranslate nohighlight">
+\[(\hat{F} + \lambda \hat{V})|\Psi_n \rangle = E_n \vert\Psi_n \rangle\]</div>
+<p>we apply Taylor series to expands the energies and states in eqn ref{eq:mp3} of the parameter $lambda$</p>
+<div class="math notranslate nohighlight">
+\[E_n = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \dots\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\vert\Psi_{n}\rangle = \vert\Psi_{n}^{(0)} \rangle
++ \lambda \vert\Psi_{n}^{(0)} \rangle + \lambda^2 \vert\Psi_{n}^{(2)} \rangle + \dots\]</div>
+<p>the <span class="math notranslate nohighlight">\(E_n^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\Psi_n^{(k)}\)</span> are the corresponding derivatives</p>
+<div class="math notranslate nohighlight">
+\[E_n^{(k)} = \frac{1}{k!} \frac{\partial^k E_n}{\partial \lambda^k}\]</div>
+<div class="math notranslate nohighlight">
+\[\Psi_n^{(k)} = \frac{1}{k!} \frac{\partial^k \Psi_n}{\partial \lambda^k}\]</div>
+<p>substitute of these expand series into the time-independent Schr&quot;{o}dinger equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(\hat{F} + \lambda \hat{V})\vert\Psi_n^{(0)} + \lambda \vert\Psi_n^{(1)} + \lambda^2 \vert\Psi_n^{(2)} + \dots\rangle&amp;= \\
+(E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} +\dots) \vert\Psi_n^{(0)} + \lambda \vert\Psi_n^{(1)} + \lambda^2 \vert\Psi_n^{(2)} + \dots\rangle\end{split}\]</div>
+<p>we expand both side of the equation, put the terms involving equate powers of <span class="math notranslate nohighlight">\(\lambda\)</span> and generate a set
+of equations.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\hat{F}|\Psi_n^{(0)}\rangle
+&amp;= E_n^{(0)}|\Psi_n^{(0)}\rangle \\
+\hat{F}|\Psi_n^{1}\rangle +\hat{V}|\Psi_n^{(0)}\rangle
+&amp;= E_n^{(0)}|\Psi_n^{(1)}\rangle + E_n^{(1)}|\Psi_n^{(0)}\rangle\\
+\hat{F}|\Psi_n^{2}\rangle +\hat{V}|\Psi_n^{(1)}\rangle
+&amp;= E_n^{(0)}|\Psi_n^{(2)}\rangle + E_n^{(1)}|\Psi_n^{(1)}\rangle + E_n^{(2)}|\Psi_n^{(0)}\rangle\\
+&amp;\dots\end{split}\]</div>
+<p>as the solution of zeroth–order equation is known, one expects, Möller–Plesset theory approaches are performed on top of previous result. Therefore we can determine the various nth–order corrections.</p>
+<p>Given a reasonably accurate Hartree–Fock reference, we may improve on it by Möller–Plesset perturbation theory. As a non-iterative way to calculate electron correlation energy, The MP2 energy represents a highly successful approximation at a fraction of the cost compare with other post–Hartree–Fock methods.</p>
+<p>Unfortunately in a sufficiently large system, the M{o}ller–Plesset method often diverges. Higher-order corrections may be calculated, but convergence is often poor.</p>
+<div class="section" id="algorithm">
+<h2><span class="section-number">5.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><strong>Step 1: Build The Integral</strong></p></li>
+</ul>
+<p>The pre–computed quantities for the SCF algorithm include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The nuclear repulsion energy <span class="math notranslate nohighlight">\(E_{nuc}\)</span>.</p></li>
+<li><p>One–electron integrals overlap <span class="math notranslate nohighlight">\(\mathbf{S}\)</span>, kinetic energy <span class="math notranslate nohighlight">\(\mathbf{T}\)</span>, and nuclear attraction <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>.</p></li>
+<li><p>Two–electron integral, the electron repulsion <span class="math notranslate nohighlight">\((\mu\nu\vert\lambda\sigma)\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<p>Please check out the <a class="reference internal" href="user_system.html#hamiltonian"><span class="std std-ref">Hamiltonian</span></a> section for further information to learn more about the pre–computed quantities.</p>
+<ul class="simple">
+<li><p><strong>Step 2: Optimized the molecular orbital coefficients by SCF Calculation</strong></p></li>
+</ul>
+<p>The Hartree-Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
+<p>Please check out the <a class="reference internal" href="user_hf.html"><span class="doc">Hartree-Fock</span></a> section for further information.</p>
+<ul class="simple">
+<li><p><strong>Step 3: Transformation of atomic orbital to molecular orbital</strong></p></li>
+</ul>
+<p>With the optimized LCAO_MO coefficients, we can transform the operators from the atomic orbital basis to the molecular orbital basis.</p>
+<p>For the one electron operators:</p>
+<div class="math notranslate nohighlight">
+\[h_{ij} = \sum_{\mu\nu}C_{\mu}^jC_{\nu}^i \langle\phi_{\mu}\vert\hat{h}\vert\phi_{\nu}\rangle
+= \sum_{\mu\nu} C_{\mu}^j C_{\nu}^i F_{\mu\nu}\]</div>
+<p>For the two electron operators:</p>
+<div class="math notranslate nohighlight">
+\[\langle pq \vert rs\rangle = \sum_{\mu} C_{\mu}^p \left[
+\sum_{\nu} C_{\nu}^q \left[
+\sum_{\lambda} C_{\lambda}^r \left[
+\sum_{\sigma} C_{\sigma}^s
+\langle\mu\nu\vert\lambda\sigma\rangle\right]\right]\right]\]</div>
+<div class="section" id="mp2">
+<h3><span class="section-number">5.1.1. </span>MP2<a class="headerlink" href="#mp2" title="Permalink to this headline"></a></h3>
+<p>Moller-Plesset Second Order Perturbation theory (MP2) is a non-iterative way to calculate electron correlation energy. The expression for it’s energy contribution can be written as:</p>
+<div class="math notranslate nohighlight">
+\[E_{\rm MP2} = \sum_{ij} \sum_{ab}
+\frac{\langle ia\vert jb\rangle (2 \langle ia\vert jb\rangle -
+\langle ib\vert ja\rangle)}
+{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}\]</div>
+<p>To run a MP2 calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp2.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ptsolver</span> <span class="o">=</span> <span class="n">MP2Solver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">pt_results</span> <span class="o">=</span> <span class="n">ptsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mp3">
+<h3><span class="section-number">5.1.2. </span>MP3<a class="headerlink" href="#mp3" title="Permalink to this headline"></a></h3>
+<p>The third order Møller-Plesset correction to the energy is given as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}E_{MP3}&amp;=\frac{1}{8}\sum_{abcdrs}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cd\left|\right|ab\right\rangle \left\langle rs\left|\right|cd\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{c}+\epsilon_{d}-\epsilon_{r}-\epsilon_{s}\right)}\\
+&amp;+\frac{1}{8}\sum_{abrstu}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle rs\left|\right|tu\right\rangle \left\langle tu\left|\right|ab\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{t}-\epsilon_{u}\right)}\\
+&amp;+\sum_{abcrst}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cs\left|\right|tb\right\rangle \left\langle rt\left|\right|ac\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{c}-\epsilon_{r}-\epsilon_{t}\right)}\end{split}\]</div>
+<p>To run a MP2 calculation in MoHa, the example is below:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp3.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">mol</span><span class="p">,</span><span class="n">orbs</span> <span class="o">=</span> <span class="n">IOSystem</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;../data/water.xyz&#39;</span><span class="p">,</span><span class="s1">&#39;sto-3g.nwchem&#39;</span><span class="p">)</span>
+<span class="n">ham</span> <span class="o">=</span> <span class="n">ChemicalHamiltonian</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="n">orbs</span><span class="p">)</span>
+<span class="n">wfn</span> <span class="o">=</span> <span class="n">HFWaveFunction</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;beta&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">scfsolver</span> <span class="o">=</span> <span class="n">PlainSCFSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">)</span>
+<span class="n">hf_results</span> <span class="o">=</span> <span class="n">scfsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+
+<span class="n">ptsolver</span> <span class="o">=</span> <span class="n">MP3Solver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
+<span class="n">pt_results</span> <span class="o">=</span> <span class="n">ptsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_cc.html" class="btn btn-neutral float-left" title="4. Coupled-Cluster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_property.html" class="btn btn-neutral float-right" title="6. Property" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yilin Zhao.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

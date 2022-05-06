@@ -72,7 +72,7 @@ Please check out the :ref:`Hamiltonian <Hamiltonian>` section for further inform
 
 * **Step 2: Build the Orthogonalization Matrix**
 
-Hartree--Fock algorithm must be optimized with the constraint that the orbitals are orthonormal, ensuring that the Hartree--Fock wave function is normalized.  
+Hartree--Fock algorithm must be optimized with the constraint that the orbitals are orthonormal,  
 
 .. math::
 
