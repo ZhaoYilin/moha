@@ -52,12 +52,8 @@
 <li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Configuration Interaction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#ci-algorithm">3.1. CI algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">3.2. Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#full-ci">3.2.1. Full CI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cisd">3.2.2. CISD</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-ci-algorithm">3.1. General CI Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">3.2. Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_cc.html">4. Coupled-Cluster</a></li>
@@ -96,17 +92,17 @@
              
   <div class="section" id="configuration-interaction">
 <h1><span class="section-number">3. </span>Configuration Interaction<a class="headerlink" href="#configuration-interaction" title="Permalink to this headline"></a></h1>
-<p>Configuration interaction approximates wave function by a linear expansion of N–electron basis functions with a given one–electron basis.</p>
+<p>Configuration interaction approximates wave function by a linear expansion of N–electron basis functions with a given one–electron basis:</p>
 <div class="math notranslate nohighlight">
 \[\vert \Psi_{CI}\rangle = \sum_{\lbrace i \rbrace}c_i \vert \Phi_i\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Phi_i\)</span> is the i–th configuration, and <span class="math notranslate nohighlight">\(c_i\)</span> is the corresponding coefficient.
-With CI wave function ansatz and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.</p>
+<p>where <span class="math notranslate nohighlight">\(\Phi_i\)</span> is the i–th configuration and <span class="math notranslate nohighlight">\(c_i\)</span> is the corresponding coefficient.</p>
+<p>To optimize the configuration interaction wave function and minimize the energy with the normalized constrain <span class="math notranslate nohighlight">\(\langle \Psi \vert \Psi \rangle = 1\)</span>. Variational principle is applied to varying the coefficients:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
-<div class="section" id="ci-algorithm">
-<h2><span class="section-number">3.1. </span>CI algorithm<a class="headerlink" href="#ci-algorithm" title="Permalink to this headline"></a></h2>
+\[\mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)\]</div>
+<div class="section" id="general-ci-algorithm">
+<h2><span class="section-number">3.1. </span>General CI Algorithm<a class="headerlink" href="#general-ci-algorithm" title="Permalink to this headline"></a></h2>
 <ul class="simple">
-<li><p><strong>Step 1: Build The Integral</strong></p></li>
+<li><p><strong>Step 1: Build the Integral</strong></p></li>
 </ul>
 <p>The pre–computed quantities for the SCF algorithm include:</p>
 <blockquote>
@@ -118,12 +114,12 @@ With CI wave function ansatz and CI basis set, the Schrödinger equation becomes
 </div></blockquote>
 <p>Please check out the <a class="reference internal" href="user_system.html#hamiltonian"><span class="std std-ref">Hamiltonian</span></a> section for further information to learn more about the pre–computed quantities.</p>
 <ul class="simple">
-<li><p><strong>Step 2: Optimized the molecular orbital coefficients by SCF Calculation</strong></p></li>
+<li><p><strong>Step 2: Optimization of Molecular Orbital Coefficients</strong></p></li>
 </ul>
 <p>The Hartree-Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
 <p>Please check out the <a class="reference internal" href="user_hf.html"><span class="doc">Hartree-Fock</span></a> section for further information.</p>
 <ul class="simple">
-<li><p><strong>Step 3: Transformation of atomic orbital to molecular orbital</strong></p></li>
+<li><p><strong>Step 3: Transformation of Atomic Orbital to Molecular Orbital</strong></p></li>
 </ul>
 <p>With the optimized LCAO_MO coefficients, we can transform the operators from the atomic orbital basis to the molecular orbital basis.</p>
 <p>For the one electron operators:</p>
@@ -138,7 +134,7 @@ With CI wave function ansatz and CI basis set, the Schrödinger equation becomes
 \sum_{\sigma} C_{\sigma}^s
 \langle\mu\nu\vert\lambda\sigma\rangle\right]\right]\right]\]</div>
 <ul class="simple">
-<li><p><strong>Step 4: Construction of N–electron basis set</strong></p></li>
+<li><p><strong>Step 4: Construction of N–electron Basis Set</strong></p></li>
 </ul>
 <p>Configuration interaction method need an N–electron basis set <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span>, here denotes explicitly a set of orthonormal Slater determinants made of a set of molecular spin orbitals <span class="math notranslate nohighlight">\(\{\chi_i\}\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -147,69 +143,59 @@ With CI wave function ansatz and CI basis set, the Schrödinger equation becomes
 <div class="math notranslate nohighlight">
 \[N_{det} = \sum_{n=0}^{min(N,2K-N)}\binom{N}{n}\binom{2K-N}{n}\]</div>
 <p>Without constraints, the number of Slater determinants is enormous. Therefore, to control the size of the N–electron basis set, a reasonable approach starts from a reference configuration. Usually, it is the ground state <span class="math notranslate nohighlight">\(\vert\Phi_0\rangle\)</span>, which is formed by the N lowest energy spin orbitals, which results in Hartree–Fock calculation.</p>
-<p>Then we append the other configuration by excitation level relative to the reference state. Thus, we build an N–electron basis set <span class="math notranslate nohighlight">\(\{ \vert\Phi_0\rangle, \vert S\rangle,\vert D\rangle,\dots\}\)</span> with the desired size.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\vert S\rangle &amp;= \vert\Phi_i^a\rangle\\
-\vert D\rangle &amp;= \vert\Phi_{ij}^{ab}\rangle\\
-&amp;\vdots\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vert S\rangle\)</span> represents the single excitations terms, <span class="math notranslate nohighlight">\(\vert D\rangle\)</span> represents the double excitations terms, and so on.</p>
+<p>Then we append the other configuration by excitation level relative to the reference state. Thus, we build an N–electron basis set <span class="math notranslate nohighlight">\(\{ \vert\Phi_0\rangle, \vert S\rangle,\vert D\rangle, \vert T \rangle \dots\}\)</span> with the desired size. Where <span class="math notranslate nohighlight">\(\vert S\rangle\)</span> represents the single excitations configurations, <span class="math notranslate nohighlight">\(\vert D\rangle\)</span> represents the double excitations configurations, and so on.</p>
 <ul class="simple">
-<li><p><strong>Step 5: Calculation and storage of the Hamiltonian matrix elements</strong></p></li>
+<li><p><strong>Step 5: Calculation of Hamiltonian Matrix Elements</strong></p></li>
 </ul>
-<p>To optimize the configuration interaction wave function and minimize the energy,  with the normalized constrain <span class="math notranslate nohighlight">\(\langle \Psi \vert \Psi \rangle = 1\)</span>. By varying the coefficients <span class="math notranslate nohighlight">\(c_i\)</span> with the variational principle,</p>
+<p>With N–electron basis set <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span>, the Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> can be represent by a matrix, its elements gives by:</p>
 <div class="math notranslate nohighlight">
-\[\mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)\]</div>
-<p>it results in the Schrödinger equation becoming a matrix–eigenvalue equation:</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
-<p><span class="math notranslate nohighlight">\(\mathbf{H}\)</span> is the Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> in matrix form, with the Slater–Condon rules, we can express its elements <span class="math notranslate nohighlight">\(H_{ij} = \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle\)</span> in terms of one and two electron molecular integrals.</p>
+\[H_{ij}= \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle\]</div>
+<p>Using the Slater–Condon rules, we can express the matrix elements <span class="math notranslate nohighlight">\(H_{ij}\)</span> in terms of one– and two– electron molecular integrals.</p>
 <ul class="simple">
-<li><p>Evaluate the number of sphin orbitals substution between two determinants.</p></li>
+<li><p>First we evaluate the number of sphin orbitals substution between two determinants.</p></li>
 </ul>
-<p>Good news about the evaluteing the configuration interaction Hamiltonian elements is that all the determinants that differ by more than two spin orbitals are zero. This save us a lot of times, and we can only focus on elements that differ by zero- one- and two sphin orbitals.</p>
+<p>According to the Slater–Condon rules, all the determinants that differ by more than two spin orbitals results in zero, hence and we can only focus on diterminants that differ by zero– one– and two sphin orbitals.</p>
 <ul class="simple">
-<li><p>Then by the number of sphin-orbitals substitution,  case</p></li>
+<li><p>Then evaluate the matrix elements by the number of sphin-orbitals substitution.</p></li>
 </ul>
-<p>Identical Determinants:</p>
+<p>For identical determinants:</p>
 <div class="math notranslate nohighlight">
 \[\langle\Phi_i \vert\hat{H}\vert \Phi_i\rangle =
 \sum_m^N \langle m \vert\hat{h}\vert m \rangle +
 \sum_{m&gt;n}^N \langle mn \vert\vert mn \rangle\]</div>
-<p>Determinants that Differ by One Spin Orbitals:</p>
+<p>For determinants that differ by one spin orbitals:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\vert \Phi_i \rangle &amp;= \vert \dots mn \dots \rangle\\
 \vert \Phi_j \rangle &amp;= \vert \dots pn \dots \rangle\\
 \langle\Phi_i \vert\hat{H}\vert \Phi_j\rangle &amp;=
 \langle m \vert\hat{h}\vert p \rangle +
 \sum_{n}^N \langle mn \vert\vert pn \rangle\end{split}\]</div>
-<p>Determinants that Differ by Two Spin Orbitals:</p>
+<p>For determinants that differ by two spin orbitals:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\vert \Phi_i \rangle &amp;= \vert \dots mn \dots \rangle\\
 \vert \Phi_j \rangle &amp;= \vert \dots pq \dots \rangle\\
 \langle\Phi_i \vert\hat{H}\vert \Phi_j\rangle &amp;=
 \langle mn \vert\vert pq \rangle\end{split}\]</div>
 <ul class="simple">
-<li><p>Finally we need compute the phase when evaluting the value of two determinants,</p></li>
+<li><p>Finally compute the phase factor.</p></li>
 </ul>
-<p>The phase is calculated as <span class="math notranslate nohighlight">\(-1^{N_{perm}}\)</span>, where <span class="math notranslate nohighlight">\(N_{perm}\)</span> is the number permutations necessary to bring the spin-orbitals on which the holes are made to the positions of the praticles. This number is equal to the number of occupied spin-orbitals between these two positions.</p>
+<p>Since the Slater determinant is antisymmetrized, when we evaluating the overlap between two determinants <span class="math notranslate nohighlight">\(\langle\Phi_i\vert\Phi_j\rangle\)</span> a phase factor.</p>
+<p>When evaluting the Hamiltonian matrix element <span class="math notranslate nohighlight">\(H_{ij}\)</span>, the phase is calculated as <span class="math notranslate nohighlight">\(-1^{N_{perm}}\)</span>, where <span class="math notranslate nohighlight">\(N_{perm}\)</span> is the number permutations necessary to bring the spin-orbitals on which the holes are made to the positions of the praticles.</p>
 <ul class="simple">
 <li><p><strong>Step 6: Solution of the Matrix eigenvalue problem for the desired state</strong></p></li>
 </ul>
 <p>The optimaztion using variational principle results in the Schrödinger equation becomes a matrix–eigenvalue equation:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
-<p>Thus, the only numerical problem in their solution is the calculation of the eigenvalues and eigenvectors of a mymmetric matrix. This is a problem which occurs in many branches of science, particularly those involving optimisation of some kind and has ,consequently, received much attention.</p>
+<p>Thus, the last step is to find the eigenvalues and eigenvectors of matrix <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> with numerical method.</p>
 </div>
 <div class="section" id="examples">
 <h2><span class="section-number">3.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="section" id="full-ci">
-<h3><span class="section-number">3.2.1. </span>Full CI<a class="headerlink" href="#full-ci" title="Permalink to this headline"></a></h3>
-<p>The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation. Therefore, the Full CI method is not applicable in large systems, usually used for benchmarking minimal systems to develop new methods.</p>
-<div class="math notranslate nohighlight">
-\[\vert\Psi_{FCI}\rangle = c_0 \vert\Phi_0\rangle
-+ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
-+ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle
-+ \dots\]</div>
+<p>Configuration interaction approximates wave function by a linear expansion of N-electron basis functions made of a given one-electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.</p>
+<ul class="simple">
+<li><p>Full CI</p></li>
+</ul>
+<p>The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/data/examples/ci/fci.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -226,15 +212,10 @@ With CI wave function ansatz and CI basis set, the Schrödinger equation becomes
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="cisd">
-<h3><span class="section-number">3.2.2. </span>CISD<a class="headerlink" href="#cisd" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>CISD</p></li>
+</ul>
 <p>FCI method is exact in a given atomic orbital basis but prohibitively expensive. Therefore, to balance accuracy and computational time, we truncate the CI space by excitation level relative to the reference state. The most common truncation of the CI space expansion is CI singles and doubles (CISD).</p>
-<p>However, since in the truncated CI, higher excitations are forbidden, hence the model is not size-extensive. Also, in large systems, high–order disconnected excitations dominate. Truncated CI, therefore, works best for small systems and is important for small multi–configurational systems.</p>
-<div class="math notranslate nohighlight">
-\[\vert\Psi_{CISD}\rangle = c_0 \vert\Phi_0\rangle
-+ \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
-+ \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle\]</div>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">/data/examples/ci/cisd.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -249,7 +230,6 @@ With CI wave function ansatz and CI basis set, the Schrödinger equation becomes
 <span class="n">cisolver</span> <span class="o">=</span> <span class="n">CISDSolver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
 <span class="n">ci_results</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>

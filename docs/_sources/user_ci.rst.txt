@@ -1,23 +1,24 @@
 =========================
 Configuration Interaction
 =========================
-Configuration interaction approximates wave function by a linear expansion of N--electron basis functions with a given one--electron basis. 
+Configuration interaction approximates wave function by a linear expansion of N--electron basis functions with a given one--electron basis: 
 
 .. math::
 
     \vert \Psi_{CI}\rangle = \sum_{\lbrace i \rbrace}c_i \vert \Phi_i\rangle
 
-where :math:`\Phi_i` is the i--th configuration, and :math:`c_i` is the corresponding coefficient. 
-With CI wave function ansatz and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.
+where :math:`\Phi_i` is the i--th configuration and :math:`c_i` is the corresponding coefficient.
+ 
+To optimize the configuration interaction wave function and minimize the energy with the normalized constrain :math:`\langle \Psi \vert \Psi \rangle = 1`. Variational principle is applied to varying the coefficients:
 
 .. math::
 
-    \mathbf{H}\mathbf{C} = E \mathbf{C}
+    \mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)
 
-CI algorithm
-============
+General CI Algorithm
+====================
 
-* **Step 1: Build The Integral**
+* **Step 1: Build the Integral**
 
 The pre--computed quantities for the SCF algorithm include:
 
@@ -29,13 +30,13 @@ The pre--computed quantities for the SCF algorithm include:
 
 Please check out the :ref:`Hamiltonian <Hamiltonian>` section for further information to learn more about the pre--computed quantities.
 
-* **Step 2: Optimized the molecular orbital coefficients by SCF Calculation**
+* **Step 2: Optimization of Molecular Orbital Coefficients**
 
 The Hartree-Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.
 
 Please check out the :doc:`user_hf` section for further information.
 
-* **Step 3: Transformation of atomic orbital to molecular orbital**
+* **Step 3: Transformation of Atomic Orbital to Molecular Orbital**
 
 With the optimized LCAO_MO coefficients, we can transform the operators from the atomic orbital basis to the molecular orbital basis.
 
@@ -57,7 +58,7 @@ For the two electron operators:
     \langle\mu\nu\vert\lambda\sigma\rangle\right]\right]\right]
 
 
-* **Step 4: Construction of N--electron basis set**
+* **Step 4: Construction of N--electron Basis Set**
 
 Configuration interaction method need an N--electron basis set :math:`\{\Phi_i\}`, here denotes explicitly a set of orthonormal Slater determinants made of a set of molecular spin orbitals :math:`\{\chi_i\}`.
 
@@ -73,41 +74,26 @@ For an N electron and K spatial orbitals system, the maximum N--electron basis s
 
 Without constraints, the number of Slater determinants is enormous. Therefore, to control the size of the N--electron basis set, a reasonable approach starts from a reference configuration. Usually, it is the ground state :math:`\vert\Phi_0\rangle`, which is formed by the N lowest energy spin orbitals, which results in Hartree--Fock calculation.
 
-Then we append the other configuration by excitation level relative to the reference state. Thus, we build an N--electron basis set :math:`\{ \vert\Phi_0\rangle, \vert S\rangle,\vert D\rangle,\dots\}` with the desired size.
-
-.. math::
-
-    \vert S\rangle &= \vert\Phi_i^a\rangle\\
-    \vert D\rangle &= \vert\Phi_{ij}^{ab}\rangle\\ 
-    &\vdots
-
-where :math:`\vert S\rangle` represents the single excitations terms, :math:`\vert D\rangle` represents the double excitations terms, and so on. 
+Then we append the other configuration by excitation level relative to the reference state. Thus, we build an N--electron basis set :math:`\{ \vert\Phi_0\rangle, \vert S\rangle,\vert D\rangle, \vert T \rangle \dots\}` with the desired size. Where :math:`\vert S\rangle` represents the single excitations configurations, :math:`\vert D\rangle` represents the double excitations configurations, and so on. 
 
  
-* **Step 5: Calculation and storage of the Hamiltonian matrix elements**
+* **Step 5: Calculation of Hamiltonian Matrix Elements**
 
-To optimize the configuration interaction wave function and minimize the energy,  with the normalized constrain :math:`\langle \Psi \vert \Psi \rangle = 1`. By varying the coefficients :math:`c_i` with the variational principle,
-
-.. math::
-
-    \mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)
-
-it results in the Schrödinger equation becoming a matrix--eigenvalue equation:
+With N--electron basis set :math:`\{\Phi_i\}`, the Hamiltonian operator :math:`\hat{H}` can be represent by a matrix, its elements gives by: 
 
 .. math::
 
-    \mathbf{H}\mathbf{C} = E \mathbf{C}
+    H_{ij}= \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle
 
-:math:`\mathbf{H}` is the Hamiltonian operator :math:`\hat{H}` in matrix form, with the Slater--Condon rules, we can express its elements :math:`H_{ij} = \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle` in terms of one and two electron molecular integrals.
+Using the Slater--Condon rules, we can express the matrix elements :math:`H_{ij}` in terms of one-- and two-- electron molecular integrals.
 
-* Evaluate the number of sphin orbitals substution between two determinants. 
+* First we evaluate the number of sphin orbitals substution between two determinants. 
 
-Good news about the evaluteing the configuration interaction Hamiltonian elements is that all the determinants that differ by more than two spin orbitals are zero. This save us a lot of times, and we can only focus on elements that differ by zero- one- and two sphin orbitals.
+According to the Slater–Condon rules, all the determinants that differ by more than two spin orbitals results in zero, hence and we can only focus on diterminants that differ by zero-- one-- and two sphin orbitals.
 
+* Then evaluate the matrix elements by the number of sphin-orbitals substitution. 
 
-* Then by the number of sphin-orbitals substitution,  case
-
-Identical Determinants:
+For identical determinants:
 
 .. math::
 
@@ -115,7 +101,7 @@ Identical Determinants:
    \sum_m^N \langle m \vert\hat{h}\vert m \rangle +
    \sum_{m>n}^N \langle mn \vert\vert mn \rangle
 
-Determinants that Differ by One Spin Orbitals:
+For determinants that differ by one spin orbitals:
 
 .. math::
 
@@ -125,7 +111,7 @@ Determinants that Differ by One Spin Orbitals:
    \langle m \vert\hat{h}\vert p \rangle +
    \sum_{n}^N \langle mn \vert\vert pn \rangle
 
-Determinants that Differ by Two Spin Orbitals:
+For determinants that differ by two spin orbitals:
 
 .. math::
 
@@ -135,9 +121,11 @@ Determinants that Differ by Two Spin Orbitals:
    \langle mn \vert\vert pq \rangle
 
 
-* Finally we need compute the phase when evaluting the value of two determinants, 
+* Finally compute the phase factor. 
 
-The phase is calculated as :math:`-1^{N_{perm}}`, where :math:`N_{perm}` is the number permutations necessary to bring the spin-orbitals on which the holes are made to the positions of the praticles. This number is equal to the number of occupied spin-orbitals between these two positions.
+Since the Slater determinant is antisymmetrized, when we evaluating the overlap between two determinants :math:`\langle\Phi_i\vert\Phi_j\rangle` a phase factor. 
+
+When evaluting the Hamiltonian matrix element :math:`H_{ij}`, the phase is calculated as :math:`-1^{N_{perm}}`, where :math:`N_{perm}` is the number permutations necessary to bring the spin-orbitals on which the holes are made to the positions of the praticles.
 
 
 * **Step 6: Solution of the Matrix eigenvalue problem for the desired state**
@@ -148,37 +136,22 @@ The optimaztion using variational principle results in the Schrödinger equation
 
     \mathbf{H}\mathbf{C} = E \mathbf{C}
 
-Thus, the only numerical problem in their solution is the calculation of the eigenvalues and eigenvectors of a mymmetric matrix. This is a problem which occurs in many branches of science, particularly those involving optimisation of some kind and has ,consequently, received much attention.
+Thus, the last step is to find the eigenvalues and eigenvectors of matrix :math:`\mathbf{H}` with numerical method. 
 
 Examples
 ========
+Configuration interaction approximates wave function by a linear expansion of N-electron basis functions made of a given one-electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.
 
-Full CI
-------- 
-The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation. Therefore, the Full CI method is not applicable in large systems, usually used for benchmarking minimal systems to develop new methods.       
- 
-.. math::
+* Full CI
 
-    \vert\Psi_{FCI}\rangle = c_0 \vert\Phi_0\rangle 
-    + \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
-    + \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle 
-    + \dots				
+The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation.
 
 .. literalinclude:: ../../data/examples/ci/fci.py
     :caption: /data/examples/ci/fci.py
 
-CISD
-----
+* CISD
+
 FCI method is exact in a given atomic orbital basis but prohibitively expensive. Therefore, to balance accuracy and computational time, we truncate the CI space by excitation level relative to the reference state. The most common truncation of the CI space expansion is CI singles and doubles (CISD).
-
-However, since in the truncated CI, higher excitations are forbidden, hence the model is not size-extensive. Also, in large systems, high–order disconnected excitations dominate. Truncated CI, therefore, works best for small systems and is important for small multi–configurational systems.    
-
-.. math::
-
-    \vert\Psi_{CISD}\rangle = c_0 \vert\Phi_0\rangle 
-    + \mathop{\sum_{\lbrace i \rbrace}}_{\lbrace a \rbrace} c_i^a\vert\Phi_i^a\rangle
-    + \mathop{\sum_{\lbrace i,j \rbrace}}_{\lbrace a,b \rbrace} c_{ij}^{ab}\vert\Phi_{ij}^{ab}\rangle 
 
 .. literalinclude:: ../../data/examples/ci/cisd.py
     :caption: /data/examples/ci/cisd.py
-

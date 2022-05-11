@@ -54,11 +54,8 @@
 <li class="toctree-l1"><a class="reference internal" href="user_ci.html">3. Configuration Interaction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_cc.html">4. Coupled-Cluster</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Perturbation Theory</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#algorithm">5.1. Algorithm</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mp2">5.1.1. MP2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mp3">5.1.2. MP3</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">5.1. Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">5.2. Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="user_property.html">6. Property</a></li>
@@ -95,47 +92,26 @@
              
   <div class="section" id="perturbation-theory">
 <h1><span class="section-number">5. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h1>
-<p>Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which we add a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
-<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
-<p>For perturbation theory, we divide the Hamiltonian into zero–order operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> and perturbaing operator <span class="math notranslate nohighlight">\(\lambda\hat{V}\)</span>. Specifically in M{o}ller–Plesset theory, we use the Fock operator as the zero–order operator and the Hartree–Fock state as the zero–order state:</p>
+<p>Perturbation theory is a collection of versatile methods used in many branches of science, and it divides the system into a model part <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> which is a known approximation to the real system <span class="math notranslate nohighlight">\(\hat{H}\)</span> and a perturbation part <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\hat{H}_0 = \hat{F};
-\quad \hat{V} = \hat{H} - \hat{F}\]</div>
-<p>the unperturbed Schr&quot;{o}dinger equation:</p>
+\[\hat{H} = \hat{H}_0 + \lambda\hat{V}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is a parameter that is small enough to guarantee convergence.</p>
+<p>Møller–Plesset perturbation theory is a particular case of perturbation theory, where we take the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span> as the model operator, and the perturbation operator is given by</p>
 <div class="math notranslate nohighlight">
-\[\quad \hat{F}|\Psi_{HF}\rangle = \sum_{i}\varepsilon_i \vert\Psi_{HF}\rangle;\]</div>
-<p>the time-independent related Schr&quot;{o}dinger equation:</p>
+\[\hat{V} = \hat{H} - \hat{F}\]</div>
+<p>As the cornerstone of ab initio quantum chemistry, Hartree–Fock calculation results in the wavefunction <span class="math notranslate nohighlight">\(\Phi_{HF}\)</span>, the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>, ground state energy <span class="math notranslate nohighlight">\(E_{HF}\)</span> and the orbital energies <span class="math notranslate nohighlight">\(\{\epsilon_i\}\)</span>. Thus, the zeroth–order time–independent Schrodinger equation is defined as:</p>
 <div class="math notranslate nohighlight">
-\[(\hat{F} + \lambda \hat{V})|\Psi_n \rangle = E_n \vert\Psi_n \rangle\]</div>
-<p>we apply Taylor series to expands the energies and states in eqn ref{eq:mp3} of the parameter $lambda$</p>
+\[\hat{H}^{(0)}\Phi_{0}^{(0)} = E_{0}^{(0)}\Phi_{0}^{(0)}\]</div>
+<p>here the zeroth–order Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}^{(0)}\)</span> is taken as the Fock operator，</p>
 <div class="math notranslate nohighlight">
-\[E_n = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \dots\]</div>
-<p>and</p>
+\[\hat{H}^{(0)} = \hat{F}\]</div>
+<p>and the zeroth–order wavefunction <span class="math notranslate nohighlight">\(\Phi_{0}\)</span> refers to the Hartree–Fock wavefunction，</p>
 <div class="math notranslate nohighlight">
-\[\vert\Psi_{n}\rangle = \vert\Psi_{n}^{(0)} \rangle
-+ \lambda \vert\Psi_{n}^{(0)} \rangle + \lambda^2 \vert\Psi_{n}^{(2)} \rangle + \dots\]</div>
-<p>the <span class="math notranslate nohighlight">\(E_n^{(k)}\)</span> and <span class="math notranslate nohighlight">\(\Psi_n^{(k)}\)</span> are the corresponding derivatives</p>
+\[\Phi_{0} = \Phi_{HF}\]</div>
+<p>furthermore, the corresponding energy <span class="math notranslate nohighlight">\(E^{(0)}_0\)</span> is the sum of orbital energies <span class="math notranslate nohighlight">\(\{\epsilon_i\}\)</span>, which is the eigenvalues of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[E_n^{(k)} = \frac{1}{k!} \frac{\partial^k E_n}{\partial \lambda^k}\]</div>
-<div class="math notranslate nohighlight">
-\[\Psi_n^{(k)} = \frac{1}{k!} \frac{\partial^k \Psi_n}{\partial \lambda^k}\]</div>
-<p>substitute of these expand series into the time-independent Schr&quot;{o}dinger equation</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}(\hat{F} + \lambda \hat{V})\vert\Psi_n^{(0)} + \lambda \vert\Psi_n^{(1)} + \lambda^2 \vert\Psi_n^{(2)} + \dots\rangle&amp;= \\
-(E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} +\dots) \vert\Psi_n^{(0)} + \lambda \vert\Psi_n^{(1)} + \lambda^2 \vert\Psi_n^{(2)} + \dots\rangle\end{split}\]</div>
-<p>we expand both side of the equation, put the terms involving equate powers of <span class="math notranslate nohighlight">\(\lambda\)</span> and generate a set
-of equations.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\hat{F}|\Psi_n^{(0)}\rangle
-&amp;= E_n^{(0)}|\Psi_n^{(0)}\rangle \\
-\hat{F}|\Psi_n^{1}\rangle +\hat{V}|\Psi_n^{(0)}\rangle
-&amp;= E_n^{(0)}|\Psi_n^{(1)}\rangle + E_n^{(1)}|\Psi_n^{(0)}\rangle\\
-\hat{F}|\Psi_n^{2}\rangle +\hat{V}|\Psi_n^{(1)}\rangle
-&amp;= E_n^{(0)}|\Psi_n^{(2)}\rangle + E_n^{(1)}|\Psi_n^{(1)}\rangle + E_n^{(2)}|\Psi_n^{(0)}\rangle\\
-&amp;\dots\end{split}\]</div>
-<p>as the solution of zeroth–order equation is known, one expects, Möller–Plesset theory approaches are performed on top of previous result. Therefore we can determine the various nth–order corrections.</p>
-<p>Given a reasonably accurate Hartree–Fock reference, we may improve on it by Möller–Plesset perturbation theory. As a non-iterative way to calculate electron correlation energy, The MP2 energy represents a highly successful approximation at a fraction of the cost compare with other post–Hartree–Fock methods.</p>
-<p>Unfortunately in a sufficiently large system, the M{o}ller–Plesset method often diverges. Higher-order corrections may be calculated, but convergence is often poor.</p>
+\[E^{(0)} = \sum_i^{occ} \epsilon_i\]</div>
+<p>As the solution of the zeroth–order equation is known, one expects that the Møller–Plesset theory performs on top of the previous result. Therefore we can determine the various nth–order corrections.</p>
 <div class="section" id="algorithm">
 <h2><span class="section-number">5.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline"></a></h2>
 <ul class="simple">
@@ -153,7 +129,7 @@ of equations.</p>
 <ul class="simple">
 <li><p><strong>Step 2: Optimized the molecular orbital coefficients by SCF Calculation</strong></p></li>
 </ul>
-<p>The Hartree-Fock method is an uncorrelated mean-field theory that offers a qualitative description of chemical systems. Although Hartree-Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
+<p>The Hartree–Fock method is an uncorrelated mean–field theory that offers a qualitative description of chemical systems. Although Hartree–Fock theory is only qualitatively correct, it forms the basis for more accurate models and becomes the cornerstone of ab initio quantum chemistry.</p>
 <p>Please check out the <a class="reference internal" href="user_hf.html"><span class="doc">Hartree-Fock</span></a> section for further information.</p>
 <ul class="simple">
 <li><p><strong>Step 3: Transformation of atomic orbital to molecular orbital</strong></p></li>
@@ -170,15 +146,49 @@ of equations.</p>
 \sum_{\lambda} C_{\lambda}^r \left[
 \sum_{\sigma} C_{\sigma}^s
 \langle\mu\nu\vert\lambda\sigma\rangle\right]\right]\right]\]</div>
-<div class="section" id="mp2">
-<h3><span class="section-number">5.1.1. </span>MP2<a class="headerlink" href="#mp2" title="Permalink to this headline"></a></h3>
-<p>Moller-Plesset Second Order Perturbation theory (MP2) is a non-iterative way to calculate electron correlation energy. The expression for it’s energy contribution can be written as:</p>
+<ul class="simple">
+<li><p><strong>Step 4: Calculate the Correction Energy to n–th Order</strong></p></li>
+</ul>
+<p>Perturbation theory applies a biased bi–partition of the Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}\)</span>. The whole Hilbert space <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> is also split into two parts: model space <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> and the orthogonal space <span class="math notranslate nohighlight">\(\mathcal{Q}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[E_{\rm MP2} = \sum_{ij} \sum_{ab}
+\[\mathcal{H} = \mathcal{P} \oplus \mathcal{Q}\]</div>
+<p>The model space <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> is spanned by the reference function <span class="math notranslate nohighlight">\(\{\Phi_{0}\}\)</span>, and the complementary space <span class="math notranslate nohighlight">\(\mathcal{Q}\)</span> is spanned by the excitation configurations <span class="math notranslate nohighlight">\(\{S, D, T, \dots\}\)</span>.</p>
+<p>Given the Møller–Plesset perturbation operator <span class="math notranslate nohighlight">\(\hat{V}\)</span>, with a reasonably accurate reference <span class="math notranslate nohighlight">\(\Phi_{HF}\)</span>, we can calculate the electron correlation energy to arbitrary order in a non–iterative way. Here list the equation of correlation energy from orders one up to three:</p>
+<ul class="simple">
+<li><p>MP1</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E_{MP1} = \langle \Phi_0 \vert\hat{V}\vert \Phi_0 \rangle
+= \frac{1}{2} \sum_{ij} \langle ij\vert\vert ij\rangle\]</div>
+<ul class="simple">
+<li><p>MP2</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E_{MP2} = \langle \Phi_0 \vert\hat{V}\vert D \rangle
+\langle D \vert\hat{V}\vert \Phi_0 \rangle
+= \sum_{ij} \sum_{ab}
 \frac{\langle ia\vert jb\rangle (2 \langle ia\vert jb\rangle -
 \langle ib\vert ja\rangle)}
 {\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}\]</div>
-<p>To run a MP2 calculation in MoHa, the example is below:</p>
+<ul class="simple">
+<li><p>MP3</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}E_{MP3} = \langle \Phi_0 \vert\hat{V}\vert D \rangle
+\langle D \vert\hat{V}\vert D \rangle
+\langle D \vert\hat{V}\vert \Phi_0 \rangle
+&amp;=\frac{1}{8}\sum_{abcdrs}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cd\left|\right|ab\right\rangle \left\langle rs\left|\right|cd\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{c}+\epsilon_{d}-\epsilon_{r}-\epsilon_{s}\right)}\\
+&amp;+\frac{1}{8}\sum_{abrstu}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle rs\left|\right|tu\right\rangle \left\langle tu\left|\right|ab\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{t}-\epsilon_{u}\right)}\\
+&amp;+\sum_{abcrst}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cs\left|\right|tb\right\rangle \left\langle rt\left|\right|ac\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{c}-\epsilon_{r}-\epsilon_{t}\right)}\end{split}\]</div>
+</div>
+<div class="section" id="examples">
+<h2><span class="section-number">5.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<p>Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which we add a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
+<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
+<ul class="simple">
+<li><p>MP2</p></li>
+</ul>
+<p>Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem. Hence the second-order energy is the first meaningful correction in Moller-Plesset Perturbation theory and results in the MP2 method.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp2.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -195,15 +205,10 @@ of equations.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="mp3">
-<h3><span class="section-number">5.1.2. </span>MP3<a class="headerlink" href="#mp3" title="Permalink to this headline"></a></h3>
-<p>The third order Møller-Plesset correction to the energy is given as:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}E_{MP3}&amp;=\frac{1}{8}\sum_{abcdrs}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cd\left|\right|ab\right\rangle \left\langle rs\left|\right|cd\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{c}+\epsilon_{d}-\epsilon_{r}-\epsilon_{s}\right)}\\
-&amp;+\frac{1}{8}\sum_{abrstu}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle rs\left|\right|tu\right\rangle \left\langle tu\left|\right|ab\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{t}-\epsilon_{u}\right)}\\
-&amp;+\sum_{abcrst}\frac{\left\langle ab\left|\right|rs\right\rangle \left\langle cs\left|\right|tb\right\rangle \left\langle rt\left|\right|ac\right\rangle }{\left(\epsilon_{a}+\epsilon_{b}-\epsilon_{r}-\epsilon_{s}\right)\left(\epsilon_{a}+\epsilon_{c}-\epsilon_{r}-\epsilon_{t}\right)}\end{split}\]</div>
-<p>To run a MP2 calculation in MoHa, the example is below:</p>
+<ul class="simple">
+<li><p>MP3</p></li>
+</ul>
+<p>After the second-order energy, the involvement of third-order correction still improves the Hartree-Fock method with cheap costs.</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp3.py</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -218,7 +223,6 @@ of equations.</p>
 <span class="n">ptsolver</span> <span class="o">=</span> <span class="n">MP3Solver</span><span class="p">(</span><span class="n">ham</span><span class="p">,</span><span class="n">wfn</span><span class="p">,</span><span class="n">hf_results</span><span class="p">)</span>
 <span class="n">pt_results</span> <span class="o">=</span> <span class="n">ptsolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
