@@ -52,7 +52,7 @@
 <li class="toctree-l1"><a class="reference internal" href="user_system.html">1. System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_hf.html">2. Hartree-Fock</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Configuration Interaction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#general-ci-algorithm">3.1. General CI Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">3.1. Algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">3.2. Examples</a></li>
 </ul>
 </li>
@@ -99,8 +99,11 @@
 <p>To optimize the configuration interaction wave function and minimize the energy with the normalized constrain <span class="math notranslate nohighlight">\(\langle \Psi \vert \Psi \rangle = 1\)</span>. Variational principle is applied to varying the coefficients:</p>
 <div class="math notranslate nohighlight">
 \[\mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)\]</div>
-<div class="section" id="general-ci-algorithm">
-<h2><span class="section-number">3.1. </span>General CI Algorithm<a class="headerlink" href="#general-ci-algorithm" title="Permalink to this headline"></a></h2>
+<p>The optimaztion using variational principle results in the Schrödinger equation becomes a matrix–eigenvalue equation:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}\mathbf{C} = E \mathbf{C}\]</div>
+<div class="section" id="algorithm">
+<h2><span class="section-number">3.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>Step 1: Build the Integral</strong></p></li>
 </ul>
@@ -147,10 +150,32 @@
 <ul class="simple">
 <li><p><strong>Step 5: Calculation of Hamiltonian Matrix Elements</strong></p></li>
 </ul>
-<p>With N–electron basis set <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span>, the Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> can be represent by a matrix, its elements gives by:</p>
+<p>With N–electron basis set <span class="math notranslate nohighlight">\(\{\Phi_i\}\)</span>, the Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}\)</span> can be represent by a matrix,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[
+\begin{split}
+\langle\Phi_0\vert\hat{H}\vert\Phi_0\rangle&amp;\ &amp;\langle\Phi_0\vert\hat{H}\vert\mathbf{h}\rangle\\
+\langle\mathbf{h}\vert\hat{H}\vert\Phi_0\rangle&amp;\ &amp;\langle\mathbf{h}\vert\hat{H}\vert\mathbf{h}\rangle\\
+\end{split}
+\right]
+\left[
+\begin{split}
+1\\
+\mathbf{C}\\
+\end{split}
+\right]
+=
+\left[
+\begin{split}
+1\\
+\mathbf{C}\\
+\end{split}
+\right]
+E\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vert\mathbf{h}\rangle\)</span> indicates the set of excitation configurations.</p>
+<p>Using the Slater–Condon rules, we can express the matrix elements <span class="math notranslate nohighlight">\(H_{ij}\)</span> in terms of one– and two– electron molecular integrals.</p>
 <div class="math notranslate nohighlight">
 \[H_{ij}= \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle\]</div>
-<p>Using the Slater–Condon rules, we can express the matrix elements <span class="math notranslate nohighlight">\(H_{ij}\)</span> in terms of one– and two– electron molecular integrals.</p>
 <ul class="simple">
 <li><p>First we evaluate the number of sphin orbitals substution between two determinants.</p></li>
 </ul>
@@ -191,7 +216,6 @@
 </div>
 <div class="section" id="examples">
 <h2><span class="section-number">3.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<p>Configuration interaction approximates wave function by a linear expansion of N-electron basis functions made of a given one-electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.</p>
 <ul class="simple">
 <li><p>Full CI</p></li>
 </ul>

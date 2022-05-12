@@ -55,27 +55,27 @@ Where the cluster operator :math:`\hat{T}` is the sum of :math:`\{\hat{T}_{i}\}`
 
 * CCSD
 
-Truncating the cluster operator :math:`\hat{T}` at doubles leads to the coupled cluster singles and doubles method(CCSD). By keep only :math:`\hat{T}_1` and :math:`\hat{T}_2`, we reach the balance between accuracy and computational time.
+Truncating the cluster operator :math:`\hat{T}` at doubles leads to the coupled cluster singles and doubles method(CCSD). By keeping only :math:`\hat{T}_1` and :math:`\hat{T}_2`, we reach the balance between accuracy and computational time.
 
 .. literalinclude:: ../../data/examples/cc/ccsd.py
     :caption: /data/examples/cc/ccsd.py
 
 * CCSD(T)
 
-Based on CCSD, the addition of perturbative triple correction gives CCSD(T) method the reputation of being the "gold standard" in computational chemistry. It is now one of the most accurate methods applicable to reasonably large molecules.   
+Based on CCSD, the addition of perturbative triple correction gives the CCSD(T) method the “gold standard” in computational chemistry. It is now one of the most accurate methods applicable to reasonably large molecules.
 
 .. literalinclude:: ../../data/examples/cc/ccsd_t.py
     :caption: /data/examples/cc/ccsd_t.py
 
 Perturbation Theory
 -------------------
-Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter :math:`\epsilon`. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator :math:`\hat{H}_0`, to which we add a small perturbation :math:`\hat{V}`.
+Perturbation theory is a collection of versatile methods used in many branches of science. It divides the system into a model part :math:`\hat{H}_0` which is a known approximation to the real system :math:`\hat{H}` and a perturbation part :math:`\lambda\hat{V}`, where :math:`\lambda` is a parameter that is small enough to guarantee convergence.
 
-In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function :math:`\Psi_{0}` is the lowest eigenstate of the Fock operator :math:`\hat{F}`.
+Møller--Plesset perturbation theory is a particular case of perturbation theory, where we take the Fock operator :math:`\hat{F}` as the model operator.
 
 * MP2
 
-Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem. Hence the second-order energy is the first meaningful correction in Moller-Plesset Perturbation theory and results in the MP2 method.  
+Depending on the choice of Møller--Plesset perturbation operator :math:`\hat{V}`, the first order correction energy :math:`E_{MP1}` might be zero or none zero, but :math:`E_{MP0} + E_{MP1}` is always equal to the Hartree--Fock energy :math:`E_{HF}`. Hence, the first meaningful correction in Møller--Plesset perturbation theory is second-order energy.
 
 .. literalinclude:: ../../data/examples/pt/mp2.py
     :caption: /data/examples/pt/mp2.py

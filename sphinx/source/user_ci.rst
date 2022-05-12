@@ -15,8 +15,14 @@ To optimize the configuration interaction wave function and minimize the energy 
 
     \mathop{min}\limits_{\{c_i\}}(\langle\Psi_{CI}\vert H \vert \Psi_{CI}\rangle-E\langle\Psi_{CI}\vert\Psi_{CI}\rangle)
 
-General CI Algorithm
-====================
+The optimaztion using variational principle results in the Schrödinger equation becomes a matrix--eigenvalue equation:
+
+.. math::
+
+    \mathbf{H}\mathbf{C} = E \mathbf{C}
+
+Algorithm
+=========
 
 * **Step 1: Build the Integral**
 
@@ -79,13 +85,38 @@ Then we append the other configuration by excitation level relative to the refer
  
 * **Step 5: Calculation of Hamiltonian Matrix Elements**
 
-With N--electron basis set :math:`\{\Phi_i\}`, the Hamiltonian operator :math:`\hat{H}` can be represent by a matrix, its elements gives by: 
+With N--electron basis set :math:`\{\Phi_i\}`, the Hamiltonian operator :math:`\hat{H}` can be represent by a matrix,
+
+.. math::
+
+    \left[
+    \begin{split} 
+    \langle\Phi_0\vert\hat{H}\vert\Phi_0\rangle&\ &\langle\Phi_0\vert\hat{H}\vert\mathbf{h}\rangle\\
+    \langle\mathbf{h}\vert\hat{H}\vert\Phi_0\rangle&\ &\langle\mathbf{h}\vert\hat{H}\vert\mathbf{h}\rangle\\
+    \end{split}
+    \right]
+    \left[
+    \begin{split}
+    1\\
+    \mathbf{C}\\
+    \end{split}
+    \right]
+    =
+    \left[
+    \begin{split}
+    1\\
+    \mathbf{C}\\
+    \end{split}
+    \right]
+    E    
+
+where :math:`\vert\mathbf{h}\rangle` indicates the set of excitation configurations.
+
+Using the Slater--Condon rules, we can express the matrix elements :math:`H_{ij}` in terms of one-- and two-- electron molecular integrals.
 
 .. math::
 
     H_{ij}= \langle \Phi_i\vert\hat{H}\vert \Phi_j\rangle
-
-Using the Slater--Condon rules, we can express the matrix elements :math:`H_{ij}` in terms of one-- and two-- electron molecular integrals.
 
 * First we evaluate the number of sphin orbitals substution between two determinants. 
 
@@ -140,8 +171,6 @@ Thus, the last step is to find the eigenvalues and eigenvectors of matrix :math:
 
 Examples
 ========
-Configuration interaction approximates wave function by a linear expansion of N-electron basis functions made of a given one-electron basis. With CI wave function and CI basis set, the Schrödinger equation becomes a matrix-eigenvalue equation.
-
 * Full CI
 
 The full configuration interaction(FCI) method assumes that all electrons are correlated among all orbitals in a given system. Hence it provides numerically exact solutions (within the infinitely flexible complete basis set) to the electronic time-independent, non-relativistic Schrödinger equation.

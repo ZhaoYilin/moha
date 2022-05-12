@@ -183,12 +183,10 @@
 </div>
 <div class="section" id="examples">
 <h2><span class="section-number">5.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<p>Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which we add a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
-<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
 <ul class="simple">
 <li><p>MP2</p></li>
 </ul>
-<p>Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem. Hence the second-order energy is the first meaningful correction in Moller-Plesset Perturbation theory and results in the MP2 method.</p>
+<p>Depending on the choice of Møller–Plesset perturbation operator <span class="math notranslate nohighlight">\(\hat{V}\)</span>, the first order correction energy <span class="math notranslate nohighlight">\(E_{MP1}\)</span> might be zero or none zero, but <span class="math notranslate nohighlight">\(E_{MP0} + E_{MP1}\)</span> is always equal to the Hartree–Fock energy <span class="math notranslate nohighlight">\(E_{HF}\)</span>. Hence, the first meaningful correction in Møller–Plesset perturbation theory is second-order energy.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp2.py</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>

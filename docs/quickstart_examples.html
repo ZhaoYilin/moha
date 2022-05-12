@@ -202,7 +202,7 @@
 <ul class="simple">
 <li><p>CCSD</p></li>
 </ul>
-<p>Truncating the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> at doubles leads to the coupled cluster singles and doubles method(CCSD). By keep only <span class="math notranslate nohighlight">\(\hat{T}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{T}_2\)</span>, we reach the balance between accuracy and computational time.</p>
+<p>Truncating the cluster operator <span class="math notranslate nohighlight">\(\hat{T}\)</span> at doubles leads to the coupled cluster singles and doubles method(CCSD). By keeping only <span class="math notranslate nohighlight">\(\hat{T}_1\)</span> and <span class="math notranslate nohighlight">\(\hat{T}_2\)</span>, we reach the balance between accuracy and computational time.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd.py</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -222,7 +222,7 @@
 <ul class="simple">
 <li><p>CCSD(T)</p></li>
 </ul>
-<p>Based on CCSD, the addition of perturbative triple correction gives CCSD(T) method the reputation of being the “gold standard” in computational chemistry. It is now one of the most accurate methods applicable to reasonably large molecules.</p>
+<p>Based on CCSD, the addition of perturbative triple correction gives the CCSD(T) method the “gold standard” in computational chemistry. It is now one of the most accurate methods applicable to reasonably large molecules.</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">/data/examples/cc/ccsd_t.py</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>
@@ -242,12 +242,12 @@
 </div>
 <div class="section" id="perturbation-theory">
 <h3><span class="section-number">2.2.3. </span>Perturbation Theory<a class="headerlink" href="#perturbation-theory" title="Permalink to this headline"></a></h3>
-<p>Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator <span class="math notranslate nohighlight">\(\hat{H}_0\)</span>, to which we add a small perturbation <span class="math notranslate nohighlight">\(\hat{V}\)</span>.</p>
-<p>In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> is the lowest eigenstate of the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span>.</p>
+<p>Perturbation theory is a collection of versatile methods used in many branches of science. It divides the system into a model part <span class="math notranslate nohighlight">\(\hat{H}_0\)</span> which is a known approximation to the real system <span class="math notranslate nohighlight">\(\hat{H}\)</span> and a perturbation part <span class="math notranslate nohighlight">\(\lambda\hat{V}\)</span>, where <span class="math notranslate nohighlight">\(\lambda\)</span> is a parameter that is small enough to guarantee convergence.</p>
+<p>Møller–Plesset perturbation theory is a particular case of perturbation theory, where we take the Fock operator <span class="math notranslate nohighlight">\(\hat{F}\)</span> as the model operator.</p>
 <ul class="simple">
 <li><p>MP2</p></li>
 </ul>
-<p>Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem. Hence the second-order energy is the first meaningful correction in Moller-Plesset Perturbation theory and results in the MP2 method.</p>
+<p>Depending on the choice of Møller–Plesset perturbation operator <span class="math notranslate nohighlight">\(\hat{V}\)</span>, the first order correction energy <span class="math notranslate nohighlight">\(E_{MP1}\)</span> might be zero or none zero, but <span class="math notranslate nohighlight">\(E_{MP0} + E_{MP1}\)</span> is always equal to the Hartree–Fock energy <span class="math notranslate nohighlight">\(E_{HF}\)</span>. Hence, the first meaningful correction in Møller–Plesset perturbation theory is second-order energy.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">/data/examples/pt/mp2.py</span><a class="headerlink" href="#id7" title="Permalink to this code"></a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">moha</span> <span class="kn">import</span> <span class="o">*</span>

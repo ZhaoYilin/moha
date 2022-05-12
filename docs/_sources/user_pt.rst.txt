@@ -126,13 +126,9 @@ Given the Møller--Plesset perturbation operator :math:`\hat{V}`, with a reasona
 
 Examples
 ========
-Perturbation theory offers robust methods for obtaining the approximate solution of problems involving small parameter :math:`\epsilon`. Moller-Plesset perturbation theory is a particular case of perturbation theory where we consider an unperturbed Hamiltonian operator :math:`\hat{H}_0`, to which we add a small perturbation :math:`\hat{V}`.
-
-In quantum chemistry, Moller-Plesset is the most popular perturbation theory, its unperturbed Hamiltonian is the shifted Fock operator, and the zeroth-order wave function :math:`\Psi_{0}` is the lowest eigenstate of the Fock operator :math:`\hat{F}`.
-
 * MP2
 
-Singly excited Slater determinants do not contribute to the correction energy because of the Brillouin theorem. Hence the second-order energy is the first meaningful correction in Moller-Plesset Perturbation theory and results in the MP2 method.  
+Depending on the choice of Møller--Plesset perturbation operator :math:`\hat{V}`, the first order correction energy :math:`E_{MP1}` might be zero or none zero, but :math:`E_{MP0} + E_{MP1}` is always equal to the Hartree--Fock energy :math:`E_{HF}`. Hence, the first meaningful correction in Møller--Plesset perturbation theory is second-order energy.
 
 .. literalinclude:: ../../data/examples/pt/mp2.py
     :caption: /data/examples/pt/mp2.py
