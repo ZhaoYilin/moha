@@ -39,7 +39,8 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages']
+    'sphinx.ext.githubpages',
+    'nbsphinx']
 
 autodoc_member_order = 'groupwise'
 autodoc_default_flags = ['members','special_members']

@@ -1,8 +1,8 @@
 import numpy as np
 from moha.io.log import log,timer
-from moha.system.operator import MultipoleMomentOperator
+from moha.system.operator.operator import MultipoleMoment
 
-class MultipoleMoment(object):
+class Moment(object):
     """Multipole momnet solver.
 
     Attributes
@@ -48,6 +48,78 @@ class MultipoleMoment(object):
         self.assign_basis_set(basis_set)
         self.assign_wavefunction(wfn)
 
+    @timer.with_section('Moment')
+    def multipole(self,lmns,coordinate = np.array([0.,0.,0.])):
+        """Kernel of the solver.
+
+        Returns
+        -------
+        results : dict
+            Multipole moment results.
+        """
+        log.hline()
+        log('Multipole moment Section'.format())
+        log.hline()
+
+        D = self.wfn.density_matrix
+        mms = []
+
+        for lmn in lmns:
+            mm_matrix = MultipoleMoment.build(self.basis_set,lmn,coordinate)
+            mm = 2*np.dot(D,mm_matrix)
+            mm = np.trace(mm,axis1=0,axis2=1)
+            mms.append(mm)
+
+        log.hline()
+        log('Multipole Moment'.format())
+        log('{}'.format(mms))
+        log.hline()
+
+        results = {
+        "success": True,
+        "mms": mms
+        }
+
+        return results
+
+    @timer.with_section('Moment')
+    def dipole(self,coordinate = np.array([0.,0.,0.])):
+        """Kernel of the solver.
+
+        Returns
+        -------
+        results : dict
+            Multipole moment results.
+        """
+        log.hline(char='=')
+        log.blank()
+        log('Dipole moment Section'.format())
+
+        lmns = [[1,0,0],[0,1,0],[0,0,1]]
+        D = self.wfn.density_matrix
+        mms = []
+
+        for lmn in lmns:
+            mm_matrix = MultipoleMoment.build(self.basis_set,lmn,coordinate)
+            mm = 2*np.dot(D,mm_matrix)
+            mm = np.trace(mm,axis1=0,axis2=1)
+            mms.append(mm)
+
+        log.hline()
+        log('Multipole Moment'.format())
+        log('{0:<20s}{1:<20.6f}'.format('X',mms[0]))
+        log('{0:<20s}{1:<20.6f}'.format('Y',mms[1]))
+        log('{0:<20s}{1:<20.6f}'.format('Z',mms[2]))
+        log('{0:<20s}{1:<20.6f}'.format('Total',sum(mms)))
+        log.blank()
+
+        results = {
+        "success": True,
+        "mms": mms
+        }
+
+        return results
+
     def assign_molecule(self,mol):
         """Assign chemical molecule to the solver.
 
@@ -77,37 +149,3 @@ class MultipoleMoment(object):
             Hartree Fock wavefunction.
         """
         self.wfn = wfn
-
-    @timer.with_section('Multipole')
-    def kernel(self,lmns,coordinate = np.array([0.,0.,0.])):
-        """Kernel of the solver.
-
-        Returns
-        -------
-        results : dict
-            Multipole moment results.
-        """
-        log.hline()
-        log('Multipole moment Section'.format())
-        log.hline()
-        
-        D = self.wfn.density_matrix
-        mms = []
-
-        for lmn in lmns:
-            mm_matrix = MultipoleMomentOperator.build(self.basis_set,lmn,coordinate)
-            mm = np.dot(D,mm_matrix)
-            mm = np.trace(mm,axis1=0,axis2=1)
-            mms.append(mm)
-
-        log.hline()
-        log('Multipole Moment'.format())
-        log('{}'.format(mms))
-        log.hline()
-
-        results = {
-        "success": True,
-        "mms": mms
-        }
-        return results
-

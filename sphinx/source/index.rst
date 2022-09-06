@@ -15,28 +15,27 @@ Contents
    :numbered:
    :caption: QUICK START:
 
-   quickstart_installation.rst
-   quickstart_examples.rst
+   quick_start/installation
+   quick_start/example
 
 .. toctree::
    :maxdepth: 2
    :numbered:
    :caption: USER DOCUMENTATION:
 
-   user_system.rst
-   user_hf.rst
-   user_ci.rst
-   user_cc.rst
-   user_pt.rst
-   user_property.rst
+   user/system
+   user/hf
+   user/pt
+   user/ci
+   user/cc
+   user/property
 
 .. toctree::
    :maxdepth: 2
    :numbered:
    :caption: DEVELOPER DOCUMENTATION:
 
-   developer_sphinx.rst
-   developer_api/modules.rst
+   developer/sphinx
 
 Indices and tables
 ==================

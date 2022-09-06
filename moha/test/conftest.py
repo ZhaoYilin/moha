@@ -1,19 +1,17 @@
-import pytest
-from pathlib import Path
-
 from moha import *
-
-cur_path = os.path.abspath(os.path.dirname(__file__))
-root_path = cur_path[:cur_path.find('moha/')+len('moha/')]
+import pytest
 
 @pytest.fixture
 def system():
     """Build system of water molecule and sto-3g basis set.
     """
-    mol_file = str(root_path)+'/moha/test/h2o.xyz'
-    mol,orbs = IOSystem.from_file(mol_file,'sto-3g.nwchem')
-    
-    ham = ChemicalHamiltonian.build(mol,orbs)
+    geo = ([8,   0.000000000000,  -0.143225816552,   0.000000000000],
+        (1,   1.638036840407,   1.136548822547,  -0.000000000000),
+        [1,  -1.638036840407,   1.136548822547,  -0.000000000000])
+
+    mol = Molecule.build(geo)
+    orb = BasisSet.build(mol,'sto-3g.nwchem')
+    ham = ChemicalHamiltonian.build(mol,orb)
     wfn = HFWaveFunction(10,7,{'alpha':5,'beta':5})
 
     return mol, orbs, ham, wfn

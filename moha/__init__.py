@@ -7,5 +7,7 @@ from moha.system import *
 from moha.symmetry import *
 from moha.io import *
 from moha.hf import *
-from moha.posthf import *
-from moha.property import *
+from moha.ci import *
+#from moha.cc import *
+from moha.mp import *
+#from moha.property import *

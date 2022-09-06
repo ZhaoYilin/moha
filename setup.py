@@ -12,4 +12,4 @@ setup(name='moha',
     author_email='zhaoyilin1991@gmail.com',
     license='MIT',
     packages=find_packages(),
-    package_data={'moha': ['io/basis_database/*']})
+    package_data={'moha': ['system/basis/database/*']})
