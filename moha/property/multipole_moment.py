@@ -1,6 +1,6 @@
 import numpy as np
 from moha.io.log import log,timer
-from moha.system.operator.operator import MultipoleMoment
+from moha.hamiltonian.operator.multipole_moment import MultipoleMoment
 
 class Moment(object):
     """Multipole momnet solver.
@@ -66,7 +66,7 @@ class Moment(object):
 
         for lmn in lmns:
             mm_matrix = MultipoleMoment.build(self.basis_set,lmn,coordinate)
-            mm = 2*np.dot(D,mm_matrix)
+            mm = -np.dot(D,mm_matrix)
             mm = np.trace(mm,axis1=0,axis2=1)
             mms.append(mm)
 
@@ -101,8 +101,14 @@ class Moment(object):
 
         for lmn in lmns:
             mm_matrix = MultipoleMoment.build(self.basis_set,lmn,coordinate)
-            mm = 2*np.dot(D,mm_matrix)
+            mm = -np.dot(D,mm_matrix)
             mm = np.trace(mm,axis1=0,axis2=1)
+            nuclear_mm = 0
+            for atom in self.mol:
+                x,y,z = atom.coordinate
+                l,m,n = lmn
+                nuclear_mm += atom.number*x**l*y**m*z**n
+            mm = mm + nuclear_mm
             mms.append(mm)
 
         log.hline()

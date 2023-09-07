@@ -23,12 +23,18 @@ Contents
    :numbered:
    :caption: USER DOCUMENTATION:
 
-   user/system
+   user/introduction
+   user/molecule
+   user/basis
+   user/hamiltonian
+   user/wavefunction
+   user/symmetry
    user/hf
    user/pt
    user/ci
    user/cc
    user/property
+   user/geometry_optimization
 
 .. toctree::
    :maxdepth: 2
@@ -36,6 +42,11 @@ Contents
    :caption: DEVELOPER DOCUMENTATION:
 
    developer/sphinx
+   developer/ham_integral
+   developer/other_integral
+   developer/point_group
+   developer/hf
+   developer/pt
 
 Indices and tables
 ==================

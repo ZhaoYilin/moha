@@ -99,7 +99,7 @@ class MPSolver(object):
         ham: Hamiltonian
             Chemical Hamiltonian.
         """
-        from moha.system.operator.hamiltonian import Hamiltonian
+        from moha.hamiltonian.hamiltonian import Hamiltonian
         if not isinstance(ham, Hamiltonian):
             raise TypeError("Parameter ham must be instance of Hamiltonian.")
         self.ham = ham
@@ -112,7 +112,7 @@ class MPSolver(object):
         wfn: HFWaveFunction
             Hartree Fock wavefunction.
         """
-        from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+        from moha.wavefunction.hf_wavefunction import HFWaveFunction
         if not isinstance(wfn, HFWaveFunction):
             raise TypeError("Parameter wfn must be instance of HFWaveFuntion.")
         self.wfn = wfn

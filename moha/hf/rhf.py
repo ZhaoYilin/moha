@@ -34,8 +34,8 @@ def rhf(S,Hcore,Eri,ndocc,I_thld,E_thld,D_thld):
         Hartree Fock calculation results.
     """
     #Build the orthogonalization matrix
-    val, vec = np.linalg.eig(S)  
-    val_minus_half = (np.diag(val**(-0.5))) 
+    val, vec = np.linalg.eig(S)
+    val_minus_half = (np.diag(val**(-0.5)))
     X = np.dot(vec,np.dot(val_minus_half,np.transpose(vec)))
 
     #Initial guess of density matrix
@@ -66,7 +66,6 @@ def rhf(S,Hcore,Eri,ndocc,I_thld,E_thld,D_thld):
 
         #Update electronic energy
         E = np.einsum('pq,pq->', F + Hcore, D)
-
         #Update convergence
         dE = abs(E-Eold)
         dRMS = np.mean((D-Dold)**2)**0.5

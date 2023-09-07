@@ -1,5 +1,5 @@
-from moha.system.basis.basis import SlaterDeterminant
-from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+from moha.basis.n_electrons import SlaterDeterminant
+from moha.wavefunction.hf_wavefunction import HFWaveFunction
 from moha.io.log import log,timer
 
 import numpy as np
@@ -250,7 +250,7 @@ class HFSolver(object):
         TypeError
             If ham is not Hamiltonian instance.
         """
-        from moha.system.operator.hamiltonian import Hamiltonian
+        from moha.hamiltonian.hamiltonian import Hamiltonian
         if not isinstance(ham, Hamiltonian):
             raise TypeError("Parameter ham must be Hamiltonian instance.")
         self.ham = ham

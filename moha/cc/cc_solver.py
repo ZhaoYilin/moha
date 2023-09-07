@@ -112,7 +112,7 @@ class CCSolver(object):
         TypeError
             If ham is not Hamiltonian instance.
         """
-        from moha.system.operator.hamiltonian import Hamiltonian
+        from moha.hamiltonian.hamiltonian import Hamiltonian
         if not isinstance(ham, Hamiltonian):
             raise TypeError("Parameter ham must be Hamiltonian instance.")
         self.ham = ham
@@ -125,7 +125,7 @@ class CCSolver(object):
         wfn: HFWaveFunction
             Hartree Fock wavefunction.
         """
-        from moha.system.wavefunction.hf_wavefunction import HFWaveFunction
+        from moha.wavefunction.hf_wavefunction import HFWaveFunction
         if not isinstance(wfn, HFWaveFunction):
             raise TypeError("Parameter wfn must be instance of HFWaveFuntion.")
         self.wfn = wfn
