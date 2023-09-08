@@ -1,11 +1,10 @@
 import itertools
-import math
+from math import pi, sqrt, pow, exp
 import numpy as np
-from scipy.special import factorial2 as fact2
 
 __all__ = ['PrimitiveGaussian','ContractedGaussian']
 
-class PrimitiveGaussian(object):
+class PrimitiveGaussian:
     """Primitive Gaussian functions.
     
     Attributes
@@ -65,10 +64,10 @@ class PrimitiveGaussian(object):
         Y = y-self.origin[1]
         Z = z-self.origin[2]
         rr = X**2+Y**2+Z**2
-        result = np.power(X,self.shell[0])*\
-            np.power(Y,self.shell[1])*\
-            np.power(Z,self.shell[2])*\
-            np.exp(-self.exponent*rr)
+        result = pow(X,self.shell[0])*\
+            pow(Y,self.shell[1])*\
+            pow(Z,self.shell[2])*\
+            exp(-self.exponent*rr)
         return result
 
     @property
@@ -82,10 +81,10 @@ class PrimitiveGaussian(object):
         """
         if self.norm_memo is None:
             i,j,k = self.shell
-            term1 = (2*self.exponent/math.pi)**(3/2)
+            term1 = (2*self.exponent/pi)**(3/2)
             term2 = (4*self.exponent)**(i+j+k)
             term3 = fact2(2*i-1)*fact2(2*j-1)*fact2(2*k-1)
-            self.norm_memo = math.sqrt(term1*term2/term3)
+            self.norm_memo = sqrt(term1*term2/term3)
         return self.norm_memo
 
     def derivative(self):
@@ -125,7 +124,7 @@ class PrimitiveGaussian(object):
 
         return dx, dy, dz
 
-class ContractedGaussian(object):
+class ContractedGaussian:
     """Predetermined linear combination of radial parts of GTOs
     Atomic orbtial represented by Contracted Gaussian functions.
     
@@ -184,11 +183,11 @@ class ContractedGaussian(object):
         rr = X**2+Y**2+Z**2
 
         cg = np.zeros(x.shape)
-        for coef, exp in zip(self.coefficients,self.exponents):
-            cg += np.power(X,self.shell[0])*\
-                np.power(Y,self.shell[1])*\
-                np.power(Z,self.shell[2])*\
-                np.exp(-exp*rr)
+        for exponent in self.exponents:
+            cg += pow(X,self.shell[0])*\
+                pow(Y,self.shell[1])*\
+                pow(Z,self.shell[2])*\
+                exp(-exponent*rr)
         return cg
 
     def __neg__(self):
@@ -272,10 +271,10 @@ class ContractedGaussian(object):
                 nb = pgb.norm
 
                 term1 = fact2(2 * l - 1) * fact2(2 * m - 1) * fact2(2 * n - 1)
-                term2 = (math.pi / (a + b)) ** (3 / 2)
+                term2 = (pi / (a + b)) ** (3 / 2)
                 term3 = (2 * (a + b)) ** (l + m + n)
                 result += (ca * cb * na * nb * term1 * term2) / term3
-            self.norm_memo = 1 / math.sqrt(result)
+            self.norm_memo = 1 / sqrt(result)
 
         return self.norm_memo
 
@@ -308,3 +307,20 @@ class ContractedGaussian(object):
         else:
             return False
 
+def fact2(n):
+    """_summary_
+
+    Parameters
+    ----------
+    n : _type_
+        _description_
+
+    Returns
+    -------
+    _type_
+        _description_
+    """    
+    if n<2:
+        return 1
+    else:
+        return n*fact2(n-2)

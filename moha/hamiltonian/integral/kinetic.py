@@ -1,9 +1,7 @@
 import numpy as np
 import itertools
 
-from moha.basis.gauss import PrimitiveGaussian
-
-class Kinetic(object):
+class Kinetic:
     """The Obara-Saika scheme for kinetic energy integral.
 
     Methods
@@ -124,7 +122,6 @@ class Kinetic(object):
             Integral value for one direction.
         """
         p = a + b
-        mu = (a*b)/(a+b)
         P = (1./p)*(a*A + b*B)
 
         if i<0 or j<0:

@@ -1,6 +1,4 @@
-import numpy as np
-import scipy.special as sc
-from math import exp, gamma, sqrt
+from math import exp, gamma
 
 def boys(v,x):
     """Boys function for the calculation of coulombic integrals.

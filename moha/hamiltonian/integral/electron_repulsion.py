@@ -1,6 +1,7 @@
 import itertools
-import math
+import numpy as np
 
+from math import dist, exp, pi, sqrt
 from moha.hamiltonian.integral.boys import *
 from moha.basis.gauss import PrimitiveGaussian
 
@@ -63,8 +64,8 @@ class ElectronRepulsion:
         B = np.array(cgb.origin)
         C = np.array(cgc.origin)
         D = np.array(cgd.origin)
-        RAB = math.dist(A,B)
-        RCD = math.dist(C,D)
+        RAB = dist(A,B)
+        RCD = dist(C,D)
 
         primitives_a = cga.expansion
         primitives_b = cgb.expansion
@@ -96,12 +97,12 @@ class ElectronRepulsion:
             P = (a*A+b*B)/(a+b)
             Q = (c*C+d*D)/(c+d)
             self.R = (p*P+q*Q)/(p+q)
-            RPQ = math.dist(P,Q)
+            RPQ = dist(P,Q)
 
             # Build boys function F_{N}(x)
-            Kab = math.exp(-mu*RAB**2)
-            Kcd = math.exp(-nu*RCD**2)
-            boys_pre_factor = (2*math.pi**(5/2))/(p*q*math.sqrt(p+q))*Kab*Kcd
+            Kab = exp(-mu*RAB**2)
+            Kcd = exp(-nu*RCD**2)
+            boys_pre_factor = (2*pi**(5/2))/(p*q*sqrt(p+q))*Kab*Kcd
             N = l_total
             x = self.alpha*RPQ**2
             boys_function = boys(l_total, x)

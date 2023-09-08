@@ -1,10 +1,11 @@
 import numpy as np
 import itertools
 
+from math import pi
 from moha.hamiltonian.integral.boys import *
 from moha.basis.gauss import PrimitiveGaussian
 
-class NuclearAttraction(object):
+class NuclearAttraction:
     """The Obara-Saika scheme for nuclear attraction integral.
 
     Methods
@@ -94,8 +95,6 @@ class NuclearAttraction(object):
         P = (a*A+b*B)/p
 
         RAB = np.linalg.norm(A-B)
-        RPA = np.linalg.norm(P-A)
-        RPB = np.linalg.norm(P-B)
         RPC = np.linalg.norm(P-C)
 
         Kab = exp(-mu*RAB**2)
@@ -109,7 +108,7 @@ class NuclearAttraction(object):
         # Build boys function F_{N}(x)
         N = l_total
         x = p*RPC**2
-        boys_pre_factor = (2*np.pi)/p*Kab
+        boys_pre_factor = (2*pi)/p*Kab
         boys_function = boys(l_total, x)
         Theta_N_000000 = boys_pre_factor * boys_function
         self.boys_dict = {l_total: Theta_N_000000}
@@ -137,17 +136,20 @@ class NuclearAttraction(object):
         pgb: PrimitiveGaussian
             The second primitive gaussian orbital.
         """
-        if pga.shell[0] > 0:
+        shell_A = pga.shell
+        shell_B = pgb.shell
+
+        if shell_A[0] > 0:
             return self.recurrence(0, N, pga, pgb, *self.new_gaussian(0, pga, pgb))
-        elif pga.shell[1] > 0:
+        elif shell_A[1] > 0:
             return self.recurrence(1, N, pga, pgb, *self.new_gaussian(1, pga, pgb))
-        elif pga.shell[2] > 0:
+        elif shell_A[2] > 0:
             return self.recurrence(2, N, pga, pgb, *self.new_gaussian(2, pga, pgb))
-        elif pgb.shell[0] > 0:
+        elif shell_B[0] > 0:
             return self.recurrence(0, N, pgb, pga, *self.new_gaussian(0, pgb, pga))
-        elif pgb.shell[1] > 0:
+        elif shell_B[1] > 0:
             return self.recurrence(1, N, pgb, pga, *self.new_gaussian(1, pgb, pga))
-        elif pgb.shell[2] > 0:
+        elif shell_B[2] > 0:
             return self.recurrence(2, N, pgb, pga, *self.new_gaussian(2, pgb, pga))
         else:
             return self.boys_dict[N]

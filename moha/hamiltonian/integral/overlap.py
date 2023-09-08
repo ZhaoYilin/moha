@@ -1,9 +1,8 @@
 import numpy as np
 import itertools
+from math import pow, exp
 
-from moha.basis.gauss import PrimitiveGaussian
-
-class Overlap(object):
+class Overlap:
     """The Obara-Saika scheme for overlap integral.
 
     Methods
@@ -62,14 +61,14 @@ class Overlap(object):
             Integral value.
         """
         result = 1
+        a = pga.exponent
+        b = pgb.exponent
+        origin_A = pga.origin
+        origin_B = pgb.origin
+        shell_A = pga.shell
+        shell_B = pgb.shell
         for r in range(3):
-            a = pga.exponent
-            b = pgb.exponent
-            A = pga.origin[r]
-            B = pgb.origin[r]
-            i = pga.shell[r]
-            j = pgb.shell[r]
-            result *= self.S1d(A,i,a,B,j,b)
+            result *= self.S1d(origin_A[r],shell_A[r],a,origin_B[r],shell_B[r],b)
         return result
 
     def S1d(self, A, i, a, B, j, b):
@@ -118,7 +117,7 @@ class Overlap(object):
                     1./(2*p)*(j-1)*self.S1d(A, i, a, B, j-2, b)
         else: 
             # boundary condition i==j==0.
-            S00 = np.power(np.pi/p,0.5)*np.exp(-mu*(A-B)**2)
+            S00 = pow(np.pi/p,0.5)*exp(-mu*(A-B)**2)
             return S00
 
 if __name__ == '__main__':

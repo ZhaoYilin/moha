@@ -1,9 +1,7 @@
 import numpy as np
 import itertools
 
-from moha.basis.gauss import PrimitiveGaussian
-
-class MultipoleMoment(object):
+class MultipoleMoment:
     """The Obara-Saika scheme for overlap integral.
 
     Methods
